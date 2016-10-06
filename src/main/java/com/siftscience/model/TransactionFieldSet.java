@@ -2,6 +2,7 @@ package com.siftscience.model;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
+import com.siftscience.exception.MissingFieldException;
 
 public class TransactionFieldSet extends FieldSet<TransactionFieldSet> {
 
@@ -19,6 +20,23 @@ public class TransactionFieldSet extends FieldSet<TransactionFieldSet> {
     @Expose @SerializedName("$shipping_address") private Address shippingAddress;
     @Expose @SerializedName("$seller_user_id") private String sellerUserId;
     @Expose @SerializedName("$transfer_recipient_user_id") private String transferRecipientUserId;
+
+    @Override
+    protected boolean allowCustomFields() {
+        return true;
+    }
+
+    @Override
+    public String getEventType() {
+        return "$transaction";
+    }
+
+    @Override
+    public void validate() {
+        super.validate();
+        validateLongField("$amount", getAmount());
+        validateStringField("$currency_code", getCurrencyCode());
+    }
 
     public static TransactionFieldSet fromJson(String json) {
         return gson.fromJson(json, TransactionFieldSet.class);
@@ -148,15 +166,5 @@ public class TransactionFieldSet extends FieldSet<TransactionFieldSet> {
     public TransactionFieldSet setTransferRecipientUserId(String transferRecipientUserId) {
         this.transferRecipientUserId = transferRecipientUserId;
         return this;
-    }
-
-    @Override
-    protected boolean allowCustomFields() {
-        return true;
-    }
-
-    @Override
-    public String getEventType() {
-        return "$transaction";
     }
 }

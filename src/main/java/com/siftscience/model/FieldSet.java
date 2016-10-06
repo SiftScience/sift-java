@@ -137,7 +137,7 @@ public abstract class FieldSet<T extends FieldSet<T>> {
         // First check that the key is present.
         if (!jsonObj.has(key)) {
             if (required) {
-                throw new MissingFieldException(MissingFieldException.buildErrorMessageForKey(key));
+                throw new MissingFieldException(MissingFieldException.messageForKey(key));
             } else {
                 return null;
             }
@@ -175,17 +175,26 @@ public abstract class FieldSet<T extends FieldSet<T>> {
         validateUserIdOrSessionId();
     }
 
-    private void validateApiKey() {
-        if (getApiKey() == null || getApiKey().isEmpty()) {
-            throw new MissingFieldException(MissingFieldException.buildErrorMessageForKey(API_KEY));
-        }
+    protected void validateApiKey() {
+        validateStringField(API_KEY, getApiKey());
     }
-    private void validateUserId() {
+    protected void validateUserId() {
         FieldSet.<String>getField(gson.toJsonTree(this).getAsJsonObject(), USER_ID, true);
     }
 
-    private void validateSessionId() {
+    protected void validateSessionId() {
         FieldSet.<String>getField(gson.toJsonTree(this).getAsJsonObject(), SESSION_ID, true);
+    }
+
+    protected static void validateStringField(String key, String val) {
+        if (val == null || val.isEmpty()) {
+            throw new MissingFieldException(MissingFieldException.messageForKey(key));
+        }
+    }
+    protected static void validateLongField(String key, Long val) {
+        if (val == null) {
+            throw new MissingFieldException(MissingFieldException.messageForKey(key));
+        }
     }
 
     protected void validateUserIdOrSessionId() {

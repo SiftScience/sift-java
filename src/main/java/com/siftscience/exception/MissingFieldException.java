@@ -11,7 +11,7 @@ public class MissingFieldException extends InvalidRequestException {
         super(response);
     }
 
-    public static String buildErrorMessageForKey(String key) {
+    public static String messageForKey(String key) {
         return "Required field \"" + key + "\" is missing.";
     }
 }

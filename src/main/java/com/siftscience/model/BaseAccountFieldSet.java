@@ -5,7 +5,7 @@ import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
 
-public abstract class BaseAccountFieldSet<T> extends FieldSet<BaseAccountFieldSet<T>> {
+abstract class BaseAccountFieldSet<T> extends FieldSet<BaseAccountFieldSet<T>> {
 
     @Expose @SerializedName(USER_ID) private String userId;
     @Expose @SerializedName(SESSION_ID) private String sessionId;
