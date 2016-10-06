@@ -95,34 +95,36 @@ public abstract class FieldSet<T extends FieldSet<T>> {
             fieldSet.setApiKey(FieldSet.<String>getField(jsonObj, "$api_key", false));
 
             // Loop through all top level JSON fields and pick out the custom field keys.
-            for (Map.Entry<String,JsonElement> entry : jsonObj.entrySet()) {
-                String key = entry.getKey();
-                JsonElement val = entry.getValue();
+            if (fieldSet.allowCustomFields()) {
+                for (Map.Entry<String,JsonElement> entry : jsonObj.entrySet()) {
+                    String key = entry.getKey();
+                    JsonElement val = entry.getValue();
 
-                // Invalid custom field keys are skipped over.
-                try {
-                    validateCustomFieldKey(key);
-                } catch (InvalidFieldException e) {
-                    continue;
-                }
+                    // Invalid custom field keys are skipped over.
+                    try {
+                        validateCustomFieldKey(key);
+                    } catch (InvalidFieldException e) {
+                        continue;
+                    }
 
-                if (val.isJsonNull()) {
-                    // Null is ignored.
-                    continue;
-                } else if (!val.isJsonPrimitive()) {
-                    // If not null and not a primitive, then that's not allowed.
-                    throw new InvalidFieldException("\"" + key + "\" must be either a number, " +
-                            "boolean, string, or null.");
-                }
+                    if (val.isJsonNull()) {
+                        // Null is ignored.
+                        continue;
+                    } else if (!val.isJsonPrimitive()) {
+                        // If not null and not a primitive, then that's not allowed.
+                        throw new InvalidFieldException("\"" + key + "\" must be either" +
+                                "a number, boolean, string, or null.");
+                    }
 
-                // Now we know it's a primitive.
-                JsonPrimitive primitiveVal = val.getAsJsonPrimitive();
-                if (primitiveVal.isString()) {
-                    fieldSet.setCustomField(key, primitiveVal.getAsString());
-                } else if (primitiveVal.isNumber()) {
-                    fieldSet.setCustomField(key, primitiveVal.getAsNumber());
-                } else if (primitiveVal.isBoolean()) {
-                    fieldSet.setCustomField(key, primitiveVal.getAsBoolean());
+                    // Now we know it's a primitive.
+                    JsonPrimitive primitiveVal = val.getAsJsonPrimitive();
+                    if (primitiveVal.isString()) {
+                        fieldSet.setCustomField(key, primitiveVal.getAsString());
+                    } else if (primitiveVal.isNumber()) {
+                        fieldSet.setCustomField(key, primitiveVal.getAsNumber());
+                    } else if (primitiveVal.isBoolean()) {
+                        fieldSet.setCustomField(key, primitiveVal.getAsBoolean());
+                    }
                 }
             }
 

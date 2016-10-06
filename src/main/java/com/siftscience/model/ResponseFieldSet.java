@@ -9,6 +9,21 @@ public class ResponseFieldSet extends FieldSet<ResponseFieldSet> {
     @Expose @SerializedName("request") private String request;
     @Expose @SerializedName("time") private Integer time;
     @Expose @SerializedName("error_message") private String errorMessage;
+    @Expose @SerializedName("score_response") private ScoreResponse scoreResponse;
+
+    @Override
+    public String getEventType() {
+        return null;
+    }
+
+    @Override
+    protected boolean allowCustomFields() {
+        return false;
+    }
+
+    public static ResponseFieldSet fromJson(String json) {
+        return gson.fromJson(json, ResponseFieldSet.class);
+    }
 
     public Integer getStatus() {
         return status;
@@ -46,29 +61,12 @@ public class ResponseFieldSet extends FieldSet<ResponseFieldSet> {
         return this;
     }
 
-    @Override
-    public String getEventType() {
-        return null;
+    public ScoreResponse getScoreResponse() {
+        return scoreResponse;
     }
 
-    @Override
-    protected boolean allowCustomFields() {
-        return false;
+    public ResponseFieldSet setScoreResponse(ScoreResponse scoreResponse) {
+        this.scoreResponse = scoreResponse;
+        return this;
     }
-
-    public static ResponseFieldSet fromJson(String json) {
-        return gson.fromJson(json, ResponseFieldSet.class);
-    }
-//
-//    private class RequestResponseFieldAdapter extends TypeAdapter<T> {
-//        @Override
-//        public void write(JsonWriter out, T value) throws IOException {
-//        }
-//
-//        @Override
-//        public T read(JsonReader in) throws IOException {
-//            String val = in.nextString().replaceAll("\\\"", "\\\\\"");
-//            return (T) gson.fromJson(val, request.getClass());
-//        }
-//    }
 }

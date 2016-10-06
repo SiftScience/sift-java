@@ -7,6 +7,8 @@ import com.sun.istack.internal.NotNull;
 import okhttp3.HttpUrl;
 import okhttp3.OkHttpClient;
 
+import java.util.List;
+
 public class SiftClient {
     private String apiKey;
     private OkHttpClient okClient = new OkHttpClient();
@@ -34,6 +36,21 @@ public class SiftClient {
         return new SiftEventRequest(baseUrl, okClient, fields);
     }
 
+    public SiftEventRequest buildRequest(@NotNull FieldSet fields, boolean returnScore) {
+        if (fields.getApiKey() == null) {
+            fields.setApiKey(apiKey);
+        }
+        return new SiftEventRequest(baseUrl, okClient, fields, returnScore);
+    }
+
+    public SiftEventRequest buildRequest(@NotNull FieldSet fields, boolean returnScore,
+                                         List<String> abuseTypes) {
+        if (fields.getApiKey() == null) {
+            fields.setApiKey(apiKey);
+        }
+        return new SiftEventRequest(baseUrl, okClient, fields, returnScore, abuseTypes);
+    }
+
     public SiftLabelRequest buildRequest(@NotNull LabelFieldSet fields) {
         if (fields.getApiKey() == null) {
             fields.setApiKey(apiKey);
@@ -46,6 +63,13 @@ public class SiftClient {
             fields.setApiKey(apiKey);
         }
         return new SiftUnlabelRequest(baseUrl, okClient, fields);
+    }
+
+    public SiftScoreRequest buildRequest(@NotNull ScoreFieldSet fields) {
+        if (fields.getApiKey() == null) {
+            fields.setApiKey(apiKey);
+        }
+        return new SiftScoreRequest(baseUrl, okClient, fields);
     }
 
     // For testing.
