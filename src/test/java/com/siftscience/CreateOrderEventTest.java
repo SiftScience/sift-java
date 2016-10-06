@@ -135,109 +135,45 @@ public class CreateOrderEventTest {
         // Build the request body.
         // Payment methods.
         List<PaymentMethod> paymentMethodList = new ArrayList<>();
-        paymentMethodList.add(new PaymentMethod()
-                .setPaymentType("$credit_card")
-                .setPaymentGateway("$braintree")
-                .setCardBin("542486")
-                .setCardLast4("4444"));
+        paymentMethodList.add(TestUtils.samplePaymentMethod1());
 
         // Items.
         List<Item> itemList = new ArrayList<>();
-
-        // Tags for the first item.
-        List<String> tags1 = new ArrayList<>();
-        tags1.add("Popcorn");
-        tags1.add("Snacks");
-        tags1.add("On Sale");
-
-        // First item.
-        itemList.add(new Item()
-                .setItemId("12344321")
-                .setProductTitle("Microwavable Kettle Corn: Original Flavor")
-                .setPrice(4990000L)
-                .setUpc("097564307560")
-                .setSku("03586005")
-                .setBrand("Peters Kettle Corn")
-                .setManufacturer("Peters Kettle Corn")
-                .setCategory("Food and Grocery")
-                .setTags(tags1)
-                .setQuantity(4L));
-
-        // Tags for the second item.
-        List<String> tags2 = new ArrayList<>();
-        tags2.add("Awesome");
-        tags2.add("Wintertime specials");
-
-        // Second item.
-        itemList.add(new Item()
-                .setItemId("B004834GQO")
-                .setProductTitle("The Slanket Blanket-Texas Tea")
-                .setPrice(39990000L)
-                .setUpc("67862114510011")
-                .setSku("004834GQ")
-                .setBrand("Slanket")
-                .setManufacturer("Slanket")
-                .setCategory("Blankets & Throws")
-                .setTags(tags2)
-                .setColor("Texas Tea")
-                .setQuantity(2L));
+        itemList.add(TestUtils.sampleItem1());
+        itemList.add(TestUtils.sampleItem2());
 
         // Promotions.
         List<Promotion> promotionList = new ArrayList<>();
-        promotionList.add(new Promotion()
-                .setPromotionId("FirstTimeBuyer")
-                .setStatus("$success")
-                .setDescription("$5 off")
-                .setDiscount(new Discount()
-                        .setAmount(5000000L)
-                        .setCurrencyCode("USD")
-                        .setMinimumPurchaseAmount(25000000L)));
-
-        // Main event fields object.
-        CreateOrderFieldSet fields = new CreateOrderFieldSet()
-                .setSessionId("gigtleqddo84l8cm15qe4il")
-                .setOrderId("ORDER-28168441")
-                .setUserEmail("bill@gmail.com")
-                .setAmount(115940000L)
-                .setCurrencyCode("USD")
-                .setBillingAddress(new Address()
-                        .setName("Bill Jones")
-                        .setPhone("1-415-555-6041")
-                        .setAddress1("2100 Main Street")
-                        .setAddress2("Apt 3B")
-                        .setCity("New London")
-                        .setRegion("New Hampshire")
-                        .setCountry("US")
-                        .setZipCode("03257"))
-                .setPaymentMethods(paymentMethodList)
-                .setShippingAddress(new Address()
-                        .setName("Bill Jones")
-                        .setPhone("1-415-555-6041")
-                        .setAddress1("2100 Main Street")
-                        .setAddress2("Apt 3B")
-                        .setCity("New London")
-                        .setRegion("New Hampshire")
-                        .setCountry("US")
-                        .setZipCode("03257"))
-                .setExpeditedShipping(true)
-                .setShippingMethod("$physical")
-                .setItems(itemList)
-                .setSellerUserId("slinkys_emporium")
-                .setPromotions(promotionList)
-                .setCustomField("digital_wallet", "apple_pay")
-                .setCustomField("coupon_code", "dollarMadness")
-                .setCustomField("shipping_choice", "FedEx Ground Courier")
-                .setCustomField("is_first_time_buyer", false);
+        promotionList.add(TestUtils.samplePromotion1());
 
         // Build and execute the request against the mock server.
-        SiftRequest request = client.buildCreateOrderRequest("billy_jones_301", fields);
+        SiftRequest request = client.buildEventRequest(
+                new CreateOrderFieldSet()
+                        .setUserId("billy_jones_301")
+                        .setSessionId("gigtleqddo84l8cm15qe4il")
+                        .setOrderId("ORDER-28168441")
+                        .setUserEmail("bill@gmail.com")
+                        .setAmount(115940000L)
+                        .setCurrencyCode("USD")
+                        .setBillingAddress(TestUtils.sampleAddress2())
+                        .setPaymentMethods(paymentMethodList)
+                        .setShippingAddress(TestUtils.sampleAddress2())
+                        .setExpeditedShipping(true)
+                        .setShippingMethod("$physical")
+                        .setItems(itemList)
+                        .setSellerUserId("slinkys_emporium")
+                        .setPromotions(promotionList)
+                        .setCustomField("digital_wallet", "apple_pay")
+                        .setCustomField("coupon_code", "dollarMadness")
+                        .setCustomField("shipping_choice", "FedEx Ground Courier")
+                        .setCustomField("is_first_time_buyer", false));
         SiftResponse siftResponse = request.send();
 
         // Verify the request.
         RecordedRequest request1 = server.takeRequest();
         Assert.assertEquals("POST", request1.getMethod());
         Assert.assertEquals("/v204/events", request1.getPath());
-        JSONAssert.assertEquals(expectedRequestBody, fields.toJson(), true);
+        JSONAssert.assertEquals(expectedRequestBody, request.getFieldSet().toJson(), true);
 
         // Verify the response.
         Assert.assertEquals(HTTP_OK, siftResponse.getHttpStatusCode());
@@ -262,7 +198,7 @@ public class CreateOrderEventTest {
 
         // Build a simple request without a user id or session id.
         CreateOrderFieldSet fields = new CreateOrderFieldSet().setOrderId("ORDER-28168441");
-        SiftRequest request = client.buildCreateOrderRequest(null, fields);
+        SiftRequest request = client.buildEventRequest(fields);
 
         MissingFieldException missingFieldException = null;
         try {

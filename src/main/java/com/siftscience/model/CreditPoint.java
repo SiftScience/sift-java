@@ -11,15 +11,17 @@ public class CreditPoint {
         return amount;
     }
 
-    public void setAmount(Long amount) {
+    public CreditPoint setAmount(Long amount) {
         this.amount = amount;
+        return this;
     }
 
     public String getCreditPointType() {
         return creditPointType;
     }
 
-    public void setCreditPointType(String creditPointType) {
+    public CreditPoint setCreditPointType(String creditPointType) {
         this.creditPointType = creditPointType;
+        return this;
     }
 }

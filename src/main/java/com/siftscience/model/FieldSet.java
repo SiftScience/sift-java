@@ -144,7 +144,18 @@ public abstract class FieldSet<T extends FieldSet<T>> {
         }
 
         // Next, cast to type param and return.
-        return (T) jsonObj.getAsJsonPrimitive(key);
+        JsonPrimitive p = jsonObj.getAsJsonPrimitive(key);
+        if (p == null || p.isJsonNull()) {
+            return null;
+        } else if (p.isBoolean()) {
+            return (T) (Boolean) p.getAsBoolean();
+        } else if (p.isNumber()) {
+            return (T) p.getAsNumber();
+        } else if (p.isString()) {
+            return (T) p.getAsString();
+        }
+
+        return null;
     }
 
     private static void validateCustomFieldKey(String key) {

@@ -9,18 +9,18 @@ public class UpdateAccountFieldSet extends BaseAccountFieldSet<UpdateAccountFiel
         return gson.fromJson(json, UpdateAccountFieldSet.class);
     }
 
-    @Expose @SerializedName("$changed_password") private String changedPassword;
+    @Expose @SerializedName("$changed_password") private Boolean changedPassword;
 
     @Override
     public String getEventType() {
         return "$update_account";
     }
 
-    public String getChangedPassword() {
+    public Boolean getChangedPassword() {
         return changedPassword;
     }
 
-    public UpdateAccountFieldSet setChangedPassword(String changedPassword) {
+    public UpdateAccountFieldSet setChangedPassword(Boolean changedPassword) {
         this.changedPassword = changedPassword;
         return this;
     }

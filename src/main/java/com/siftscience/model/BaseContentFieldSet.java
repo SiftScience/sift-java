@@ -14,12 +14,12 @@ abstract class BaseContentFieldSet<T extends BaseContentFieldSet<T>> extends Fie
     @Expose @SerializedName("$contact_phone") private String contactPhone;
     @Expose @SerializedName("$subject") private String subject;
     @Expose @SerializedName("$content") private String content;
-    @Expose @SerializedName("$amount") private Integer amount;
+    @Expose @SerializedName("$amount") private Long amount;
     @Expose @SerializedName("$currency_code") private String currencyCode;
     @Expose @SerializedName("$categories") private List<String> categories;
     @Expose @SerializedName("$locations") private List<Address> locations;
     @Expose @SerializedName("$image_hashes") private List<String> imageHashes;
-    @Expose @SerializedName("$expiration_time") private List<String> expirationTime;
+    @Expose @SerializedName("$expiration_time") private Long expirationTime;
     @Expose @SerializedName("$status") private String status;
 
     @Override
@@ -90,11 +90,11 @@ abstract class BaseContentFieldSet<T extends BaseContentFieldSet<T>> extends Fie
         return (T) this;
     }
 
-    public Integer getAmount() {
+    public Long getAmount() {
         return amount;
     }
 
-    public T setAmount(Integer amount) {
+    public T setAmount(Long amount) {
         this.amount = amount;
         return (T) this;
     }
@@ -135,11 +135,11 @@ abstract class BaseContentFieldSet<T extends BaseContentFieldSet<T>> extends Fie
         return (T) this;
     }
 
-    public List<String> getExpirationTime() {
+    public Long getExpirationTime() {
         return expirationTime;
     }
 
-    public T setExpirationTime(List<String> expirationTime) {
+    public T setExpirationTime(Long expirationTime) {
         this.expirationTime = expirationTime;
         return (T) this;
     }
