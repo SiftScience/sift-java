@@ -11,6 +11,8 @@ public class SubmitReviewFieldSet extends FieldSet<SubmitReviewFieldSet> {
 
     @Expose @SerializedName(USER_ID) private String userId;
     @Expose @SerializedName(SESSION_ID) private String sessionId;
+    @Expose @SerializedName(TIME) private Integer time;
+    @Expose @SerializedName(IP) private String ip;
     @Expose @SerializedName("$content") private String content;
     @Expose @SerializedName("$review_title") private String reviewTitle;
     @Expose @SerializedName("$item_id") private String itemId;
@@ -87,6 +89,24 @@ public class SubmitReviewFieldSet extends FieldSet<SubmitReviewFieldSet> {
 
     public SubmitReviewFieldSet setSubmissionStatus(String submissionStatus) {
         this.submissionStatus = submissionStatus;
+        return this;
+    }
+
+    public Integer getTime() {
+        return time;
+    }
+
+    public SubmitReviewFieldSet setTime(Integer time) {
+        this.time = time;
+        return this;
+    }
+
+    public String getIp() {
+        return ip;
+    }
+
+    public SubmitReviewFieldSet setIp(String ip) {
+        this.ip = ip;
         return this;
     }
 }

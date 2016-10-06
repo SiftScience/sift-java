@@ -9,6 +9,8 @@ abstract class BaseContentFieldSet<T extends BaseContentFieldSet<T>> extends Fie
 
     @Expose @SerializedName(USER_ID) private String userId;
     @Expose @SerializedName(SESSION_ID) private String sessionId;
+    @Expose @SerializedName(TIME) private Integer time;
+    @Expose @SerializedName(IP) private String ip;
     @Expose @SerializedName("$content_id") private String contentId;
     @Expose @SerializedName("$contact_email") private String contactEmail;
     @Expose @SerializedName("$contact_phone") private String contactPhone;
@@ -151,5 +153,23 @@ abstract class BaseContentFieldSet<T extends BaseContentFieldSet<T>> extends Fie
     public T setStatus(String status) {
         this.status = status;
         return (T) this;
+    }
+
+    public Integer getTime() {
+        return time;
+    }
+
+    public BaseContentFieldSet setTime(Integer time) {
+        this.time = time;
+        return this;
+    }
+
+    public String getIp() {
+        return ip;
+    }
+
+    public BaseContentFieldSet setIp(String ip) {
+        this.ip = ip;
+        return this;
     }
 }

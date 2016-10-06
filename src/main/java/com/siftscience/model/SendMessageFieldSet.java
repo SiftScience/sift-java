@@ -11,6 +11,8 @@ public class SendMessageFieldSet extends FieldSet<SendMessageFieldSet> {
 
     @Expose @SerializedName(USER_ID) private String userId;
     @Expose @SerializedName(SESSION_ID) private String sessionId;
+    @Expose @SerializedName(TIME) private Integer time;
+    @Expose @SerializedName(IP) private String ip;
     @Expose @SerializedName("$recipient_user_id") private String recipientUserId;
     @Expose @SerializedName("$subject") private String subject;
     @Expose @SerializedName("$content") private String content;
@@ -67,6 +69,24 @@ public class SendMessageFieldSet extends FieldSet<SendMessageFieldSet> {
 
     public SendMessageFieldSet setContent(String content) {
         this.content = content;
+        return this;
+    }
+
+    public Integer getTime() {
+        return time;
+    }
+
+    public SendMessageFieldSet setTime(Integer time) {
+        this.time = time;
+        return this;
+    }
+
+    public String getIp() {
+        return ip;
+    }
+
+    public SendMessageFieldSet setIp(String ip) {
+        this.ip = ip;
         return this;
     }
 }

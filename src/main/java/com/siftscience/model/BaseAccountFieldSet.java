@@ -9,6 +9,8 @@ abstract class BaseAccountFieldSet<T extends BaseAccountFieldSet<T>> extends Fie
 
     @Expose @SerializedName(USER_ID) private String userId;
     @Expose @SerializedName(SESSION_ID) private String sessionId;
+    @Expose @SerializedName(TIME) private Integer time;
+    @Expose @SerializedName(IP) private String ip;
     @Expose @SerializedName("$user_email") private String userEmail;
     @Expose @SerializedName("$name") private String name;
     @Expose @SerializedName("$phone") private String phone;
@@ -111,5 +113,23 @@ abstract class BaseAccountFieldSet<T extends BaseAccountFieldSet<T>> extends Fie
     public T setSocialSignOnType(String socialSignOnType) {
         this.socialSignOnType = socialSignOnType;
         return (T) this;
+    }
+
+    public Integer getTime() {
+        return time;
+    }
+
+    public BaseAccountFieldSet setTime(Integer time) {
+        this.time = time;
+        return this;
+    }
+
+    public String getIp() {
+        return ip;
+    }
+
+    public BaseAccountFieldSet setIp(String ip) {
+        this.ip = ip;
+        return this;
     }
 }

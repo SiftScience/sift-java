@@ -11,6 +11,8 @@ public class LogoutFieldSet extends FieldSet<LogoutFieldSet> {
 
     @Expose @SerializedName(USER_ID) private String userId;
     @Expose @SerializedName(SESSION_ID) private String sessionId;
+    @Expose @SerializedName(TIME) private Integer time;
+    @Expose @SerializedName(IP) private String ip;
 
     @Override
     protected boolean allowCustomFields() {
@@ -37,6 +39,24 @@ public class LogoutFieldSet extends FieldSet<LogoutFieldSet> {
 
     public LogoutFieldSet setSessionId(String sessionId) {
         this.sessionId = sessionId;
+        return this;
+    }
+
+    public Integer getTime() {
+        return time;
+    }
+
+    public LogoutFieldSet setTime(Integer time) {
+        this.time = time;
+        return this;
+    }
+
+    public String getIp() {
+        return ip;
+    }
+
+    public LogoutFieldSet setIp(String ip) {
+        this.ip = ip;
         return this;
     }
 }

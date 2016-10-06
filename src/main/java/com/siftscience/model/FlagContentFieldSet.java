@@ -11,6 +11,8 @@ public class FlagContentFieldSet extends FieldSet<FlagContentFieldSet> {
 
     @Expose @SerializedName(USER_ID) private String userId;
     @Expose @SerializedName(SESSION_ID) private String sessionId;
+    @Expose @SerializedName(TIME) private Integer time;
+    @Expose @SerializedName(IP) private String ip;
     @Expose @SerializedName("$content_id") private String contentId;
     @Expose @SerializedName("$flagged_by") private String flaggedBy;
 
@@ -63,6 +65,24 @@ public class FlagContentFieldSet extends FieldSet<FlagContentFieldSet> {
 
     public FlagContentFieldSet setFlaggedBy(String flaggedBy) {
         this.flaggedBy = flaggedBy;
+        return this;
+    }
+
+    public Integer getTime() {
+        return time;
+    }
+
+    public FlagContentFieldSet setTime(Integer time) {
+        this.time = time;
+        return this;
+    }
+
+    public String getIp() {
+        return ip;
+    }
+
+    public FlagContentFieldSet setIp(String ip) {
+        this.ip = ip;
         return this;
     }
 }

@@ -11,6 +11,8 @@ public class LinkSessionToUserFieldSet extends FieldSet<LinkSessionToUserFieldSe
 
     @Expose @SerializedName(USER_ID) private String userId;
     @Expose @SerializedName(SESSION_ID) private String sessionId;
+    @Expose @SerializedName(TIME) private Integer time;
+    @Expose @SerializedName(IP) private String ip;
 
     @Override
     protected boolean allowCustomFields() {
@@ -47,4 +49,21 @@ public class LinkSessionToUserFieldSet extends FieldSet<LinkSessionToUserFieldSe
         return this;
     }
 
+    public Integer getTime() {
+        return time;
+    }
+
+    public LinkSessionToUserFieldSet setTime(Integer time) {
+        this.time = time;
+        return this;
+    }
+
+    public String getIp() {
+        return ip;
+    }
+
+    public LinkSessionToUserFieldSet setIp(String ip) {
+        this.ip = ip;
+        return this;
+    }
 }

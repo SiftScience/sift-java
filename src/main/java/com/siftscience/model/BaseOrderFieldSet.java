@@ -9,6 +9,8 @@ abstract class BaseOrderFieldSet<T extends BaseOrderFieldSet<T>> extends FieldSe
 
     @Expose @SerializedName(USER_ID) private String userId;
     @Expose @SerializedName(SESSION_ID) private String sessionId;
+    @Expose @SerializedName(TIME) private Integer time;
+    @Expose @SerializedName(IP) private String ip;
     @Expose @SerializedName("$order_id") private String orderId;
     @Expose @SerializedName("$user_email") private String userEmail;
     @Expose @SerializedName("$amount") private Long amount;
@@ -155,5 +157,23 @@ abstract class BaseOrderFieldSet<T extends BaseOrderFieldSet<T>> extends FieldSe
     public T setShippingMethod(String shippingMethod) {
         this.shippingMethod = shippingMethod;
         return (T) this;
+    }
+
+    public Integer getTime() {
+        return time;
+    }
+
+    public BaseOrderFieldSet setTime(Integer time) {
+        this.time = time;
+        return this;
+    }
+
+    public String getIp() {
+        return ip;
+    }
+
+    public BaseOrderFieldSet setIp(String ip) {
+        this.ip = ip;
+        return this;
     }
 }

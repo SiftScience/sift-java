@@ -11,6 +11,8 @@ public class ChargebackFieldSet extends FieldSet<ChargebackFieldSet> {
 
     @Expose @SerializedName(USER_ID) private String userId;
     @Expose @SerializedName(SESSION_ID) private String sessionId;
+    @Expose @SerializedName(TIME) private Integer time;
+    @Expose @SerializedName(IP) private String ip;
     @Expose @SerializedName("$order_id") private String orderId;
     @Expose @SerializedName("$transaction_id") private String transactionId;
     @Expose @SerializedName("$chargeback_state") private String chargebackState;
@@ -84,6 +86,24 @@ public class ChargebackFieldSet extends FieldSet<ChargebackFieldSet> {
 
     public ChargebackFieldSet setChargebackReason(String chargebackReason) {
         this.chargebackReason = chargebackReason;
+        return this;
+    }
+
+    public Integer getTime() {
+        return time;
+    }
+
+    public ChargebackFieldSet setTime(Integer time) {
+        this.time = time;
+        return this;
+    }
+
+    public String getIp() {
+        return ip;
+    }
+
+    public ChargebackFieldSet setIp(String ip) {
+        this.ip = ip;
         return this;
     }
 }

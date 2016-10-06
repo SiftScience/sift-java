@@ -8,6 +8,8 @@ public class TransactionFieldSet extends FieldSet<TransactionFieldSet> {
 
     @Expose @SerializedName(USER_ID) private String userId;
     @Expose @SerializedName(SESSION_ID) private String sessionId;
+    @Expose @SerializedName(TIME) private Integer time;
+    @Expose @SerializedName(IP) private String ip;
     @Expose @SerializedName("$amount") private Long amount;
     @Expose @SerializedName("$currency_code") private String currencyCode;
     @Expose @SerializedName("$user_email") private String userEmail;
@@ -165,6 +167,24 @@ public class TransactionFieldSet extends FieldSet<TransactionFieldSet> {
 
     public TransactionFieldSet setTransferRecipientUserId(String transferRecipientUserId) {
         this.transferRecipientUserId = transferRecipientUserId;
+        return this;
+    }
+
+    public Integer getTime() {
+        return time;
+    }
+
+    public TransactionFieldSet setTime(Integer time) {
+        this.time = time;
+        return this;
+    }
+
+    public String getIp() {
+        return ip;
+    }
+
+    public TransactionFieldSet setIp(String ip) {
+        this.ip = ip;
         return this;
     }
 }

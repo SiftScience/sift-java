@@ -11,6 +11,8 @@ public class LoginFieldSet extends FieldSet<LoginFieldSet> {
 
     @Expose @SerializedName(USER_ID) private String userId;
     @Expose @SerializedName(SESSION_ID) private String sessionId;
+    @Expose @SerializedName(TIME) private Integer time;
+    @Expose @SerializedName(IP) private String ip;
     @Expose @SerializedName("$login_status") private String loginStatus;
 
     @Override
@@ -47,6 +49,24 @@ public class LoginFieldSet extends FieldSet<LoginFieldSet> {
 
     public LoginFieldSet setLoginStatus(String loginStatus) {
         this.loginStatus = loginStatus;
+        return this;
+    }
+
+    public Integer getTime() {
+        return time;
+    }
+
+    public LoginFieldSet setTime(Integer time) {
+        this.time = time;
+        return this;
+    }
+
+    public String getIp() {
+        return ip;
+    }
+
+    public LoginFieldSet setIp(String ip) {
+        this.ip = ip;
         return this;
     }
 }

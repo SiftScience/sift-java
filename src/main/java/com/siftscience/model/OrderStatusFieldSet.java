@@ -11,6 +11,8 @@ public class OrderStatusFieldSet extends FieldSet<OrderStatusFieldSet> {
 
     @Expose @SerializedName(USER_ID) private String userId;
     @Expose @SerializedName(SESSION_ID) private String sessionId;
+    @Expose @SerializedName(TIME) private Integer time;
+    @Expose @SerializedName(IP) private String ip;
     @Expose @SerializedName("$order_id") private String orderId;
     @Expose @SerializedName("$order_status") private String orderStatus;
     @Expose @SerializedName("$reason") private String reason;
@@ -115,6 +117,24 @@ public class OrderStatusFieldSet extends FieldSet<OrderStatusFieldSet> {
 
     public OrderStatusFieldSet setDescription(String description) {
         this.description = description;
+        return this;
+    }
+
+    public Integer getTime() {
+        return time;
+    }
+
+    public OrderStatusFieldSet setTime(Integer time) {
+        this.time = time;
+        return this;
+    }
+
+    public String getIp() {
+        return ip;
+    }
+
+    public OrderStatusFieldSet setIp(String ip) {
+        this.ip = ip;
         return this;
     }
 }

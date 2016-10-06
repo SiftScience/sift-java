@@ -11,6 +11,8 @@ public class ContentStatusFieldSet extends FieldSet<ContentStatusFieldSet> {
 
     @Expose @SerializedName(USER_ID) private String userId;
     @Expose @SerializedName(SESSION_ID) private String sessionId;
+    @Expose @SerializedName(TIME) private Integer time;
+    @Expose @SerializedName(IP) private String ip;
     @Expose @SerializedName("$content_id") private String contentId;
     @Expose @SerializedName("$status") private String status;
 
@@ -66,6 +68,24 @@ public class ContentStatusFieldSet extends FieldSet<ContentStatusFieldSet> {
 
     public ContentStatusFieldSet setContentId(String contentId) {
         this.contentId = contentId;
+        return this;
+    }
+
+    public Integer getTime() {
+        return time;
+    }
+
+    public ContentStatusFieldSet setTime(Integer time) {
+        this.time = time;
+        return this;
+    }
+
+    public String getIp() {
+        return ip;
+    }
+
+    public ContentStatusFieldSet setIp(String ip) {
+        this.ip = ip;
         return this;
     }
 }

@@ -13,6 +13,8 @@ public class AddPromotionFieldSet extends FieldSet<AddPromotionFieldSet> {
 
     @Expose @SerializedName(USER_ID) private String userId;
     @Expose @SerializedName(SESSION_ID) private String sessionId;
+    @Expose @SerializedName(TIME) private Integer time;
+    @Expose @SerializedName(IP) private String ip;
     @Expose @SerializedName("$promotions") private List<Promotion> promotions;
 
     @Override
@@ -49,6 +51,24 @@ public class AddPromotionFieldSet extends FieldSet<AddPromotionFieldSet> {
 
     public AddPromotionFieldSet setPromotions(List<Promotion> promotions) {
         this.promotions = promotions;
+        return this;
+    }
+
+    public Integer getTime() {
+        return time;
+    }
+
+    public AddPromotionFieldSet setTime(Integer time) {
+        this.time = time;
+        return this;
+    }
+
+    public String getIp() {
+        return ip;
+    }
+
+    public AddPromotionFieldSet setIp(String ip) {
+        this.ip = ip;
         return this;
     }
 }
