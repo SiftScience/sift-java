@@ -82,7 +82,7 @@ public class TransactionEventTest {
         client.setBaseUrl(baseUrl);
 
         // Build and execute the request against the mock server.
-        SiftRequest request = client.buildEventRequest(new TransactionFieldSet()
+        SiftRequest request = client.buildRequest(new TransactionFieldSet()
                 .setUserId("billy_jones_301")
                 .setAmount(506790000L)
                 .setCurrencyCode("USD")

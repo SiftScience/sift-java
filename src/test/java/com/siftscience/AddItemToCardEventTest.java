@@ -55,7 +55,7 @@ public class AddItemToCardEventTest {
         client.setBaseUrl(baseUrl);
 
         // Build and execute the request against the mock server.
-        SiftRequest request = client.buildEventRequest(new AddItemToCartFieldSet()
+        SiftRequest request = client.buildRequest(new AddItemToCartFieldSet()
                 .setUserId("billy_jones_301")
                 .setSessionId("gigtleqddo84l8cm15qe4il")
                 .setItem(TestUtils.sampleItem2()));

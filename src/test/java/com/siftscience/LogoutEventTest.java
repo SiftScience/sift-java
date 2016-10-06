@@ -39,7 +39,7 @@ public class LogoutEventTest {
         client.setBaseUrl(baseUrl);
 
         // Build and execute the request against the mock server.
-        SiftRequest request = client.buildEventRequest(new LogoutFieldSet()
+        SiftRequest request = client.buildRequest(new LogoutFieldSet()
                 .setUserId("billy_jones_301"));
 
         SiftResponse siftResponse = request.send();

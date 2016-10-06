@@ -44,7 +44,7 @@ public class ChargebackEventTest {
         client.setBaseUrl(baseUrl);
 
         // Build and execute the request against the mock server.
-        SiftRequest request = client.buildEventRequest(new ChargebackFieldSet()
+        SiftRequest request = client.buildRequest(new ChargebackFieldSet()
                 .setUserId("billy_jones_301")
                 .setOrderId("ORDER-123124124")
                 .setTransactionId("719637215")

@@ -43,7 +43,7 @@ public class SendMessageEventTest {
         client.setBaseUrl(baseUrl);
 
         // Build and execute the request against the mock server.
-        SiftRequest request = client.buildEventRequest(new SendMessageFieldSet()
+        SiftRequest request = client.buildRequest(new SendMessageFieldSet()
                 .setUserId("billy_jones_301")
                 .setRecipientUserId("512924123")
                 .setSubject("Subject line of the message.")

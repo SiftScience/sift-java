@@ -79,7 +79,7 @@ public class UpdateContentEventTest {
         imageHashes.add("4be4b314caafaa3e12bfcb8d16df3aff");
 
         // Build and execute the request against the mock server.
-        SiftRequest request = client.buildEventRequest(new UpdateContentFieldSet()
+        SiftRequest request = client.buildRequest(new UpdateContentFieldSet()
                 .setUserId("billy_jones_301")
                 .setContactEmail("bill@example.com")
                 .setContactPhone("1-415-555-6040")

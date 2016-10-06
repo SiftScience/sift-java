@@ -106,7 +106,7 @@ public class CreateAccountEventTest {
         promotionList.add(TestUtils.samplePromotion2());
 
         // Build and execute the request against the mock server.
-        SiftRequest request = client.buildEventRequest(
+        SiftRequest request = client.buildRequest(
                 new CreateAccountFieldSet()
                         .setUserId("billy_jones_301")
                         .setSessionId("gigtleqddo84l8cm15qe4il")

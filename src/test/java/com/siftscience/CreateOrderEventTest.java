@@ -147,7 +147,7 @@ public class CreateOrderEventTest {
         promotionList.add(TestUtils.samplePromotion1());
 
         // Build and execute the request against the mock server.
-        SiftRequest request = client.buildEventRequest(
+        SiftRequest request = client.buildRequest(
                 new CreateOrderFieldSet()
                         .setUserId("billy_jones_301")
                         .setSessionId("gigtleqddo84l8cm15qe4il")
@@ -198,7 +198,7 @@ public class CreateOrderEventTest {
 
         // Build a simple request without a user id or session id.
         CreateOrderFieldSet fields = new CreateOrderFieldSet().setOrderId("ORDER-28168441");
-        SiftRequest request = client.buildEventRequest(fields);
+        SiftRequest request = client.buildRequest(fields);
 
         MissingFieldException missingFieldException = null;
         try {

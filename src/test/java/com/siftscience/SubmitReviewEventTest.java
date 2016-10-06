@@ -47,7 +47,7 @@ public class SubmitReviewEventTest {
         client.setBaseUrl(baseUrl);
 
         // Build and execute the request against the mock server.
-        SiftRequest request = client.buildEventRequest(new SubmitReviewFieldSet()
+        SiftRequest request = client.buildRequest(new SubmitReviewFieldSet()
                 .setUserId("billy_jones_301")
                 .setContent("Text content of submitted review goes here.")
                 .setReviewTitle("Title of Review Goes Here")

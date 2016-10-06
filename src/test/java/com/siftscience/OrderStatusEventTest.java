@@ -47,7 +47,7 @@ public class OrderStatusEventTest {
         client.setBaseUrl(baseUrl);
 
         // Build and execute the request against the mock server.
-        SiftRequest request = client.buildEventRequest(new OrderStatusFieldSet()
+        SiftRequest request = client.buildRequest(new OrderStatusFieldSet()
                 .setUserId("billy_jones_301")
                 .setOrderId("ORDER-28168441")
                 .setOrderStatus("$canceled")

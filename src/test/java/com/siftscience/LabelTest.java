@@ -1,6 +1,6 @@
 package com.siftscience;
 
-import com.siftscience.model.LoginFieldSet;
+import com.siftscience.model.LabelFieldSet;
 import okhttp3.HttpUrl;
 import okhttp3.mockwebserver.MockResponse;
 import okhttp3.mockwebserver.MockWebServer;
@@ -11,14 +11,18 @@ import org.skyscreamer.jsonassert.JSONAssert;
 
 import static java.net.HttpURLConnection.HTTP_OK;
 
-public class LoginEventTest {
+public class LabelTest {
     @Test
-    public void testLogin() throws Exception {
-        String expectedRequestBody = "{\n" +
-                "  \"$type\"         : \"$login\",\n" +
-                "  \"$api_key\"      : \"your_api_key_here\",\n" +
-                "  \"$user_id\"      : \"billy_jones_301\",\n" +
-                "  \"$login_status\" : \"$success\"\n" +
+    public void testLabel() throws Exception {
+        String expectedRequestBody = "{ \n" +
+                "  \"$api_key\"     : \"23b87a99k099fc98\", \n" +
+                "  \"$is_bad\"      : true, \n" +
+                "  \"$abuse_type\"  : \"payment_abuse\",\n" +
+                "  \"$description\" :" +
+                            " \"The user was testing cards repeatedly for a valid " +
+                "card\", \n" +
+                "  \"$source\"      : \"manual review\", \n" +
+                "  \"$analyst\"     : \"someone@your-site.com\" \n" +
                 "}";
 
         // Start a new mock server and enqueue a mock response.
@@ -36,20 +40,24 @@ public class LoginEventTest {
         HttpUrl baseUrl = server.url("");
 
         // Create a new client and link it to the mock server.
-        SiftClient client = new SiftClient("your_api_key_here");
+        SiftClient client = new SiftClient("23b87a99k099fc98");
         client.setBaseUrl(baseUrl);
 
         // Build and execute the request against the mock server.
-        SiftRequest request = client.buildRequest(new LoginFieldSet()
+        SiftLabelRequest request = client.buildRequest(new LabelFieldSet()
                 .setUserId("billy_jones_301")
-                .setLoginStatus("$success"));
+                .setIsBad(true)
+                .setAbuseType("payment_abuse")
+                .setDescription("The user was testing cards repeatedly for a valid card")
+                .setSource("manual review")
+                .setAnalyst("someone@your-site.com"));
 
         SiftResponse siftResponse = request.send();
 
         // Verify the request.
         RecordedRequest request1 = server.takeRequest();
         Assert.assertEquals("POST", request1.getMethod());
-        Assert.assertEquals("/v204/events", request1.getPath());
+        Assert.assertEquals("/v204/users/billy_jones_301/labels", request1.getPath());
         JSONAssert.assertEquals(expectedRequestBody, request.getFieldSet().toJson(), true);
 
         // Verify the response.
@@ -59,6 +67,5 @@ public class LoginEventTest {
                 siftResponse.getResponseBody().toJson(), true);
 
         server.shutdown();
-
     }
 }

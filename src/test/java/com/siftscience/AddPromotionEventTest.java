@@ -60,7 +60,7 @@ public class AddPromotionEventTest {
         promotions.add(TestUtils.samplePromotion3());
 
         // Build and execute the request against the mock server.
-        SiftRequest request = client.buildEventRequest(new AddPromotionFieldSet()
+        SiftRequest request = client.buildRequest(new AddPromotionFieldSet()
                 .setUserId("billy_jones_301")
                 .setPromotions(promotions));
 

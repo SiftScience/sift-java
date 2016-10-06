@@ -83,7 +83,7 @@ public class UpdateAccountEventTest {
         paymentMethodList.add(TestUtils.samplePaymentMethod2());
 
         // Build and execute the request against the mock server.
-        SiftRequest request = client.buildEventRequest(
+        SiftRequest request = client.buildRequest(
                 new UpdateAccountFieldSet()
                         .setUserId("billy_jones_301")
                         .setUserEmail("bill@gmail.com")

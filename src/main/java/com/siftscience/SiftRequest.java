@@ -5,9 +5,11 @@ import com.siftscience.model.FieldSet;
 import okhttp3.*;
 
 import java.io.IOException;
+import java.net.HttpURLConnection;
 
 public abstract class SiftRequest {
-    private FieldSet fieldSet;
+
+    FieldSet fieldSet;
     private OkHttpClient okClient;
     private HttpUrl baseUrl;
 
@@ -23,21 +25,20 @@ public abstract class SiftRequest {
         this.fieldSet = fields;
     }
 
+    protected void modifyRequestBuilder(Request.Builder builder) {
+        builder.post(RequestBody.create(MediaType.parse("application/json"), fieldSet.toJson()));
+    }
+
     public SiftResponse send() throws IOException {
 
-        // Validate before sending.
         fieldSet.validate();
 
         // Ok now that the fieldSet is valid, construct and send the request.
+        Request.Builder okRequestBuilder = new Request.Builder().url(this.url());
+        modifyRequestBuilder(okRequestBuilder);
         SiftResponse response = new SiftResponse(
-                okClient.newCall(new Request.Builder()
-                        .url(this.url())
-                        .post(RequestBody.create(
-                                MediaType.parse("application/json"),
-                                fieldSet.toJson()))
-                .build()).execute(),
-                this.fieldSet
-        );
+                okClient.newCall(okRequestBuilder.build()).execute(),
+                fieldSet);
 
         // If not successful but no exception happened yet, dig deeper into the response so we
         // can manually throw an appropriate exception.

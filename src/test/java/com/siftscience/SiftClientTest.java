@@ -63,7 +63,7 @@ public class SiftClientTest {
                 .setUserEmail("bill@gmail.com");
 
         // Build and execute the request against the mock server.
-        SiftRequest request = client.buildEventRequest(fields);
+        SiftRequest request = client.buildRequest(fields);
         InvalidApiKeyException apiKeyException = null;
         try {
             request.send();
@@ -120,7 +120,7 @@ public class SiftClientTest {
                 .setOrderId("ORDER-28168441");
 
         // Build and execute the request against the mock server.
-        SiftRequest request = client.buildEventRequest(fields);
+        SiftRequest request = client.buildRequest(fields);
         MissingFieldException missingFieldException = null;
         try {
             request.send();
@@ -153,7 +153,7 @@ public class SiftClientTest {
         CreateOrderFieldSet fields = new CreateOrderFieldSet()
                 .setUserId("uid")
                 .setOrderId("ORDER-28168441");
-        SiftRequest request = client.buildEventRequest(fields);
+        SiftRequest request = client.buildRequest(fields);
 
         MissingFieldException missingFieldException = null;
         try {
@@ -237,7 +237,7 @@ public class SiftClientTest {
                 .setUserEmail("bill@gmail.com");
 
         // Build and execute the request against the mock server.
-        SiftRequest request = client.buildEventRequest(fields);
+        SiftRequest request = client.buildRequest(fields);
         RateLimitException rateLimitException = null;
         try {
             request.send();
@@ -288,7 +288,7 @@ public class SiftClientTest {
                 .setUserEmail("bill@gmail.com");
 
         // Build and execute the request against the mock server.
-        SiftRequest request = client.buildEventRequest(fields);
+        SiftRequest request = client.buildRequest(fields);
         ServerException serverException = null;
         try {
             request.send();

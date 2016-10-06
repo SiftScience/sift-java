@@ -41,7 +41,7 @@ public class CustomEventTest {
         client.setBaseUrl(baseUrl);
 
         // Build and execute the request against the mock server.
-        SiftRequest request = client.buildEventRequest(new CustomEventFieldSet()
+        SiftRequest request = client.buildRequest(new CustomEventFieldSet()
                 .setEventType("make_call")
                 .setUserId("billy_jones_301")
                 .setCustomField("recipient_user_id", "marylee819")

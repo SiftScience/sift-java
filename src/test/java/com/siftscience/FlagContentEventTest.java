@@ -1,5 +1,9 @@
 package com.siftscience;
 
+import com.siftscience.exception.InvalidFieldException;
+import com.siftscience.exception.InvalidRequestException;
+import com.siftscience.exception.MissingFieldException;
+import com.siftscience.exception.SiftException;
 import com.siftscience.model.FlagContentFieldSet;
 import okhttp3.HttpUrl;
 import okhttp3.mockwebserver.MockResponse;
@@ -43,7 +47,7 @@ public class FlagContentEventTest {
         client.setBaseUrl(baseUrl);
 
         // Build and execute the request against the mock server.
-        SiftRequest request = client.buildEventRequest(new FlagContentFieldSet()
+        SiftRequest request = client.buildRequest(new FlagContentFieldSet()
                 .setUserId("billy_jones_301")
                 .setContentId("9671500641")
                 .setFlaggedBy("jamieli89"));

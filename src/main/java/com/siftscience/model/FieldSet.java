@@ -11,14 +11,14 @@ import java.util.Map;
 
 public abstract class FieldSet<T extends FieldSet<T>> {
 
-    static final String API_KEY = "$api_key";
-    static final String USER_ID = "$user_id";
-    static final String SESSION_ID = "$session_id";
-    static final String EVENT_TYPE = "$type";
-    static final String IP = "$ip";
-    static final String TIME = "$time";
-    static final String IS_BAD = "$is_bad";
-    static final String ABUSE_TYPE = "$abuse_type";
+    public static final String API_KEY = "$api_key";
+    public static final String USER_ID = "$user_id";
+    public static final String SESSION_ID = "$session_id";
+    public static final String EVENT_TYPE = "$type";
+    public static final String IP = "$ip";
+    public static final String TIME = "$time";
+    public static final String IS_BAD = "$is_bad";
+    public static final String ABUSE_TYPE = "$abuse_type";
 
     private static Gson defaultGson = new GsonBuilder()
             .excludeFieldsWithoutExposeAnnotation()
@@ -207,6 +207,11 @@ public abstract class FieldSet<T extends FieldSet<T>> {
             throw new MissingFieldException(MissingFieldException.messageForKey(key));
         }
     }
+    protected static void validateBooleanField(String key, Boolean val) {
+        if (val == null) {
+            throw new MissingFieldException(MissingFieldException.messageForKey(key));
+        }
+    }
 
     protected void validateUserIdOrSessionId() {
         int missing = 0;
@@ -238,7 +243,7 @@ public abstract class FieldSet<T extends FieldSet<T>> {
     }
 
     // Serialize to JSON and then immediately deserialize to get a deep copy of this FieldSet.
-    public T clone() {
-        return (T) gson.fromJson(this.toJson(), this.getClass());
-    }
+//    public T clone() {
+//        return (T) gson.fromJson(this.toJson(), this.getClass());
+//    }
 }
