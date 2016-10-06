@@ -5,7 +5,7 @@ import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
 
-public class BaseOrderFieldSet<T extends BaseOrderFieldSet<T>> extends FieldSet<T> {
+public abstract class BaseOrderFieldSet<T extends BaseOrderFieldSet<T>> extends FieldSet<T> {
 
     @Expose @SerializedName(USER_ID) private String userId;
     @Expose @SerializedName(SESSION_ID) private String sessionId;
@@ -34,10 +34,6 @@ public class BaseOrderFieldSet<T extends BaseOrderFieldSet<T>> extends FieldSet<
     public T setUserId(String userId) {
         this.userId = userId;
         return (T) this;
-    }
-
-    public String getEventType() {
-        return "$create_order";
     }
 
     public String getSessionId() {

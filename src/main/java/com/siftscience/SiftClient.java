@@ -1,6 +1,8 @@
 package com.siftscience;
 
+import com.siftscience.model.CreateAccountFieldSet;
 import com.siftscience.model.CreateOrderFieldSet;
+import com.siftscience.model.TransactionFieldSet;
 import com.siftscience.model.UpdateOrderFieldSet;
 import okhttp3.HttpUrl;
 import okhttp3.OkHttpClient;
@@ -29,7 +31,6 @@ public class SiftClient {
     public SiftEventRequest buildCreateOrderRequest(
             String userId,
             CreateOrderFieldSet extraFields) {
-
         extraFields.setApiKey(apiKey).setUserId(userId);
         return new SiftEventRequest(baseUrl, okClient, extraFields);
     }
@@ -37,7 +38,20 @@ public class SiftClient {
     public SiftEventRequest buildUpdateOrderRequest(
             String userId,
             UpdateOrderFieldSet extraFields) {
+        extraFields.setApiKey(apiKey).setUserId(userId);
+        return new SiftEventRequest(baseUrl, okClient, extraFields);
+    }
 
+    public SiftEventRequest buildTransactionRequest(
+            String userId,
+            TransactionFieldSet extraFields) {
+        extraFields.setApiKey(apiKey).setUserId(userId);
+        return new SiftEventRequest(baseUrl, okClient, extraFields);
+    }
+
+    public SiftEventRequest buildCreateAccountRequest(
+            String userId,
+            CreateAccountFieldSet extraFields) {
         extraFields.setApiKey(apiKey).setUserId(userId);
         return new SiftEventRequest(baseUrl, okClient, extraFields);
     }
