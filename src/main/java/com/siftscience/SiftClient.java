@@ -1,9 +1,6 @@
 package com.siftscience;
 
-import com.siftscience.model.CreateAccountFieldSet;
-import com.siftscience.model.CreateOrderFieldSet;
-import com.siftscience.model.TransactionFieldSet;
-import com.siftscience.model.UpdateOrderFieldSet;
+import com.siftscience.model.*;
 import okhttp3.HttpUrl;
 import okhttp3.OkHttpClient;
 
@@ -28,32 +25,49 @@ public class SiftClient {
         return this;
     }
 
-    public SiftEventRequest buildCreateOrderRequest(
-            String userId,
-            CreateOrderFieldSet extraFields) {
-        extraFields.setApiKey(apiKey).setUserId(userId);
-        return new SiftEventRequest(baseUrl, okClient, extraFields);
+    public SiftEventRequest buildCreateOrderRequest(String userId, CreateOrderFieldSet fields) {
+        if (fields == null) {
+            fields = new CreateOrderFieldSet();
+        }
+        return new SiftEventRequest(baseUrl, okClient,
+                fields.clone().setApiKey(apiKey).setUserId(userId));
     }
 
-    public SiftEventRequest buildUpdateOrderRequest(
-            String userId,
-            UpdateOrderFieldSet extraFields) {
-        extraFields.setApiKey(apiKey).setUserId(userId);
-        return new SiftEventRequest(baseUrl, okClient, extraFields);
+    public SiftEventRequest buildUpdateOrderRequest(String userId, UpdateOrderFieldSet fields) {
+        if (fields == null) {
+            fields = new UpdateOrderFieldSet();
+        }
+        return new SiftEventRequest(baseUrl, okClient,
+                fields.clone().setApiKey(apiKey).setUserId(userId));
     }
 
-    public SiftEventRequest buildTransactionRequest(
-            String userId,
-            TransactionFieldSet extraFields) {
-        extraFields.setApiKey(apiKey).setUserId(userId);
-        return new SiftEventRequest(baseUrl, okClient, extraFields);
+    public SiftEventRequest buildTransactionRequest(String userId, Long amount,
+                                                    String currencyCode,
+                                                    TransactionFieldSet fields) {
+        if (fields == null) {
+            fields = new TransactionFieldSet();
+        }
+        return new SiftEventRequest(baseUrl, okClient, fields.clone()
+                .setApiKey(apiKey).setUserId(userId)
+                .setAmount(amount).setCurrencyCode(currencyCode));
     }
 
-    public SiftEventRequest buildCreateAccountRequest(
-            String userId,
-            CreateAccountFieldSet extraFields) {
-        extraFields.setApiKey(apiKey).setUserId(userId);
-        return new SiftEventRequest(baseUrl, okClient, extraFields);
+    public SiftEventRequest buildCreateAccountRequest(String userId,
+                                                      CreateAccountFieldSet fields) {
+        if (fields == null) {
+            fields = new CreateAccountFieldSet();
+        }
+        return new SiftEventRequest(baseUrl, okClient,
+                fields.clone().setApiKey(apiKey).setUserId(userId));
+    }
+
+    public SiftEventRequest buildUpdateAccountRequest(String userId,
+                                                      UpdateAccountFieldSet fields) {
+        if (fields == null) {
+            fields = new UpdateAccountFieldSet();
+        }
+        return new SiftEventRequest(baseUrl, okClient,
+                fields.clone().setApiKey(apiKey).setUserId(userId));
     }
 
     // For testing.

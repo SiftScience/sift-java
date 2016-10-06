@@ -225,4 +225,9 @@ public abstract class FieldSet<T extends FieldSet<T>> {
         this.apiKey = apiKey;
         return (T) this;
     }
+
+    // Serialize to JSON and then immediately deserialize to get a deep copy of this FieldSet.
+    public T clone() {
+        return (T) gson.fromJson(this.toJson(), this.getClass());
+    }
 }
