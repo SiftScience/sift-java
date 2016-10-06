@@ -1,33 +1,41 @@
 package com.siftscience;
 
+import com.siftscience.model.FieldSet;
+import com.siftscience.model.ResponseFieldSet;
+import com.sun.istack.internal.NotNull;
 import okhttp3.Response;
+
+import java.io.IOException;
 
 public class SiftResponse {
     private Response okResponse;
-
-    private int status;
-    private String errorMessage;
     private int time;
-    private String request;
+    private FieldSet requestBody;
+    private ResponseFieldSet body;
 
-    public SiftResponse(Response okResponse) {
+    SiftResponse(@NotNull Response okResponse, FieldSet requestBody)
+            throws IOException {
+
         this.okResponse = okResponse;
+        if (okResponse.body() != null) {
+            this.body = ResponseFieldSet.fromJson(okResponse.body().string());
+        }
+        this.requestBody = requestBody;
     }
 
-    public int getStatus() {
-        return status;
+    public int getHttpStatusCode() {
+        return okResponse.code();
     }
 
-    void setStatus(int status) {
-        this.status = status;
+    public ResponseFieldSet getResponseBody() {
+        return body;
     }
 
     public String getErrorMessage() {
-        return errorMessage;
-    }
-
-    void setErrorMessage(String errorMessage) {
-        this.errorMessage = errorMessage;
+        if (body != null) {
+            return body.getErrorMessage();
+        }
+        return null;
     }
 
     public int getTime() {
@@ -38,11 +46,27 @@ public class SiftResponse {
         this.time = time;
     }
 
-    public String getRequest() {
-        return request;
+    public FieldSet getRequestBody() {
+        return requestBody;
     }
 
-    void setRequest(String request) {
-        this.request = request;
+    SiftResponse setRequestBody(FieldSet requestBody) {
+        this.requestBody = requestBody;
+        return this;
+    }
+
+    public boolean isSuccessful() {
+        return okResponse.isSuccessful();
+    }
+
+    Response getOkResponse() {
+        return okResponse;
+    }
+
+    public Integer getSiftStatusCode() {
+        if (body != null) {
+            return body.getStatus();
+        }
+        return null;
     }
 }

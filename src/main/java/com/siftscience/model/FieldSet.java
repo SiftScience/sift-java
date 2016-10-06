@@ -30,6 +30,9 @@ public abstract class FieldSet<T extends FieldSet<T>> {
 
     private JsonObject customFields = new JsonObject();
 
+    protected abstract boolean allowCustomFields();
+
+    @Nullable
     public abstract String getEventType();
 
     public T setCustomField(@NotNull String key, @Nullable Number val) {
@@ -51,6 +54,10 @@ public abstract class FieldSet<T extends FieldSet<T>> {
         return (T) this;
     }
     private boolean customFieldSetup(@NotNull String key, @Nullable Object val) {
+        if (!allowCustomFields()) {
+            return false;
+        }
+
         validateCustomFieldKey(key);
         if (val == null) {
             this.clearCustomField(key);
@@ -130,7 +137,7 @@ public abstract class FieldSet<T extends FieldSet<T>> {
         // First check that the key is present.
         if (!jsonObj.has(key)) {
             if (required) {
-                throw new MissingFieldException(key);
+                throw new MissingFieldException(MissingFieldException.buildErrorMessageForKey(key));
             } else {
                 return null;
             }
@@ -170,7 +177,7 @@ public abstract class FieldSet<T extends FieldSet<T>> {
 
     private void validateApiKey() {
         if (getApiKey() == null || getApiKey().isEmpty()) {
-            throw new MissingFieldException(API_KEY);
+            throw new MissingFieldException(MissingFieldException.buildErrorMessageForKey(API_KEY));
         }
     }
     private void validateUserId() {

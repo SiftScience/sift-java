@@ -1,7 +1,6 @@
 package com.siftscience;
 
 import com.siftscience.model.FieldSet;
-import com.sun.istack.internal.NotNull;
 import okhttp3.HttpUrl;
 import okhttp3.OkHttpClient;
 

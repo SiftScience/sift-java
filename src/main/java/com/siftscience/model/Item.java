@@ -6,6 +6,7 @@ import com.google.gson.annotations.SerializedName;
 import java.util.List;
 
 public class Item {
+
     @Expose @SerializedName("$item_id") private String itemId;
     @Expose @SerializedName("$product_title") private String productTitle;
     @Expose @SerializedName("$price") private Long price;

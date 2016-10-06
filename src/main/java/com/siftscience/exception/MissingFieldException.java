@@ -1,7 +1,17 @@
 package com.siftscience.exception;
 
-public class MissingFieldException extends FieldException {
-    public MissingFieldException(String fieldName) {
-        super("Required field \"" + fieldName + "\" is missing.");
+import com.siftscience.SiftResponse;
+
+public class MissingFieldException extends InvalidRequestException {
+    public MissingFieldException(String msg) {
+        super(msg);
+    }
+
+    public MissingFieldException(SiftResponse response) {
+        super(response);
+    }
+
+    public static String buildErrorMessageForKey(String key) {
+        return "Required field \"" + key + "\" is missing.";
     }
 }

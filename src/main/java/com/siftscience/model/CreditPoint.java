@@ -4,8 +4,7 @@ import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 public class CreditPoint {
-    @Expose
-    @SerializedName("$amount") private Long amount;
+    @Expose @SerializedName("$amount") private Long amount;
     @Expose @SerializedName("$credit_point_type") private String creditPointType;
 
     public Long getAmount() {

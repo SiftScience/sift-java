@@ -1,7 +1,13 @@
 package com.siftscience.exception;
 
-public class InvalidFieldException extends FieldException {
+import com.siftscience.SiftResponse;
+
+public class InvalidFieldException extends InvalidRequestException {
     public InvalidFieldException(String msg) {
         super(msg);
+    }
+
+    public InvalidFieldException(SiftResponse response) {
+        super(response);
     }
 }
