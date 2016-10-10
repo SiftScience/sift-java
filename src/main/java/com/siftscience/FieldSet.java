@@ -7,8 +7,17 @@ import com.siftscience.exception.MissingFieldException;
 import java.lang.reflect.Type;
 import java.util.Map;
 
+/**
+ * FieldSet represents a set of fields/parameters to send along with an API request. It handles
+ * JSON serialization, field validation, and provides support for custom fields. One important
+ * thing to note about FieldSets is that although they know how to serialize into JSON, their
+ * fields will not always be used as such. For example, some requests don't have a JSON body at
+ * all so the "$api_key" field of the FieldSet will be used as a query parameter of the HTTP
+ * request instead.
+ */
 public abstract class FieldSet<T extends FieldSet<T>> {
 
+    // Reserved field names.
     public static final String API_KEY = "$api_key";
     public static final String USER_ID = "$user_id";
     public static final String SESSION_ID = "$session_id";
@@ -18,6 +27,25 @@ public abstract class FieldSet<T extends FieldSet<T>> {
     public static final String IS_BAD = "$is_bad";
     public static final String ABUSE_TYPE = "$abuse_type";
 
+
+    /**
+     * The default validation function checks that either the user id or the session id exists
+     * in the resulting JSON since it's the most common requirement among all event types. Also
+     * checks that the API key exists.
+     */
+    public void validate() {
+        // API key must exist.
+        validateApiKey();
+
+        // At least one of user id or session id must also exist.
+        validateUserIdOrSessionId();
+    }
+
+
+    // Serialization happens in two stages. First, the object is serialized with `defaultGson`
+    // according to the @Expose and @SerializedName annotations on the subclass type. Then, the
+    // resulting JSON map is augmented with the serialization results of the `gson` Gson instance
+    // below which handles custom fields.
     private static Gson defaultGson = new GsonBuilder()
             .excludeFieldsWithoutExposeAnnotation()
             .create();
@@ -26,12 +54,17 @@ public abstract class FieldSet<T extends FieldSet<T>> {
             .registerTypeHierarchyAdapter(FieldSet.class, new FieldSetSerializer())
             .create();
 
-    private JsonObject customFields = new JsonObject();
-
-    protected abstract boolean allowCustomFields();
-
+    // Every Events API request will have a reserved "$type" field that never changes for that
+    // event type so subclasses should return their associated type such as "$create_order".
     public abstract String getEventType();
 
+    // customFields is the map of all custom k/v fields belonging to this FieldSet.
+    private JsonObject customFields = new JsonObject();
+
+    // Some types of requests don't allow custom fields. Return false for such fixed payloads.
+    protected abstract boolean allowCustomFields();
+
+    // Setters for custom fields. Values can only be numbers, booleans, or strings.
     public T setCustomField(String key, Number val) {
         if (customFieldSetup(key, val)) {
             this.customFields.addProperty(key, val);
@@ -62,6 +95,9 @@ public abstract class FieldSet<T extends FieldSet<T>> {
         }
         return true;
     }
+
+    // Clearing a custom field is equivalent to setting the value to null since nulls don't get
+    // serialized.
     public T clearCustomField(String key) {
         this.customFields.remove(key);
         return (T) this;
@@ -71,18 +107,29 @@ public abstract class FieldSet<T extends FieldSet<T>> {
         return (T) this;
     }
 
+    /**
+     * Custom serialization adapter for all FieldSets.
+     */
     private static class FieldSetSerializer implements JsonSerializer<FieldSet> {
         public JsonElement serialize(FieldSet src, Type t, JsonSerializationContext ctx) {
+            // First look for all @Expose'd fields on the subclass.
             JsonObject jsonObj = defaultGson.toJsonTree(src).getAsJsonObject();
+
+            // Next augment with the custom fields from this base class.
             for (Map.Entry<String,JsonElement> entry : src.customFields.entrySet()) {
                 jsonObj.add(entry.getKey(), entry.getValue());
             }
+
+            // And then add the common reserved fields shared between all FieldSets.
             jsonObj.addProperty(EVENT_TYPE, src.getEventType());
             jsonObj.addProperty(API_KEY, src.getApiKey());
             return jsonObj;
         }
     }
 
+    /**
+     * Custom deserialization adapter for all FieldSets.
+     */
     private static class FieldSetDeserializer implements JsonDeserializer<FieldSet> {
         public FieldSet deserialize(JsonElement json, Type t, JsonDeserializationContext ctx) {
             FieldSet fieldSet = defaultGson.fromJson(json, t);
@@ -172,19 +219,6 @@ public abstract class FieldSet<T extends FieldSet<T>> {
         return gson.toJson(this);
     }
 
-    /**
-     * The default validation function checks that either the user id or the session id exists
-     * in the resulting JSON since it's the most common requirement among all event types. Also
-     * checks that the API key exists.
-     */
-    public void validate() {
-        // API key must exist.
-        validateApiKey();
-
-        // At least one of user id or session id must also exist.
-        validateUserIdOrSessionId();
-    }
-
     protected void validateApiKey() {
         validateStringField(API_KEY, getApiKey());
     }
@@ -240,9 +274,4 @@ public abstract class FieldSet<T extends FieldSet<T>> {
         this.apiKey = apiKey;
         return (T) this;
     }
-
-    // Serialize to JSON and then immediately deserialize to get a deep copy of this FieldSet.
-//    public T clone() {
-//        return (T) gson.fromJson(this.toJson(), this.getClass());
-//    }
 }

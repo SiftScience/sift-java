@@ -5,12 +5,20 @@ import okhttp3.*;
 
 import java.io.IOException;
 
+/**
+ * UnlabelRequest is the request type to use for unlabeling a user via the Labels API.
+ * https://siftscience.com/developers/docs/curl/labels-api/unlabel-user
+ */
 public class UnlabelRequest extends SiftRequest<UnlabelResponse> {
 
     UnlabelRequest(HttpUrl baseUrl, OkHttpClient okClient, UnlabelFieldSet fields) {
         super(baseUrl, okClient, fields);
     }
 
+    /**
+     * For unlabeling, the api key and abuse types are encoded into the URL since there is no
+     * request body.
+     */
     @Override
     protected HttpUrl path(HttpUrl baseUrl) {
         UnlabelFieldSet unlabelFields = (UnlabelFieldSet)fieldSet;
@@ -25,6 +33,9 @@ public class UnlabelRequest extends SiftRequest<UnlabelResponse> {
         return builder.build();
     }
 
+    /**
+     * Use the DELETE HTTP method instead of the default POST.
+     */
     @Override
     protected void modifyRequestBuilder(Request.Builder builder) {
         builder.delete();

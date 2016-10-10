@@ -7,9 +7,17 @@ import okhttp3.Response;
 import java.io.IOException;
 import java.util.List;
 
+/**
+ * EventRequest is the request type for the Sift Events API.
+ * https://siftscience.com/developers/docs/curl/events-api
+ */
 public class EventRequest extends SiftRequest<EventResponse> {
 
+    // Whether or not to return the given user's score via Synchronous Scoring.
+    // https://siftscience.com/developers/docs/curl/score-api/synchronous-scores
     private boolean returnScore;
+
+    // The abuse types to return synchronous scores for.
     private List<String> abuseTypes;
 
     EventRequest(HttpUrl baseUrl, OkHttpClient okClient, FieldSet fields) {
@@ -40,8 +48,9 @@ public class EventRequest extends SiftRequest<EventResponse> {
 
     @Override
     protected HttpUrl path(HttpUrl baseUrl) {
-        HttpUrl.Builder builder = baseUrl.newBuilder()
-                .addPathSegment("events");
+        HttpUrl.Builder builder = baseUrl.newBuilder().addPathSegment("events");
+
+        // returnScore and abuseTypes are encoded into the URL as query params rather than JSON.
         if (returnScore) {
             builder.addQueryParameter("return_score", "true");
         }

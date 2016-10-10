@@ -6,6 +6,10 @@ import okhttp3.ResponseBody;
 
 import java.io.IOException;
 
+/**
+ * SiftResponse is the base class of all Sift API responses. It is a simple wrapper around the
+ * actual OkHttp response.
+ */
 public abstract class SiftResponse<T extends BaseResponseBody<T>> {
     private Response okResponse;
     private int time;

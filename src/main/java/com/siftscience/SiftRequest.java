@@ -5,6 +5,10 @@ import okhttp3.*;
 
 import java.io.IOException;
 
+/**
+ * SiftRequest is the base class for all Sift API requests. It implements the `send` method which
+ * should be used by all subtypes as it provides standard error handling logic.
+ */
 public abstract class SiftRequest<T extends SiftResponse> {
 
     FieldSet fieldSet;
@@ -23,6 +27,9 @@ public abstract class SiftRequest<T extends SiftResponse> {
         this.fieldSet = fields;
     }
 
+    /**
+     * By default, the request is a JSON encoded POST.
+     */
     protected void modifyRequestBuilder(Request.Builder builder) {
         builder.post(RequestBody.create(MediaType.parse("application/json"), fieldSet.toJson()));
     }

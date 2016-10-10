@@ -7,6 +7,10 @@ import okhttp3.Response;
 
 import java.io.IOException;
 
+/**
+ * LabelRequest is the request type for the Sift Labels API.
+ * https://siftscience.com/developers/docs/curl/labels-api
+ */
 public class LabelRequest extends SiftRequest<LabelResponse> {
 
     LabelRequest(HttpUrl baseUrl, OkHttpClient okClient, LabelFieldSet fields) {
@@ -23,8 +27,7 @@ public class LabelRequest extends SiftRequest<LabelResponse> {
     }
 
     @Override
-    LabelResponse buildResponse(Response response, FieldSet requestFields)
-            throws IOException {
+    LabelResponse buildResponse(Response response, FieldSet requestFields) throws IOException {
         return new LabelResponse(response, requestFields);
     }
 }
