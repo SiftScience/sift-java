@@ -1,31 +1,30 @@
 package com.siftscience;
 
-import com.siftscience.model.FieldSet;
 import okhttp3.HttpUrl;
 import okhttp3.OkHttpClient;
 
 import java.util.List;
 
-public class SiftEventRequest extends SiftRequest {
+public class EventRequest extends SiftRequest {
 
     private boolean returnScore;
     private List<String> abuseTypes;
 
-    SiftEventRequest(HttpUrl baseUrl, OkHttpClient okClient, FieldSet fields) {
+    EventRequest(HttpUrl baseUrl, OkHttpClient okClient, FieldSet fields) {
         super(baseUrl, okClient, fields);
         this.returnScore = false;
         abuseTypes = null;
     }
 
-    SiftEventRequest(HttpUrl baseUrl, OkHttpClient okClient, FieldSet fields,
-                            boolean returnScore) {
+    EventRequest(HttpUrl baseUrl, OkHttpClient okClient, FieldSet fields,
+                 boolean returnScore) {
         super(baseUrl, okClient, fields);
         this.returnScore = returnScore;
         this.abuseTypes = null;
     }
 
-    SiftEventRequest(HttpUrl baseUrl, OkHttpClient okClient, FieldSet fields,
-                            boolean returnScore, List<String> abuseTypes) {
+    EventRequest(HttpUrl baseUrl, OkHttpClient okClient, FieldSet fields,
+                 boolean returnScore, List<String> abuseTypes) {
         super(baseUrl, okClient, fields);
         this.returnScore = returnScore;
         this.abuseTypes = abuseTypes;

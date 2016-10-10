@@ -1,7 +1,5 @@
 package com.siftscience;
 
-import com.siftscience.exception.MissingFieldException;
-import com.siftscience.exception.SiftException;
 import com.siftscience.model.*;
 import com.sun.istack.internal.NotNull;
 import okhttp3.HttpUrl;
@@ -29,47 +27,47 @@ public class SiftClient {
         return this;
     }
 
-    public SiftEventRequest buildRequest(@NotNull FieldSet fields) {
+    public EventRequest buildRequest(@NotNull FieldSet fields) {
         if (fields.getApiKey() == null) {
             fields.setApiKey(apiKey);
         }
-        return new SiftEventRequest(baseUrl, okClient, fields);
+        return new EventRequest(baseUrl, okClient, fields);
     }
 
-    public SiftEventRequest buildRequest(@NotNull FieldSet fields, boolean returnScore) {
+    public EventRequest buildRequest(@NotNull FieldSet fields, boolean returnScore) {
         if (fields.getApiKey() == null) {
             fields.setApiKey(apiKey);
         }
-        return new SiftEventRequest(baseUrl, okClient, fields, returnScore);
+        return new EventRequest(baseUrl, okClient, fields, returnScore);
     }
 
-    public SiftEventRequest buildRequest(@NotNull FieldSet fields, boolean returnScore,
-                                         List<String> abuseTypes) {
+    public EventRequest buildRequest(@NotNull FieldSet fields, boolean returnScore,
+                                     List<String> abuseTypes) {
         if (fields.getApiKey() == null) {
             fields.setApiKey(apiKey);
         }
-        return new SiftEventRequest(baseUrl, okClient, fields, returnScore, abuseTypes);
+        return new EventRequest(baseUrl, okClient, fields, returnScore, abuseTypes);
     }
 
-    public SiftLabelRequest buildRequest(@NotNull LabelFieldSet fields) {
+    public LabelRequest buildRequest(@NotNull LabelFieldSet fields) {
         if (fields.getApiKey() == null) {
             fields.setApiKey(apiKey);
         }
-        return new SiftLabelRequest(baseUrl, okClient, fields);
+        return new LabelRequest(baseUrl, okClient, fields);
     }
 
-    public SiftUnlabelRequest buildRequest(@NotNull UnlabelFieldSet fields) {
+    public UnlabelRequest buildRequest(@NotNull UnlabelFieldSet fields) {
         if (fields.getApiKey() == null) {
             fields.setApiKey(apiKey);
         }
-        return new SiftUnlabelRequest(baseUrl, okClient, fields);
+        return new UnlabelRequest(baseUrl, okClient, fields);
     }
 
-    public SiftScoreRequest buildRequest(@NotNull ScoreFieldSet fields) {
+    public ScoreRequest buildRequest(@NotNull ScoreFieldSet fields) {
         if (fields.getApiKey() == null) {
             fields.setApiKey(apiKey);
         }
-        return new SiftScoreRequest(baseUrl, okClient, fields);
+        return new ScoreRequest(baseUrl, okClient, fields);
     }
 
     // For testing.

@@ -5,8 +5,8 @@ import okhttp3.HttpUrl;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 
-public class SiftScoreRequest extends SiftRequest {
-    SiftScoreRequest(HttpUrl baseUrl, OkHttpClient okClient, ScoreFieldSet fields) {
+public class ScoreRequest extends SiftRequest {
+    ScoreRequest(HttpUrl baseUrl, OkHttpClient okClient, ScoreFieldSet fields) {
         super(baseUrl, okClient, fields);
     }
 

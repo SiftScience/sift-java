@@ -1,4 +1,4 @@
-package com.siftscience.model;
+package com.siftscience;
 
 import com.google.gson.*;
 import com.siftscience.exception.InvalidFieldException;

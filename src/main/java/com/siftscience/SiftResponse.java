@@ -1,6 +1,5 @@
 package com.siftscience;
 
-import com.siftscience.model.FieldSet;
 import com.siftscience.model.ResponseFieldSet;
 import com.sun.istack.internal.NotNull;
 import okhttp3.Response;

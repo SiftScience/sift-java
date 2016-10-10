@@ -4,9 +4,9 @@ import com.siftscience.model.LabelFieldSet;
 import okhttp3.HttpUrl;
 import okhttp3.OkHttpClient;
 
-public class SiftLabelRequest extends SiftRequest {
+public class LabelRequest extends SiftRequest {
 
-    SiftLabelRequest(HttpUrl baseUrl, OkHttpClient okClient, LabelFieldSet fields) {
+    LabelRequest(HttpUrl baseUrl, OkHttpClient okClient, LabelFieldSet fields) {
         super(baseUrl, okClient, fields);
     }
 

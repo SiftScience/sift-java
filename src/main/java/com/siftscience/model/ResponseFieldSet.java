@@ -2,6 +2,7 @@ package com.siftscience.model;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
+import com.siftscience.FieldSet;
 
 public class ResponseFieldSet extends FieldSet<ResponseFieldSet> {
 

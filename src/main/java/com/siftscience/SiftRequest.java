@@ -1,11 +1,9 @@
 package com.siftscience;
 
 import com.siftscience.exception.*;
-import com.siftscience.model.FieldSet;
 import okhttp3.*;
 
 import java.io.IOException;
-import java.net.HttpURLConnection;
 
 public abstract class SiftRequest {
 

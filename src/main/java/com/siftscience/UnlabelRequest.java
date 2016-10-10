@@ -3,9 +3,9 @@ package com.siftscience;
 import com.siftscience.model.UnlabelFieldSet;
 import okhttp3.*;
 
-public class SiftUnlabelRequest extends SiftRequest {
+public class UnlabelRequest extends SiftRequest {
 
-    SiftUnlabelRequest(HttpUrl baseUrl, OkHttpClient okClient, UnlabelFieldSet fields) {
+    UnlabelRequest(HttpUrl baseUrl, OkHttpClient okClient, UnlabelFieldSet fields) {
         super(baseUrl, okClient, fields);
     }
 

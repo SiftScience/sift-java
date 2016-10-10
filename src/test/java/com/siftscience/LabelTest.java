@@ -44,7 +44,7 @@ public class LabelTest {
         client.setBaseUrl(baseUrl);
 
         // Build and execute the request against the mock server.
-        SiftLabelRequest request = client.buildRequest(new LabelFieldSet()
+        LabelRequest request = client.buildRequest(new LabelFieldSet()
                 .setUserId("billy_jones_301")
                 .setIsBad(true)
                 .setAbuseType("payment_abuse")
