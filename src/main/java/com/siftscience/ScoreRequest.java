@@ -1,7 +1,6 @@
 package com.siftscience;
 
 import com.siftscience.model.ScoreFieldSet;
-import com.sun.istack.internal.NotNull;
 import okhttp3.HttpUrl;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
@@ -20,7 +19,7 @@ public class ScoreRequest extends SiftRequest<ScoreResponse> {
     }
 
     @Override
-    ScoreResponse buildResponse(@NotNull Response response, FieldSet requestFields)
+    ScoreResponse buildResponse(Response response, FieldSet requestFields)
             throws IOException {
         return new ScoreResponse(response, requestFields);
     }

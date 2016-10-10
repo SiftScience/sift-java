@@ -1,7 +1,6 @@
 package com.siftscience;
 
 import com.siftscience.model.BaseResponseBody;
-import com.sun.istack.internal.NotNull;
 import okhttp3.Response;
 import okhttp3.ResponseBody;
 
@@ -13,7 +12,7 @@ public abstract class SiftResponse<T extends BaseResponseBody<T>> {
     private FieldSet requestBody;
     T body;
 
-    SiftResponse(@NotNull Response okResponse, FieldSet requestBody) throws IOException {
+    SiftResponse(Response okResponse, FieldSet requestBody) throws IOException {
         this.okResponse = okResponse;
         this.requestBody = requestBody;
 

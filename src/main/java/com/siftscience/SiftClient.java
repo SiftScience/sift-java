@@ -1,7 +1,6 @@
 package com.siftscience;
 
 import com.siftscience.model.*;
-import com.sun.istack.internal.NotNull;
 import okhttp3.HttpUrl;
 import okhttp3.OkHttpClient;
 
@@ -53,21 +52,21 @@ public class SiftClient {
         return this;
     }
 
-    public EventRequest buildRequest(@NotNull FieldSet fields) {
+    public EventRequest buildRequest(FieldSet fields) {
         if (fields.getApiKey() == null) {
             fields.setApiKey(apiKey);
         }
         return new EventRequest(baseUrl, okClient, fields);
     }
 
-    public EventRequest buildRequest(@NotNull FieldSet fields, boolean returnScore) {
+    public EventRequest buildRequest(FieldSet fields, boolean returnScore) {
         if (fields.getApiKey() == null) {
             fields.setApiKey(apiKey);
         }
         return new EventRequest(baseUrl, okClient, fields, returnScore);
     }
 
-    public EventRequest buildRequest(@NotNull FieldSet fields, boolean returnScore,
+    public EventRequest buildRequest(FieldSet fields, boolean returnScore,
                                      List<String> abuseTypes) {
         if (fields.getApiKey() == null) {
             fields.setApiKey(apiKey);
@@ -75,21 +74,21 @@ public class SiftClient {
         return new EventRequest(baseUrl, okClient, fields, returnScore, abuseTypes);
     }
 
-    public LabelRequest buildRequest(@NotNull LabelFieldSet fields) {
+    public LabelRequest buildRequest(LabelFieldSet fields) {
         if (fields.getApiKey() == null) {
             fields.setApiKey(apiKey);
         }
         return new LabelRequest(baseUrl, okClient, fields);
     }
 
-    public UnlabelRequest buildRequest(@NotNull UnlabelFieldSet fields) {
+    public UnlabelRequest buildRequest(UnlabelFieldSet fields) {
         if (fields.getApiKey() == null) {
             fields.setApiKey(apiKey);
         }
         return new UnlabelRequest(baseUrl, okClient, fields);
     }
 
-    public ScoreRequest buildRequest(@NotNull ScoreFieldSet fields) {
+    public ScoreRequest buildRequest(ScoreFieldSet fields) {
         if (fields.getApiKey() == null) {
             fields.setApiKey(apiKey);
         }

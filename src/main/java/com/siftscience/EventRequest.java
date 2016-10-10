@@ -1,6 +1,5 @@
 package com.siftscience;
 
-import com.sun.istack.internal.NotNull;
 import okhttp3.HttpUrl;
 import okhttp3.OkHttpClient;
 import okhttp3.Response;
@@ -20,7 +19,7 @@ public class EventRequest extends SiftRequest<EventResponse> {
     }
 
     @Override
-    EventResponse buildResponse(@NotNull Response response, FieldSet requestFields)
+    EventResponse buildResponse(Response response, FieldSet requestFields)
             throws IOException {
         return new EventResponse(response, requestFields);
     }

@@ -1,7 +1,6 @@
 package com.siftscience;
 
 import com.siftscience.exception.*;
-import com.sun.istack.internal.NotNull;
 import okhttp3.*;
 
 import java.io.IOException;
@@ -28,7 +27,7 @@ public abstract class SiftRequest<T extends SiftResponse> {
         builder.post(RequestBody.create(MediaType.parse("application/json"), fieldSet.toJson()));
     }
 
-    abstract T buildResponse(@NotNull Response response, FieldSet requestFields) throws IOException;
+    abstract T buildResponse(Response response, FieldSet requestFields) throws IOException;
 
     public T send() throws IOException {
 

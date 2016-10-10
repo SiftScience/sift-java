@@ -1,7 +1,6 @@
 package com.siftscience;
 
 import com.siftscience.model.LabelFieldSet;
-import com.sun.istack.internal.NotNull;
 import okhttp3.HttpUrl;
 import okhttp3.OkHttpClient;
 import okhttp3.Response;
@@ -24,7 +23,7 @@ public class LabelRequest extends SiftRequest<LabelResponse> {
     }
 
     @Override
-    LabelResponse buildResponse(@NotNull Response response, FieldSet requestFields)
+    LabelResponse buildResponse(Response response, FieldSet requestFields)
             throws IOException {
         return new LabelResponse(response, requestFields);
     }

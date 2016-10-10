@@ -1,7 +1,6 @@
 package com.siftscience.exception;
 
 import com.siftscience.SiftResponse;
-import com.sun.istack.internal.NotNull;
 
 public class SiftException extends RuntimeException {
 
@@ -11,7 +10,7 @@ public class SiftException extends RuntimeException {
         super(msg);
     }
 
-    public SiftException(@NotNull SiftResponse response) {
+    public SiftException(SiftResponse response) {
         super(responseErrorMessage(response));
         this.response = response;
     }

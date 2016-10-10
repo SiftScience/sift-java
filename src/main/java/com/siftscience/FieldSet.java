@@ -3,8 +3,6 @@ package com.siftscience;
 import com.google.gson.*;
 import com.siftscience.exception.InvalidFieldException;
 import com.siftscience.exception.MissingFieldException;
-import com.sun.istack.internal.NotNull;
-import com.sun.istack.internal.Nullable;
 
 import java.lang.reflect.Type;
 import java.util.Map;
@@ -32,28 +30,27 @@ public abstract class FieldSet<T extends FieldSet<T>> {
 
     protected abstract boolean allowCustomFields();
 
-    @Nullable
     public abstract String getEventType();
 
-    public T setCustomField(@NotNull String key, @Nullable Number val) {
+    public T setCustomField(String key, Number val) {
         if (customFieldSetup(key, val)) {
             this.customFields.addProperty(key, val);
         }
         return (T) this;
     }
-    public T setCustomField(@NotNull String key, @Nullable Boolean val) {
+    public T setCustomField(String key, Boolean val) {
         if (customFieldSetup(key, val)) {
             this.customFields.addProperty(key, val);
         }
         return (T) this;
     }
-    public T setCustomField(@NotNull String key, @Nullable String val) {
+    public T setCustomField(String key, String val) {
         if (customFieldSetup(key, val)) {
             this.customFields.addProperty(key, val);
         }
         return (T) this;
     }
-    private boolean customFieldSetup(@NotNull String key, @Nullable Object val) {
+    private boolean customFieldSetup(String key, Object val) {
         if (!allowCustomFields()) {
             return false;
         }
@@ -65,7 +62,7 @@ public abstract class FieldSet<T extends FieldSet<T>> {
         }
         return true;
     }
-    public T clearCustomField(@NotNull String key) {
+    public T clearCustomField(String key) {
         this.customFields.remove(key);
         return (T) this;
     }
@@ -132,8 +129,8 @@ public abstract class FieldSet<T extends FieldSet<T>> {
         }
     }
 
-    private static <T> T getField(@NotNull JsonObject jsonObj,
-                                  @NotNull String key,
+    private static <T> T getField(JsonObject jsonObj,
+                                  String key,
                                   boolean required) {
 
         // First check that the key is present.
