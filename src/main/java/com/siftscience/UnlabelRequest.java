@@ -1,9 +1,12 @@
 package com.siftscience;
 
 import com.siftscience.model.UnlabelFieldSet;
+import com.sun.istack.internal.NotNull;
 import okhttp3.*;
 
-public class UnlabelRequest extends SiftRequest {
+import java.io.IOException;
+
+public class UnlabelRequest extends SiftRequest<UnlabelResponse> {
 
     UnlabelRequest(HttpUrl baseUrl, OkHttpClient okClient, UnlabelFieldSet fields) {
         super(baseUrl, okClient, fields);
@@ -26,5 +29,11 @@ public class UnlabelRequest extends SiftRequest {
     @Override
     protected void modifyRequestBuilder(Request.Builder builder) {
         builder.delete();
+    }
+
+    @Override
+    UnlabelResponse buildResponse(@NotNull Response response, FieldSet requestFields)
+            throws IOException {
+        return new UnlabelResponse(response, requestFields);
     }
 }

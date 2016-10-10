@@ -1,11 +1,15 @@
 package com.siftscience;
 
 import com.siftscience.model.ScoreFieldSet;
+import com.sun.istack.internal.NotNull;
 import okhttp3.HttpUrl;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
+import okhttp3.Response;
 
-public class ScoreRequest extends SiftRequest {
+import java.io.IOException;
+
+public class ScoreRequest extends SiftRequest<ScoreResponse> {
     ScoreRequest(HttpUrl baseUrl, OkHttpClient okClient, ScoreFieldSet fields) {
         super(baseUrl, okClient, fields);
     }
@@ -13,6 +17,12 @@ public class ScoreRequest extends SiftRequest {
     @Override
     protected void modifyRequestBuilder(Request.Builder builder) {
         builder.get();
+    }
+
+    @Override
+    ScoreResponse buildResponse(@NotNull Response response, FieldSet requestFields)
+            throws IOException {
+        return new ScoreResponse(response, requestFields);
     }
 
     @Override

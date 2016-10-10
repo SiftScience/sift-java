@@ -1,11 +1,14 @@
 package com.siftscience;
 
+import com.sun.istack.internal.NotNull;
 import okhttp3.HttpUrl;
 import okhttp3.OkHttpClient;
+import okhttp3.Response;
 
+import java.io.IOException;
 import java.util.List;
 
-public class EventRequest extends SiftRequest {
+public class EventRequest extends SiftRequest<EventResponse> {
 
     private boolean returnScore;
     private List<String> abuseTypes;
@@ -14,6 +17,12 @@ public class EventRequest extends SiftRequest {
         super(baseUrl, okClient, fields);
         this.returnScore = false;
         abuseTypes = null;
+    }
+
+    @Override
+    EventResponse buildResponse(@NotNull Response response, FieldSet requestFields)
+            throws IOException {
+        return new EventResponse(response, requestFields);
     }
 
     EventRequest(HttpUrl baseUrl, OkHttpClient okClient, FieldSet fields,

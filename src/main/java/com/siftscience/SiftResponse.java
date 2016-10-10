@@ -6,15 +6,13 @@ import okhttp3.Response;
 
 import java.io.IOException;
 
-public class SiftResponse {
+public abstract class SiftResponse {
     private Response okResponse;
     private int time;
     private FieldSet requestBody;
     private ResponseFieldSet body;
 
-    SiftResponse(@NotNull Response okResponse, FieldSet requestBody)
-            throws IOException {
-
+    SiftResponse(@NotNull Response okResponse, FieldSet requestBody) throws IOException {
         this.okResponse = okResponse;
         if (okResponse.body() != null) {
             this.body = ResponseFieldSet.fromJson(okResponse.body().string());
