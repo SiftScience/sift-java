@@ -6,7 +6,7 @@ import okhttp3.Response;
 
 import java.io.IOException;
 
-public class EventResponse extends SiftResponse {
+public class EventResponse extends SiftResponse<EventResponseFieldSet> {
     EventResponse(@NotNull Response okResponse, FieldSet requestBody) throws IOException {
         super(okResponse, requestBody);
     }

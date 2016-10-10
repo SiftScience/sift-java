@@ -7,7 +7,7 @@ import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 import java.io.IOException;
 
-public class LabelResponse extends SiftResponse {
+public class LabelResponse extends SiftResponse<LabelResponseFieldSet> {
     LabelResponse(@NotNull Response okResponse, FieldSet requestBody) throws IOException {
         super(okResponse, requestBody);
     }

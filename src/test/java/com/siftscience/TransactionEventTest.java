@@ -1,5 +1,6 @@
 package com.siftscience;
 
+import com.siftscience.model.EventResponseFieldSet;
 import com.siftscience.model.TransactionFieldSet;
 import okhttp3.HttpUrl;
 import okhttp3.mockwebserver.MockResponse;
@@ -82,7 +83,7 @@ public class TransactionEventTest {
         client.setBaseUrl(baseUrl);
 
         // Build and execute the request against the mock server.
-        SiftRequest request = client.buildRequest(new TransactionFieldSet()
+        EventRequest request = client.buildRequest(new TransactionFieldSet()
                 .setUserId("billy_jones_301")
                 .setAmount(506790000L)
                 .setCurrencyCode("USD")
@@ -100,7 +101,7 @@ public class TransactionEventTest {
                 .setCustomField("coupon_code", "dollarMadness")
                 .setCustomField("shipping_choice", "FedEx Ground Courier")
                 .setCustomField("is_first_time_buyer", false));
-        SiftResponse siftResponse = request.send();
+        EventResponse siftResponse = request.send();
 
         // Verify the request.
         RecordedRequest request1 = server.takeRequest();
@@ -113,6 +114,10 @@ public class TransactionEventTest {
         Assert.assertEquals(0, (int) siftResponse.getResponseBody().getStatus());
         JSONAssert.assertEquals(response.getBody().readUtf8(),
                 siftResponse.getResponseBody().toJson(), true);
+//        EventResponseFieldSet ff = siftResponse.getResponseBody();
+//        siftResponse.getRequestBody()
+//        siftResponse.getResponseBody().getErrorMessage();
+//        siftResponse.getErrorMessage();
 
         server.shutdown();
     }

@@ -7,6 +7,32 @@ import okhttp3.OkHttpClient;
 
 import java.util.List;
 
+/**
+ * Use a SiftClient to access all supported Sift Science APIs.
+ *
+ * Usage:
+ *
+ * SiftClient client = new SiftClient("your_api_key");
+ * EventRequest txEventRequest = client.buildRequest(
+ *      new TransactionFieldSet()
+ *              .setUserId("some_user_id")
+ *              .setAmount(506790000L)
+ *              .setCurrencyCode("USD")
+ *              .setTransactionType("$sale")
+ *              ... );
+ * try {
+ *      EventResponse txEventResponse = txEventRequest.send();
+ * } catch (SiftException e) {
+ *     ... handle validation and unexpected server errors.
+ * }
+ *
+ * txEventResponse.isSuccessful(); // true;
+ * txEventResponse.getErrorMessage(); // "OK";
+ *
+ * FieldSet requestFields = txEventResponse.getRequestBody();
+ * EventResponseFieldSet responseFields = txEventResponse.getResponseBody();
+ *
+ */
 public class SiftClient {
     private String apiKey;
     private OkHttpClient okClient = new OkHttpClient();

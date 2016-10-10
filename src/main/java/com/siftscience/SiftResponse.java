@@ -8,11 +8,11 @@ import okhttp3.ResponseBody;
 
 import java.io.IOException;
 
-public abstract class SiftResponse {
+public abstract class SiftResponse<T extends BaseResponseFieldSet<T>> {
     private Response okResponse;
     private int time;
     private FieldSet requestBody;
-    BaseResponseFieldSet body;
+    T body;
 
     SiftResponse(@NotNull Response okResponse, FieldSet requestBody) throws IOException {
         this.okResponse = okResponse;
@@ -33,7 +33,7 @@ public abstract class SiftResponse {
         return okResponse.code();
     }
 
-    public BaseResponseFieldSet getResponseBody() {
+    public T getResponseBody() {
         return body;
     }
 
