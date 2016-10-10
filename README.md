@@ -24,14 +24,14 @@ SiftClient client = new SiftClient("your_api_key");
 All request types can be built using the overloaded `client.buildRequest`.
 Here's an example for the `$create_order` event type.
 ```java
+// Build the request object.
 EventRequest createOrderRequest = client.buildRequest(new CreateOrderFieldSet()
-        // Required fields ($api_key and $type) are automatically filled
-        // in by the library, although $api_key can be overridden on a
-        // per-request basis.
+
+        // Required fields ($api_key and $type) are automatically filled in by the library,
+        // although $api_key can be overridden on a per-request basis.
         .setUserId("bill_jones") 
         
-        // Supported fields. See all fields for $create_order at:
-        // https://siftscience.com/developers/docs/curl/events-api/reserved-events/create-order
+        // Supported fields.
         .setOrderId("ORDER-28168441")
         .setUserEmail("bjones@altavista.com")
         .setCurrencyCode("USD")
@@ -46,6 +46,8 @@ EventRequest createOrderRequest = client.buildRequest(new CreateOrderFieldSet()
                 .setCountry("US")
                 .setZipCode("03257"))
         .setExpeditedShipping(true)
+        // More supported fields documented at:
+        // https://siftscience.com/developers/docs/curl/events-api/reserved-events/create-order
         
         // Custom fields.
         .setCustomField("digital_wallet", "apple_pay")
@@ -53,4 +55,11 @@ EventRequest createOrderRequest = client.buildRequest(new CreateOrderFieldSet()
         .setCustomField("shipping_choice", "FedEx Ground Courier")
         .setCustomField("is_first_time_buyer", false)
 );
+
+// Send the request.
+try {
+    createOrderRequest.send();
+} catch (SiftException e) {
+    ... handle InvalidRequestException and/or ServerException subtypes.
+}
 ```
