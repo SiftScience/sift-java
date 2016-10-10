@@ -5,10 +5,10 @@ import com.google.gson.annotations.SerializedName;
 
 import java.util.Map;
 
-public class ScoreResponseFieldSet extends BaseResponseFieldSet<ScoreResponseFieldSet> {
+public class ScoreResponseBody extends BaseResponseBody<ScoreResponseBody> {
 
-    public static ScoreResponseFieldSet fromJson(String json) {
-        return gson.fromJson(json, ScoreResponseFieldSet.class);
+    public static ScoreResponseBody fromJson(String json) {
+        return gson.fromJson(json, ScoreResponseBody.class);
     }
 
     @Expose @SerializedName("user_id") private String userId;
@@ -19,7 +19,7 @@ public class ScoreResponseFieldSet extends BaseResponseFieldSet<ScoreResponseFie
         return userId;
     }
 
-    public ScoreResponseFieldSet setUserId(String userId) {
+    public ScoreResponseBody setUserId(String userId) {
         this.userId = userId;
         return this;
     }
@@ -28,7 +28,7 @@ public class ScoreResponseFieldSet extends BaseResponseFieldSet<ScoreResponseFie
         return scores;
     }
 
-    public ScoreResponseFieldSet setScores(Map<String, AbuseScore> scores) {
+    public ScoreResponseBody setScores(Map<String, AbuseScore> scores) {
         this.scores = scores;
         return this;
     }
@@ -37,7 +37,7 @@ public class ScoreResponseFieldSet extends BaseResponseFieldSet<ScoreResponseFie
         return latestLabels;
     }
 
-    public ScoreResponseFieldSet setLatestLabels(Map<String, Label> latestLabels) {
+    public ScoreResponseBody setLatestLabels(Map<String, Label> latestLabels) {
         this.latestLabels = latestLabels;
         return this;
     }

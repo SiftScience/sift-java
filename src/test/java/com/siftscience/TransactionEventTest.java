@@ -1,6 +1,5 @@
 package com.siftscience;
 
-import com.siftscience.model.EventResponseFieldSet;
 import com.siftscience.model.TransactionFieldSet;
 import okhttp3.HttpUrl;
 import okhttp3.mockwebserver.MockResponse;
@@ -114,7 +113,7 @@ public class TransactionEventTest {
         Assert.assertEquals(0, (int) siftResponse.getResponseBody().getStatus());
         JSONAssert.assertEquals(response.getBody().readUtf8(),
                 siftResponse.getResponseBody().toJson(), true);
-//        EventResponseFieldSet ff = siftResponse.getResponseBody();
+//        EventResponseBody ff = siftResponse.getResponseBody();
 //        siftResponse.getRequestBody()
 //        siftResponse.getResponseBody().getErrorMessage();
 //        siftResponse.getErrorMessage();

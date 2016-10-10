@@ -30,7 +30,7 @@ import java.util.List;
  * txEventResponse.getErrorMessage(); // "OK";
  *
  * FieldSet requestFields = txEventResponse.getRequestBody();
- * EventResponseFieldSet responseFields = txEventResponse.getResponseBody();
+ * EventResponseBody responseFields = txEventResponse.getResponseBody();
  *
  */
 public class SiftClient {

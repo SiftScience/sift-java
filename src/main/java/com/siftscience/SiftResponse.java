@@ -1,14 +1,13 @@
 package com.siftscience;
 
-import com.siftscience.model.BaseResponseFieldSet;
-import com.siftscience.model.EventResponseFieldSet;
+import com.siftscience.model.BaseResponseBody;
 import com.sun.istack.internal.NotNull;
 import okhttp3.Response;
 import okhttp3.ResponseBody;
 
 import java.io.IOException;
 
-public abstract class SiftResponse<T extends BaseResponseFieldSet<T>> {
+public abstract class SiftResponse<T extends BaseResponseBody<T>> {
     private Response okResponse;
     private int time;
     private FieldSet requestBody;

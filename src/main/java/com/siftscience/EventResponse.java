@@ -1,18 +1,18 @@
 package com.siftscience;
 
-import com.siftscience.model.EventResponseFieldSet;
+import com.siftscience.model.EventResponseBody;
 import com.sun.istack.internal.NotNull;
 import okhttp3.Response;
 
 import java.io.IOException;
 
-public class EventResponse extends SiftResponse<EventResponseFieldSet> {
+public class EventResponse extends SiftResponse<EventResponseBody> {
     EventResponse(@NotNull Response okResponse, FieldSet requestBody) throws IOException {
         super(okResponse, requestBody);
     }
 
     @Override
     void populateBodyFromJson(String jsonBody) {
-        body = EventResponseFieldSet.fromJson(jsonBody);
+        body = EventResponseBody.fromJson(jsonBody);
     }
 }

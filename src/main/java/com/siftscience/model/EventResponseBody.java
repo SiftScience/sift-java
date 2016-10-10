@@ -3,10 +3,10 @@ package com.siftscience.model;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class EventResponseFieldSet extends BaseResponseFieldSet<EventResponseFieldSet> {
+public class EventResponseBody extends BaseResponseBody<EventResponseBody> {
 
-    public static EventResponseFieldSet fromJson(String json) {
-        return gson.fromJson(json, EventResponseFieldSet.class);
+    public static EventResponseBody fromJson(String json) {
+        return gson.fromJson(json, EventResponseBody.class);
     }
 
     @Expose @SerializedName("request") private String request;
@@ -17,7 +17,7 @@ public class EventResponseFieldSet extends BaseResponseFieldSet<EventResponseFie
         return request;
     }
 
-    public EventResponseFieldSet setRequest(String request) {
+    public EventResponseBody setRequest(String request) {
         this.request = request;
         return this;
     }
@@ -26,7 +26,7 @@ public class EventResponseFieldSet extends BaseResponseFieldSet<EventResponseFie
         return time;
     }
 
-    public EventResponseFieldSet setTime(Integer time) {
+    public EventResponseBody setTime(Integer time) {
         this.time = time;
         return this;
     }
@@ -35,7 +35,7 @@ public class EventResponseFieldSet extends BaseResponseFieldSet<EventResponseFie
         return scoreResponse;
     }
 
-    public EventResponseFieldSet setScoreResponse(ScoreResponse scoreResponse) {
+    public EventResponseBody setScoreResponse(ScoreResponse scoreResponse) {
         this.scoreResponse = scoreResponse;
         return this;
     }

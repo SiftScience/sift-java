@@ -3,7 +3,7 @@ package com.siftscience.model;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class LabelResponseFieldSet extends BaseResponseFieldSet<LabelResponseFieldSet> {
+public class LabelResponseFieldSet extends BaseResponseBody<LabelResponseFieldSet> {
 
     public static LabelResponseFieldSet fromJson(String json) {
         return gson.fromJson(json, LabelResponseFieldSet.class);

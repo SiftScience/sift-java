@@ -1,23 +1,20 @@
 package com.siftscience.model;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 import com.siftscience.FieldSet;
 
-public abstract class BaseResponseFieldSet<T extends BaseResponseFieldSet<T>> extends FieldSet<T> {
+public abstract class BaseResponseBody<T extends BaseResponseBody<T>> {
+
+    // This static gson instance is used to deserialize JSON responses from all Sift APIs.
+    protected static Gson gson = new GsonBuilder()
+            .excludeFieldsWithoutExposeAnnotation()
+            .create();
 
     @Expose @SerializedName("status") private Integer status;
     @Expose @SerializedName("error_message") private String errorMessage;
-
-    @Override
-    public String getEventType() {
-        return null;
-    }
-
-    @Override
-    protected boolean allowCustomFields() {
-        return false;
-    }
 
     public Integer getStatus() {
         return status;
@@ -35,5 +32,9 @@ public abstract class BaseResponseFieldSet<T extends BaseResponseFieldSet<T>> ex
     public T setErrorMessage(String errorMessage) {
         this.errorMessage = errorMessage;
         return (T) this;
+    }
+
+    public String toJson() {
+        return gson.toJson(this);
     }
 }
