@@ -1,8 +1,10 @@
 package com.siftscience;
 
-import com.siftscience.model.ResponseFieldSet;
+import com.siftscience.model.BaseResponseFieldSet;
+import com.siftscience.model.EventResponseFieldSet;
 import com.sun.istack.internal.NotNull;
 import okhttp3.Response;
+import okhttp3.ResponseBody;
 
 import java.io.IOException;
 
@@ -10,21 +12,28 @@ public abstract class SiftResponse {
     private Response okResponse;
     private int time;
     private FieldSet requestBody;
-    private ResponseFieldSet body;
+    BaseResponseFieldSet body;
 
     SiftResponse(@NotNull Response okResponse, FieldSet requestBody) throws IOException {
         this.okResponse = okResponse;
-        if (okResponse.body() != null) {
-            this.body = ResponseFieldSet.fromJson(okResponse.body().string());
-        }
         this.requestBody = requestBody;
+
+        ResponseBody rspBody = okResponse.body();
+        if (rspBody != null) {
+            String bodyString = rspBody.string();
+            if (!bodyString.isEmpty()) {
+                populateBodyFromJson(bodyString);
+            }
+        }
     }
+
+    abstract void populateBodyFromJson(String jsonBody);
 
     public int getHttpStatusCode() {
         return okResponse.code();
     }
 
-    public ResponseFieldSet getResponseBody() {
+    public BaseResponseFieldSet getResponseBody() {
         return body;
     }
 
