@@ -86,8 +86,7 @@ public class ScoresTest {
         abuseTypes.add("payment_abuse");
         abuseTypes.add("promotion_abuse");
         EventRequest request = client.buildRequest(
-                new CreateOrderFieldSet()
-                        .setUserId("billy_jones_301"), true, abuseTypes);
+                new CreateOrderFieldSet().setUserId("billy_jones_301"), abuseTypes);
         EventResponse siftResponse = request.send();
 
         // Verify the request.
@@ -164,11 +163,11 @@ public class ScoresTest {
         List<String> abuseTypes = new ArrayList<>();
         abuseTypes.add("payment_abuse");
         abuseTypes.add("promotion_abuse");
-        SiftRequest request = client.buildRequest(
+        ScoreRequest request = client.buildRequest(
                 new ScoreFieldSet()
                         .setUserId("billy_jones_301")
                         .setAbuseTypes(abuseTypes));
-        SiftResponse siftResponse = request.send();
+        ScoreResponse siftResponse = request.send();
 
 
         // Verify the request.

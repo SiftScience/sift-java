@@ -52,7 +52,7 @@ public class LabelTest {
                 .setSource("manual review")
                 .setAnalyst("someone@your-site.com"));
 
-        SiftResponse siftResponse = request.send();
+        LabelResponse siftResponse = request.send();
 
         // Verify the request.
         RecordedRequest request1 = server.takeRequest();

@@ -59,19 +59,11 @@ public class SiftClient {
         return new EventRequest(baseUrl, okClient, fields);
     }
 
-    public EventRequest buildRequest(FieldSet fields, boolean returnScore) {
+    public EventRequest buildRequest(FieldSet fields, List<String> abuseTypes) {
         if (fields.getApiKey() == null) {
             fields.setApiKey(apiKey);
         }
-        return new EventRequest(baseUrl, okClient, fields, returnScore);
-    }
-
-    public EventRequest buildRequest(FieldSet fields, boolean returnScore,
-                                     List<String> abuseTypes) {
-        if (fields.getApiKey() == null) {
-            fields.setApiKey(apiKey);
-        }
-        return new EventRequest(baseUrl, okClient, fields, returnScore, abuseTypes);
+        return new EventRequest(baseUrl, okClient, fields, abuseTypes);
     }
 
     public LabelRequest buildRequest(LabelFieldSet fields) {

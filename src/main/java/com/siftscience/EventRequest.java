@@ -13,16 +13,11 @@ import java.util.List;
  */
 public class EventRequest extends SiftRequest<EventResponse> {
 
-    // Whether or not to return the given user's score via Synchronous Scoring.
-    // https://siftscience.com/developers/docs/curl/score-api/synchronous-scores
-    private boolean returnScore;
-
     // The abuse types to return synchronous scores for.
     private List<String> abuseTypes;
 
     EventRequest(HttpUrl baseUrl, OkHttpClient okClient, FieldSet fields) {
         super(baseUrl, okClient, fields);
-        this.returnScore = false;
         abuseTypes = null;
     }
 
@@ -32,17 +27,8 @@ public class EventRequest extends SiftRequest<EventResponse> {
         return new EventResponse(response, requestFields);
     }
 
-    EventRequest(HttpUrl baseUrl, OkHttpClient okClient, FieldSet fields,
-                 boolean returnScore) {
+    EventRequest(HttpUrl baseUrl, OkHttpClient okClient, FieldSet fields, List<String> abuseTypes) {
         super(baseUrl, okClient, fields);
-        this.returnScore = returnScore;
-        this.abuseTypes = null;
-    }
-
-    EventRequest(HttpUrl baseUrl, OkHttpClient okClient, FieldSet fields,
-                 boolean returnScore, List<String> abuseTypes) {
-        super(baseUrl, okClient, fields);
-        this.returnScore = returnScore;
         this.abuseTypes = abuseTypes;
     }
 
@@ -51,7 +37,7 @@ public class EventRequest extends SiftRequest<EventResponse> {
         HttpUrl.Builder builder = baseUrl.newBuilder().addPathSegment("events");
 
         // returnScore and abuseTypes are encoded into the URL as query params rather than JSON.
-        if (returnScore) {
+        if (abuseTypes != null) {
             builder.addQueryParameter("return_score", "true");
         }
         if (abuseTypes != null && abuseTypes.size() > 0) {
