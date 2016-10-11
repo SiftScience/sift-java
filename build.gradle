@@ -21,15 +21,28 @@ dependencies {
     testCompile group: 'com.squareup.okhttp3', name: 'mockwebserver', version: '3.4.1'
     compile 'com.google.code.gson:gson:2.7'
     compile 'com.squareup.okhttp3:okhttp:3.4.1'
+    compile 'com.squareup.okio:okio:1.9.0'
 }
 
+apply plugin: 'maven-publish'
 apply plugin: 'com.github.johnrengelman.shadow'
+
 shadowJar {
-    dependencies {
-        include(dependency('com.google.code.gson:gson'))
-        include(dependency('com.squareup.okhttp3:okhttp'))
+    classifier = ''
+    relocate 'okhttp3', 'shade.com.sift.okhttp3'
+    relocate 'okio', 'shade.com.sift.okio'
+    relocate 'com.google.gson', 'shade.com.sift.com.google.gson'
+}
+
+publishing {
+    publications {
+        shadow(MavenPublication) {
+            from components.shadow
+        }
     }
 
-    relocate 'com.google.gson', 'com.siftscience.shadow.gson'
-    relocate 'com.squareup.okhttp3', 'com.siftscience.shadow.okhttp3'
+    repositories {
+        mavenLocal()
+    }
 }
+
