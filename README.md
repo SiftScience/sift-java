@@ -57,9 +57,45 @@ EventRequest createOrderRequest = client.buildRequest(new CreateOrderFieldSet()
 );
 
 // Send the request.
+EventResponse response;
 try {
-    createOrderRequest.send();
+    response = createOrderRequest.send();
 } catch (SiftException e) {
-    ... handle InvalidRequestException and/or ServerException subtypes.
+    SiftResponse errorResponse = e.getSiftResponse();
+    // ... handle InvalidRequestException and/or ServerException subtypes.
 }
+
+// Inspect the response.
+response.isSuccessful(); // true
+response.getErrorMessage(); // "OK"
+response.getSiftStatusCode(); // 0
+response.getHttpStatusCode(); // 200
+EventResponseBody responseBody = response.getResponseBody();
+```
+
+### Get Scores
+#### Synchronous Scoring
+To get a score in the response body of an event request, build your
+request with `client.buildRequest(eventFieldSet, abuseTypes)`. The extra
+parameter `abuseTypes` is a `List` of Sift Science abuse types for which
+the API will provide user scores.
+
+Here's how the `$create_order` example above can be altered to respond
+with `payment_abuse` and `promotion_abuse` scores.
+
+```java
+// Build the list of requested abuse types.
+List<String> abuseTypes = new ArrayList<>();
+abuseTypes.add("payment_abuse");
+abuseTypes.add("promotion_abuse");
+
+// Add it as an extra parameter. The first parameter is the same as in the first example.
+EventRequest createOrderRequest = client.buildRequest(createOrderFieldSet, abuseTypes);
+
+// Send the request.
+...
+
+// Inspect scores.
+Score paymentAbuseScore = response.getScore("payment_abuse");
+Label label = response.getLatestLabel("payment_abuse");
 ```

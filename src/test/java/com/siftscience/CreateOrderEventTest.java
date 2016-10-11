@@ -147,7 +147,7 @@ public class CreateOrderEventTest {
         promotionList.add(TestUtils.samplePromotion1());
 
         // Build and execute the request against the mock server.
-        SiftRequest request = client.buildRequest(
+        EventRequest request = client.buildRequest(
                 new CreateOrderFieldSet()
                         .setUserId("billy_jones_301")
                         .setSessionId("gigtleqddo84l8cm15qe4il")
@@ -167,7 +167,7 @@ public class CreateOrderEventTest {
                         .setCustomField("coupon_code", "dollarMadness")
                         .setCustomField("shipping_choice", "FedEx Ground Courier")
                         .setCustomField("is_first_time_buyer", false));
-        SiftResponse siftResponse = request.send();
+        EventResponse siftResponse = request.send();
 
         // Verify the request.
         RecordedRequest request1 = server.takeRequest();

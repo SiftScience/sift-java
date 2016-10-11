@@ -85,10 +85,10 @@ public class ScoresTest {
         List<String> abuseTypes = new ArrayList<>();
         abuseTypes.add("payment_abuse");
         abuseTypes.add("promotion_abuse");
-        SiftRequest request = client.buildRequest(
+        EventRequest request = client.buildRequest(
                 new CreateOrderFieldSet()
                         .setUserId("billy_jones_301"), true, abuseTypes);
-        SiftResponse siftResponse = request.send();
+        EventResponse siftResponse = request.send();
 
         // Verify the request.
         RecordedRequest request1 = server.takeRequest();
@@ -102,6 +102,11 @@ public class ScoresTest {
         Assert.assertEquals(0, (int) siftResponse.getResponseBody().getStatus());
         JSONAssert.assertEquals(response.getBody().readUtf8(),
                 siftResponse.getResponseBody().toJson(), true);
+        Assert.assertEquals(siftResponse.getScore("payment_abuse").getScore(),
+                (Double) 0.898391231245);
+        Assert.assertEquals(siftResponse.getLatestLabel("payment_abuse").getBad(), true);
+        Assert.assertEquals(siftResponse.getLatestLabel("payment_abuse").getDescription(),
+                "received a chargeback");
 
         server.shutdown();
     }
