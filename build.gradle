@@ -1,11 +1,12 @@
 group 'com.siftscience'
-version '1.0-SNAPSHOT'
+version '1.0'
 buildscript {
     repositories {
         jcenter()
     }
     dependencies {
         classpath 'com.github.jengelman.gradle.plugins:shadow:1.2.3'
+//        classpath "io.codearte.gradle.nexus:gradle-nexus-staging-plugin:0.5.3"
     }
 }
 
@@ -34,6 +35,14 @@ shadowJar {
     relocate 'com.google.gson', 'shade.com.sift.com.google.gson'
 }
 
+//apply plugin: 'io.codearte.nexus-staging'
+
+//nexusStaging {
+//    serverUrl 'https://oss.sonatype.org/service/local/staging/deploy/maven2'
+//    username = 'VSdMrMhr'
+//    password = 'z5MFUzTc4gdFVRGIBD0b5bgEH6viWVwPv6tf8PlqzloR'
+//}
+
 publishing {
     publications {
         shadow(MavenPublication) {
@@ -43,6 +52,23 @@ publishing {
 
     repositories {
         mavenLocal()
+        maven {
+            name 'snapshot'
+            url 'https://oss.sonatype.org/content/repositories/snapshots'
+            credentials {
+                username = 'VSdMrMhr'
+                password = 'z5MFUzTc4gdFVRGIBD0b5bgEH6viWVwPv6tf8PlqzloR'
+            }
+        }
+
+        maven {
+            name 'staging'
+            url 'https://oss.sonatype.org/service/local/staging/deploy/maven2'
+            credentials {
+                username = 'VSdMrMhr'
+                password = 'z5MFUzTc4gdFVRGIBD0b5bgEH6viWVwPv6tf8PlqzloR'
+            }
+        }
     }
 }
 

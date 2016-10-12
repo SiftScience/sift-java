@@ -1,5 +1,6 @@
 package com.siftscience;
 
+import com.siftscience.model.ChargebackFieldSet;
 import com.siftscience.model.UnlabelFieldSet;
 import okhttp3.HttpUrl;
 import okhttp3.mockwebserver.MockResponse;
