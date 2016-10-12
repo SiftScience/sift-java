@@ -137,38 +137,6 @@ public class SiftClientTest {
     }
 
     /**
-     * Now we test that the library correctly throws a MissingFieldException during the
-     * client side validation stage of the request being sent. No mock web server because the
-     * request should never be sent.
-     */
-    @Test
-    public void testClientSideMissingFieldException() throws IOException {
-
-        // Create a new client and link it to a fake server address.
-        SiftClient client = new SiftClient();
-        client.setBaseUrl(HttpUrl.parse("http://fakehost:1234"));
-
-        // Build a simple request. The main part is that we don't manually set an API key here
-        // and we also haven't specified it on the client.
-        CreateOrderFieldSet fields = new CreateOrderFieldSet()
-                .setUserId("uid")
-                .setOrderId("ORDER-28168441");
-        SiftRequest request = client.buildRequest(fields);
-
-        MissingFieldException missingFieldException = null;
-        try {
-            request.send();
-        } catch (MissingFieldException e) {
-            missingFieldException = e;
-        }
-
-        // Should have thrown an exception.
-        Assert.assertNotNull(missingFieldException);
-        Assert.assertEquals("Required field \"$api_key\" is missing.",
-                missingFieldException.getLocalizedMessage());
-    }
-
-    /**
      * Custom field keys can't be empty or start with a dollar sign. This should also never fire
      * a network request so we can skip the mock web server.
      */
@@ -183,9 +151,9 @@ public class SiftClientTest {
         // method.
         InvalidFieldException invalidFieldException = null;
         try {
-            new CreateOrderFieldSet()
+            client.buildRequest(new CreateOrderFieldSet()
                     .setOrderId("ORDER-28168441")
-                    .setCustomField("$not_allowed", "foo");
+                    .setCustomField("$not_allowed", "foo")).send();
         } catch (InvalidFieldException e) {
             invalidFieldException = e;
         }

@@ -1,6 +1,7 @@
 package com.siftscience.model;
 
 public class UpdateOrderFieldSet extends BaseOrderFieldSet<UpdateOrderFieldSet> {
+    @Override
     public String getEventType() {
         return "$update_order";
     }

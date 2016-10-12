@@ -4,16 +4,12 @@ import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 import com.siftscience.FieldSet;
 
-public class OrderStatusFieldSet extends FieldSet<OrderStatusFieldSet> {
+public class OrderStatusFieldSet extends EventsApiRequestFieldSet<OrderStatusFieldSet> {
 
     public static OrderStatusFieldSet fromJson(String json) {
         return gson.fromJson(json, OrderStatusFieldSet.class);
     }
 
-    @Expose @SerializedName(USER_ID) private String userId;
-    @Expose @SerializedName(SESSION_ID) private String sessionId;
-    @Expose @SerializedName(TIME) private Integer time;
-    @Expose @SerializedName(IP) private String ip;
     @Expose @SerializedName("$order_id") private String orderId;
     @Expose @SerializedName("$order_status") private String orderStatus;
     @Expose @SerializedName("$reason") private String reason;
@@ -23,39 +19,8 @@ public class OrderStatusFieldSet extends FieldSet<OrderStatusFieldSet> {
     @Expose @SerializedName("$description") private String description;
 
     @Override
-    protected boolean allowCustomFields() {
-        return true;
-    }
-
-    @Override
     public String getEventType() {
         return "$order_status";
-    }
-
-
-    @Override
-    public void validate() {
-        super.validate();
-        validateStringField("$order_id", getOrderId());
-        validateStringField("$order_status", getOrderStatus());
-    }
-
-    public String getUserId() {
-        return userId;
-    }
-
-    public OrderStatusFieldSet setUserId(String userId) {
-        this.userId = userId;
-        return this;
-    }
-
-    public String getSessionId() {
-        return sessionId;
-    }
-
-    public OrderStatusFieldSet setSessionId(String sessionId) {
-        this.sessionId = sessionId;
-        return this;
     }
 
     public String getOrderId() {
@@ -118,24 +83,6 @@ public class OrderStatusFieldSet extends FieldSet<OrderStatusFieldSet> {
 
     public OrderStatusFieldSet setDescription(String description) {
         this.description = description;
-        return this;
-    }
-
-    public Integer getTime() {
-        return time;
-    }
-
-    public OrderStatusFieldSet setTime(Integer time) {
-        this.time = time;
-        return this;
-    }
-
-    public String getIp() {
-        return ip;
-    }
-
-    public OrderStatusFieldSet setIp(String ip) {
-        this.ip = ip;
         return this;
     }
 }

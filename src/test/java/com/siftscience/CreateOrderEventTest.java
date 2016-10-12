@@ -183,33 +183,4 @@ public class CreateOrderEventTest {
 
         server.shutdown();
     }
-
-    /**
-     * Either user id or session id must be present for most events API requests. This test makes
-     * sure that the request doesn't even get sent an throws a relevant exception when those
-     * fields are missing.
-     */
-    @Test
-    public void testEitherUserOrSessionIdExists() throws IOException {
-
-        // Create a new client and link it to a fake server address.
-        SiftClient client = new SiftClient("my_api_key");
-        client.setBaseUrl(HttpUrl.parse("http://fakehost:1234"));
-
-        // Build a simple request without a user id or session id.
-        CreateOrderFieldSet fields = new CreateOrderFieldSet().setOrderId("ORDER-28168441");
-        SiftRequest request = client.buildRequest(fields);
-
-        MissingFieldException missingFieldException = null;
-        try {
-            request.send();
-        } catch (MissingFieldException e) {
-            missingFieldException = e;
-        }
-
-        // Should have thrown an exception.
-        Assert.assertNotNull(missingFieldException);
-        Assert.assertEquals("Either \"$user_id\" or \"$session_id\" must exist.",
-                missingFieldException.getLocalizedMessage());
-    }
 }

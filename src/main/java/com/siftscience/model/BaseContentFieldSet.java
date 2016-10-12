@@ -6,12 +6,9 @@ import com.siftscience.FieldSet;
 
 import java.util.List;
 
-abstract class BaseContentFieldSet<T extends BaseContentFieldSet<T>> extends FieldSet<T> {
+abstract class BaseContentFieldSet<T extends BaseContentFieldSet<T>>
+        extends EventsApiRequestFieldSet<T> {
 
-    @Expose @SerializedName(USER_ID) private String userId;
-    @Expose @SerializedName(SESSION_ID) private String sessionId;
-    @Expose @SerializedName(TIME) private Integer time;
-    @Expose @SerializedName(IP) private String ip;
     @Expose @SerializedName("$content_id") private String contentId;
     @Expose @SerializedName("$contact_email") private String contactEmail;
     @Expose @SerializedName("$contact_phone") private String contactPhone;
@@ -24,29 +21,6 @@ abstract class BaseContentFieldSet<T extends BaseContentFieldSet<T>> extends Fie
     @Expose @SerializedName("$image_hashes") private List<String> imageHashes;
     @Expose @SerializedName("$expiration_time") private Long expirationTime;
     @Expose @SerializedName("$status") private String status;
-
-    @Override
-    protected boolean allowCustomFields() {
-        return true;
-    }
-
-    public String getUserId() {
-        return userId;
-    }
-
-    public T setUserId(String userId) {
-        this.userId = userId;
-        return (T) this;
-    }
-
-    public String getSessionId() {
-        return sessionId;
-    }
-
-    public T setSessionId(String sessionId) {
-        this.sessionId = sessionId;
-        return (T) this;
-    }
 
     public String getContentId() {
         return contentId;
@@ -154,23 +128,5 @@ abstract class BaseContentFieldSet<T extends BaseContentFieldSet<T>> extends Fie
     public T setStatus(String status) {
         this.status = status;
         return (T) this;
-    }
-
-    public Integer getTime() {
-        return time;
-    }
-
-    public BaseContentFieldSet setTime(Integer time) {
-        this.time = time;
-        return this;
-    }
-
-    public String getIp() {
-        return ip;
-    }
-
-    public BaseContentFieldSet setIp(String ip) {
-        this.ip = ip;
-        return this;
     }
 }

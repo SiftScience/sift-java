@@ -13,26 +13,14 @@ public class LabelFieldSet extends FieldSet<LabelFieldSet> {
     private String userId;
     @Expose @SerializedName(IS_BAD) private Boolean isBad;
     @Expose @SerializedName(ABUSE_TYPE) private String abuseType;
+    @Expose @SerializedName(TIME) private Long time;
     @Expose @SerializedName("$description") private String description;
     @Expose @SerializedName("$source") private String source;
     @Expose @SerializedName("$analyst") private String analyst;
 
     @Override
-    protected boolean allowCustomFields() {
-        return false;
-    }
-
-    @Override
-    public String getEventType() {
-        return null;
-    }
-
-    @Override
-    public void validate() {
-        validateApiKey();
-        validateStringField(USER_ID, userId);
-        validateBooleanField(IS_BAD, isBad);
-        validateStringField(ABUSE_TYPE, abuseType);
+    protected boolean shouldJsonSerializeApiKey() {
+        return true;
     }
 
     public Boolean getIsBad() {
@@ -86,6 +74,15 @@ public class LabelFieldSet extends FieldSet<LabelFieldSet> {
 
     public LabelFieldSet setUserId(String userId) {
         this.userId = userId;
+        return this;
+    }
+
+    public Long getTime() {
+        return time;
+    }
+
+    public LabelFieldSet setTime(Long time) {
+        this.time = time;
         return this;
     }
 }

@@ -6,12 +6,9 @@ import com.siftscience.FieldSet;
 
 import java.util.List;
 
-abstract class BaseOrderFieldSet<T extends BaseOrderFieldSet<T>> extends FieldSet<T> {
+abstract class BaseOrderFieldSet<T extends BaseOrderFieldSet<T>>
+        extends EventsApiRequestFieldSet<T> {
 
-    @Expose @SerializedName(USER_ID) private String userId;
-    @Expose @SerializedName(SESSION_ID) private String sessionId;
-    @Expose @SerializedName(TIME) private Integer time;
-    @Expose @SerializedName(IP) private String ip;
     @Expose @SerializedName("$order_id") private String orderId;
     @Expose @SerializedName("$user_email") private String userEmail;
     @Expose @SerializedName("$amount") private Long amount;
@@ -24,29 +21,6 @@ abstract class BaseOrderFieldSet<T extends BaseOrderFieldSet<T>> extends FieldSe
     @Expose @SerializedName("$seller_user_id") private String sellerUserId;
     @Expose @SerializedName("$promotions") private List<Promotion> promotions;
     @Expose @SerializedName("$shipping_method") private String shippingMethod;
-
-    @Override
-    protected boolean allowCustomFields() {
-        return true;
-    }
-
-    public String getUserId() {
-        return userId;
-    }
-
-    public T setUserId(String userId) {
-        this.userId = userId;
-        return (T) this;
-    }
-
-    public String getSessionId() {
-        return sessionId;
-    }
-
-    public T setSessionId(String sessionId) {
-        this.sessionId = sessionId;
-        return (T) this;
-    }
 
     public String getOrderId() {
         return orderId;
@@ -158,23 +132,5 @@ abstract class BaseOrderFieldSet<T extends BaseOrderFieldSet<T>> extends FieldSe
     public T setShippingMethod(String shippingMethod) {
         this.shippingMethod = shippingMethod;
         return (T) this;
-    }
-
-    public Integer getTime() {
-        return time;
-    }
-
-    public BaseOrderFieldSet setTime(Integer time) {
-        this.time = time;
-        return this;
-    }
-
-    public String getIp() {
-        return ip;
-    }
-
-    public BaseOrderFieldSet setIp(String ip) {
-        this.ip = ip;
-        return this;
     }
 }

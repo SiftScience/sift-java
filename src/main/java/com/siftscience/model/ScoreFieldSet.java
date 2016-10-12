@@ -11,16 +11,6 @@ public class ScoreFieldSet extends FieldSet<ScoreFieldSet> {
     @Expose @SerializedName(USER_ID) private String userId;
     private List<String> abuseTypes;
 
-    @Override
-    protected boolean allowCustomFields() {
-        return false;
-    }
-
-    @Override
-    public String getEventType() {
-        return null;
-    }
-
     public String getUserId() {
         return userId;
     }

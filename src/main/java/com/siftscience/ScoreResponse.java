@@ -18,10 +18,16 @@ public class ScoreResponse extends SiftResponse<ScoreResponseBody> {
     }
 
     public AbuseScore getScore(String abuseType) {
-        return this.getResponseBody().getScores().get(abuseType);
+        if (this.getResponseBody() != null && this.getResponseBody().getScores() != null) {
+            return this.getResponseBody().getScores().get(abuseType);
+        }
+        return null;
     }
 
     public Label getLatestLabel(String abuseType) {
-        return this.getResponseBody().getLatestLabels().get(abuseType);
+        if (this.getResponseBody() != null && this.getResponseBody().getLatestLabels() != null) {
+            return this.getResponseBody().getLatestLabels().get(abuseType);
+        }
+        return null;
     }
 }

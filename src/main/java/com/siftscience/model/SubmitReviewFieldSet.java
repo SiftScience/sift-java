@@ -4,16 +4,12 @@ import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 import com.siftscience.FieldSet;
 
-public class SubmitReviewFieldSet extends FieldSet<SubmitReviewFieldSet> {
+public class SubmitReviewFieldSet extends EventsApiRequestFieldSet<SubmitReviewFieldSet> {
 
     public static SubmitReviewFieldSet fromJson(String json) {
         return gson.fromJson(json, SubmitReviewFieldSet.class);
     }
 
-    @Expose @SerializedName(USER_ID) private String userId;
-    @Expose @SerializedName(SESSION_ID) private String sessionId;
-    @Expose @SerializedName(TIME) private Integer time;
-    @Expose @SerializedName(IP) private String ip;
     @Expose @SerializedName("$content") private String content;
     @Expose @SerializedName("$review_title") private String reviewTitle;
     @Expose @SerializedName("$item_id") private String itemId;
@@ -21,31 +17,8 @@ public class SubmitReviewFieldSet extends FieldSet<SubmitReviewFieldSet> {
     @Expose @SerializedName("$submission_status") private String submissionStatus;
 
     @Override
-    protected boolean allowCustomFields() {
-        return true;
-    }
-
-    @Override
     public String getEventType() {
         return "$submit_review";
-    }
-
-    public String getUserId() {
-        return userId;
-    }
-
-    public SubmitReviewFieldSet setUserId(String userId) {
-        this.userId = userId;
-        return this;
-    }
-
-    public String getSessionId() {
-        return sessionId;
-    }
-
-    public SubmitReviewFieldSet setSessionId(String sessionId) {
-        this.sessionId = sessionId;
-        return this;
     }
 
     public String getContent() {
@@ -90,24 +63,6 @@ public class SubmitReviewFieldSet extends FieldSet<SubmitReviewFieldSet> {
 
     public SubmitReviewFieldSet setSubmissionStatus(String submissionStatus) {
         this.submissionStatus = submissionStatus;
-        return this;
-    }
-
-    public Integer getTime() {
-        return time;
-    }
-
-    public SubmitReviewFieldSet setTime(Integer time) {
-        this.time = time;
-        return this;
-    }
-
-    public String getIp() {
-        return ip;
-    }
-
-    public SubmitReviewFieldSet setIp(String ip) {
-        this.ip = ip;
         return this;
     }
 }

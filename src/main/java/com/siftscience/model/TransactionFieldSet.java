@@ -4,12 +4,8 @@ import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 import com.siftscience.FieldSet;
 
-public class TransactionFieldSet extends FieldSet<TransactionFieldSet> {
+public class TransactionFieldSet extends EventsApiRequestFieldSet<TransactionFieldSet> {
 
-    @Expose @SerializedName(USER_ID) private String userId;
-    @Expose @SerializedName(SESSION_ID) private String sessionId;
-    @Expose @SerializedName(TIME) private Integer time;
-    @Expose @SerializedName(IP) private String ip;
     @Expose @SerializedName("$amount") private Long amount;
     @Expose @SerializedName("$currency_code") private String currencyCode;
     @Expose @SerializedName("$user_email") private String userEmail;
@@ -24,42 +20,12 @@ public class TransactionFieldSet extends FieldSet<TransactionFieldSet> {
     @Expose @SerializedName("$transfer_recipient_user_id") private String transferRecipientUserId;
 
     @Override
-    protected boolean allowCustomFields() {
-        return true;
-    }
-
-    @Override
     public String getEventType() {
         return "$transaction";
     }
 
-    @Override
-    public void validate() {
-        super.validate();
-        validateLongField("$amount", getAmount());
-        validateStringField("$currency_code", getCurrencyCode());
-    }
-
     public static TransactionFieldSet fromJson(String json) {
         return gson.fromJson(json, TransactionFieldSet.class);
-    }
-
-    public String getUserId() {
-        return userId;
-    }
-
-    public TransactionFieldSet setUserId(String userId) {
-        this.userId = userId;
-        return this;
-    }
-
-    public String getSessionId() {
-        return sessionId;
-    }
-
-    public TransactionFieldSet setSessionId(String sessionId) {
-        this.sessionId = sessionId;
-        return this;
     }
 
     public Long getAmount() {
@@ -167,24 +133,6 @@ public class TransactionFieldSet extends FieldSet<TransactionFieldSet> {
 
     public TransactionFieldSet setTransferRecipientUserId(String transferRecipientUserId) {
         this.transferRecipientUserId = transferRecipientUserId;
-        return this;
-    }
-
-    public Integer getTime() {
-        return time;
-    }
-
-    public TransactionFieldSet setTime(Integer time) {
-        this.time = time;
-        return this;
-    }
-
-    public String getIp() {
-        return ip;
-    }
-
-    public TransactionFieldSet setIp(String ip) {
-        this.ip = ip;
         return this;
     }
 }

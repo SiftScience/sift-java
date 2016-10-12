@@ -6,12 +6,9 @@ import com.siftscience.FieldSet;
 
 import java.util.List;
 
-abstract class BaseAccountFieldSet<T extends BaseAccountFieldSet<T>> extends FieldSet<T> {
+abstract class BaseAccountFieldSet<T extends BaseAccountFieldSet<T>>
+        extends EventsApiRequestFieldSet<T> {
 
-    @Expose @SerializedName(USER_ID) private String userId;
-    @Expose @SerializedName(SESSION_ID) private String sessionId;
-    @Expose @SerializedName(TIME) private Integer time;
-    @Expose @SerializedName(IP) private String ip;
     @Expose @SerializedName("$user_email") private String userEmail;
     @Expose @SerializedName("$name") private String name;
     @Expose @SerializedName("$phone") private String phone;
@@ -20,29 +17,6 @@ abstract class BaseAccountFieldSet<T extends BaseAccountFieldSet<T>> extends Fie
     @Expose @SerializedName("$billing_address") private Address billingAddress;
     @Expose @SerializedName("$shipping_address") private Address shippingAddress;
     @Expose @SerializedName("$social_sign_on_type") private String socialSignOnType;
-
-    @Override
-    protected boolean allowCustomFields() {
-        return true;
-    }
-
-    public String getUserId() {
-        return userId;
-    }
-
-    public T setUserId(String userId) {
-        this.userId = userId;
-        return (T) this;
-    }
-
-    public String getSessionId() {
-        return sessionId;
-    }
-
-    public T setSessionId(String sessionId) {
-        this.sessionId = sessionId;
-        return (T) this;
-    }
 
     public String getUserEmail() {
         return userEmail;
@@ -114,23 +88,5 @@ abstract class BaseAccountFieldSet<T extends BaseAccountFieldSet<T>> extends Fie
     public T setSocialSignOnType(String socialSignOnType) {
         this.socialSignOnType = socialSignOnType;
         return (T) this;
-    }
-
-    public Integer getTime() {
-        return time;
-    }
-
-    public BaseAccountFieldSet setTime(Integer time) {
-        this.time = time;
-        return this;
-    }
-
-    public String getIp() {
-        return ip;
-    }
-
-    public BaseAccountFieldSet setIp(String ip) {
-        this.ip = ip;
-        return this;
     }
 }
