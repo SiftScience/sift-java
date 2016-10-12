@@ -94,13 +94,12 @@ Here's how the `$create_order` example above can be altered to respond
 with `payment_abuse` and `promotion_abuse` scores.
 
 ```java
-// Build the list of requested abuse types.
-List<String> abuseTypes = new ArrayList<>();
-abuseTypes.add("payment_abuse");
-abuseTypes.add("promotion_abuse");
-
-// Add it as an extra parameter. The first parameter is the same as in the first example.
-EventRequest createOrderRequest = client.buildRequest(createOrderFieldSet, abuseTypes);
+// Add a list of requested abuse types as an extra parameter.
+// The first parameter is the same as in the first example.
+EventRequest createOrderRequest = client.buildRequest(
+        createOrderFieldSet,
+        Arrays.asList("payment_abuse", "promotion_abuse")
+);
 
 // Send the request. May throw a SiftException.
 EventResponse response = createOrderRequest.send();
@@ -116,15 +115,11 @@ Provide a `ScoreFieldSet` containing a list of abuse types `client.buildRequest`
 to send a request to the Scores API.
 
 ```java
-// Build the list of requested abuse types.
-List<String> abuseTypes = new ArrayList<>();
-abuseTypes.add("payment_abuse");
-abuseTypes.add("promotion_abuse");
-
-// Build the ScoreRequest.
+// Build the ScoreRequest with a list of abuse types.
 ScoreRequest request = client.buildRequest(new ScoreFieldSet()
         .setUserId("bill_jones")
-        .setAbuseTypes(abuseTypes));
+        .setAbuseTypes(Arrays.asList("payment_abuse", "promotion_abuse"))
+);
 
 // Send the request. May throw a SiftException.
 ScoreResponse response = request.send();
