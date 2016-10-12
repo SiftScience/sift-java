@@ -7,9 +7,19 @@ Java 1.7 or later.
 
 ## Setup
 ### Maven
-TODO: Write docs for Maven setup
+```xml
+<dependency>
+    <groupId>com.siftscience</groupId>
+    <artifactId>sift-java</artifactId>
+    <version>1.0</version>
+</dependency>
+```
 ### Gradle
-TODO: Write docs for Gradle setup
+```
+dependencies {
+    compile 'com.siftscience:sift-java:1.0'
+}
+```
 
 ## How To Use
 
