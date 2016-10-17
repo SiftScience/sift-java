@@ -2,13 +2,11 @@ package com.siftscience.model;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
-import com.siftscience.FieldSet;
 
 import java.util.List;
 
 abstract class BaseOrderFieldSet<T extends BaseOrderFieldSet<T>>
         extends EventsApiRequestFieldSet<T> {
-
     @Expose @SerializedName("$order_id") private String orderId;
     @Expose @SerializedName("$user_email") private String userEmail;
     @Expose @SerializedName("$amount") private Long amount;

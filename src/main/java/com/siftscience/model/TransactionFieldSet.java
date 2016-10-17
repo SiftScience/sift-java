@@ -2,10 +2,8 @@ package com.siftscience.model;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
-import com.siftscience.FieldSet;
 
 public class TransactionFieldSet extends EventsApiRequestFieldSet<TransactionFieldSet> {
-
     @Expose @SerializedName("$amount") private Long amount;
     @Expose @SerializedName("$currency_code") private String currencyCode;
     @Expose @SerializedName("$user_email") private String userEmail;

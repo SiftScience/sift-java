@@ -4,7 +4,6 @@ import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 public class UpdateAccountFieldSet extends BaseAccountFieldSet<UpdateAccountFieldSet> {
-
     public static UpdateAccountFieldSet fromJson(String json) {
         return gson.fromJson(json, UpdateAccountFieldSet.class);
     }

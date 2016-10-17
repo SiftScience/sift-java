@@ -2,12 +2,10 @@ package com.siftscience.model;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
-import com.siftscience.FieldSet;
 
 import java.util.List;
 
 public class AddPromotionFieldSet extends EventsApiRequestFieldSet<AddPromotionFieldSet> {
-
     public static AddPromotionFieldSet fromJson(String json) {
         return gson.fromJson(json, AddPromotionFieldSet.class);
     }

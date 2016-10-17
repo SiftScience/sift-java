@@ -4,7 +4,6 @@ import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 public class Discount {
-
     @Expose @SerializedName("$percentage_off") private Float percentageOff;
     @Expose @SerializedName("$amount") private Long amount;
     @Expose @SerializedName("$currency_code") private String currencyCode;

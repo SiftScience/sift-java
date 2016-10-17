@@ -6,7 +6,6 @@ import com.google.gson.annotations.SerializedName;
 import java.util.List;
 
 public class CreateAccountFieldSet extends BaseAccountFieldSet<CreateAccountFieldSet> {
-
     public static CreateAccountFieldSet fromJson(String json) {
         return gson.fromJson(json, CreateAccountFieldSet.class);
     }

@@ -6,7 +6,6 @@ import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 public abstract class BaseResponseBody<T extends BaseResponseBody<T>> {
-
     // This static gson instance is used to deserialize JSON responses from all Sift APIs.
     protected static Gson gson = new GsonBuilder()
             .excludeFieldsWithoutExposeAnnotation()

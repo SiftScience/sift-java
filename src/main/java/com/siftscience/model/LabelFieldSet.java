@@ -5,7 +5,6 @@ import com.google.gson.annotations.SerializedName;
 import com.siftscience.FieldSet;
 
 public class LabelFieldSet extends FieldSet<LabelFieldSet> {
-
     public static LabelFieldSet fromJson(String json) {
         return gson.fromJson(json, LabelFieldSet.class);
     }

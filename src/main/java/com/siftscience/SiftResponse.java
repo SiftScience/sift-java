@@ -50,8 +50,9 @@ public abstract class SiftResponse<T extends BaseResponseBody<T>> {
         return time;
     }
 
-    void setTime(int time) {
+    SiftResponse setTime(int time) {
         this.time = time;
+        return this;
     }
 
     public FieldSet getRequestBody() {

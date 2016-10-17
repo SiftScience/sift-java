@@ -10,7 +10,6 @@ import java.io.IOException;
  * should be used by all subtypes as it provides standard error handling logic.
  */
 public abstract class SiftRequest<T extends SiftResponse> {
-
     FieldSet fieldSet;
     private OkHttpClient okClient;
     private HttpUrl baseUrl;

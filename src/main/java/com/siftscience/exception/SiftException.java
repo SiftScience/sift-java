@@ -3,7 +3,6 @@ package com.siftscience.exception;
 import com.siftscience.SiftResponse;
 
 public class SiftException extends RuntimeException {
-
     private SiftResponse response;
 
     public SiftException(String msg) {

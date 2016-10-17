@@ -4,7 +4,6 @@ import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 public class EventResponseBody extends BaseResponseBody<EventResponseBody> {
-
     public static EventResponseBody fromJson(String json) {
         return gson.fromJson(json, EventResponseBody.class);
     }

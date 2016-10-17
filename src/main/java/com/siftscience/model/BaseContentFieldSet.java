@@ -2,13 +2,11 @@ package com.siftscience.model;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
-import com.siftscience.FieldSet;
 
 import java.util.List;
 
 abstract class BaseContentFieldSet<T extends BaseContentFieldSet<T>>
         extends EventsApiRequestFieldSet<T> {
-
     @Expose @SerializedName("$content_id") private String contentId;
     @Expose @SerializedName("$contact_email") private String contactEmail;
     @Expose @SerializedName("$contact_phone") private String contactPhone;

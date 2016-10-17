@@ -1,7 +1,6 @@
 package com.siftscience.model;
 
 public class UpdateContentFieldSet extends BaseContentFieldSet<UpdateContentFieldSet> {
-
     public static UpdateContentFieldSet fromJson(String json) {
         return gson.fromJson(json, UpdateContentFieldSet.class);
     }

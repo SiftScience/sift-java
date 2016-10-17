@@ -7,7 +7,6 @@ import com.siftscience.FieldSet;
 import java.util.List;
 
 public class ScoreFieldSet extends FieldSet<ScoreFieldSet> {
-
     @Expose @SerializedName(USER_ID) private String userId;
     private List<String> abuseTypes;
 

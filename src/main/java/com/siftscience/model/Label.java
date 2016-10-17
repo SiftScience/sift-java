@@ -4,7 +4,6 @@ import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 public class Label {
-
     @Expose @SerializedName("is_bad") private Boolean isBad;
     @Expose @SerializedName("time") private Long time;
     @Expose @SerializedName("description") private String description;

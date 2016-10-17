@@ -3,7 +3,6 @@ package com.siftscience.model;
 import com.siftscience.FieldSet;
 
 public class UnlabelFieldSet extends FieldSet<UnlabelFieldSet> {
-
     private String userId;
     private String abuseType;
 

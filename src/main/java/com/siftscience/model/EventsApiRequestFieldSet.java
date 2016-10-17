@@ -6,7 +6,6 @@ import com.siftscience.FieldSet;
 
 public abstract class EventsApiRequestFieldSet<T extends EventsApiRequestFieldSet<T>> extends
         FieldSet<T> {
-
     @Expose @SerializedName(USER_ID) private String userId;
     @Expose @SerializedName(SESSION_ID) private String sessionId;
     @Expose @SerializedName(TIME) private Long time;

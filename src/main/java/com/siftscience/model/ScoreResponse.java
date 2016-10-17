@@ -6,7 +6,6 @@ import com.google.gson.annotations.SerializedName;
 import java.util.Map;
 
 public class ScoreResponse {
-
     @Expose @SerializedName("user_id") private String userId;
     @Expose @SerializedName("status") private Integer status;
     @Expose @SerializedName("error_message") private String errorMessage;

@@ -6,7 +6,6 @@ import com.siftscience.model.Label;
 import okhttp3.Response;
 
 import java.io.IOException;
-import java.util.List;
 
 public class EventResponse extends SiftResponse<EventResponseBody> {
     EventResponse(Response okResponse, FieldSet requestBody) throws IOException {

@@ -4,7 +4,6 @@ import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 public class Address {
-
     @Expose @SerializedName("$name") private String name;
     @Expose @SerializedName("$phone") private String phone;
     @Expose @SerializedName("$address_1") private String address1;

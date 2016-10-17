@@ -4,7 +4,6 @@ import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 public class LabelResponseBody extends BaseResponseBody<LabelResponseBody> {
-
     public static LabelResponseBody fromJson(String json) {
         return gson.fromJson(json, LabelResponseBody.class);
     }

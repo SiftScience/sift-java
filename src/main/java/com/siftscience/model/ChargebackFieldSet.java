@@ -2,10 +2,8 @@ package com.siftscience.model;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
-import com.siftscience.FieldSet;
 
 public class ChargebackFieldSet extends EventsApiRequestFieldSet<ChargebackFieldSet> {
-
     public static ChargebackFieldSet fromJson(String json) {
         return gson.fromJson(json, ChargebackFieldSet.class);
     }

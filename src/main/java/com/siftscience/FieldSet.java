@@ -17,7 +17,6 @@ import java.util.Map;
  * request instead.
  */
 public abstract class FieldSet<T extends FieldSet<T>> {
-
     // Reserved field names.
     public static final String API_KEY = "$api_key";
     public static final String USER_ID = "$user_id";

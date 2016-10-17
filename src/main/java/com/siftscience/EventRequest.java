@@ -12,7 +12,6 @@ import java.util.List;
  * https://siftscience.com/developers/docs/curl/events-api
  */
 public class EventRequest extends SiftRequest<EventResponse> {
-
     // The abuse types to return synchronous scores for.
     private List<String> abuseTypes;
 

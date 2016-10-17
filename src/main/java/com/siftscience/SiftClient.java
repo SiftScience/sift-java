@@ -37,8 +37,6 @@ public class SiftClient {
     private OkHttpClient okClient = new OkHttpClient();
     private HttpUrl baseUrl = HttpUrl.parse("https://api.siftscience.com");
 
-    public SiftClient() { }
-
     public SiftClient(String apiKey) {
         this.apiKey = apiKey;
     }
