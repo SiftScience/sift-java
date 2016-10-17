@@ -36,7 +36,6 @@ public abstract class SiftRequest<T extends SiftResponse> {
     abstract T buildResponse(Response response, FieldSet requestFields) throws IOException;
 
     public T send() throws IOException {
-
         fieldSet.validate();
 
         // Ok now that the fieldSet is valid, construct and send the request.
@@ -47,7 +46,6 @@ public abstract class SiftRequest<T extends SiftResponse> {
         // If not successful but no exception happened yet, dig deeper into the response so we
         // can manually throw an appropriate exception.
         if (!response.isSuccessful()) {
-
             int httpCode = response.getHttpStatusCode();
             Integer siftCode = response.getSiftStatusCode();
 

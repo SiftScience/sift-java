@@ -91,7 +91,7 @@ public abstract class FieldSet<T extends FieldSet<T>> {
     }
 
     public void validate() {
-        for (Map.Entry<String,JsonElement> entry : customFields.entrySet()) {
+        for (Map.Entry<String, JsonElement> entry : customFields.entrySet()) {
             if (entry.getKey().startsWith("$")) {
                 throw new InvalidFieldException("Custom field \"" + entry.getKey() +
                         "\" may not begin with a dollar sign.");
@@ -108,7 +108,7 @@ public abstract class FieldSet<T extends FieldSet<T>> {
             JsonObject jsonObj = defaultGson.toJsonTree(src).getAsJsonObject();
 
             // Next augment with the custom fields from this base class.
-            for (Map.Entry<String,JsonElement> entry : src.customFields.entrySet()) {
+            for (Map.Entry<String, JsonElement> entry : src.customFields.entrySet()) {
                 jsonObj.add(entry.getKey(), entry.getValue());
             }
 
@@ -141,7 +141,7 @@ public abstract class FieldSet<T extends FieldSet<T>> {
             }
 
             // Loop through all top level JSON fields and pick out the custom field keys.
-            for (Map.Entry<String,JsonElement> entry : jsonObj.entrySet()) {
+            for (Map.Entry<String, JsonElement> entry : jsonObj.entrySet()) {
                 String key = entry.getKey();
                 JsonElement val = entry.getValue();
 
