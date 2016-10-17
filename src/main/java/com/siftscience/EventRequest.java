@@ -36,10 +36,8 @@ public class EventRequest extends SiftRequest<EventResponse> {
         HttpUrl.Builder builder = baseUrl.newBuilder().addPathSegment("events");
 
         // returnScore and abuseTypes are encoded into the URL as query params rather than JSON.
-        if (abuseTypes != null) {
-            builder.addQueryParameter("return_score", "true");
-        }
         if (abuseTypes != null && abuseTypes.size() > 0) {
+            builder.addQueryParameter("return_score", "true");
             String queryParamVal = "";
             for (String abuseType : abuseTypes) {
                 queryParamVal += (abuseType + ",");
