@@ -1,5 +1,8 @@
 group 'com.siftscience'
 version '1.0-SNAPSHOT'
+task wrapper(type: Wrapper) {
+    gradleVersion = '3.1'
+}
 buildscript {
     repositories {
         jcenter()

@@ -2,8 +2,6 @@ package com.siftscience.model;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
-import com.siftscience.EventResponse;
-import com.sun.istack.internal.Interned;
 
 public class EventResponseBody extends BaseResponseBody<EventResponseBody> {
     public static EventResponseBody fromJson(String json) {
