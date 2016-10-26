@@ -38,7 +38,7 @@ public class ScoreRequest extends SiftRequest<ScoreResponse> {
     @Override
     protected HttpUrl path(HttpUrl baseUrl) {
         ScoreFieldSet scoreFieldSet = (ScoreFieldSet)fieldSet;
-        HttpUrl.Builder builder = baseUrl.newBuilder();
+        HttpUrl.Builder builder = baseUrl.newBuilder().addPathSegment("v204");
         builder.addPathSegment("score").addPathSegment(scoreFieldSet.getUserId())
                 .addQueryParameter("api_key", scoreFieldSet.getApiKey());
         if (scoreFieldSet.getAbuseTypes() != null && scoreFieldSet.getAbuseTypes().size() > 0) {

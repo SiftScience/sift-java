@@ -5,6 +5,7 @@ import okhttp3.OkHttpClient;
 import okhttp3.Response;
 
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -14,6 +15,7 @@ import java.util.List;
 public class EventRequest extends SiftRequest<EventResponse> {
     // The abuse types to return synchronous scores for.
     private List<String> abuseTypes;
+    private boolean isWorkflowStatus = false;
 
     EventRequest(HttpUrl baseUrl, OkHttpClient okClient, FieldSet fields) {
         super(baseUrl, okClient, fields);
@@ -26,18 +28,20 @@ public class EventRequest extends SiftRequest<EventResponse> {
         return new EventResponse(response, requestFields);
     }
 
-    EventRequest(HttpUrl baseUrl, OkHttpClient okClient, FieldSet fields, List<String> abuseTypes) {
-        super(baseUrl, okClient, fields);
-        this.abuseTypes = abuseTypes;
-    }
-
     @Override
     protected HttpUrl path(HttpUrl baseUrl) {
-        HttpUrl.Builder builder = baseUrl.newBuilder().addPathSegment("events");
+        HttpUrl.Builder builder = baseUrl.newBuilder()
+                .addPathSegment("v204").addPathSegment("events");
+
+        boolean hasAbuseTypes = abuseTypes != null && abuseTypes.size() > 0;
+        if (isWorkflowStatus) {
+            builder.addQueryParameter("return_workflow_status", "true");
+        } else if (hasAbuseTypes) {
+            builder.addQueryParameter("return_score", "true");
+        }
 
         // returnScore and abuseTypes are encoded into the URL as query params rather than JSON.
-        if (abuseTypes != null && abuseTypes.size() > 0) {
-            builder.addQueryParameter("return_score", "true");
+        if (hasAbuseTypes) {
             String queryParamVal = "";
             for (String abuseType : abuseTypes) {
                 queryParamVal += (abuseType + ",");
@@ -46,5 +50,15 @@ public class EventRequest extends SiftRequest<EventResponse> {
                     queryParamVal.substring(0, queryParamVal.length() - 1));
         }
         return builder.build();
+    }
+
+    public EventRequest withScores(String... abuseTypes) {
+        this.abuseTypes = Arrays.asList(abuseTypes);
+        return this;
+    }
+
+    public EventRequest withWorkflowStatus() {
+        this.isWorkflowStatus = true;
+        return this;
     }
 }

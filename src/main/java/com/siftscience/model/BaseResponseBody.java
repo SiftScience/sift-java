@@ -18,7 +18,7 @@ public abstract class BaseResponseBody<T extends BaseResponseBody<T>> {
         return status;
     }
 
-    public T setStatus(Integer status) {
+    protected T setStatus(Integer status) {
         this.status = status;
         return (T) this;
     }
@@ -27,7 +27,7 @@ public abstract class BaseResponseBody<T extends BaseResponseBody<T>> {
         return errorMessage;
     }
 
-    public T setErrorMessage(String errorMessage) {
+    protected T setErrorMessage(String errorMessage) {
         this.errorMessage = errorMessage;
         return (T) this;
     }

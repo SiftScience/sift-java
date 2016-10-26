@@ -38,4 +38,24 @@ public class LabelResponseBody extends BaseResponseBody<LabelResponseBody> {
         this.scoreResponse = scoreResponse;
         return this;
     }
+
+    @Override
+    public Integer getStatus() {
+        return super.getStatus();
+    }
+
+    @Override
+    public LabelResponseBody setStatus(Integer status) {
+        return super.setStatus(status);
+    }
+
+    @Override
+    public String getErrorMessage() {
+        return super.getErrorMessage();
+    }
+
+    @Override
+    public LabelResponseBody setErrorMessage(String errorMessage) {
+        return super.setErrorMessage(errorMessage);
+    }
 }

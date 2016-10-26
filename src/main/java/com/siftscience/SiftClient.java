@@ -36,6 +36,7 @@ public class SiftClient {
     private String apiKey;
     private OkHttpClient okClient = new OkHttpClient();
     private HttpUrl baseUrl = HttpUrl.parse("https://api.siftscience.com");
+    private HttpUrl baseApi3Url = HttpUrl.parse("https://api3.siftscience.com");
 
     public SiftClient(String apiKey) {
         this.apiKey = apiKey;
@@ -45,49 +46,49 @@ public class SiftClient {
         return apiKey;
     }
 
-    public SiftClient setApiKey(String apiKey) {
-        this.apiKey = apiKey;
-        return this;
-    }
-
     public EventRequest buildRequest(FieldSet fields) {
-        if (fields.getApiKey() == null) {
-            fields.setApiKey(apiKey);
-        }
+        setupApiKey(fields);
         return new EventRequest(baseUrl, okClient, fields);
     }
 
-    public EventRequest buildRequest(FieldSet fields, List<String> abuseTypes) {
-        if (fields.getApiKey() == null) {
-            fields.setApiKey(apiKey);
-        }
-        return new EventRequest(baseUrl, okClient, fields, abuseTypes);
+    public DecisionStatusRequest buildRequest(DecisionStatusFieldSet fields) {
+        setupApiKey(fields);
+        return new DecisionStatusRequest(baseApi3Url, okClient, fields);
     }
 
     public LabelRequest buildRequest(LabelFieldSet fields) {
-        if (fields.getApiKey() == null) {
-            fields.setApiKey(apiKey);
-        }
+        setupApiKey(fields);
         return new LabelRequest(baseUrl, okClient, fields);
     }
 
     public UnlabelRequest buildRequest(UnlabelFieldSet fields) {
-        if (fields.getApiKey() == null) {
-            fields.setApiKey(apiKey);
-        }
+        setupApiKey(fields);
         return new UnlabelRequest(baseUrl, okClient, fields);
     }
 
     public ScoreRequest buildRequest(ScoreFieldSet fields) {
+        setupApiKey(fields);
+        return new ScoreRequest(baseUrl, okClient, fields);
+    }
+
+    public WorkflowStatusRequest buildRequest(WorkflowStatusFieldSet fields) {
+        setupApiKey(fields);
+        return new WorkflowStatusRequest(baseApi3Url, okClient, fields);
+    }
+
+    private void setupApiKey(FieldSet fields) {
         if (fields.getApiKey() == null) {
             fields.setApiKey(apiKey);
         }
-        return new ScoreRequest(baseUrl, okClient, fields);
     }
 
     // For testing.
     SiftClient setBaseUrl(HttpUrl baseUrl) {
         this.baseUrl = baseUrl;
+        return this;
+    }
+    SiftClient setBaseApi3Url(HttpUrl baseApi3Url) {
+        this.baseApi3Url = baseApi3Url;
         return this;
     }
 }

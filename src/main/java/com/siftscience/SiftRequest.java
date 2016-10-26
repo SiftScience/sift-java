@@ -17,7 +17,7 @@ public abstract class SiftRequest<T extends SiftResponse> {
     protected abstract HttpUrl path(HttpUrl baseUrl);
 
     public HttpUrl url() {
-        return path(baseUrl.newBuilder().addPathSegment("v204").build());
+        return path(baseUrl);
     }
 
     SiftRequest(HttpUrl baseUrl, OkHttpClient okClient, FieldSet fields) {

@@ -40,4 +40,24 @@ public class ScoreResponseBody extends BaseResponseBody<ScoreResponseBody> {
         this.latestLabels = latestLabels;
         return this;
     }
+
+    @Override
+    public Integer getStatus() {
+        return super.getStatus();
+    }
+
+    @Override
+    public ScoreResponseBody setStatus(Integer status) {
+        return super.setStatus(status);
+    }
+
+    @Override
+    public String getErrorMessage() {
+        return super.getErrorMessage();
+    }
+
+    @Override
+    public ScoreResponseBody setErrorMessage(String errorMessage) {
+        return super.setErrorMessage(errorMessage);
+    }
 }

@@ -3,6 +3,7 @@ package com.siftscience.model;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import java.util.List;
 import java.util.Map;
 
 public class ScoreResponse {
@@ -11,6 +12,7 @@ public class ScoreResponse {
     @Expose @SerializedName("error_message") private String errorMessage;
     @Expose @SerializedName("scores") private Map<String, AbuseScore> scores;
     @Expose @SerializedName("latest_labels") private Map<String, Label> latestLabels;
+    @Expose @SerializedName("workflow_statuses") private List<WorkflowStatus> workflowStatuses;
 
     public String getUserId() {
         return userId;
@@ -54,6 +56,15 @@ public class ScoreResponse {
 
     public ScoreResponse setLatestLabels(Map<String, Label> latestLabels) {
         this.latestLabels = latestLabels;
+        return this;
+    }
+
+    public List<WorkflowStatus> getWorkflowStatuses() {
+        return workflowStatuses;
+    }
+
+    public ScoreResponse setWorkflowStatuses(List<WorkflowStatus> workflowStatuses) {
+        this.workflowStatuses = workflowStatuses;
         return this;
     }
 }

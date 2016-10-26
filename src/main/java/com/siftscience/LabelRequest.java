@@ -19,6 +19,7 @@ public class LabelRequest extends SiftRequest<LabelResponse> {
     @Override
     protected HttpUrl path(HttpUrl baseUrl) {
         return baseUrl.newBuilder()
+                .addPathSegment("v204")
                 .addPathSegment("users")
                 .addPathSegment(((LabelFieldSet)fieldSet).getUserId())
                 .addPathSegment("labels")

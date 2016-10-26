@@ -82,11 +82,9 @@ public class ScoresTest {
         client.setBaseUrl(baseUrl);
 
         // Build and execute the request against the mock server.
-        List<String> abuseTypes = new ArrayList<>();
-        abuseTypes.add("payment_abuse");
-        abuseTypes.add("promotion_abuse");
         EventRequest request = client.buildRequest(
-                new CreateOrderFieldSet().setUserId("billy_jones_301"), abuseTypes);
+                new CreateOrderFieldSet().setUserId("billy_jones_301"))
+                        .withScores("payment_abuse", "promotion_abuse");
         EventResponse siftResponse = request.send();
 
         // Verify the request.
@@ -103,9 +101,6 @@ public class ScoresTest {
                 siftResponse.getResponseBody().toJson(), true);
         Assert.assertEquals(siftResponse.getScore("payment_abuse").getScore(),
                 (Double) 0.898391231245);
-        Assert.assertEquals(siftResponse.getLatestLabel("payment_abuse").getBad(), true);
-        Assert.assertEquals(siftResponse.getLatestLabel("payment_abuse").getDescription(),
-                "received a chargeback");
 
         server.shutdown();
     }

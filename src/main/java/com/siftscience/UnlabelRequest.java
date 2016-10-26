@@ -22,6 +22,7 @@ public class UnlabelRequest extends SiftRequest<UnlabelResponse> {
     protected HttpUrl path(HttpUrl baseUrl) {
         UnlabelFieldSet unlabelFields = (UnlabelFieldSet)fieldSet;
         HttpUrl.Builder builder = baseUrl.newBuilder()
+                .addPathSegment("v204")
                 .addPathSegment("users")
                 .addPathSegment(unlabelFields.getUserId())
                 .addPathSegment("labels");
