@@ -20,7 +20,12 @@ dependencies {
     compile 'com.siftscience:sift-java:1.0'
 }
 ```
-
+### From source
+```
+$ git clone git@github.com:SiftScience/sift-java.git
+$ cd sift-java
+$ ./gradlew shadowJar # Jar saved to ./build/libs
+```
 ## How To Use
 
 Create a SiftClient object with your API key. It can be used to access
@@ -85,10 +90,9 @@ EventResponseBody responseBody = response.getResponseBody();
 
 ### Get Scores
 #### [Synchronous Scoring](https://siftscience.com/developers/docs/java/score-api/synchronous-scores)
-To get a score in the response body of an event request, build your
-request with `client.buildRequest(eventFieldSet, abuseTypes)`. The extra
-parameter `abuseTypes` is a `List` of Sift Science abuse types for which
-the API will provide user scores.
+To get a score in the response body of an event request, build your event
+request as usual and then augment the request with a list of abuse types
+for which you would like scores returned using `EventRequest#withScores`.
 
 Here's how the `$create_order` example above can be altered to respond
 with `payment_abuse` and `promotion_abuse` scores.
@@ -96,18 +100,18 @@ with `payment_abuse` and `promotion_abuse` scores.
 ```java
 // Add a list of requested abuse types as an extra parameter.
 // The first parameter is the same as in the first example.
-EventRequest createOrderRequest = client.buildRequest(
-        createOrderFieldSet,
-        Arrays.asList("payment_abuse", "promotion_abuse")
-);
+EventRequest createOrderRequest = client.buildRequest(createOrderFieldSet)
+        .withScores("payment_abuse", "promotion_abuse");
 
 // Send the request. May throw a SiftException.
 EventResponse response = createOrderRequest.send();
 
 // Inspect scores.
 Score paymentAbuseScore = response.getScore("payment_abuse");
-Label latestPaymentAbuseLabel = response.getLatestLabel("payment_abuse");
 ```
+
+You may also invoke the `withScores` method with no arguments to return
+scores for all abuse types.
 
 #### [Score API](https://siftscience.com/developers/docs/java/score-api/score-api)
 Scores may also be requested separately from incoming event requests.
@@ -126,7 +130,6 @@ ScoreResponse response = request.send();
 
 // Inspect scores.
 Score paymentAbuseScore = response.getScore("payment_abuse");
-Label latestPaymentAbuseLabel = response.getLatestLabel("payment_abuse");
 ```
 
 ### Labels
@@ -151,4 +154,30 @@ UnlabelRequest request = client.buildRequest(new UnlabelFieldSet()
         
         // Optional abuse type to unlabel for. Omit to unlabel for all abuse types.
         .setAbuseType("payment_abuse"));
+```
+
+### Workflow Status
+#### [Synchronous Workflow Statuses](https://siftscience.com/developers/docs/curl/workflows-api/workflow-decisions)
+Similarly to the Scores API, EventRequest objects can also be modified to
+return a Workflow Status using the `EventRequest#withWorkflowStatus` method.
+```java
+EventRequest createOrderRequest = client.buildRequest(createOrderFieldSet)
+        .withWorkflowStatus();
+```
+
+#### [Workflow Status API](https://siftscience.com/developers/docs/curl/workflows-api/workflow-status)
+To query the Workflow Status API, create a request with a WorkflowStatusFieldSet.
+```java
+WorkflowStatusRequest request = client.buildRequest(new WorkflowStatusFieldSet()
+        .setAccountId("your_account_id")
+        .setWorkflowRunId("someid"));
+```
+
+### [Decision Status API](https://siftscience.com/developers/docs/curl/decisions-api/decision-status)
+To query the Decision Status API, create a request with a DecisionStatusFieldSet.
+```java
+DecisionStatusRequest request = client.buildRequest(new DecisionStatusFieldSet()
+        .setAccountId("your_account_id")
+        .setEntity(DecisionStatusFieldSet.ENTITY_ORDERS) // or ENTITY_USERS
+        .setEntityId("someid"));
 ```

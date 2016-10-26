@@ -33,15 +33,14 @@ public class EventRequest extends SiftRequest<EventResponse> {
         HttpUrl.Builder builder = baseUrl.newBuilder()
                 .addPathSegment("v204").addPathSegment("events");
 
-        boolean hasAbuseTypes = abuseTypes != null && abuseTypes.size() > 0;
         if (isWorkflowStatus) {
             builder.addQueryParameter("return_workflow_status", "true");
-        } else if (hasAbuseTypes) {
+        } else if (abuseTypes != null) {
             builder.addQueryParameter("return_score", "true");
         }
 
         // returnScore and abuseTypes are encoded into the URL as query params rather than JSON.
-        if (hasAbuseTypes) {
+        if (abuseTypes != null && abuseTypes.size() > 0) {
             String queryParamVal = "";
             for (String abuseType : abuseTypes) {
                 queryParamVal += (abuseType + ",");
