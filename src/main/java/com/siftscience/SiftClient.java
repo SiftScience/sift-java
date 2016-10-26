@@ -7,7 +7,8 @@ import okhttp3.OkHttpClient;
 import java.util.List;
 
 /**
- * Use a SiftClient to access all supported Sift Science APIs.
+ * Use a SiftClient to access all supported Sift Science APIs. It may be used concurrently from
+ * different threads.
  *
  * Usage:
  *

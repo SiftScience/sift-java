@@ -67,4 +67,8 @@ public class ScoreResponse {
         this.workflowStatuses = workflowStatuses;
         return this;
     }
+
+    public WorkflowStatus getWorkflowStatus(int i) {
+        return workflowStatuses.get(i);
+    }
 }
