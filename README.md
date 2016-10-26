@@ -28,8 +28,8 @@ $ ./gradlew shadowJar # Jar saved to ./build/libs
 ```
 ## How To Use
 
-Create a SiftClient object with your API key. It can be used to access
-all supported APIs.
+Create a SiftClient object with your API key. SiftClient is thread safe
+and can be used to access all supported APIs.
 ```java
 SiftClient client = new SiftClient("your_api_key");
 ```
