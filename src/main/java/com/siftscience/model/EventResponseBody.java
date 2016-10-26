@@ -38,24 +38,4 @@ public class EventResponseBody extends BaseResponseBody<EventResponseBody> {
         this.scoreResponse = scoreResponse;
         return this;
     }
-
-    @Override
-    public Integer getStatus() {
-        return super.getStatus();
-    }
-
-    @Override
-    public EventResponseBody setStatus(Integer status) {
-        return super.setStatus(status);
-    }
-
-    @Override
-    public String getErrorMessage() {
-        return super.getErrorMessage();
-    }
-
-    @Override
-    public EventResponseBody setErrorMessage(String errorMessage) {
-        return super.setErrorMessage(errorMessage);
-    }
 }
