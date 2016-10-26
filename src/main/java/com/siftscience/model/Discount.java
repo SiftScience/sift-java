@@ -4,16 +4,16 @@ import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 public class Discount {
-    @Expose @SerializedName("$percentage_off") private Float percentageOff;
+    @Expose @SerializedName("$percentage_off") private Double percentageOff;
     @Expose @SerializedName("$amount") private Long amount;
     @Expose @SerializedName("$currency_code") private String currencyCode;
     @Expose @SerializedName("$minimum_purchase_amount") private Long minimumPurchaseAmount;
 
-    public Float getPercentageOff() {
+    public Double getPercentageOff() {
         return percentageOff;
     }
 
-    public Discount setPercentageOff(Float percentageOff) {
+    public Discount setPercentageOff(Double percentageOff) {
         this.percentageOff = percentageOff;
         return this;
     }
