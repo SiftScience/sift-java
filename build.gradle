@@ -1,23 +1,16 @@
-group 'com.siftscience'
-version '1.0-SNAPSHOT'
-task wrapper(type: Wrapper) {
-    gradleVersion = '3.1'
-}
-buildscript {
-    repositories {
-        jcenter()
-    }
-    dependencies {
-        classpath 'com.github.jengelman.gradle.plugins:shadow:1.2.3'
-    }
-}
-
 apply plugin: 'java'
+apply plugin: 'maven-publish'
+apply plugin: 'signing'
+
+group = 'com.siftscience'
+version = '1.1'
 sourceCompatibility = 1.7
+targetCompatibility = 1.7
 
 repositories {
     mavenCentral()
 }
+
 dependencies {
     testCompile group: 'junit', name: 'junit', version: '4.11'
     testCompile group: 'org.skyscreamer', name: 'jsonassert', version: '1.3.0'
@@ -27,44 +20,127 @@ dependencies {
     compile 'com.squareup.okio:okio:1.9.0'
 }
 
-apply plugin: 'maven-publish'
-apply plugin: 'com.github.johnrengelman.shadow'
+task wrapper(type: Wrapper) {
+    gradleVersion = '3.1'
+}
 
-shadowJar {
-    classifier = ''
-    relocate 'okhttp3', 'shade.com.sift.okhttp3'
-    relocate 'okio', 'shade.com.sift.okio'
-    relocate 'com.google.gson', 'shade.com.sift.com.google.gson'
+buildscript {
+    repositories {
+        jcenter()
+    }
+}
+
+task sourceJar(type: Jar) {
+    classifier "sources"
+    from sourceSets.main.allSource
+}
+
+task javaDocJar(type: Jar) {
+    classifier "javadoc"
+    from javadoc
+}
+
+artifacts {
+    archives jar
+    archives sourceJar
+    archives javaDocJar
+}
+
+signing {
+    sign configurations.archives
+}
+
+def pomConfig = {
+    name "${project.name}"
+    url 'https://github.com/SiftScience/sift-java'
+    licenses {
+        license {
+            name 'MIT License'
+            url 'https://github.com/SiftScience/sift-java/blob/master/LICENSE'
+            distribution 'repo'
+        }
+    }
+    inceptionYear 2016
+    organization {
+        name 'Sift Science'
+        url 'https://siftscience.com'
+    }
+    developers {
+        developer {
+            id 'lopatin'
+            name 'Alex Lopatin'
+            url 'https://github.com/lopatin'
+        }
+    }
+    scm {
+        url 'https://github.com/SiftScience/sift-java'
+        connection 'scm:git:https://github.com/SiftScience/sift-java.git'
+        developerConnection 'scm:git:ssh://git@github.com/SiftScience/sift-java.git'
+    }
 }
 
 publishing {
     publications {
-        shadow(MavenPublication) {
-            from components.shadow
+        jar(MavenPublication) {
+            from components.java
+
+            artifact(sourceJar) {
+                classifier = "sources"
+            }
+
+            artifact(javaDocJar) {
+                classifier = "javadoc"
+            }
+
+            pom.withXml {
+                def root = asNode()
+                def last = root.children().last()
+                last.parent().appendNode('description', 'Sift Science Java API')
+                last + pomConfig
+            }
+
+            // Sign the pom.xml.
+            pom.withXml {
+                def pomFile = file("${project.buildDir}/generated-pom.xml")
+                writeTo(pomFile)
+                def pomAscFile = signing.sign(pomFile).signatureFiles[0]
+                artifact(pomAscFile) {
+                    classifier = null
+                    extension = 'pom.asc'
+                }
+                pomFile.delete()
+            }
+
+            // Sign the artifacts.
+            project.tasks.signArchives.signatureFiles.each {
+                artifact(it) {
+                    def matcher = it.file =~ /-(sources|javadoc)\.jar\.asc$/
+                    if (matcher.find()) {
+                        classifier = matcher.group(1)
+                    } else {
+                        classifier = null
+                    }
+                    extension = 'jar.asc'
+                }
+            }
         }
     }
 
     repositories {
-        mavenLocal()
         maven {
-            name 'snapshot'
-            url 'https://oss.sonatype.org/content/repositories/snapshots'
+            name 'staging'
+            url 'https://oss.sonatype.org/service/local/staging/deploy/maven2/'
+
             credentials {
-                username = System.env.SIFT_JAVA_USERNAME
-                password = System.env.SIFT_JAVA_PASSWORD
+                username = "${sonatypeUsername}"
+                password = "${sonatypePassword}"
             }
         }
-
-        // TODO: Uncomment when no longer a snapshot version. Also remove the
-        // "-SNAPSHOT" suffix from the version.
-//        maven {
-//            name 'staging'
-//            url 'https://oss.sonatype.org/service/local/staging/deploy/maven2'
-//            credentials {
-//                username = System.env.SIFT_JAVA_USERNAME
-//                password = System.env.SIFT_JAVA_PASSWORD
-//            }
-//        }
     }
 }
 
+model {
+    tasks.publishJarPublicationToStagingRepository {
+        dependsOn(project.tasks.signArchives)
+    }
+}
