@@ -45,9 +45,9 @@ public abstract class SiftRequest<T extends SiftResponse> {
 
         // If not successful but no exception happened yet, dig deeper into the response so we
         // can manually throw an appropriate exception.
-        if (!response.isSuccessful()) {
+        if (!response.isOk()) {
             int httpCode = response.getHttpStatusCode();
-            Integer siftCode = response.getSiftStatusCode();
+            Integer siftCode = response.getApiStatus();
 
             if (httpCode >= 500 && httpCode < 600) {
                 throw new ServerException(response);

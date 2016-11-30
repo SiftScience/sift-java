@@ -110,13 +110,13 @@ public class TransactionEventTest {
 
         // Verify the response.
         Assert.assertEquals(HTTP_OK, siftResponse.getHttpStatusCode());
-        Assert.assertEquals(0, (int) siftResponse.getResponseBody().getStatus());
+        Assert.assertEquals(0, (int) siftResponse.getBody().getStatus());
         JSONAssert.assertEquals(response.getBody().readUtf8(),
-                siftResponse.getResponseBody().toJson(), true);
-//        EventResponseBody ff = siftResponse.getResponseBody();
+                siftResponse.getBody().toJson(), true);
+//        EventResponseBody ff = siftResponse.getBody();
 //        siftResponse.getRequestBody()
-//        siftResponse.getResponseBody().getErrorMessage();
-//        siftResponse.getErrorMessage();
+//        siftResponse.getBody().getApiErrorMessage();
+//        siftResponse.getApiErrorMessage();
 
         server.shutdown();
     }

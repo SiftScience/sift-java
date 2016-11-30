@@ -1,7 +1,6 @@
 package com.siftscience;
 
 import com.siftscience.model.ContentStatusFieldSet;
-import com.siftscience.model.UpdateContentFieldSet;
 import okhttp3.HttpUrl;
 import okhttp3.mockwebserver.MockResponse;
 import okhttp3.mockwebserver.MockWebServer;
@@ -59,9 +58,9 @@ public class ContentStatusEventTest {
 
         // Verify the response.
         Assert.assertEquals(HTTP_OK, siftResponse.getHttpStatusCode());
-        Assert.assertEquals(0, (int) siftResponse.getResponseBody().getStatus());
+        Assert.assertEquals(0, (int) siftResponse.getBody().getStatus());
         JSONAssert.assertEquals(response.getBody().readUtf8(),
-                siftResponse.getResponseBody().toJson(), true);
+                siftResponse.getBody().toJson(), true);
 
         server.shutdown();
     }

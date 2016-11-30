@@ -35,15 +35,8 @@ public abstract class SiftResponse<T extends BaseResponseBody<T>> {
         return okResponse.code();
     }
 
-    public T getResponseBody() {
+    public T getBody() {
         return body;
-    }
-
-    public String getErrorMessage() {
-        if (body != null) {
-            return body.getErrorMessage();
-        }
-        return null;
     }
 
     public int getTime() {
@@ -59,22 +52,20 @@ public abstract class SiftResponse<T extends BaseResponseBody<T>> {
         return requestBody;
     }
 
-    SiftResponse setRequestBody(FieldSet requestBody) {
-        this.requestBody = requestBody;
-        return this;
+    public boolean isOk() {
+        return okResponse != null && okResponse.isSuccessful();
     }
 
-    public boolean isSuccessful() {
-        return okResponse.isSuccessful();
-    }
-
-    Response getOkResponse() {
-        return okResponse;
-    }
-
-    public Integer getSiftStatusCode() {
+    public Integer getApiStatus() {
         if (body != null) {
             return body.getStatus();
+        }
+        return null;
+    }
+
+    public String getApiErrorMessage() {
+        if (body != null) {
+            return body.getErrorMessage();
         }
         return null;
     }

@@ -1,9 +1,6 @@
 package com.siftscience;
 
-import com.siftscience.model.AbuseScore;
-import com.siftscience.model.EventResponseBody;
-import com.siftscience.model.Label;
-import com.siftscience.model.WorkflowStatus;
+import com.siftscience.model.*;
 import okhttp3.Response;
 
 import java.io.IOException;
@@ -20,19 +17,34 @@ public class EventResponse extends SiftResponse<EventResponseBody> {
         body = EventResponseBody.fromJson(jsonBody);
     }
 
-    public Map<String, AbuseScore> getScores() {
-        return this.getResponseBody().getScoreResponse().getScores();
+    public Double getScore(String abuseType) {
+        AbuseScore scoreResponse = getAbuseScore(abuseType);
+        return scoreResponse != null ? scoreResponse.getScore() : null;
     }
 
-    public AbuseScore getScore(String abuseType) {
-        return this.getResponseBody().getScoreResponse().getScores().get(abuseType);
+    public List<Reason> getReasons(String abuseType) {
+        AbuseScore scoreResponse = getAbuseScore(abuseType);
+        return scoreResponse != null ? scoreResponse.getReasons() : null;
+    }
+
+    public Map<String, AbuseScore> getAbuseScores() {
+        com.siftscience.model.ScoreResponse scoreResponse = getBody().getScoreResponse();
+        return scoreResponse != null ? scoreResponse.getScores() : null;
+    }
+
+    public AbuseScore getAbuseScore(String abuseType) {
+        com.siftscience.model.ScoreResponse scoreResponse = getBody().getScoreResponse();
+        return scoreResponse != null && scoreResponse.getScores() != null ?
+                scoreResponse.getScores().get(abuseType) : null;
     }
 
     public List<WorkflowStatus> getWorkflowStatuses() {
-        return this.getResponseBody().getScoreResponse().getWorkflowStatuses();
+        com.siftscience.model.ScoreResponse scoreResponse = getBody().getScoreResponse();
+        return scoreResponse != null ? scoreResponse.getWorkflowStatuses() : null;
     }
 
     public WorkflowStatus getWorkflowStatus(int i) {
-        return this.getResponseBody().getScoreResponse().getWorkflowStatuses().get(i);
+        List<WorkflowStatus> workflowStatuses = getWorkflowStatuses();
+        return workflowStatuses != null ? workflowStatuses.get(i) : null;
     }
 }

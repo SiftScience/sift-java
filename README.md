@@ -11,21 +11,25 @@ Java 1.7 or later.
 <dependency>
     <groupId>com.siftscience</groupId>
     <artifactId>sift-java</artifactId>
-    <version>1.1</version>
+    <version>1.1.1</version>
 </dependency>
 ```
 ### Gradle
 ```
 dependencies {
-    compile 'com.siftscience:sift-java:1.1'
+    compile 'com.siftscience:sift-java:1.1.1'
 }
 ```
-### From source
+### Other
+Download and install the latest Jar from the [releases page](https://github.com/SiftScience/sift-java/releases). This zip file contains the Jar files of the libraries that sift-java depends on (Gson, OkHttp, and Okio), so those will have to be installed also.
+
+You may also generate the distribution Zip from source.
 ```
 $ git clone git@github.com:SiftScience/sift-java.git
 $ cd sift-java
-$ ./gradlew shadowJar # Jar saved to ./build/libs
+$ ./gradlew distZip   # Zip file saved to ./build/distributions/
 ```
+
 ## How To Use
 
 Create a SiftClient object with your API key. SiftClient is thread safe
@@ -34,7 +38,9 @@ and can be used to access all supported APIs.
 SiftClient client = new SiftClient("your_api_key");
 ```
 
-### [Send Events](https://siftscience.com/developers/docs/java/events-api)
+### Send Events
+
+[API Docs](https://siftscience.com/developers/docs/java/events-api)
 
 All request types can be built using the overloaded `client.buildRequest`.
 Here's an example for the `$create_order` event type.
@@ -77,19 +83,22 @@ try {
     response = createOrderRequest.send();
 } catch (SiftException e) {
     SiftResponse errorResponse = e.getSiftResponse();
-    // ... handle InvalidRequestException and/or ServerException subtypes.
+    // ... handle InvalidRequestException(4xx) and/or ServerException(5xx) subtypes.
 }
 
 // Inspect the response.
-response.isSuccessful(); // true
-response.getErrorMessage(); // "OK"
-response.getSiftStatusCode(); // 0
-response.getHttpStatusCode(); // 200
-EventResponseBody responseBody = response.getResponseBody();
+response.isOk();                // true
+response.getApiErrorMessage();  // "OK"
+response.getApiStatus();        // 0
+response.getHttpStatusCode();   // 200
+EventResponseBody body = response.getBody();
 ```
 
 ### Get Scores
-#### [Synchronous Scoring](https://siftscience.com/developers/docs/java/score-api/synchronous-scores)
+#### Synchronous Scoring
+
+[API Docs](https://siftscience.com/developers/docs/java/score-api/synchronous-scores)
+
 To get a score in the response body of an event request, build your event
 request as usual and then augment the request with a list of abuse types
 for which you would like scores returned using `EventRequest#withScores`.
@@ -107,13 +116,16 @@ EventRequest createOrderRequest = client.buildRequest(createOrderFieldSet)
 EventResponse response = createOrderRequest.send();
 
 // Inspect scores.
-Score paymentAbuseScore = response.getScore("payment_abuse");
+AbuseScore paymentAbuseScore = response.getAbuseScore("payment_abuse");
 ```
 
 You may also invoke the `withScores` method with no arguments to return
 scores for all abuse types.
 
-#### [Score API](https://siftscience.com/developers/docs/java/score-api/score-api)
+#### Score API
+
+[API Docs](https://siftscience.com/developers/docs/java/score-api/score-api)
+
 Scores may also be requested separately from incoming event requests.
 Provide a `ScoreFieldSet` containing a list of abuse types `client.buildRequest`
 to send a request to the Scores API.
@@ -129,11 +141,14 @@ ScoreRequest request = client.buildRequest(new ScoreFieldSet()
 ScoreResponse response = request.send();
 
 // Inspect scores.
-Score paymentAbuseScore = response.getScore("payment_abuse");
+AbuseScore paymentAbuseScore = response.getAbuseScore("payment_abuse");
 ```
 
 ### Labels
-#### [Label User](https://siftscience.com/developers/docs/java/labels-api)
+#### Label User
+
+[API Docs](https://siftscience.com/developers/docs/java/labels-api)
+
 To send a label, build a request using a `LabelFieldSet`;
 ```java
 LabelRequest request = client.buildRequest(new LabelFieldSet()
@@ -146,7 +161,10 @@ LabelRequest request = client.buildRequest(new LabelFieldSet()
 );
 ```
 
-#### [Unlabel User](https://siftscience.com/developers/docs/java/labels-api/unlabel-user)
+#### Unlabel User
+
+[API Docs](https://siftscience.com/developers/docs/java/labels-api/unlabel-user)
+
 Similarly, use an `UnlabelFieldSet` to unlabel a user.
 ```java
 UnlabelRequest request = client.buildRequest(new UnlabelFieldSet()
@@ -157,7 +175,10 @@ UnlabelRequest request = client.buildRequest(new UnlabelFieldSet()
 ```
 
 ### Workflow Status
-#### [Synchronous Workflow Statuses](https://siftscience.com/developers/docs/curl/workflows-api/workflow-decisions)
+#### Synchronous Workflow Statuses
+
+[API Docs](https://siftscience.com/developers/docs/java/workflows-api/workflow-decisions)
+
 Similarly to the Scores API, EventRequest objects can also be modified to
 return a Workflow Status using the `EventRequest#withWorkflowStatus` method.
 ```java
@@ -165,7 +186,10 @@ EventRequest createOrderRequest = client.buildRequest(createOrderFieldSet)
         .withWorkflowStatus();
 ```
 
-#### [Workflow Status API](https://siftscience.com/developers/docs/curl/workflows-api/workflow-status)
+#### Workflow Status API
+
+[API Docs](https://siftscience.com/developers/docs/java/workflows-api/workflow-status)
+
 To query the Workflow Status API, create a request with a WorkflowStatusFieldSet.
 ```java
 WorkflowStatusRequest request = client.buildRequest(new WorkflowStatusFieldSet()
@@ -173,7 +197,10 @@ WorkflowStatusRequest request = client.buildRequest(new WorkflowStatusFieldSet()
         .setWorkflowRunId("someid"));
 ```
 
-### [Decision Status API](https://siftscience.com/developers/docs/curl/decisions-api/decision-status)
+### Decision Status API
+
+[API Docs](https://siftscience.com/developers/docs/java/decisions-api/decision-status)
+
 To query the Decision Status API, create a request with a DecisionStatusFieldSet.
 ```java
 DecisionStatusRequest request = client.buildRequest(new DecisionStatusFieldSet()
