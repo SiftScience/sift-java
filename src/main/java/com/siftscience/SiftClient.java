@@ -26,11 +26,11 @@ import java.util.List;
  *     ... handle validation and unexpected server errors.
  * }
  *
- * txEventResponse.isSuccessful(); // true;
- * txEventResponse.getErrorMessage(); // "OK";
+ * txEventResponse.isOk(); // true;
+ * txEventResponse.getApiErrorMessage(); // "OK";
  *
  * FieldSet requestFields = txEventResponse.getRequestBody();
- * EventResponseBody responseFields = txEventResponse.getResponseBody();
+ * EventResponseBody responseFields = txEventResponse.getBody();
  *
  */
 public class SiftClient {

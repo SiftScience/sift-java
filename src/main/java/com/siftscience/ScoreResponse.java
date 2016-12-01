@@ -1,7 +1,6 @@
 package com.siftscience;
 
 import com.siftscience.model.AbuseScore;
-import com.siftscience.model.Label;
 import com.siftscience.model.ScoreResponseBody;
 import okhttp3.Response;
 
@@ -17,16 +16,17 @@ public class ScoreResponse extends SiftResponse<ScoreResponseBody> {
         body = ScoreResponseBody.fromJson(jsonBody);
     }
 
-    public AbuseScore getScore(String abuseType) {
-        if (this.getResponseBody() != null && this.getResponseBody().getScores() != null) {
-            return this.getResponseBody().getScores().get(abuseType);
+    public AbuseScore getScoreResponse(String abuseType) {
+        if (this.getBody() != null && this.getBody().getScores() != null) {
+            return this.getBody().getScores().get(abuseType);
         }
         return null;
     }
 
-    public Label getLatestLabel(String abuseType) {
-        if (this.getResponseBody() != null && this.getResponseBody().getLatestLabels() != null) {
-            return this.getResponseBody().getLatestLabels().get(abuseType);
+    public Double getScore(String abuseType) {
+        AbuseScore abuseScore = getScoreResponse(abuseType);
+        if (abuseScore != null) {
+            return abuseScore.getScore();
         }
         return null;
     }

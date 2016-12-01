@@ -54,9 +54,9 @@ public class LinkSessionToUserEventTest {
 
         // Verify the response.
         Assert.assertEquals(HTTP_OK, siftResponse.getHttpStatusCode());
-        Assert.assertEquals(0, (int) siftResponse.getResponseBody().getStatus());
+        Assert.assertEquals(0, (int) siftResponse.getBody().getStatus());
         JSONAssert.assertEquals(response.getBody().readUtf8(),
-                siftResponse.getResponseBody().toJson(), true);
+                siftResponse.getBody().toJson(), true);
 
         server.shutdown();
     }

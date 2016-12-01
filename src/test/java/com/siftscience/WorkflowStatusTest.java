@@ -142,10 +142,10 @@ public class WorkflowStatusTest {
 
         // Verify the response.
         Assert.assertEquals(HTTP_OK, siftResponse.getHttpStatusCode());
-        Assert.assertEquals(0, (int) siftResponse.getResponseBody().getStatus());
+        Assert.assertEquals(0, (int) siftResponse.getBody().getStatus());
         JSONAssert.assertEquals(response.getBody().readUtf8(),
-                siftResponse.getResponseBody().toJson(), true);
-        Assert.assertEquals(siftResponse.getScore("payment_abuse").getScore(),
+                siftResponse.getBody().toJson(), true);
+        Assert.assertEquals(siftResponse.getAbuseScore("payment_abuse").getScore(),
                 (Double) 0.898391231245);
         Assert.assertEquals(siftResponse.getWorkflowStatuses().get(0).getId(), "6dbq76qbaaaaa");
         Assert.assertEquals(siftResponse.getWorkflowStatuses().get(0)
@@ -231,6 +231,6 @@ public class WorkflowStatusTest {
         // Verify the response was parsed correctly.
         Assert.assertEquals(HTTP_OK, siftResponse.getHttpStatusCode());
         JSONAssert.assertEquals(response.getBody().readUtf8(),
-                siftResponse.getResponseBody().toJson(), true);
+                siftResponse.getBody().toJson(), true);
     }
 }

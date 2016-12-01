@@ -95,10 +95,10 @@ public class ScoresTest {
 
         // Verify the response.
         Assert.assertEquals(HTTP_OK, siftResponse.getHttpStatusCode());
-        Assert.assertEquals(0, (int) siftResponse.getResponseBody().getStatus());
+        Assert.assertEquals(0, (int) siftResponse.getBody().getStatus());
         JSONAssert.assertEquals(response.getBody().readUtf8(),
-                siftResponse.getResponseBody().toJson(), true);
-        Assert.assertEquals(siftResponse.getScore("payment_abuse").getScore(),
+                siftResponse.getBody().toJson(), true);
+        Assert.assertEquals(siftResponse.getAbuseScore("payment_abuse").getScore(),
                 (Double) 0.898391231245);
 
         server.shutdown();
@@ -179,10 +179,10 @@ public class ScoresTest {
 
         // Verify the response.
         Assert.assertEquals(HTTP_OK, siftResponse.getHttpStatusCode());
-        Assert.assertEquals(0, (int) siftResponse.getResponseBody().getStatus());
+        Assert.assertEquals(0, (int) siftResponse.getBody().getStatus());
         JSONAssert.assertEquals(response.getBody().readUtf8(),
-                siftResponse.getResponseBody().toJson(), true);
-        Assert.assertEquals(siftResponse.getScore("payment_abuse").getScore(),
+                siftResponse.getBody().toJson(), true);
+        Assert.assertEquals(siftResponse.getAbuseScore("payment_abuse").getScore(),
                 (Double) 0.898391231245);
 
         server.shutdown();
@@ -255,9 +255,9 @@ public class ScoresTest {
 
         // Verify the response.
         Assert.assertEquals(HTTP_OK, siftResponse.getHttpStatusCode());
-        Assert.assertEquals(0, (int) siftResponse.getResponseBody().getStatus());
+        Assert.assertEquals(0, (int) siftResponse.getBody().getStatus());
         JSONAssert.assertEquals(response.getBody().readUtf8(),
-                siftResponse.getResponseBody().toJson(), true);
+                siftResponse.getBody().toJson(), true);
 
         server.shutdown();
 
