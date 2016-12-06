@@ -197,6 +197,37 @@ WorkflowStatusRequest request = client.buildRequest(new WorkflowStatusFieldSet()
         .setWorkflowRunId("someid"));
 ```
 
+### Apply Decision API
+
+[API Docs](https://siftscience.com/developers/docs/java/decisions-api/apply-decision)
+
+To apply a decision to a user, create a request with accountId, userId, and ApplyDecisionFieldSet.
+```java
+ApplyDecisionRequest request = client.buildRequest(
+        accountId,
+        userId,
+        new ApplyDecisionFieldSet()
+            .setDecisionId("decision_id")
+            .setSource(DecisionSource.AUTOMATED_RULE)
+            .setTime(System.currentTimeInMillis())
+);
+```
+
+To apply a decision to an order, create a request with accountId, userId, orderId and ApplyDecisionFieldSet.
+```java
+ApplyDecisionRequest request = client.buildRequest(
+        accountId,
+        userId,
+        orderId,
+        new ApplyDecisionFieldSet()
+            .setDecisionId("decision_id")
+            .setSource(DecisionSource.MANUAL_REVIEW)
+            .setAnalyst("analyst@fraudco.com")
+            .setTime(System.currentTimeInMillis())
+);
+```
+
+
 ### Decision Status API
 
 [API Docs](https://siftscience.com/developers/docs/java/decisions-api/decision-status)

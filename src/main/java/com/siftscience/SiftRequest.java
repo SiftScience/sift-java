@@ -41,7 +41,8 @@ public abstract class SiftRequest<T extends SiftResponse> {
         // Ok now that the fieldSet is valid, construct and send the request.
         Request.Builder okRequestBuilder = new Request.Builder().url(this.url());
         modifyRequestBuilder(okRequestBuilder);
-        T response = buildResponse(okClient.newCall(okRequestBuilder.build()).execute(), fieldSet);
+        Request request = okRequestBuilder.build();
+        T response = buildResponse(okClient.newCall(request).execute(), fieldSet);
 
         // If not successful but no exception happened yet, dig deeper into the response so we
         // can manually throw an appropriate exception.
