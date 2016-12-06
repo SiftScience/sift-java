@@ -52,6 +52,35 @@ public class SiftClient {
         return new EventRequest(baseUrl, okClient, fields);
     }
 
+    public ApplyDecisionRequest buildRequest(String accountId,
+                                             String userId,
+                                             ApplyDecisionFieldSet fields) {
+        setBaseApi3Url(baseApi3Url.newBuilder("/v3/accounts")
+                .addPathSegment(accountId)
+                .addPathSegment("users")
+                .addPathSegment(userId)
+                .addPathSegment("decisions")
+                .build());
+
+        return new ApplyDecisionRequest(baseApi3Url, okClient, fields, apiKey);
+    }
+
+    public ApplyDecisionRequest buildRequest(String accountId,
+                                             String userId,
+                                             String orderId,
+                                             ApplyDecisionFieldSet fields) {
+        setBaseApi3Url(baseApi3Url.newBuilder("/v3/accounts")
+                .addPathSegment(accountId)
+                .addPathSegment("users")
+                .addPathSegment(userId)
+                .addPathSegment("orders")
+                .addPathSegment(orderId)
+                .addPathSegment("decisions")
+                .build());
+
+        return new ApplyDecisionRequest(baseApi3Url, okClient, fields, apiKey);
+    }
+
     public DecisionStatusRequest buildRequest(DecisionStatusFieldSet fields) {
         setupApiKey(fields);
         return new DecisionStatusRequest(baseApi3Url, okClient, fields);
