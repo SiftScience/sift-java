@@ -197,6 +197,16 @@ WorkflowStatusRequest request = client.buildRequest(new WorkflowStatusFieldSet()
         .setWorkflowRunId("someid"));
 ```
 
+#### Get decisions
+
+[API Docs](https://siftscience.com/developers/docs/java/decisions-api/get-decisions)
+
+To retrieve available decisions, create a request with GetDecisionsFieldSet.
+```java
+GetDecisions request = client.buildRequest(new GetDecisionsFieldSet()
+        .setAccountId("your_account_id"));
+```
+
 ### Decision Status API
 
 [API Docs](https://siftscience.com/developers/docs/java/decisions-api/decision-status)

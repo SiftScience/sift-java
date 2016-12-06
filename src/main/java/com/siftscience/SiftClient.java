@@ -52,6 +52,11 @@ public class SiftClient {
         return new EventRequest(baseUrl, okClient, fields);
     }
 
+    public GetDecisionsRequest buildRequest(GetDecisionFieldSet fields) {
+        setupApiKey(fields);
+        return new GetDecisionsRequest(baseApi3Url, okClient, fields);
+    }
+
     public DecisionStatusRequest buildRequest(DecisionStatusFieldSet fields) {
         setupApiKey(fields);
         return new DecisionStatusRequest(baseApi3Url, okClient, fields);
