@@ -25,11 +25,11 @@ public class ApplyDecisionTest {
         "}";
 
         String responseBody =
-        "{\n" +
-            "\"time\": " + System.currentTimeMillis() + ",\n" +
-            "\"status\": " + 0 + ",\n" +
-            "\"request\": " + requestBody + " ,\n" +
-            "\"error_message\": \"OK\"" +
+        "{" +
+            "\"time\":" + System.currentTimeMillis() + "," +
+            "\"request\":" + requestBody + "," +
+            "\"status\":" + 0 + "," +
+            "\"error_message\":\"OK\"" +
         "}";
 
         MockWebServer server = new MockWebServer();
@@ -51,9 +51,9 @@ public class ApplyDecisionTest {
 
         // Build and execute the request against the mock server.
         ApplyDecisionRequest request = client.buildRequest(
-                accountId,
-                userId,
                 new ApplyDecisionFieldSet()
+                        .setAccountId(accountId)
+                        .setUserId(userId)
                         .setDecisionId("your_decision_id")
                         .setSource(DecisionSource.MANUAL_REVIEW)
                         .setAnalyst("analyst@biz.com")
@@ -77,19 +77,19 @@ public class ApplyDecisionTest {
     @Test
     public void testApplyDecisionToOrderEntity() throws Exception {
         String requestBody =
-                "{\n" +
-                        "\"decision_id\": \"looks_ok_account_abuse\",\n" +
-                        "\"source\": \"automated_rule\",\n" +
-                        "\"time\": 1480618362\n" +
-                        "}";
+                "{" +
+                    "\"decision_id\":\"looks_ok_account_abuse\"," +
+                    "\"source\":\"automated_rule\"," +
+                    "\"time\":1480618362" +
+                "}";
 
         String responseBody =
-                "{\n" +
-                        "\"time\": " + System.currentTimeMillis() + ",\n" +
-                        "\"status\": " + 0 + ",\n" +
-                        "\"request\": " + requestBody + " ,\n" +
-                        "\"error_message\": \"OK\"" +
-                        "}";
+                "{" +
+                    "\"time\":" + System.currentTimeMillis() + "," +
+                    "\"request\":" + requestBody + "," +
+                    "\"status\":" + 0 + "," +
+                    "\"error_message\":\"OK\"" +
+                "}";
 
         MockWebServer server = new MockWebServer();
         MockResponse response = new MockResponse();
@@ -111,10 +111,10 @@ public class ApplyDecisionTest {
 
         // Build and execute the request against the mock server.
         ApplyDecisionRequest request = client.buildRequest(
-                accountId,
-                userId,
-                orderId,
                 new ApplyDecisionFieldSet()
+                        .setAccountId(accountId)
+                        .setUserId(userId)
+                        .setOrderId(orderId)
                         .setDecisionId("your_decision_id")
                         .setSource(DecisionSource.AUTOMATED_RULE)
                         .setTime(System.currentTimeMillis()));
