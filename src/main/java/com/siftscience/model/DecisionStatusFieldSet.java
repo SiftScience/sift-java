@@ -4,11 +4,11 @@ import com.siftscience.FieldSet;
 
 public class DecisionStatusFieldSet extends FieldSet<DecisionStatusFieldSet> {
 
-        public static final String ENTITY_USERS = "users";
-        public static final String ENTITY_ORDERS = "orders";
+    public static final String ENTITY_USERS = "users";
+    public static final String ENTITY_ORDERS = "orders";
 
-        private String accountId;
-        private String entity;
+    private String accountId;
+    private String entity;
     private String entityId;
 
     public String getAccountId() {
