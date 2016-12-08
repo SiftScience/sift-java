@@ -4,18 +4,37 @@ import com.siftscience.model.GetDecisionFieldSet;
 import okhttp3.*;
 
 import java.io.IOException;
+import com.google.common.base.Joiner;
+
 
 public class GetDecisionsRequest extends SiftRequest<GetDecisionsResponse> {
+    private final Joiner joiner = Joiner.on(",");
+
     GetDecisionsRequest(HttpUrl baseUrl, OkHttpClient okClient, FieldSet fields) {
         super(baseUrl, okClient, fields);
     }
 
     @Override
     protected HttpUrl path(HttpUrl baseUrl) {
-        return baseUrl.newBuilder("/v3/accounts")
-                .addPathSegment(((GetDecisionFieldSet) fieldSet).getAccountId())
-                .addPathSegment("decisions")
-                .build();
+        GetDecisionFieldSet fieldSet = (GetDecisionFieldSet) this.fieldSet;
+        HttpUrl.Builder path = baseUrl.newBuilder("/v3/accounts")
+                .addPathSegment(fieldSet.getAccountId())
+                .addPathSegment("decisions");
+
+        if (fieldSet.getEntityType() != null) {
+            path.addQueryParameter("entity_type", fieldSet.getEntityType().name());
+        }
+        if (fieldSet.getLimit() != null) {
+            path.addQueryParameter("limit", String.valueOf(fieldSet.getLimit()));
+        }
+        if (fieldSet.getCreatedBefore() != null) {
+            path.addQueryParameter("created_before", String.valueOf(fieldSet.getCreatedBefore()));
+        }
+        if (fieldSet.getAbuseTypes() != null && !fieldSet.getAbuseTypes().isEmpty()) {
+            path.addQueryParameter("abuse_types", joiner.join(fieldSet.getAbuseTypes()));
+        }
+
+        return path.build();
     }
 
     @Override

@@ -2,6 +2,8 @@ package com.siftscience.model;
 
 import com.siftscience.FieldSet;
 
+import java.util.List;
+
 public class GetDecisionFieldSet extends FieldSet<GetDecisionFieldSet> {
     public GetDecisionFieldSet() {}
 
@@ -9,19 +11,40 @@ public class GetDecisionFieldSet extends FieldSet<GetDecisionFieldSet> {
         return gson.fromJson(json, GetDecisionFieldSet.class);
     }
 
-    public static final String ENTITY_USERS = "users";
-    public static final String ENTITY_ORDERS = "orders";
-
     private String accountId;
-    private String entity;
+    private Integer limit;
+    private Long createdBefore;
+    private EntityType entityType;
+    private List<AbuseType> abuseTypes;
+
+    public enum AbuseType {
+        PAYMENT_ABUSE, CONTENT_ABUSE, PROMOTION_ABUSE, ACCOUNT_ABUSE, LEGACY, ACCOUNT_TAKEOVER
+    }
+    public enum EntityType {USER, ORDER}
+    public enum DecisionCategory {BLOCK, WATCH, ACCEPT}
 
     public GetDecisionFieldSet setAccountId(String accountId) {
         this.accountId = accountId;
         return this;
     }
 
-    public GetDecisionFieldSet setEntity(String entity) {
-        this.entity = entity;
+    public GetDecisionFieldSet setLimit(Integer limit) {
+        this.limit = limit;
+        return this;
+    }
+
+    public GetDecisionFieldSet setCreatedBefore(Long createdBefore) {
+        this.createdBefore = createdBefore;
+        return this;
+    }
+
+    public GetDecisionFieldSet setEntityType(EntityType entityType) {
+        this.entityType = entityType;
+        return this;
+    }
+
+    public GetDecisionFieldSet setAbuseTypes(List<AbuseType> abuseTypes) {
+        this.abuseTypes = abuseTypes;
         return this;
     }
 
@@ -29,7 +52,19 @@ public class GetDecisionFieldSet extends FieldSet<GetDecisionFieldSet> {
         return accountId;
     }
 
-    public String getEntity() {
-        return entity;
+    public Integer getLimit() {
+        return limit;
+    }
+
+    public Long getCreatedBefore() {
+        return createdBefore;
+    }
+
+    public EntityType getEntityType() {
+        return entityType;
+    }
+
+    public List<AbuseType> getAbuseTypes() {
+        return abuseTypes;
     }
 }

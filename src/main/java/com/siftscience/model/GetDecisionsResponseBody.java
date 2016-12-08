@@ -5,10 +5,65 @@ import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
 
-public class GetDecisionsResponseBody extends BaseResponseBody<GetDecisionsResponseBody>{
-    @Expose @SerializedName("decisions") private final List<Decision> decisions;
+import static com.siftscience.model.GetDecisionFieldSet.*;
 
-    public GetDecisionsResponseBody(List<Decision> decisions) {
+public class GetDecisionsResponseBody extends BaseResponseBody<GetDecisionsResponseBody>{
+    @Expose @SerializedName("data") private final List<Decision> decisions;
+    @Expose @SerializedName("has_more") private final boolean hasMore;
+    @Expose @SerializedName("total_results") private final long totalResults;
+    @Expose @SerializedName("next_ref") private final String nextRef;
+
+
+    public GetDecisionsResponseBody(List<Decision> decisions, boolean hasMore, long totalResults, String nextRef) {
         this.decisions = decisions;
+        this.hasMore = hasMore;
+        this.totalResults = totalResults;
+        this.nextRef = nextRef;
+    }
+
+    public List<Decision> getDecisions() {
+        return decisions;
+    }
+
+    public boolean isHasMore() {
+        return hasMore;
+    }
+
+    public long getTotalResults() {
+        return totalResults;
+    }
+
+    public String getNextRef() {
+        return nextRef;
+    }
+
+    class Decision {
+        @Expose @SerializedName("id") private final String id;
+        @Expose @SerializedName("name") private final String name;
+        @Expose @SerializedName("description") private final String description;
+        @Expose @SerializedName("category") private final DecisionCategory category;
+        @Expose @SerializedName("entity_type") private final EntityType entityType;
+        @Expose @SerializedName("abuse_type") private final AbuseType abuseType;
+        @Expose @SerializedName("webhook_url") private final String webhookUrl;
+        @Expose @SerializedName("created_at") private final long createdAt;
+        @Expose @SerializedName("created_by") private final String createdBy;
+        @Expose @SerializedName("updated_at") private final long updatedAt;
+        @Expose @SerializedName("updated_by") private final String updatedBy;
+
+        public Decision(String id, String name, String description, DecisionCategory category,
+                        EntityType entityType, AbuseType abuseType, String webhookUrl,
+                        long createdAt, String createdBy, long updatedAt, String updatedBy) {
+            this.id = id;
+            this.name = name;
+            this.description = description;
+            this.category = category;
+            this.entityType = entityType;
+            this.abuseType = abuseType;
+            this.webhookUrl = webhookUrl;
+            this.createdAt = createdAt;
+            this.createdBy = createdBy;
+            this.updatedAt = updatedAt;
+            this.updatedBy = updatedBy;
+        }
     }
 }
