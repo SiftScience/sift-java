@@ -3,9 +3,10 @@ package com.siftscience.model;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 import com.siftscience.ApplyDecisionRequest;
+import com.siftscience.ApplyDecisionResponse;
 
 public class ApplyDecisionResponseBody extends BaseResponseBody<ApplyDecisionResponseBody> {
-    @Expose @SerializedName("time") private long time;
+    @Expose @SerializedName("time") private Long time;
     @Expose @SerializedName("request") private ApplyDecisionFieldSet request;
 
     public static ApplyDecisionResponseBody fromJson(String json) {
@@ -16,19 +17,21 @@ public class ApplyDecisionResponseBody extends BaseResponseBody<ApplyDecisionRes
         this.request = request;
     }
 
-    public long getTime() {
+    public Long getTime() {
         return time;
     }
 
-    public void setTime(long time) {
+    public ApplyDecisionResponseBody setTime(Long time) {
         this.time = time;
+        return this;
     }
 
     public ApplyDecisionFieldSet getRequest() {
         return request;
     }
 
-    public void setRequest(ApplyDecisionFieldSet request) {
+    public ApplyDecisionResponseBody setRequest(ApplyDecisionFieldSet request) {
         this.request = request;
+        return this;
     }
 }

@@ -204,9 +204,9 @@ WorkflowStatusRequest request = client.buildRequest(new WorkflowStatusFieldSet()
 To apply a decision to a user, create a request with accountId, userId, and ApplyDecisionFieldSet.
 ```java
 ApplyDecisionRequest request = client.buildRequest(
-        accountId,
-        userId,
         new ApplyDecisionFieldSet()
+            .setAccountId("your_account_id")
+            .setUserId("a_user_id")
             .setDecisionId("decision_id")
             .setSource(DecisionSource.AUTOMATED_RULE)
             .setTime(System.currentTimeInMillis())
@@ -216,10 +216,10 @@ ApplyDecisionRequest request = client.buildRequest(
 To apply a decision to an order, create a request with accountId, userId, orderId and ApplyDecisionFieldSet.
 ```java
 ApplyDecisionRequest request = client.buildRequest(
-        accountId,
-        userId,
-        orderId,
         new ApplyDecisionFieldSet()
+            .setAccountId("your_account_id")
+            .setUserId("a_user_id")
+            .setOrderId("a_order_id")
             .setDecisionId("decision_id")
             .setSource(DecisionSource.MANUAL_REVIEW)
             .setAnalyst("analyst@fraudco.com")
