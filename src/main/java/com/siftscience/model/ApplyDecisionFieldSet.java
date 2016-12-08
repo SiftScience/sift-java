@@ -48,7 +48,7 @@ public class ApplyDecisionFieldSet extends FieldSet<ApplyDecisionFieldSet> {
     @Expose @SerializedName("decision_id") private String decisionId;
     @Expose @SerializedName("source") private DecisionSource source;
     @Expose @SerializedName("analyst") private String analyst;
-    @Expose @SerializedName("time") private long time;
+    @Expose @SerializedName("time") private Long time;
     private String accountId;
     private String userId;
     private String orderId;
@@ -70,7 +70,7 @@ public class ApplyDecisionFieldSet extends FieldSet<ApplyDecisionFieldSet> {
         return this;
     }
 
-    public ApplyDecisionFieldSet setTime(long time) {
+    public ApplyDecisionFieldSet setTime(Long time) {
         this.time = time;
         return this;
     }
@@ -99,7 +99,7 @@ public class ApplyDecisionFieldSet extends FieldSet<ApplyDecisionFieldSet> {
 
     public ApplyDecisionFieldSet setOrderId(String orderId) {
         this.orderId = orderId;
-            return this;
+        return this;
     }
 
     @Override
