@@ -93,6 +93,8 @@ publishing {
                 classifier = "javadoc"
             }
 
+
+
             pom.withXml {
                 def root = asNode()
                 def last = root.children().last()
@@ -116,12 +118,18 @@ publishing {
             project.tasks.signArchives.signatureFiles.each {
                 artifact(it) {
                     def matcher = it.file =~ /-(sources|javadoc)\.jar\.asc$/
+                    def zipMatcher = it.file =~ /\.(zip|tar)\.asc$/
+                    def extensionPrefix = 'jar'
+                    if (zipMatcher.find()) {
+                        extensionPrefix = zipMatcher.group(1)
+                    }
                     if (matcher.find()) {
                         classifier = matcher.group(1)
                     } else {
                         classifier = null
                     }
-                    extension = 'jar.asc'
+
+                    extension = extensionPrefix + '.asc'
                 }
             }
         }
