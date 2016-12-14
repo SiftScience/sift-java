@@ -1,11 +1,11 @@
 package com.siftscience;
 
-import com.siftscience.model.ApplyDecisionResponseBody;
+import com.siftscience.model.DecisionLogJson;
 import okhttp3.Response;
 
 import java.io.IOException;
 
-public class ApplyDecisionResponse extends SiftResponse<ApplyDecisionResponseBody>{
+public class ApplyDecisionResponse extends SiftResponse<DecisionLogJson>{
 
     ApplyDecisionResponse(Response okResponse, FieldSet requestBody) throws IOException {
         super(okResponse, requestBody);
@@ -13,7 +13,7 @@ public class ApplyDecisionResponse extends SiftResponse<ApplyDecisionResponseBod
 
     @Override
     public void populateBodyFromJson(String jsonBody) {
-        body = ApplyDecisionResponseBody.fromJson(jsonBody);
+        body = DecisionLogJson.fromJson(jsonBody);
     }
 
 }

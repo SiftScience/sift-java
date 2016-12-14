@@ -1,6 +1,7 @@
 package com.siftscience;
 
 import com.siftscience.model.ApplyDecisionFieldSet;
+import com.siftscience.model.DecisionLogJson;
 import okhttp3.HttpUrl;
 import okhttp3.mockwebserver.MockResponse;
 import okhttp3.mockwebserver.MockWebServer;
@@ -16,21 +17,29 @@ public class ApplyDecisionTest {
 
     @Test
     public void testApplyDecisionToUserEntity() throws Exception {
-        String requestBody =
-        "{\n" +
-            "\"decision_id\": \"looks_ok_account_abuse\",\n" +
-            "\"source\": \"manual_review\",\n" +
-            "\"analyst\":\"frank@gmail.com\",\n" +
-            "\"time\": 1480618362\n" +
-        "}";
-
-        String responseBody =
-        "{" +
-            "\"time\":" + System.currentTimeMillis() + "," +
-            "\"request\":" + requestBody + "," +
-            "\"status\":" + 0 + "," +
-            "\"error_message\":\"OK\"" +
-        "}";
+        String responseBody = "" +
+                "{" +
+                    "\"entity\": {" +
+                        "\"id\": \"a_user_id\"," +
+                        "\"type\": \"user\"," +
+                        "\"ref\": {" +
+                            "\"id\": \"a_user_id\"," +
+                            "\"href\": \"path/to/user/a_user_id\"" +
+                        "}" +
+                    "}," +
+                    "\"decision\": {" +
+                        "\"id\": \"looks_ok_account_abuse\"," +
+                        "\"href\": \"path/to/decision/looks_ok_account_abuse\"" +
+                    "}," +
+                    "\"source\": {" +
+                        "\"type\": \"ANALYST\"," +
+                        "\"ref\": {" +
+                            "\"id\": \"analyst@biz.com\"," +
+                            "\"href\": \"path/to/analyst/frank@biz.com\"" +
+                        "}" +
+                    "}," +
+                    "\"time\": 123213123" +
+                "}";
 
         MockWebServer server = new MockWebServer();
         MockResponse response = new MockResponse();
@@ -54,7 +63,7 @@ public class ApplyDecisionTest {
                 new ApplyDecisionFieldSet()
                         .setAccountId(accountId)
                         .setUserId(userId)
-                        .setDecisionId("your_decision_id")
+                        .setDecisionId("looks_ok_account_abuse")
                         .setSource(DecisionSource.MANUAL_REVIEW)
                         .setAnalyst("analyst@biz.com")
                         .setTime(System.currentTimeMillis()));
@@ -76,20 +85,26 @@ public class ApplyDecisionTest {
 
     @Test
     public void testApplyDecisionToOrderEntity() throws Exception {
-        String requestBody =
+        String responseBody = "" +
                 "{" +
-                    "\"decision_id\":\"looks_ok_account_abuse\"," +
-                    "\"source\":\"automated_rule\"," +
-                    "\"time\":1480618362" +
+                    "\"entity\": {" +
+                        "\"id\": \"an_order_id\"," +
+                        "\"type\": \"order\"," +
+                        "\"ref\": {" +
+                            "\"id\": \"an_order_id\"," +
+                            "\"href\": \"path/to/order/an_order_id\"" +
+                        "}" +
+                    "}," +
+                    "\"decision\": {" +
+                        "\"id\": \"order_looks_bad_payment_abuse\"," +
+                        "\"href\": \"path/to/decision/looks_ok_account_abuse\"" +
+                    "}," +
+                    "\"source\": {" +
+                        "\"type\": \"AUTOMATED_RULE\"" +
+                    "}," +
+                    "\"time\": 123213123" +
                 "}";
 
-        String responseBody =
-                "{" +
-                    "\"time\":" + System.currentTimeMillis() + "," +
-                    "\"request\":" + requestBody + "," +
-                    "\"status\":" + 0 + "," +
-                    "\"error_message\":\"OK\"" +
-                "}";
 
         MockWebServer server = new MockWebServer();
         MockResponse response = new MockResponse();
@@ -115,7 +130,7 @@ public class ApplyDecisionTest {
                         .setAccountId(accountId)
                         .setUserId(userId)
                         .setOrderId(orderId)
-                        .setDecisionId("your_decision_id")
+                        .setDecisionId("order_looks_bad_payment_abuse")
                         .setSource(DecisionSource.AUTOMATED_RULE)
                         .setTime(System.currentTimeMillis()));
 
