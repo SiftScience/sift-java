@@ -201,19 +201,40 @@ WorkflowStatusRequest request = client.buildRequest(new WorkflowStatusFieldSet()
 
 [API Docs](https://siftscience.com/developers/docs/java/decisions-api/get-decisions)
 
-To retrieve available decisions, create a request with GetDecisionsFieldSet.
+To retrieve available decisions, build a request with a GetDecisionsFieldSet.
 ```java
 GetDecisions request = client.buildRequest(new GetDecisionsFieldSet()
         .setAbuseTypes(ImmutableList.of(AbuseType.PAYMENT_ABUSE, AbuseType.CONTENT_ABUSE))
         .setAccountId("your_account_id"));
 ```
-Additionally, this request supports filtering on results by creation time, applicable entity type, and abuse type(s). 
+
+Additionally, this field set supports filtering on results by entity and abuse type(s).
 ```java
 GetDecisions request = client.buildRequest(new GetDecisionsFieldSet()
         .setAccountId("your_account_id"))
         .setEntityType(EntityType.ORDER)
-        .setCreatedBefore(Instant.now().minus(7, ChronoUnit.WEEKS).getEpochSecond())
-        .setAbuseTypes(ImmutableList.of(AbuseType.PAYMENT_ABUSE, AbuseType.CONTENT_ABUSE));
+        .setAbuseTypes(ImmutableList.of(AbuseType.PAYMENT_ABUSE, AbuseType.CONTENT_ABUSE))
+```
+
+Pagination is also supported, with offset by creation time (`created_before`) and limit (`limit`).
+The default `limit` is to return up to 100 results.
+```java
+GetDecisions request = client.buildRequest(new GetDecisionsFieldSet()
+        .setAccountId("your_account_id"))
+        .setCreatedBefore(Instant.now()
+                                 .minus(7, ChronoUnit.WEEKS)
+                                 .getEpochSecond())
+        .setLimit(10);  
+```
+
+A request will return a paginated response if the number of query results are greater than the set `limit`. In these
+cases, the response object will contain a url (`nextRef`) at which the next set of results may be retrieved. Build a 
+new request from this `nextRef`, as follows:
+```java
+GetDecisionsResponse response = request.send();
+String nextRef = response.getBody().getNextRef();
+GetDecisionsRequest nextRequest = client.buildRequest(GetDecisionsFieldSet.fromNextRef(nextRef));
+
 ```
 
 ### Decision Status API

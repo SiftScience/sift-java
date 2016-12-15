@@ -20,8 +20,9 @@ public class GetDecisionsTest {
     @Test
     public void testDecisionStatus() throws Exception {
         long createdBefore = System.currentTimeMillis();
-        String accountId = "your_account_id";
+        String accountId = "8675308";
 
+        long lastCreated = System.currentTimeMillis();
         String responseBody = "{" +
                 "   \"data\": [" +
                 "       {" +
@@ -41,7 +42,8 @@ public class GetDecisionsTest {
                 "   \"has_more\": false," +
                 "   \"total_results\": 3," +
                 "   \"next_ref\": \"/v3/accounts/" + accountId + "/decisions?created_before=" +
-                        createdBefore + "\"" +
+                lastCreated + "&abuse_types=CONTENT_ABUSE,PAYMENT_ABUSE" +
+                        "&entity_type=user&limit=11\"" +
                 "}";
 
 
@@ -73,14 +75,18 @@ public class GetDecisionsTest {
         // Verify the request.
         RecordedRequest request = server.takeRequest();
         Assert.assertEquals("GET", request.getMethod());
-        Assert.assertEquals("/v3/accounts/your_account_id/decisions?entity_type=ORDER&limit=11" +
+        Assert.assertEquals("/v3/accounts/" + accountId + "/decisions?entity_type=ORDER&limit=11" +
                 "&created_before="+createdBefore+"&abuse_types=ACCOUNT_ABUSE,ACCOUNT_TAKEOVER",
                 request.getPath());
         Assert.assertEquals(request.getHeader("Authorization"), "Basic eW91cl9hcGlfa2V5Og==");
+
 
         // Verify the response was parsed correctly.
         Assert.assertEquals(HTTP_OK, siftResponse.getHttpStatusCode());
         JSONAssert.assertEquals(response.getBody().readUtf8(),
                 siftResponse.getBody().toJson(), true);
+
+        GetDecisionsRequest nextRequest = client.buildRequest(GetDecisionFieldSet.fromNextRef(
+                siftResponse.getBody().getNextRef()));
     }
 }

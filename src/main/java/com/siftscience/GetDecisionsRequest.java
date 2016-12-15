@@ -18,6 +18,24 @@ public class GetDecisionsRequest extends SiftRequest<GetDecisionsResponse> {
         super(baseUrl, okClient, fields);
     }
 
+    public enum Query {
+        ENTITY_TYPE("entity_type"),
+        LIMIT("limit"),
+        CREATED_BEFORE("created_before"),
+        ABUSE_TYPES("abuse_types");
+
+        private final String value;
+
+        Query(String value) {
+            this.value = value;
+        }
+
+        @Override
+        public String toString() {
+            return value;
+        }
+    }
+
     @Override
     protected HttpUrl path(HttpUrl baseUrl) {
         GetDecisionFieldSet fieldSet = (GetDecisionFieldSet) this.fieldSet;
@@ -26,16 +44,16 @@ public class GetDecisionsRequest extends SiftRequest<GetDecisionsResponse> {
                 .addPathSegment("decisions");
 
         if (fieldSet.getEntityType() != null) {
-            path.addQueryParameter("entity_type", fieldSet.getEntityType().name());
+            path.addQueryParameter(Query.ENTITY_TYPE.toString(), fieldSet.getEntityType().name());
         }
         if (fieldSet.getLimit() != null) {
-            path.addQueryParameter("limit", String.valueOf(fieldSet.getLimit()));
+            path.addQueryParameter(Query.LIMIT.toString(), String.valueOf(fieldSet.getLimit()));
         }
         if (fieldSet.getCreatedBefore() != null) {
-            path.addQueryParameter("created_before", String.valueOf(fieldSet.getCreatedBefore()));
+            path.addQueryParameter(Query.CREATED_BEFORE.toString(), String.valueOf(fieldSet.getCreatedBefore()));
         }
         if (fieldSet.getAbuseTypes() != null && !fieldSet.getAbuseTypes().isEmpty()) {
-            path.addQueryParameter("abuse_types", joiner.join(fieldSet.getAbuseTypes()));
+            path.addQueryParameter(Query.ABUSE_TYPES.toString(), joiner.join(fieldSet.getAbuseTypes()));
         }
 
         return path.build();
