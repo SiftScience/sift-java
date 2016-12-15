@@ -9,8 +9,8 @@ import static com.siftscience.model.GetDecisionFieldSet.*;
 
 public class GetDecisionsResponseBody extends BaseResponseBody<GetDecisionsResponseBody>{
     @Expose @SerializedName("data") private final List<Decision> decisions;
-    @Expose @SerializedName("has_more") private final boolean hasMore;
-    @Expose @SerializedName("total_results") private final long totalResults;
+    @Expose @SerializedName("has_more") private final Boolean hasMore;
+    @Expose @SerializedName("total_results") private final Long totalResults;
     @Expose @SerializedName("next_ref") private final String nextRef;
 
 
@@ -25,11 +25,11 @@ public class GetDecisionsResponseBody extends BaseResponseBody<GetDecisionsRespo
         return decisions;
     }
 
-    public boolean isHasMore() {
+    public Boolean isHasMore() {
         return hasMore;
     }
 
-    public long getTotalResults() {
+    public Long getTotalResults() {
         return totalResults;
     }
 
@@ -45,9 +45,9 @@ public class GetDecisionsResponseBody extends BaseResponseBody<GetDecisionsRespo
         @Expose @SerializedName("entity_type") private final EntityType entityType;
         @Expose @SerializedName("abuse_type") private final AbuseType abuseType;
         @Expose @SerializedName("webhook_url") private final String webhookUrl;
-        @Expose @SerializedName("created_at") private final long createdAt;
+        @Expose @SerializedName("created_at") private final Long createdAt;
         @Expose @SerializedName("created_by") private final String createdBy;
-        @Expose @SerializedName("updated_at") private final long updatedAt;
+        @Expose @SerializedName("updated_at") private final Long updatedAt;
         @Expose @SerializedName("updated_by") private final String updatedBy;
 
         public Decision(String id, String name, String description, DecisionCategory category,

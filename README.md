@@ -204,7 +204,16 @@ WorkflowStatusRequest request = client.buildRequest(new WorkflowStatusFieldSet()
 To retrieve available decisions, create a request with GetDecisionsFieldSet.
 ```java
 GetDecisions request = client.buildRequest(new GetDecisionsFieldSet()
+        .setAbuseTypes(ImmutableList.of(AbuseType.PAYMENT_ABUSE, AbuseType.CONTENT_ABUSE))
         .setAccountId("your_account_id"));
+```
+Additionally, this request supports filtering on results by creation time, applicable entity type, and abuse type(s). 
+```java
+GetDecisions request = client.buildRequest(new GetDecisionsFieldSet()
+        .setAccountId("your_account_id"))
+        .setEntityType(EntityType.ORDER)
+        .setCreatedBefore(Instant.now().minus(7, ChronoUnit.WEEKS).getEpochSecond())
+        .setAbuseTypes(ImmutableList.of(AbuseType.PAYMENT_ABUSE, AbuseType.CONTENT_ABUSE));
 ```
 
 ### Decision Status API
