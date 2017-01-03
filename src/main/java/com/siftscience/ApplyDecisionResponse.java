@@ -1,6 +1,7 @@
 package com.siftscience;
 
 import com.siftscience.model.DecisionLog;
+import com.siftscience.model.ApplyDecisionResponseBody;
 import okhttp3.Response;
 
 import java.io.IOException;
