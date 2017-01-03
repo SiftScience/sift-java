@@ -24,13 +24,17 @@ public class ApplyDecisionTest {
             "\"time\": 1480618362\n" +
         "}";
 
-        String responseBody =
-        "{" +
-            "\"time\":" + System.currentTimeMillis() + "," +
-            "\"request\":" + requestBody + "," +
-            "\"status\":" + 0 + "," +
-            "\"error_message\":\"OK\"" +
-        "}";
+        String responseBody = "" +
+                "{" +
+                    "\"entity\": {" +
+                        "\"id\": \"a_user_id\"," +
+                        "\"type\": \"user\"" +
+                    "}," +
+                    "\"decision\": {" +
+                        "\"id\": \"looks_ok_account_abuse\"" +
+                    "}," +
+                    "\"time\": 123213123" +
+                "}";
 
         MockWebServer server = new MockWebServer();
         MockResponse response = new MockResponse();
@@ -83,12 +87,16 @@ public class ApplyDecisionTest {
                     "\"time\":1480618362" +
                 "}";
 
-        String responseBody =
+        String responseBody = "" +
                 "{" +
-                    "\"time\":" + System.currentTimeMillis() + "," +
-                    "\"request\":" + requestBody + "," +
-                    "\"status\":" + 0 + "," +
-                    "\"error_message\":\"OK\"" +
+                    "\"entity\": {" +
+                        "\"id\": \"an_order_id\"," +
+                        "\"type\": \"order\"" +
+                    "}," +
+                    "\"decision\": {" +
+                        "\"id\": \"order_looks_bad_payment_abuse\"" +
+                    "}," +
+                    "\"time\": 123213123" +
                 "}";
 
         MockWebServer server = new MockWebServer();
