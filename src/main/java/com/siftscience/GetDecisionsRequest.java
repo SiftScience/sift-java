@@ -21,7 +21,7 @@ public class GetDecisionsRequest extends SiftRequest<GetDecisionsResponse> {
     public enum Query {
         ENTITY_TYPE("entity_type"),
         LIMIT("limit"),
-        CREATED_BEFORE("created_before"),
+        FROM("from"),
         ABUSE_TYPES("abuse_types");
 
         private final String value;
@@ -49,8 +49,8 @@ public class GetDecisionsRequest extends SiftRequest<GetDecisionsResponse> {
         if (fieldSet.getLimit() != null) {
             path.addQueryParameter(Query.LIMIT.toString(), String.valueOf(fieldSet.getLimit()));
         }
-        if (fieldSet.getCreatedBefore() != null) {
-            path.addQueryParameter(Query.CREATED_BEFORE.toString(), String.valueOf(fieldSet.getCreatedBefore()));
+        if (fieldSet.getFrom() != null) {
+            path.addQueryParameter(Query.FROM.toString(), String.valueOf(fieldSet.getFrom()));
         }
         if (fieldSet.getAbuseTypes() != null && !fieldSet.getAbuseTypes().isEmpty()) {
             path.addQueryParameter(Query.ABUSE_TYPES.toString(), joiner.join(fieldSet.getAbuseTypes()));

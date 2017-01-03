@@ -19,10 +19,7 @@ public class GetDecisionsTest {
     
     @Test
     public void testDecisionStatus() throws Exception {
-        long createdBefore = System.currentTimeMillis();
         String accountId = "8675308";
-
-        long lastCreated = System.currentTimeMillis();
         String responseBody = "{" +
                 "   \"data\": [" +
                 "       {" +
@@ -41,9 +38,11 @@ public class GetDecisionsTest {
                 "   ]," +
                 "   \"has_more\": false," +
                 "   \"total_results\": 3," +
-                "   \"next_ref\": \"/v3/accounts/" + accountId + "/decisions?created_before=" +
-                lastCreated + "&abuse_types=CONTENT_ABUSE,PAYMENT_ABUSE" +
-                        "&entity_type=user&limit=11\"" +
+                "   \"next_ref\": \"/v3/accounts/" + accountId + "/decisions" +
+                        "?abuse_types=CONTENT_ABUSE,PAYMENT_ABUSE" +
+                        "&entity_type=user" +
+                        "&from=12" +
+                        "&limit=11\"" +
                 "}";
 
 
@@ -66,7 +65,7 @@ public class GetDecisionsTest {
                 .setAccountId(accountId)
                 .setLimit(11)
                 .setAbuseTypes(Lists.newArrayList(ACCOUNT_ABUSE, ACCOUNT_TAKEOVER))
-                .setCreatedBefore(createdBefore)
+                .setFrom(1)
                 .setEntityType(ORDER)
 
         );
@@ -76,7 +75,7 @@ public class GetDecisionsTest {
         RecordedRequest request = server.takeRequest();
         Assert.assertEquals("GET", request.getMethod());
         Assert.assertEquals("/v3/accounts/" + accountId + "/decisions?entity_type=ORDER&limit=11" +
-                "&created_before="+createdBefore+"&abuse_types=ACCOUNT_ABUSE,ACCOUNT_TAKEOVER",
+                "&from=1&abuse_types=ACCOUNT_ABUSE,ACCOUNT_TAKEOVER",
                 request.getPath());
         Assert.assertEquals(request.getHeader("Authorization"), "Basic eW91cl9hcGlfa2V5Og==");
 

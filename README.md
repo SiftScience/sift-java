@@ -216,14 +216,13 @@ GetDecisions request = client.buildRequest(new GetDecisionsFieldSet()
         .setAbuseTypes(ImmutableList.of(AbuseType.PAYMENT_ABUSE, AbuseType.CONTENT_ABUSE))
 ```
 
-Pagination is also supported, with offset by creation time (`created_before`) and limit (`limit`).
+Pagination is also supported, with offset by index (`from`) and limit (`limit`).
 The default `limit` is to return up to 100 results.
+The default offset value `from` is 0.
 ```java
 GetDecisions request = client.buildRequest(new GetDecisionsFieldSet()
         .setAccountId("your_account_id"))
-        .setCreatedBefore(Instant.now()
-                                 .minus(7, ChronoUnit.WEEKS)
-                                 .getEpochSecond())
+        .setFrom(15)
         .setLimit(10);  
 ```
 

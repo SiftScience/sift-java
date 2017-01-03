@@ -15,7 +15,7 @@ import static com.siftscience.GetDecisionsRequest.*;
 public class GetDecisionFieldSet extends FieldSet<GetDecisionFieldSet> {
     private String accountId;
     private Integer limit;
-    private Long createdBefore;
+    private Integer from;
     private EntityType entityType;
     private List<AbuseType> abuseTypes;
     private static final Pattern ACCOUNT_ID_PATTERN = Pattern.compile("(?<=accounts/)\\d+[^/]");
@@ -47,11 +47,11 @@ public class GetDecisionFieldSet extends FieldSet<GetDecisionFieldSet> {
                         case ABUSE_TYPES:
                             fieldSet.setAbuseTypes(pair[1]);
                             break;
-                        case CREATED_BEFORE:
-                            fieldSet.setCreatedBefore(Long.parseLong(pair[1]));
-                            break;
                         case ENTITY_TYPE:
                             fieldSet.setEntityType(EntityType.valueOf(pair[1].toUpperCase()));
+                            break;
+                        case FROM:
+                            fieldSet.setFrom(Integer.valueOf(pair[1]));
                             break;
                         case LIMIT:
                             fieldSet.setLimit(Integer.valueOf(pair[1]));
@@ -91,8 +91,8 @@ public class GetDecisionFieldSet extends FieldSet<GetDecisionFieldSet> {
         return this;
     }
 
-    public GetDecisionFieldSet setCreatedBefore(Long createdBefore) {
-        this.createdBefore = createdBefore;
+    public GetDecisionFieldSet setFrom(Integer from) {
+        this.from = from;
         return this;
     }
 
@@ -114,8 +114,8 @@ public class GetDecisionFieldSet extends FieldSet<GetDecisionFieldSet> {
         return limit;
     }
 
-    public Long getCreatedBefore() {
-        return createdBefore;
+    public Integer getFrom() {
+        return from;
     }
 
     public EntityType getEntityType() {
