@@ -3,7 +3,7 @@ package com.siftscience.model;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class DecisionLogJson extends BaseResponseBody<DecisionLogJson> {
+public class DecisionLog extends BaseResponseBody<DecisionLog> {
     @Expose @SerializedName("entity") private EntityJson entity;
     @Expose @SerializedName("decision") private RefJson decision;
     @Expose @SerializedName("source") private DecisionSourceJson source;
@@ -30,7 +30,27 @@ public class DecisionLogJson extends BaseResponseBody<DecisionLogJson> {
         @Expose @SerializedName("title") private String title;
     }
 
-    public static DecisionLogJson fromJson(String json) {
-         return gson.fromJson(json, DecisionLogJson.class);
+    public static DecisionLog fromJson(String json) {
+         return gson.fromJson(json, DecisionLog.class);
+    }
+
+    public EntityJson getEntity() {
+        return entity;
+    }
+
+    public RefJson getDecision() {
+        return decision;
+    }
+
+    public DecisionSourceJson getSource() {
+        return source;
+    }
+
+    public Long getTime() {
+        return time;
+    }
+
+    public Boolean getWebhook_succeeded() {
+        return webhook_succeeded;
     }
 }

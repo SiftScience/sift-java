@@ -1,7 +1,6 @@
 package com.siftscience;
 
 import com.siftscience.model.ApplyDecisionFieldSet;
-import com.siftscience.model.DecisionLogJson;
 import okhttp3.HttpUrl;
 import okhttp3.mockwebserver.MockResponse;
 import okhttp3.mockwebserver.MockWebServer;
@@ -131,6 +130,7 @@ public class ApplyDecisionTest {
                         .setUserId(userId)
                         .setOrderId(orderId)
                         .setDecisionId("order_looks_bad_payment_abuse")
+                        .setDescription("suspicious billing to ip distance")
                         .setSource(DecisionSource.AUTOMATED_RULE)
                         .setTime(System.currentTimeMillis()));
 

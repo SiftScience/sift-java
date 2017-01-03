@@ -26,8 +26,6 @@ public class ApplyDecisionRequest extends SiftRequest<ApplyDecisionResponse>{
         return path.addPathSegment("decisions").build();
     }
 
-
-
     @Override
     ApplyDecisionResponse buildResponse(okhttp3.Response response, FieldSet requestFields) throws IOException {
         return new ApplyDecisionResponse(response, requestFields);

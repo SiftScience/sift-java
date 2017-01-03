@@ -222,7 +222,7 @@ ApplyDecisionRequest request = client.buildRequest(
             .setOrderId("a_order_id")
             .setDecisionId("decision_id")
             .setSource(DecisionSource.MANUAL_REVIEW)
-            .setAnalyst("analyst@fraudco.com")
+            .setAnalyst("analyst@fraudco.com")            
             .setTime(System.currentTimeInMillis())
 );
 ```
