@@ -37,7 +37,7 @@ public class GetDecisionsResponseBody extends BaseResponseBody<GetDecisionsRespo
         return nextRef;
     }
 
-    class Decision {
+    public class Decision {
         @Expose @SerializedName("id") private final String id;
         @Expose @SerializedName("name") private final String name;
         @Expose @SerializedName("description") private final String description;
@@ -64,6 +64,50 @@ public class GetDecisionsResponseBody extends BaseResponseBody<GetDecisionsRespo
             this.createdBy = createdBy;
             this.updatedAt = updatedAt;
             this.updatedBy = updatedBy;
+        }
+
+        public String getId() {
+            return id;
+        }
+
+        public String getName() {
+            return name;
+        }
+
+        public String getDescription() {
+            return description;
+        }
+
+        public DecisionCategory getCategory() {
+            return category;
+        }
+
+        public EntityType getEntityType() {
+            return entityType;
+        }
+
+        public AbuseType getAbuseType() {
+            return abuseType;
+        }
+
+        public String getWebhookUrl() {
+            return webhookUrl;
+        }
+
+        public Long getCreatedAt() {
+            return createdAt;
+        }
+
+        public String getCreatedBy() {
+            return createdBy;
+        }
+
+        public Long getUpdatedAt() {
+            return updatedAt;
+        }
+
+        public String getUpdatedBy() {
+            return updatedBy;
         }
     }
 }
