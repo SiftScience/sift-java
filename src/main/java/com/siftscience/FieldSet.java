@@ -1,12 +1,13 @@
 package com.siftscience;
 
 import com.google.gson.*;
-import com.siftscience.exception.InvalidApiKeyException;
 import com.siftscience.exception.InvalidFieldException;
-import com.siftscience.exception.MissingFieldException;
+import com.siftscience.model.GetDecisionsResponseBody.Decision;
 
 import java.lang.reflect.Type;
 import java.util.Map;
+
+import static com.siftscience.model.GetDecisionFieldSet.*;
 
 /**
  * FieldSet represents a set of fields/parameters to send along with an API request. It handles
@@ -37,6 +38,7 @@ public abstract class FieldSet<T extends FieldSet<T>> {
     protected static Gson gson = new GsonBuilder()
             .registerTypeHierarchyAdapter(FieldSet.class, new FieldSetDeserializer())
             .registerTypeHierarchyAdapter(FieldSet.class, new FieldSetSerializer())
+            .registerTypeAdapter(Decision.class, new DecisionSetDeserializer())
             .create();
 
     // Every Events API request will have a reserved "$type" field that never changes for that
@@ -96,6 +98,43 @@ public abstract class FieldSet<T extends FieldSet<T>> {
                 throw new InvalidFieldException("Custom field \"" + entry.getKey() +
                         "\" may not begin with a dollar sign.");
             }
+        }
+    }
+
+    /**
+     * Custom serialization adapter for DecisionSet
+     */
+    private static class DecisionSetDeserializer implements JsonDeserializer<Decision> {
+        @Override
+        public Decision deserialize(JsonElement json, Type t, JsonDeserializationContext ctx)
+                throws JsonParseException {
+            Decision decision = defaultGson.fromJson(json, t);
+            JsonObject asJsonObject = json.getAsJsonObject();
+            if (asJsonObject.has("abuse_type")) {
+                try {
+                    decision.setAbuseType(AbuseType.valueOf(asJsonObject.get("abuse_type")
+                            .getAsString().toUpperCase()));
+                } catch (IllegalArgumentException e) {
+                    //Unable to deserialize abuseType
+                }
+            }
+            if (asJsonObject.has("category")) {
+                try {
+                    decision.setCategory(DecisionCategory.valueOf(asJsonObject.get("category")
+                        .getAsString().toUpperCase()));
+                } catch (IllegalArgumentException e) {
+                    //Unable to deserialize category type
+                }
+            }
+            if (asJsonObject.has("entity_type")) {
+                try {
+                    decision.setEntityType(EntityType.valueOf(asJsonObject.get("entity_type")
+                    .getAsString().toUpperCase()));
+                } catch (IllegalArgumentException e) {
+                    //Unable to deserialize entityType
+                }
+            }
+            return decision;
         }
     }
 
