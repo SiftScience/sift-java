@@ -2,7 +2,7 @@ package com.siftscience;
 
 import com.google.gson.*;
 import com.siftscience.exception.InvalidFieldException;
-import com.siftscience.model.GetDecisionsResponseBody.Decision;
+import com.siftscience.model.GetDecisionsResponseBody;
 
 import java.lang.reflect.Type;
 import java.util.Map;
@@ -38,7 +38,8 @@ public abstract class FieldSet<T extends FieldSet<T>> {
     protected static Gson gson = new GsonBuilder()
             .registerTypeHierarchyAdapter(FieldSet.class, new FieldSetDeserializer())
             .registerTypeHierarchyAdapter(FieldSet.class, new FieldSetSerializer())
-            .registerTypeAdapter(Decision.class, new DecisionSetDeserializer())
+            .registerTypeAdapter(GetDecisionsResponseBody.Decision.class,
+                    new DecisionSetDeserializer())
             .create();
 
     // Every Events API request will have a reserved "$type" field that never changes for that
@@ -104,11 +105,14 @@ public abstract class FieldSet<T extends FieldSet<T>> {
     /**
      * Custom serialization adapter for DecisionSet
      */
-    private static class DecisionSetDeserializer implements JsonDeserializer<Decision> {
+    private static class DecisionSetDeserializer implements
+            JsonDeserializer<GetDecisionsResponseBody.Decision> {
         @Override
-        public Decision deserialize(JsonElement json, Type t, JsonDeserializationContext ctx)
+        public GetDecisionsResponseBody.Decision deserialize(JsonElement json,
+                                                             Type t,
+                                                             JsonDeserializationContext ctx)
                 throws JsonParseException {
-            Decision decision = defaultGson.fromJson(json, t);
+            GetDecisionsResponseBody.Decision decision = defaultGson.fromJson(json, t);
             JsonObject asJsonObject = json.getAsJsonObject();
             if (asJsonObject.has("abuse_type")) {
                 try {
