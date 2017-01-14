@@ -1,5 +1,6 @@
 package com.siftscience.model;
 
+import com.google.common.base.Preconditions;
 import com.google.common.collect.ImmutableList;
 import com.siftscience.FieldSet;
 import com.siftscience.exception.InvalidFieldException;
@@ -27,6 +28,7 @@ public class GetDecisionFieldSet extends FieldSet<GetDecisionFieldSet> {
     }
 
     public static GetDecisionFieldSet fromNextRef(String nextRef) {
+        Preconditions.checkNotNull(nextRef,"Must provide valid nextRef");
         URI uri = URI.create(nextRef);
         String queries = uri.getQuery();
             if ( queries == null || queries.isEmpty()) {
