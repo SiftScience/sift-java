@@ -18,7 +18,7 @@ public class GetDecisionFieldSet extends FieldSet<GetDecisionFieldSet> {
     private Integer from;
     private EntityType entityType;
     private List<AbuseType> abuseTypes;
-    private static final Pattern ACCOUNT_ID_PATTERN = Pattern.compile("(?<=accounts/)\\d+[^/]");
+    private static final Pattern ACCOUNT_ID_PATTERN = Pattern.compile("(?<=accounts/)\\w+[^/]");
 
     public GetDecisionFieldSet() {}
 
