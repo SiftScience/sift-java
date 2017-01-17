@@ -1,13 +1,22 @@
 package com.siftscience;
 
-import com.google.gson.*;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonDeserializationContext;
+import com.google.gson.JsonDeserializer;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParseException;
+import com.google.gson.JsonPrimitive;
+import com.google.gson.JsonSerializationContext;
+import com.google.gson.JsonSerializer;
 import com.siftscience.exception.InvalidFieldException;
+import com.siftscience.model.GetDecisionFieldSet;
 import com.siftscience.model.GetDecisionsResponseBody;
 
 import java.lang.reflect.Type;
 import java.util.Map;
 
-import static com.siftscience.model.GetDecisionFieldSet.*;
 
 /**
  * FieldSet represents a set of fields/parameters to send along with an API request. It handles
@@ -116,24 +125,24 @@ public abstract class FieldSet<T extends FieldSet<T>> {
             JsonObject asJsonObject = json.getAsJsonObject();
             if (asJsonObject.has("abuse_type")) {
                 try {
-                    decision.setAbuseType(AbuseType.valueOf(asJsonObject.get("abuse_type")
-                            .getAsString().toUpperCase()));
+                    decision.setAbuseType(GetDecisionFieldSet.AbuseType.valueOf(asJsonObject
+                            .get("abuse_type").getAsString().toUpperCase()));
                 } catch (IllegalArgumentException e) {
                     //Unable to deserialize abuseType
                 }
             }
             if (asJsonObject.has("category")) {
                 try {
-                    decision.setCategory(DecisionCategory.valueOf(asJsonObject.get("category")
-                        .getAsString().toUpperCase()));
+                    decision.setCategory(GetDecisionFieldSet.DecisionCategory.valueOf(asJsonObject
+                            .get("category").getAsString().toUpperCase()));
                 } catch (IllegalArgumentException e) {
                     //Unable to deserialize category type
                 }
             }
             if (asJsonObject.has("entity_type")) {
                 try {
-                    decision.setEntityType(EntityType.valueOf(asJsonObject.get("entity_type")
-                    .getAsString().toUpperCase()));
+                    decision.setEntityType(GetDecisionFieldSet.EntityType.valueOf(asJsonObject
+                            .get("entity_type").getAsString().toUpperCase()));
                 } catch (IllegalArgumentException e) {
                     //Unable to deserialize entityType
                 }

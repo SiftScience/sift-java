@@ -19,7 +19,7 @@ public class GetDecisionFieldSet extends FieldSet<GetDecisionFieldSet> {
     private Integer from;
     private EntityType entityType;
     private List<AbuseType> abuseTypes;
-    private static final Pattern ACCOUNT_ID_PATTERN = Pattern.compile("(?<=accounts/)\\w+[^/]");
+    private static final Pattern ACCOUNT_ID_PATTERN = Pattern.compile("(?<=accounts/)\\[0-9a-f]+[^/]");
 
     public GetDecisionFieldSet() {}
 

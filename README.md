@@ -209,7 +209,7 @@ ApplyDecisionRequest request = client.buildRequest(
             .setUserId("a_user_id")
             .setDecisionId("decision_id")
             .setSource(DecisionSource.AUTOMATED_RULE)
-            .setTime(System.currentTimeInMillis())
+            .setDescription("description of decision applied")
 );
 ```
 
@@ -222,8 +222,8 @@ ApplyDecisionRequest request = client.buildRequest(
             .setOrderId("a_order_id")
             .setDecisionId("decision_id")
             .setSource(DecisionSource.MANUAL_REVIEW)
-            .setAnalyst("analyst@fraudco.com")            
-            .setTime(System.currentTimeInMillis())
+            .setAnalyst("analyst@example.com")      
+            .setDescription("description of decision applied")
 );
 ```
 
@@ -233,14 +233,14 @@ ApplyDecisionRequest request = client.buildRequest(
 
 To retrieve available decisions, build a request with a GetDecisionsFieldSet.
 ```java
-GetDecisions request = client.buildRequest(new GetDecisionsFieldSet()
+GetDecisionsRequest request = client.buildRequest(new GetDecisionsFieldSet()
         .setAbuseTypes(ImmutableList.of(AbuseType.PAYMENT_ABUSE, AbuseType.CONTENT_ABUSE))
         .setAccountId("your_account_id"));
 ```
 
 Additionally, this field set supports filtering on results by entity and abuse type(s).
 ```java
-GetDecisions request = client.buildRequest(new GetDecisionsFieldSet()
+GetDecisionsRequest request = client.buildRequest(new GetDecisionsFieldSet()
         .setAccountId("your_account_id"))
         .setEntityType(EntityType.ORDER)
         .setAbuseTypes(ImmutableList.of(AbuseType.PAYMENT_ABUSE, AbuseType.CONTENT_ABUSE))
@@ -250,7 +250,7 @@ Pagination is also supported, with offset by index (`from`) and limit (`limit`).
 The default `limit` is to return up to 100 results.
 The default offset value `from` is 0.
 ```java
-GetDecisions request = client.buildRequest(new GetDecisionsFieldSet()
+GetDecisionsRequest request = client.buildRequest(new GetDecisionsFieldSet()
         .setAccountId("your_account_id"))
         .setFrom(15)
         .setLimit(10);  

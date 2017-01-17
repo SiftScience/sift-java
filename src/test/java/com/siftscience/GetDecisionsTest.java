@@ -28,7 +28,7 @@ public class GetDecisionsTest {
                 "           \"description\": \"likely a good user\"," +
                 "           \"category\": \"ACCEPT\"," +
                 "           \"entity_type\": \"USER\"," +
-                "           \"abuse_type\": \"LEGACY\"," +
+                "           \"abuse_type\": \"legacy\"," +
                 "           \"webhook_url\": \"\"," +
                 "           \"created_at\": 123," +
                 "           \"created_by\": \"clint@biz.com\"," +
