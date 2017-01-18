@@ -197,20 +197,50 @@ WorkflowStatusRequest request = client.buildRequest(new WorkflowStatusFieldSet()
         .setWorkflowRunId("someid"));
 ```
 
+### Apply Decision API
+
+[API Docs](https://siftscience.com/developers/docs/java/decisions-api/apply-decision)
+
+To apply a decision to a user, create a request with accountId, userId, and ApplyDecisionFieldSet.
+```java
+ApplyDecisionRequest request = client.buildRequest(
+        new ApplyDecisionFieldSet()
+            .setAccountId("your_account_id")
+            .setUserId("a_user_id")
+            .setDecisionId("decision_id")
+            .setSource(DecisionSource.AUTOMATED_RULE)
+            .setDescription("description of decision applied")
+);
+```
+
+To apply a decision to an order, create a request with accountId, userId, orderId and ApplyDecisionFieldSet.
+```java
+ApplyDecisionRequest request = client.buildRequest(
+        new ApplyDecisionFieldSet()
+            .setAccountId("your_account_id")
+            .setUserId("a_user_id")
+            .setOrderId("a_order_id")
+            .setDecisionId("decision_id")
+            .setSource(DecisionSource.MANUAL_REVIEW)
+            .setAnalyst("analyst@example.com")      
+            .setDescription("description of decision applied")
+);
+```
+
 #### Get decisions
 
 [API Docs](https://siftscience.com/developers/docs/java/decisions-api/get-decisions)
 
 To retrieve available decisions, build a request with a GetDecisionsFieldSet.
 ```java
-GetDecisions request = client.buildRequest(new GetDecisionsFieldSet()
+GetDecisionsRequest request = client.buildRequest(new GetDecisionsFieldSet()
         .setAbuseTypes(ImmutableList.of(AbuseType.PAYMENT_ABUSE, AbuseType.CONTENT_ABUSE))
         .setAccountId("your_account_id"));
 ```
 
 Additionally, this field set supports filtering on results by entity and abuse type(s).
 ```java
-GetDecisions request = client.buildRequest(new GetDecisionsFieldSet()
+GetDecisionsRequest request = client.buildRequest(new GetDecisionsFieldSet()
         .setAccountId("your_account_id"))
         .setEntityType(EntityType.ORDER)
         .setAbuseTypes(ImmutableList.of(AbuseType.PAYMENT_ABUSE, AbuseType.CONTENT_ABUSE))
@@ -220,7 +250,7 @@ Pagination is also supported, with offset by index (`from`) and limit (`limit`).
 The default `limit` is to return up to 100 results.
 The default offset value `from` is 0.
 ```java
-GetDecisions request = client.buildRequest(new GetDecisionsFieldSet()
+GetDecisionsRequest request = client.buildRequest(new GetDecisionsFieldSet()
         .setAccountId("your_account_id"))
         .setFrom(15)
         .setLimit(10);  

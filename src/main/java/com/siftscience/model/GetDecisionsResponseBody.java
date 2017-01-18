@@ -38,17 +38,17 @@ public class GetDecisionsResponseBody extends BaseResponseBody<GetDecisionsRespo
     }
 
     public class Decision {
-        @Expose @SerializedName("id") private final String id;
-        @Expose @SerializedName("name") private final String name;
-        @Expose @SerializedName("description") private final String description;
-        @Expose @SerializedName("category") private final DecisionCategory category;
-        @Expose @SerializedName("entity_type") private final EntityType entityType;
-        @Expose @SerializedName("abuse_type") private final AbuseType abuseType;
-        @Expose @SerializedName("webhook_url") private final String webhookUrl;
-        @Expose @SerializedName("created_at") private final Long createdAt;
-        @Expose @SerializedName("created_by") private final String createdBy;
-        @Expose @SerializedName("updated_at") private final Long updatedAt;
-        @Expose @SerializedName("updated_by") private final String updatedBy;
+        @Expose @SerializedName("id") private String id;
+        @Expose @SerializedName("name") private String name;
+        @Expose @SerializedName("description") private String description;
+        @Expose @SerializedName("category") private DecisionCategory category;
+        @Expose @SerializedName("entity_type") private EntityType entityType;
+        @Expose @SerializedName("abuse_type") private AbuseType abuseType;
+        @Expose @SerializedName("webhook_url") private String webhookUrl;
+        @Expose @SerializedName("created_at") private Long createdAt;
+        @Expose @SerializedName("created_by") private String createdBy;
+        @Expose @SerializedName("updated_at") private Long updatedAt;
+        @Expose @SerializedName("updated_by") private String updatedBy;
 
         public Decision(String id, String name, String description, DecisionCategory category,
                         EntityType entityType, AbuseType abuseType, String webhookUrl,
@@ -70,44 +70,88 @@ public class GetDecisionsResponseBody extends BaseResponseBody<GetDecisionsRespo
             return id;
         }
 
+        public void setId(String id) {
+            this.id = id;
+        }
+
         public String getName() {
             return name;
+        }
+
+        public void setName(String name) {
+            this.name = name;
         }
 
         public String getDescription() {
             return description;
         }
 
+        public void setDescription(String description) {
+            this.description = description;
+        }
+
         public DecisionCategory getCategory() {
             return category;
+        }
+
+        public void setCategory(DecisionCategory category) {
+            this.category = category;
         }
 
         public EntityType getEntityType() {
             return entityType;
         }
 
+        public void setEntityType(EntityType entityType) {
+            this.entityType = entityType;
+        }
+
         public AbuseType getAbuseType() {
             return abuseType;
+        }
+
+        public void setAbuseType(AbuseType abuseType) {
+            this.abuseType = abuseType;
         }
 
         public String getWebhookUrl() {
             return webhookUrl;
         }
 
+        public void setWebhookUrl(String webhookUrl) {
+            this.webhookUrl = webhookUrl;
+        }
+
         public Long getCreatedAt() {
             return createdAt;
+        }
+
+        public void setCreatedAt(Long createdAt) {
+            this.createdAt = createdAt;
         }
 
         public String getCreatedBy() {
             return createdBy;
         }
 
+        public void setCreatedBy(String createdBy) {
+            this.createdBy = createdBy;
+        }
+
         public Long getUpdatedAt() {
             return updatedAt;
         }
 
+        public void setUpdatedAt(Long updatedAt) {
+            this.updatedAt = updatedAt;
+        }
+
         public String getUpdatedBy() {
             return updatedBy;
+        }
+
+        public void setUpdatedBy(String updatedBy) {
+            this.updatedBy = updatedBy;
         }
     }
 }

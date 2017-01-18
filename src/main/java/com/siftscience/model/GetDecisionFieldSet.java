@@ -1,7 +1,9 @@
 package com.siftscience.model;
 
+import com.google.common.base.Preconditions;
 import com.google.common.collect.ImmutableList;
 import com.siftscience.FieldSet;
+import com.siftscience.GetDecisionsRequest;
 import com.siftscience.exception.InvalidFieldException;
 import com.siftscience.exception.InvalidRequestException;
 
@@ -10,15 +12,14 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import static com.siftscience.GetDecisionsRequest.*;
-
 public class GetDecisionFieldSet extends FieldSet<GetDecisionFieldSet> {
     private String accountId;
     private Integer limit;
     private Integer from;
     private EntityType entityType;
     private List<AbuseType> abuseTypes;
-    private static final Pattern ACCOUNT_ID_PATTERN = Pattern.compile("(?<=accounts/)\\d+[^/]");
+    private static final Pattern ACCOUNT_ID_PATTERN = Pattern
+            .compile("(?<=accounts/)\\p{XDigit}+[^/]");
 
     public GetDecisionFieldSet() {}
 
@@ -27,6 +28,7 @@ public class GetDecisionFieldSet extends FieldSet<GetDecisionFieldSet> {
     }
 
     public static GetDecisionFieldSet fromNextRef(String nextRef) {
+        Preconditions.checkNotNull(nextRef,"Must provide valid nextRef");
         URI uri = URI.create(nextRef);
         String queries = uri.getQuery();
             if ( queries == null || queries.isEmpty()) {
@@ -43,7 +45,7 @@ public class GetDecisionFieldSet extends FieldSet<GetDecisionFieldSet> {
             for (String query : queries.split("&")) {
                 String[] pair = query.split("=");
                 if (pair.length == 2) {
-                    switch (Query.valueOf(pair[0].toUpperCase())) {
+                    switch (GetDecisionsRequest.Query.valueOf(pair[0].toUpperCase())) {
                         case ABUSE_TYPES:
                             fieldSet.setAbuseTypes(pair[1]);
                             break;
