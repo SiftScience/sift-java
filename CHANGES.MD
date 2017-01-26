@@ -2,6 +2,7 @@
 ==================
 
 - Make base model classes public.
+- Packaging with "jar" instead of "pom".
 
 1.3 (2017-01-17)
 ==================
