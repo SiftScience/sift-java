@@ -1,4 +1,9 @@
-1.3 (2016-01-17)
+1.3.1 (2017-01-26)
+==================
+
+- Make base model classes public.
+
+1.3 (2017-01-17)
 ==================
 
 - Add support for decisions API.
