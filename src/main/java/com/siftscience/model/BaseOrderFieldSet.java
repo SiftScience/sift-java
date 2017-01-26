@@ -5,7 +5,7 @@ import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
 
-abstract class BaseOrderFieldSet<T extends BaseOrderFieldSet<T>>
+public abstract class BaseOrderFieldSet<T extends BaseOrderFieldSet<T>>
         extends EventsApiRequestFieldSet<T> {
     @Expose @SerializedName("$order_id") private String orderId;
     @Expose @SerializedName("$user_email") private String userEmail;
