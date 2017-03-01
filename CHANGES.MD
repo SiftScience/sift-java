@@ -1,3 +1,9 @@
+1.4 (2017-02-28)
+=================
+
+- Add support for $verification event.
+- Add support for $app and $browser complex fields.
+
 1.3.1 (2017-01-26)
 ==================
 
