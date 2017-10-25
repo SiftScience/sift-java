@@ -1,3 +1,9 @@
+1.4.1 (2017-10-25)
+=================
+
+- Fix typo in ApplyDecisionFieldSet.java.
+- Throw a ServerException for all 5xx server responses.
+
 1.4 (2017-02-28)
 =================
 
