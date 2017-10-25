@@ -1,5 +1,7 @@
 package com.siftscience;
 
+import com.google.gson.JsonSyntaxException;
+import com.siftscience.exception.ServerException;
 import com.siftscience.model.BaseResponseBody;
 import okhttp3.Response;
 import okhttp3.ResponseBody;
@@ -24,7 +26,16 @@ public abstract class SiftResponse<T extends BaseResponseBody<T>> {
         if (rspBody != null) {
             String bodyString = rspBody.string();
             if (!bodyString.isEmpty()) {
-                populateBodyFromJson(bodyString);
+                try {
+                    populateBodyFromJson(bodyString);
+                } catch (JsonSyntaxException e) {
+                    // If parsing the response body as JSON failed for a 5xx, ignore the parse
+                    // exception.
+                    int code = okResponse.code();
+                    if (code < 500 || code >= 600) {
+                        throw e;
+                    }
+                }
             }
         }
     }
