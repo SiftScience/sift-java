@@ -48,7 +48,7 @@ public class ApplyDecisionFieldSet extends FieldSet<ApplyDecisionFieldSet> {
     @Expose @SerializedName("decision_id") private String decisionId;
     @Expose @SerializedName("source") private DecisionSource source;
     @Expose @SerializedName("analyst") private String analyst;
-    @Expose @SerializedName("descrion") private String description;
+    @Expose @SerializedName("description") private String description;
     @Expose @SerializedName("time") private Long time;
     private String accountId;
     private String userId;
