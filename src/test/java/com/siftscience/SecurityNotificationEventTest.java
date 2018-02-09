@@ -19,7 +19,7 @@ public class SecurityNotificationEventTest {
     @Test
     public void testSecurityNotification() throws Exception {
         String sessionId = "gigtleqddo84l8cm15qe4il";
-        String verifiedValue = "14155551212";
+        String notifiedValue = "14155551212";
 
         String expectedRequestBody = "{\n" +
                 "  \"$type\"         : \"$security_notification\",\n" +
@@ -28,7 +28,7 @@ public class SecurityNotificationEventTest {
                 "  \"$session_id\"   : \"" + sessionId + "\",\n" +
                 "  \"$notification_status\"       : \"$sent\",\n" +
                 "  \"$notification_type\" : \"$sms\",\n" +
-                "  \"$notified_value\" : \"" + verifiedValue + "\"\n" +
+                "  \"$notified_value\" : \"" + notifiedValue + "\"\n" +
                 "}";
 
         // Start a new mock server and enqueue a mock response.
@@ -55,7 +55,7 @@ public class SecurityNotificationEventTest {
                 .setSessionId(sessionId)
                 .setNotificationStatus("$sent")
                 .setNotificationType("$sms")
-                .setNotifiedValue(verifiedValue);
+                .setNotifiedValue(notifiedValue);
         SiftRequest request = client.buildRequest(fieldSet);
 
         SiftResponse siftResponse = request.send();
