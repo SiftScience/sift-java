@@ -1,3 +1,9 @@
+1.5 (2018-02-09)
+=================
+
+- Add session level decisions in ApplyDecisionFieldSet.java.
+- Add support for $security_notification event.
+
 1.4.1 (2017-10-25)
 =================
 

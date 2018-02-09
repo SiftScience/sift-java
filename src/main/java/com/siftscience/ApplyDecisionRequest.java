@@ -23,6 +23,11 @@ public class ApplyDecisionRequest extends SiftRequest<ApplyDecisionResponse>{
             path.addPathSegment("orders").addPathSegment(orderId);
         }
 
+        String sessionId = ((ApplyDecisionFieldSet) fieldSet).getSessionId();
+        if (sessionId != null && !sessionId.isEmpty()) {
+            path.addPathSegment("sessions").addPathSegment(sessionId);
+        }
+
         return path.addPathSegment("decisions").build();
     }
 

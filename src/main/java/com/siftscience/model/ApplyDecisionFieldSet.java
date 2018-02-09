@@ -53,6 +53,7 @@ public class ApplyDecisionFieldSet extends FieldSet<ApplyDecisionFieldSet> {
     private String accountId;
     private String userId;
     private String orderId;
+    private String sessionId;
 
     public ApplyDecisionFieldSet() {}
 
@@ -105,6 +106,15 @@ public class ApplyDecisionFieldSet extends FieldSet<ApplyDecisionFieldSet> {
 
     public ApplyDecisionFieldSet setOrderId(String orderId) {
         this.orderId = orderId;
+        return this;
+    }
+
+    public String getSessionId() {
+        return sessionId;
+    }
+
+    public ApplyDecisionFieldSet setSessionId(String sessionId) {
+        this.sessionId = sessionId;
         return this;
     }
 
