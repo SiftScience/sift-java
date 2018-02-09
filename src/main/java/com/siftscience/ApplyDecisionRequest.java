@@ -19,12 +19,11 @@ public class ApplyDecisionRequest extends SiftRequest<ApplyDecisionResponse>{
                 .addPathSegment(((ApplyDecisionFieldSet) fieldSet).getUserId());
 
         String orderId = ((ApplyDecisionFieldSet) fieldSet).getOrderId();
+        String sessionId = ((ApplyDecisionFieldSet) fieldSet).getSessionId();
+
         if (orderId != null && !orderId.isEmpty()) {
             path.addPathSegment("orders").addPathSegment(orderId);
-        }
-
-        String sessionId = ((ApplyDecisionFieldSet) fieldSet).getSessionId();
-        if (sessionId != null && !sessionId.isEmpty()) {
+        } else if (sessionId != null && !sessionId.isEmpty()) {
             path.addPathSegment("sessions").addPathSegment(sessionId);
         }
 
