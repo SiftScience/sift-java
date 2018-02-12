@@ -227,6 +227,20 @@ ApplyDecisionRequest request = client.buildRequest(
 );
 ```
 
+To apply a decision to a session, create a request with accountId, userId, sessionId and ApplyDecisionFieldSet.
+```java
+ApplyDecisionRequest request = client.buildRequest(
+        new ApplyDecisionFieldSet()
+            .setAccountId("your_account_id")
+            .setUserId("a_user_id")
+            .setSessionId("a_session_id")
+            .setDecisionId("decision_id")
+            .setSource(DecisionSource.MANUAL_REVIEW)
+            .setAnalyst("analyst@example.com")
+            .setDescription("description of decision applied")
+);
+```
+
 #### Get decisions
 
 [API Docs](https://siftscience.com/developers/docs/java/decisions-api/get-decisions)
