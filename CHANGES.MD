@@ -2,6 +2,7 @@
 =================
 
 - Add session level decisions in ApplyDecisionFieldSet.java.
+- Add support for filtering get decisions by entity type SESSION.
 - Add support for $security_notification event.
 
 1.4.1 (2017-10-25)
