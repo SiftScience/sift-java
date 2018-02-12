@@ -100,7 +100,7 @@ public class GetDecisionsTest {
                 "           \"name\": \"User is good\"," +
                 "           \"description\": \"likely a good user\"," +
                 "           \"category\": \"ACCEPT\"," +
-                "           \"entity_type\": \"USER\"," +
+                "           \"entity_type\": \"SESSION\"," +
                 "           \"abuse_type\": \"LEGACY\"," +
                 "           \"webhook_url\": \"\"," +
                 "           \"created_at\": 123," +
