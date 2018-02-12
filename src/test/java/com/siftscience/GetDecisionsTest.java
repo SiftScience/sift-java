@@ -40,7 +40,7 @@ public class GetDecisionsTest {
                 "   \"has_more\": false," +
                 "   \"total_results\": 3," +
                 "   \"next_ref\": \"/v3/accounts/" + accountId + "/decisions" +
-                        "?abuse_types=CONTENT_ABUSE,PAYMENT_ABUSE" +
+                        "?abuse_types=ACCOUNT_ABUSE,ACCOUNT_TAKEOVER" +
                         "&entity_type=user" +
                         "&from=12" +
                         "&limit=11\"" +
@@ -96,9 +96,9 @@ public class GetDecisionsTest {
         String responseBody = "{" +
                 "   \"data\": [" +
                 "       {" +
-                "           \"id\": \"user_is_good\"," +
-                "           \"name\": \"User is good\"," +
-                "           \"description\": \"likely a good user\"," +
+                "           \"id\": \"session_is_good\"," +
+                "           \"name\": \"Session is good\"," +
+                "           \"description\": \"likely a good session\"," +
                 "           \"category\": \"ACCEPT\"," +
                 "           \"entity_type\": \"SESSION\"," +
                 "           \"abuse_type\": \"LEGACY\"," +
@@ -112,7 +112,7 @@ public class GetDecisionsTest {
                 "   \"has_more\": false," +
                 "   \"total_results\": 3," +
                 "   \"next_ref\": \"/v3/accounts/" + accountId + "/decisions" +
-                "?abuse_types=CONTENT_ABUSE,PAYMENT_ABUSE" +
+                "?abuse_types=ACCOUNT_TAKEOVER,ACCOUNT_ABUSE" +
                 "&entity_type=session" +
                 "&from=12" +
                 "&limit=11\"" +
