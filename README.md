@@ -11,13 +11,13 @@ Java 1.7 or later.
 <dependency>
     <groupId>com.siftscience</groupId>
     <artifactId>sift-java</artifactId>
-    <version>1.4.1</version>
+    <version>1.5</version>
 </dependency>
 ```
 ### Gradle
 ```
 dependencies {
-    compile 'com.siftscience:sift-java:1.4.1'
+    compile 'com.siftscience:sift-java:1.5'
 }
 ```
 ### Other
@@ -223,6 +223,20 @@ ApplyDecisionRequest request = client.buildRequest(
             .setDecisionId("decision_id")
             .setSource(DecisionSource.MANUAL_REVIEW)
             .setAnalyst("analyst@example.com")      
+            .setDescription("description of decision applied")
+);
+```
+
+To apply a decision to a session, create a request with accountId, userId, sessionId and ApplyDecisionFieldSet.
+```java
+ApplyDecisionRequest request = client.buildRequest(
+        new ApplyDecisionFieldSet()
+            .setAccountId("your_account_id")
+            .setUserId("a_user_id")
+            .setSessionId("a_session_id")
+            .setDecisionId("decision_id")
+            .setSource(DecisionSource.MANUAL_REVIEW)
+            .setAnalyst("analyst@example.com")
             .setDescription("description of decision applied")
 );
 ```
