@@ -1,6 +1,7 @@
 package com.siftscience;
 
 import com.siftscience.model.Address;
+import com.siftscience.model.CreateCommentFieldSet;
 import com.siftscience.model.CreateContentFieldSet;
 import okhttp3.HttpUrl;
 import okhttp3.mockwebserver.MockResponse;
@@ -80,7 +81,7 @@ public class CreateContentEventTest {
         imageHashes.add("4be4b314caafaa3e12bfcb8d16df3aff");
 
         // Build and execute the request against the mock server.
-        SiftRequest request = client.buildRequest(new CreateContentFieldSet()
+        SiftRequest request = client.buildRequest(new CreateCommentFieldSet()
                 .setUserId("billy_jones_301")
                 .setContactEmail("bill@example.com")
                 .setContactPhone("1-415-555-6040")
