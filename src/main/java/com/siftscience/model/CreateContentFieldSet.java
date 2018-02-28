@@ -1,10 +1,7 @@
 package com.siftscience.model;
 
-public class CreateContentFieldSet extends BaseContentFieldSet<CreateContentFieldSet> {
-    public static CreateContentFieldSet fromJson(String json) {
-        return gson.fromJson(json, CreateContentFieldSet.class);
-    }
-
+public abstract class CreateContentFieldSet<T extends CreateContentFieldSet<T>>
+    extends BaseContentFieldSet<T> {
     @Override
     public String getEventType() {
         return "$create_content";
