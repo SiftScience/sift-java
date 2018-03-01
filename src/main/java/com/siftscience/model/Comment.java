@@ -6,6 +6,7 @@ import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 public class Comment {
+
     @Expose @SerializedName("$body") private String body;
     @Expose @SerializedName("$contact_email") private String contactEmail;
     @Expose @SerializedName("$root_content_id") private String rootContentId;
