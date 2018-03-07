@@ -150,4 +150,76 @@ public class ApplyDecisionTest {
                 siftResponse.getBody().toJson(), true);
     }
 
+    @Test
+    public void testApplyDecisionToContentEntity() throws Exception {
+        String requestBody =
+            "{" +
+                "\"decision_id\":\"content_looks_bad_content_abuse\"," +
+                "\"source\":\"automated_rule\"," +
+                "\"time\":1480618362" +
+                "}";
+
+        String responseBody = "" +
+            "{" +
+            "\"entity\": {" +
+            "\"id\": \"a_content_id\"," +
+            "\"type\": \"content\"" +
+            "}," +
+            "\"decision\": {" +
+            "\"id\": \"content_looks_bad_content_abuse\"" +
+            "}," +
+            "\"time\": 123213123" +
+            "}";
+
+        MockWebServer server = new MockWebServer();
+        MockResponse response = new MockResponse();
+        response.setResponseCode(HTTP_OK);
+        response.setBody(responseBody);
+
+        server.enqueue(response);
+        server.start();
+
+        String accountId = "your_account_id";
+        String userId = "a_user_id";
+        String contentId = "a_content_id";
+
+        HttpUrl baseApi3Url = server.url("").newBuilder().build();
+
+        // Create a new client and link it to the mock server.
+        SiftClient client = new SiftClient("your_api_key");
+        client.setBaseApi3Url(baseApi3Url);
+
+        // Build and execute the request against the mock server.
+        ApplyDecisionRequest request = client.buildRequest(
+            new ApplyDecisionFieldSet()
+                .setAccountId(accountId)
+                .setUserId(userId)
+                .setContentId(contentId)
+                .setDecisionId("content_looks_bad_content_abuse")
+                .setDescription("suspicious text")
+                .setSource(DecisionSource.AUTOMATED_RULE)
+                .setTime(System.currentTimeMillis()));
+
+        ApplyDecisionResponse siftResponse = request.send();
+
+        // Verify the request.
+        RecordedRequest request1 = server.takeRequest();
+        Assert.assertEquals("POST", request1.getMethod());
+        Assert.assertEquals(new StringBuilder("/v3/accounts/")
+                .append(accountId)
+                .append("/users/")
+                .append(userId)
+                .append("/content/")
+                .append(contentId)
+                .append("/decisions")
+                .toString(),
+            request1.getPath());
+        Assert.assertEquals(request1.getHeader("Authorization"), "Basic eW91cl9hcGlfa2V5Og==");
+
+        // Verify the response was parsed correctly.
+        Assert.assertEquals(HTTP_OK, siftResponse.getHttpStatusCode());
+        JSONAssert.assertEquals(response.getBody().readUtf8(),
+            siftResponse.getBody().toJson(), true);
+    }
+
 }
