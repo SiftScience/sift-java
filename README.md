@@ -288,6 +288,6 @@ To query the Decision Status API, create a request with a DecisionStatusFieldSet
 ```java
 DecisionStatusRequest request = client.buildRequest(new DecisionStatusFieldSet()
         .setAccountId("your_account_id")
-        .setEntity(DecisionStatusFieldSet.ENTITY_ORDERS) // or ENTITY_USERS
+        .setEntity(DecisionStatusFieldSet.ENTITY_ORDERS) // or ENTITY_USERS or ENTITY_CONTENT
         .setEntityId("someid"));
 ```
