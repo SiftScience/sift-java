@@ -11,6 +11,7 @@ public class DecisionStatusFieldSet extends FieldSet<DecisionStatusFieldSet> {
     private String accountId;
     private String entity;
     private String entityId;
+    private String userId;
 
     public String getAccountId() {
         return accountId;
@@ -36,6 +37,15 @@ public class DecisionStatusFieldSet extends FieldSet<DecisionStatusFieldSet> {
 
     public DecisionStatusFieldSet setEntityId(String entityId) {
         this.entityId = entityId;
+        return this;
+    }
+
+    public String getUserId() {
+        return userId;
+    }
+
+    public DecisionStatusFieldSet setUserId(String userId) {
+        this.userId = userId;
         return this;
     }
 }
