@@ -20,13 +20,9 @@ public class DecisionStatusRequest extends SiftRequest<DecisionStatusResponse> {
             .addPathSegment("accounts")
             .addPathSegment(((DecisionStatusFieldSet)fieldSet).getAccountId());
         if (((DecisionStatusFieldSet)fieldSet).getEntity().equals(ENTITY_CONTENT)) {
-            return builder
+            builder = builder
                 .addPathSegment("users")
-                .addPathSegment(((DecisionStatusFieldSet)fieldSet).getUserId())
-                .addPathSegment(((DecisionStatusFieldSet)fieldSet).getEntity())
-                .addPathSegment(((DecisionStatusFieldSet)fieldSet).getEntityId())
-                .addPathSegment("decisions")
-                .build();
+                .addPathSegment(((DecisionStatusFieldSet)fieldSet).getUserId());
         }
         return builder
             .addPathSegment(((DecisionStatusFieldSet)fieldSet).getEntity())
