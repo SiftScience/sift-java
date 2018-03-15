@@ -1,7 +1,6 @@
 package com.siftscience;
 
 import com.siftscience.model.DecisionStatusFieldSet;
-import com.sun.javafx.fxml.builder.URLBuilder;
 import okhttp3.*;
 
 import java.io.IOException;

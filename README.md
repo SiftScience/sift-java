@@ -288,6 +288,15 @@ To query the Decision Status API, create a request with a DecisionStatusFieldSet
 ```java
 DecisionStatusRequest request = client.buildRequest(new DecisionStatusFieldSet()
         .setAccountId("your_account_id")
-        .setEntity(DecisionStatusFieldSet.ENTITY_ORDERS) // or ENTITY_USERS or ENTITY_CONTENT
+        .setEntity(DecisionStatusFieldSet.ENTITY_ORDERS) // or ENTITY_USERS
         .setEntityId("someid"));
+```
+
+To query the Decision Status API for Content, create a request with a DecisionStatusFieldSet, including a user id.
+```java
+DecisionStatusRequest request = client.buildRequest(new DecisionStatusFieldSet()
+        .setAccountId("your_account_id")
+        .setEntity(DecisionStatusFieldSet.ENTITY_CONTENT)
+        .setUserId("a_user_id")
+        .setEntityId("a_content_id"));
 ```
