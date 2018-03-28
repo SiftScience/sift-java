@@ -1,4 +1,4 @@
-2.0 (2018-02-09)
+2.0 (2018-03-28)
 =================
 
 - Add content level decisions in ApplyDecisionFieldSet.java.
