@@ -89,7 +89,7 @@ public class ScoresTest {
         // Verify the request.
         RecordedRequest request1 = server.takeRequest();
         Assert.assertEquals("POST", request1.getMethod());
-        Assert.assertEquals("/v204/events?return_score=true&abuse_types=" +
+        Assert.assertEquals("/v205/events?return_score=true&abuse_types=" +
                 "payment_abuse,promotion_abuse", request1.getPath());
         JSONAssert.assertEquals(expectedRequestBody, request.getFieldSet().toJson(), true);
 
@@ -174,7 +174,7 @@ public class ScoresTest {
         // Verify the request.
         RecordedRequest request1 = server.takeRequest();
         Assert.assertEquals("POST", request1.getMethod());
-        Assert.assertEquals("/v204/events?return_score=true", request1.getPath());
+        Assert.assertEquals("/v205/events?return_score=true", request1.getPath());
         JSONAssert.assertEquals(expectedRequestBody, request.getFieldSet().toJson(), true);
 
         // Verify the response.
@@ -250,7 +250,7 @@ public class ScoresTest {
         // Verify the request.
         RecordedRequest request1 = server.takeRequest();
         Assert.assertEquals("GET", request1.getMethod());
-        Assert.assertEquals("/v204/score/billy_jones_301?api_key=your_api_key_here&" +
+        Assert.assertEquals("/v205/score/billy_jones_301?api_key=your_api_key_here&" +
                 "abuse_types=payment_abuse,promotion_abuse", request1.getPath());
 
         // Verify the response.

@@ -88,4 +88,54 @@ public class DecisionStatusTest {
         JSONAssert.assertEquals(response.getBody().readUtf8(),
                 siftResponse.getBody().toJson(), true);
     }
+
+    @Test
+    public void testContentDecisionStatus() throws Exception {
+        MockWebServer server = new MockWebServer();
+        MockResponse response = new MockResponse();
+        response.setResponseCode(HTTP_OK);
+
+        String rspBody = "{\n" +
+            "  \"decisions\": {\n" +
+            "    \"content_abuse\": {\n" +
+            "      \"decision\": {\n" +
+            "        \"id\": \"content_looks_ok_content_abuse\"\n" +
+            "      },\n" +
+            "      \"time\": 1461963429151,\n" +
+            "      \"webhook_succeeded\": true\n" +
+            "    }\n" +
+            "  }\n" +
+            "}";
+
+        response.setBody(rspBody);
+        server.enqueue(response);
+        server.start();
+        HttpUrl baseUrl;
+        baseUrl = server.url("");
+
+        // Create a new client and link it to the mock server.
+        SiftClient client = new SiftClient("your_api_key");
+        client.setBaseApi3Url(baseUrl);
+
+        // Build and execute the request against the mock server.
+        DecisionStatusRequest request = client.buildRequest(
+            new DecisionStatusFieldSet()
+                .setAccountId("your_account_id")
+                .setEntity(DecisionStatusFieldSet.ENTITY_CONTENT)
+                .setEntityId("someid")
+                .setUserId("some_user"));
+        DecisionStatusResponse siftResponse = request.send();
+
+        // Verify the request.
+        RecordedRequest request1 = server.takeRequest();
+        Assert.assertEquals("GET", request1.getMethod());
+        Assert.assertEquals("/v3/accounts/your_account_id/users/some_user/content/someid/decisions",
+            request1.getPath());
+        Assert.assertEquals(request1.getHeader("Authorization"), "Basic eW91cl9hcGlfa2V5Og==");
+
+        // Verify the response was parsed correctly.
+        Assert.assertEquals(HTTP_OK, siftResponse.getHttpStatusCode());
+        JSONAssert.assertEquals(response.getBody().readUtf8(),
+            siftResponse.getBody().toJson(), true);
+    }
 }

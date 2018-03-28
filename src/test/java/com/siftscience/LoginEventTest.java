@@ -62,7 +62,7 @@ public class LoginEventTest {
         // Verify the request.
         RecordedRequest request1 = server.takeRequest();
         Assert.assertEquals("POST", request1.getMethod());
-        Assert.assertEquals("/v204/events", request1.getPath());
+        Assert.assertEquals("/v205/events", request1.getPath());
         JSONAssert.assertEquals(expectedRequestBody, request.getFieldSet().toJson(), true);
 
         // Verify the response.
@@ -119,7 +119,7 @@ public class LoginEventTest {
         // Verify the request.
         RecordedRequest request1 = server.takeRequest();
         Assert.assertEquals("POST", request1.getMethod());
-        Assert.assertEquals("/v204/events", request1.getPath());
+        Assert.assertEquals("/v205/events", request1.getPath());
         JSONAssert.assertEquals(expectedRequestBody, request.getFieldSet().toJson(), true);
 
         // Verify the response.

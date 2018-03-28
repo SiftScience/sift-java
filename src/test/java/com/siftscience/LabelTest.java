@@ -57,7 +57,7 @@ public class LabelTest {
         // Verify the request.
         RecordedRequest request1 = server.takeRequest();
         Assert.assertEquals("POST", request1.getMethod());
-        Assert.assertEquals("/v204/users/billy_jones_301/labels", request1.getPath());
+        Assert.assertEquals("/v205/users/billy_jones_301/labels", request1.getPath());
         JSONAssert.assertEquals(expectedRequestBody, request.getFieldSet().toJson(), true);
 
         // Verify the response.

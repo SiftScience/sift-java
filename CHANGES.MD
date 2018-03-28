@@ -1,3 +1,12 @@
+2.0 (2018-02-09)
+=================
+
+- Add content level decisions in ApplyDecisionFieldSet.java.
+- Add support for V205 content events
+- Removed support for send message and submit review events.
+- Add support for filtering get decisions by entity type SESSION.
+
+
 1.5 (2018-02-09)
 =================
 

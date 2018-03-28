@@ -80,7 +80,7 @@ public class GetDecisionFieldSet extends FieldSet<GetDecisionFieldSet> {
     public enum AbuseType {
         PAYMENT_ABUSE, CONTENT_ABUSE, PROMOTION_ABUSE, ACCOUNT_ABUSE, LEGACY, ACCOUNT_TAKEOVER
     }
-    public enum EntityType {USER, ORDER, SESSION}
+    public enum EntityType {USER, ORDER, SESSION, CONTENT}
     public enum DecisionCategory {BLOCK, WATCH, ACCEPT}
 
     public GetDecisionFieldSet setAccountId(String accountId) {
