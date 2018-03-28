@@ -122,13 +122,14 @@ public class DecisionStatusTest {
             new DecisionStatusFieldSet()
                 .setAccountId("your_account_id")
                 .setEntity(DecisionStatusFieldSet.ENTITY_CONTENT)
-                .setEntityId("someid"));
+                .setEntityId("someid")
+                .setUserId("some_user"));
         DecisionStatusResponse siftResponse = request.send();
 
         // Verify the request.
         RecordedRequest request1 = server.takeRequest();
         Assert.assertEquals("GET", request1.getMethod());
-        Assert.assertEquals("/v3/accounts/your_account_id/content/someid/decisions",
+        Assert.assertEquals("/v3/accounts/your_account_id/users/some_user/content/someid/decisions",
             request1.getPath());
         Assert.assertEquals(request1.getHeader("Authorization"), "Basic eW91cl9hcGlfa2V5Og==");
 

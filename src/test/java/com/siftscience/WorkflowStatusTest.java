@@ -136,7 +136,7 @@ public class WorkflowStatusTest {
         // Verify the request.
         RecordedRequest request1 = server.takeRequest();
         Assert.assertEquals("POST", request1.getMethod());
-        Assert.assertEquals("/v204/events?return_workflow_status=true&abuse_types=" +
+        Assert.assertEquals("/v205/events?return_workflow_status=true&abuse_types=" +
                 "payment_abuse,promotion_abuse", request1.getPath());
         JSONAssert.assertEquals(expectedRequestBody, request.getFieldSet().toJson(), true);
 
