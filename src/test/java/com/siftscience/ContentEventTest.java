@@ -873,6 +873,8 @@ public class ContentEventTest {
             "       \"$body\": \"Let's meet at 5pm\",\n" +
             "       \"$contact_email\": \"alex_301@domain.com\",\n" +
             "       \"$recipient_user_ids\": [\"fy9h989sjphh71\"],\n" +
+            "       \"$subject\": \"Hello world\",\n" +
+            "       \"$root_content_id\": \"posting-123\",\n" +
             "       \"$images\": [{\n" +
             "           \"$md5_hash\": \"aflshdfbalsubdf3234sfdkjb\",\n" +
             "           \"$link\": \"https://www.domain.com/file.png\",\n" +
@@ -911,6 +913,8 @@ public class ContentEventTest {
             .setBody("Let's meet at 5pm")
             .setContactEmail("alex_301@domain.com")
             .setRecipientUserIds(Collections.singletonList("fy9h989sjphh71"))
+            .setSubject("Hello world")
+            .setRootContentId("posting-123")
             .setImages(images);
 
         // Build and execute the request against the mock server.
