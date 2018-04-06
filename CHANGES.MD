@@ -1,3 +1,9 @@
+2.0.1 (2018-04-06)
+=================
+
+- Improved documentation in CHANGES.MD and README.md.
+- Added missing fields to Message.java
+
 2.0 (2018-03-30)
 =================
 
