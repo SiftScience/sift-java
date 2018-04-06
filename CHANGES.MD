@@ -3,6 +3,7 @@
 
 - Improved documentation in CHANGES.MD and README.md.
 - Added missing fields to Message.java
+- Removed deprecated files.
 
 2.0 (2018-03-30)
 =================
