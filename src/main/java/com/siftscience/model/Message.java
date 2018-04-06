@@ -9,7 +9,9 @@ public class Message {
     @Expose @SerializedName("$body") private String body;
     @Expose @SerializedName("$contact_email") private String contactEmail;
     @Expose @SerializedName("$recipient_user_ids") private List<String> recipientUserIds;
+    @Expose @SerializedName("$root_content_id") private String rootContentId;
     @Expose @SerializedName("$images") private List<Image> images;
+    @Expose @SerializedName("$subject") private String subject;
 
     public String getBody() {
         return body;
@@ -44,6 +46,22 @@ public class Message {
 
     public Message setRecipientUserIds(List<String> recipientUserIds) {
         this.recipientUserIds = recipientUserIds;
+        return this;
+    }
+
+    public String getSubject() { return subject; }
+
+    public Message setSubject(String subject) {
+        this.subject = subject;
+        return this;
+    }
+
+    public String getRootContentId() {
+        return rootContentId;
+    }
+
+    public Message setRootContentId(String rootContentId) {
+        this.rootContentId = rootContentId;
         return this;
     }
 }
