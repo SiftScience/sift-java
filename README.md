@@ -286,7 +286,7 @@ GetDecisionsRequest request = client.buildRequest(new GetDecisionsFieldSet()
 ```
 
 A request will return a paginated response if the number of query results are greater than the set `limit`. In these
-cases, the response object will contain a url (`nextRef`) at which the next set of results may be retrieved. Build a 
+cases, the response object will contain a url (`nextRef`) at which the next set of results may be retrieved. Build a
 new request from this `nextRef`, as follows:
 ```java
 GetDecisionsResponse response = request.send();
@@ -305,6 +305,15 @@ DecisionStatusRequest request = client.buildRequest(new DecisionStatusFieldSet()
         .setAccountId("your_account_id")
         .setEntity(DecisionStatusFieldSet.ENTITY_ORDERS) // or ENTITY_USERS
         .setEntityId("someid"));
+```
+
+To query the Decision Status API for a Session, create a request with a DecisionStatusFieldSet, including a user id.
+```java
+DecisionStatusRequest request = client.buildRequest(new DecisionStatusFieldSet()
+        .setAccountId("your_account_id")
+        .setEntity(DecisionStatusFieldSet.ENTITY_SESSION)
+        .setUserId("a_user_id")
+        .setEntityId("a_session_id"));
 ```
 
 To query the Decision Status API for Content, create a request with a DecisionStatusFieldSet, including a user id.
