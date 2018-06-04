@@ -6,6 +6,7 @@ public class DecisionStatusFieldSet extends FieldSet<DecisionStatusFieldSet> {
 
     public static final String ENTITY_USERS = "users";
     public static final String ENTITY_ORDERS = "orders";
+    public static final String ENTITY_SESSIONS = "sessions";
     public static final String ENTITY_CONTENT = "content";
 
     private String accountId;
