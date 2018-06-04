@@ -47,14 +47,14 @@ public class SessionDecisionStatusTest {
             new DecisionStatusFieldSet()
                 .setAccountId("your_account_id")
                 .setUserId("someuser")
-                .setEntity(DecisionStatusFieldSet.ENTITY_SESSION)
+                .setEntity(DecisionStatusFieldSet.ENTITY_SESSIONS)
                 .setEntityId("someid"));
         DecisionStatusResponse siftResponse = request.send();
 
         // Verify the request.
         RecordedRequest request1 = server.takeRequest();
         Assert.assertEquals("GET", request1.getMethod());
-        Assert.assertEquals("/v3/accounts/your_account_id/users/someuser/session/someid/decisions",
+        Assert.assertEquals("/v3/accounts/your_account_id/users/someuser/sessions/someid/decisions",
             request1.getPath());
         Assert.assertEquals(request1.getHeader("Authorization"), "Basic eW91cl9hcGlfa2V5Og==");
 

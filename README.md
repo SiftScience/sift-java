@@ -11,13 +11,13 @@ Java 1.7 or later.
 <dependency>
     <groupId>com.siftscience</groupId>
     <artifactId>sift-java</artifactId>
-    <version>2.0.1</version>
+    <version>2.1.0</version>
 </dependency>
 ```
 ### Gradle
 ```
 dependencies {
-    compile 'com.siftscience:sift-java:2.0.1'
+    compile 'com.siftscience:sift-java:2.1.0'
 }
 ```
 ### Other
@@ -50,8 +50,8 @@ EventRequest createOrderRequest = client.buildRequest(new CreateOrderFieldSet()
 
         // Required fields ($api_key and $type) are automatically filled in by the library,
         // although $api_key can be overridden on a per-request basis.
-        .setUserId("bill_jones") 
-        
+        .setUserId("bill_jones")
+
         // Supported fields.
         .setOrderId("ORDER-28168441")
         .setUserEmail("bjones@altavista.com")
@@ -69,7 +69,7 @@ EventRequest createOrderRequest = client.buildRequest(new CreateOrderFieldSet()
         .setExpeditedShipping(true)
         // More supported fields documented at:
         // https://siftscience.com/developers/docs/java/events-api/reserved-events/create-order
-        
+
         // Custom fields.
         .setCustomField("digital_wallet", "apple_pay")
         .setCustomField("coupon_code", "dollarMadness")
@@ -169,7 +169,7 @@ Similarly, use an `UnlabelFieldSet` to unlabel a user.
 ```java
 UnlabelRequest request = client.buildRequest(new UnlabelFieldSet()
         .setUserId("billy_jones_301")
-        
+
         // Optional abuse type to unlabel for. Omit to unlabel for all abuse types.
         .setAbuseType("payment_abuse"));
 ```
@@ -311,7 +311,7 @@ To query the Decision Status API for a Session, create a request with a Decision
 ```java
 DecisionStatusRequest request = client.buildRequest(new DecisionStatusFieldSet()
         .setAccountId("your_account_id")
-        .setEntity(DecisionStatusFieldSet.ENTITY_SESSION)
+        .setEntity(DecisionStatusFieldSet.ENTITY_SESSIONS)
         .setUserId("a_user_id")
         .setEntityId("a_session_id"));
 ```

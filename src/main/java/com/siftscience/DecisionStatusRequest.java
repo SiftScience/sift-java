@@ -6,7 +6,7 @@ import okhttp3.*;
 import java.io.IOException;
 
 import static com.siftscience.model.DecisionStatusFieldSet.ENTITY_CONTENT;
-import static com.siftscience.model.DecisionStatusFieldSet.ENTITY_SESSION;
+import static com.siftscience.model.DecisionStatusFieldSet.ENTITY_SESSIONS;
 
 public class DecisionStatusRequest extends SiftRequest<DecisionStatusResponse> {
     DecisionStatusRequest(HttpUrl baseUrl, OkHttpClient okClient, DecisionStatusFieldSet fields) {
@@ -20,7 +20,7 @@ public class DecisionStatusRequest extends SiftRequest<DecisionStatusResponse> {
             .addPathSegment("accounts")
             .addPathSegment(((DecisionStatusFieldSet)fieldSet).getAccountId());
         String entity = ((DecisionStatusFieldSet)fieldSet).getEntity();
-        if (entity.equals(ENTITY_CONTENT) || entity.equals(ENTITY_SESSION)) {
+        if (entity.equals(ENTITY_CONTENT) || entity.equals(ENTITY_SESSIONS)) {
             builder = builder
                 .addPathSegment("users")
                 .addPathSegment(((DecisionStatusFieldSet)fieldSet).getUserId());
