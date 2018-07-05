@@ -16,6 +16,7 @@ public class EventRequest extends SiftRequest<EventResponse> {
     // The abuse types to return synchronous scores for.
     private List<String> abuseTypes;
     private boolean isWorkflowStatus = false;
+    private boolean forceWorkflowRun = false;
 
     EventRequest(HttpUrl baseUrl, OkHttpClient okClient, FieldSet fields) {
         super(baseUrl, okClient, fields);
@@ -39,6 +40,10 @@ public class EventRequest extends SiftRequest<EventResponse> {
             builder.addQueryParameter("return_score", "true");
         }
 
+        if (forceWorkflowRun) {
+            builder.addQueryParameter("force_workflow_run", "true"); 
+        }
+
         // returnScore and abuseTypes are encoded into the URL as query params rather than JSON.
         if (abuseTypes != null && abuseTypes.size() > 0) {
             String queryParamVal = "";
@@ -58,6 +63,11 @@ public class EventRequest extends SiftRequest<EventResponse> {
 
     public EventRequest withWorkflowStatus() {
         this.isWorkflowStatus = true;
+        return this;
+    }
+
+    public EventRequest withForceWorkflowRun() {
+        this.forceWorkflowRun = true;
         return this;
     }
 }
