@@ -82,6 +82,11 @@ public class SiftClient {
         return new ScoreRequest(baseUrl, okClient, fields);
     }
 
+    public UserScoreRequest buildRequest(UserScoreFieldSet fields) {
+        setupApiKey(fields);
+        return new UserScoreRequest(baseUrl, okClient, fields);
+    }
+
     public WorkflowStatusRequest buildRequest(WorkflowStatusFieldSet fields) {
         setupApiKey(fields);
         return new WorkflowStatusRequest(baseApi3Url, okClient, fields);

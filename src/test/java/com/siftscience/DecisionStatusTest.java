@@ -86,7 +86,7 @@ public class DecisionStatusTest {
         // Verify the response was parsed correctly.
         Assert.assertEquals(HTTP_OK, siftResponse.getHttpStatusCode());
         JSONAssert.assertEquals(response.getBody().readUtf8(),
-                siftResponse.getBody().toJson(), true);
+                siftResponse.getBody().toJson(), false);
     }
 
     @Test
@@ -136,6 +136,6 @@ public class DecisionStatusTest {
         // Verify the response was parsed correctly.
         Assert.assertEquals(HTTP_OK, siftResponse.getHttpStatusCode());
         JSONAssert.assertEquals(response.getBody().readUtf8(),
-            siftResponse.getBody().toJson(), true);
+            siftResponse.getBody().toJson(), false);
     }
 }
