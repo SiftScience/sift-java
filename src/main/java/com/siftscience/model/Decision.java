@@ -3,6 +3,8 @@ package com.siftscience.model;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import java.util.Objects;
+
 public class Decision {
     @Expose @SerializedName("id") private String id;
     @Expose @SerializedName("category") private String category;
@@ -62,10 +64,10 @@ public class Decision {
         }
 
         Decision o = (Decision) other;
-        return getId().equals(o.getId())
-                && getCategory().equals(o.getCategory())
+        return Objects.equals(getId(), o.getId())
+                && Objects.equals(getCategory(), o.getCategory())
                 && getTime() == o.getTime()
-                && getSource().equals(o.getSource())
-                && getDescription().equals(o.getDescription());
+                && Objects.equals(getSource(), o.getSource())
+                && Objects.equals(getDescription(), o.getDescription());
     }
 }

@@ -46,15 +46,16 @@ public class UserScoreRequest extends SiftRequest<EntityScoreResponse> {
      */
     @Override
     protected HttpUrl path(HttpUrl baseUrl) {
-        UserScoreFieldSet userSoreFieldSet = (UserScoreFieldSet)fieldSet;
+        UserScoreFieldSet userScoreFieldSet = (UserScoreFieldSet)fieldSet;
         HttpUrl.Builder builder = baseUrl.newBuilder().addPathSegment("v205");
         builder.addPathSegment("users")
-                .addPathSegment(userSoreFieldSet.getUserId())
+                .addPathSegment(userScoreFieldSet.getUserId())
                 .addPathSegment("score")
-                .addQueryParameter("api_key", userSoreFieldSet.getApiKey());
-        if (userSoreFieldSet.getAbuseTypes() != null && userSoreFieldSet.getAbuseTypes().size() > 0) {
+                .addQueryParameter("api_key", userScoreFieldSet.getApiKey());
+        if (userScoreFieldSet.getAbuseTypes() != null
+                && !userScoreFieldSet.getAbuseTypes().isEmpty()) {
             String queryParamVal = "";
-            for (String abuseType : userSoreFieldSet.getAbuseTypes()) {
+            for (String abuseType : userScoreFieldSet.getAbuseTypes()) {
                 queryParamVal += (abuseType + ",");
             }
             builder.addQueryParameter("abuse_types",
