@@ -2,7 +2,6 @@ package com.siftscience;
 
 import static java.net.HttpURLConnection.HTTP_OK;
 
-import com.google.common.collect.Lists;
 import com.siftscience.model.Address;
 import com.siftscience.model.Comment;
 import com.siftscience.model.CreateCommentFieldSet;
@@ -33,6 +32,7 @@ import org.junit.Test;
 import org.skyscreamer.jsonassert.JSONAssert;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
@@ -210,7 +210,7 @@ public class ContentEventTest {
         Item item = new Item()
             .setCurrencyCode("USD")
             .setPrice(2950000000L)
-            .setTags(Lists.newArrayList("heat", "washer/dryer"));
+            .setTags(Arrays.asList("heat", "washer/dryer"));
 
         Listing l = new Listing()
             .setBody("Capitol Hill Seattle brand new condo. 2 bedrooms and 1 full bath.")
@@ -398,7 +398,7 @@ public class ContentEventTest {
 
         Profile p = new Profile()
             .setBody("Hi! My name is Alex and I just moved to New London!")
-            .setCategories(Lists.newArrayList("Friends", "Long-term dating"))
+            .setCategories(Arrays.asList("Friends", "Long-term dating"))
             .setContactAddress(contactAddress)
             .setContactEmail("alex_301@domain.com")
             .setImages(images);
@@ -819,7 +819,7 @@ public class ContentEventTest {
         Item item = new Item()
             .setCurrencyCode("USD")
             .setPrice(2950000000L)
-            .setTags(Lists.newArrayList("heat", "washer/dryer"));
+            .setTags(Arrays.asList("heat", "washer/dryer"));
 
         Listing l = new Listing()
             .setBody("Capitol Hill Seattle brand new condo. 2 bedrooms and 1 full bath.")
@@ -1011,7 +1011,7 @@ public class ContentEventTest {
 
         Profile p = new Profile()
             .setBody("Hi! My name is Alex and I just moved to New London!")
-            .setCategories(Lists.newArrayList("Friends", "Long-term dating"))
+            .setCategories(Arrays.asList("Friends", "Long-term dating"))
             .setContactAddress(contactAddress)
             .setContactEmail("alex_301@domain.com")
             .setImages(images);

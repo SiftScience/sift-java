@@ -1,14 +1,15 @@
 package com.siftscience.model;
 
-import com.google.common.base.Preconditions;
-import com.google.common.collect.ImmutableList;
 import com.siftscience.FieldSet;
 import com.siftscience.GetDecisionsRequest;
 import com.siftscience.exception.InvalidFieldException;
 import com.siftscience.exception.InvalidRequestException;
 
 import java.net.URI;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -28,7 +29,7 @@ public class GetDecisionFieldSet extends FieldSet<GetDecisionFieldSet> {
     }
 
     public static GetDecisionFieldSet fromNextRef(String nextRef) {
-        Preconditions.checkNotNull(nextRef,"Must provide valid nextRef");
+        Objects.requireNonNull(nextRef,"Must provide valid nextRef");
         URI uri = URI.create(nextRef);
         String queries = uri.getQuery();
             if ( queries == null || queries.isEmpty()) {
@@ -70,11 +71,11 @@ public class GetDecisionFieldSet extends FieldSet<GetDecisionFieldSet> {
     }
 
     private void setAbuseTypes(String abuseTypeCsv) {
-        ImmutableList.Builder<AbuseType> abuseTypes = ImmutableList.builder();
+        List<AbuseType> abuseTypes = new ArrayList<>();
         for (String abuseType : abuseTypeCsv.split(",")) {
             abuseTypes.add(AbuseType.valueOf(abuseType.toUpperCase()));
         }
-        this.abuseTypes = abuseTypes.build();
+        this.abuseTypes = Collections.unmodifiableList(abuseTypes);
     }
 
     public enum AbuseType {

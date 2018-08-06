@@ -3,7 +3,6 @@ package com.siftscience;
 import com.siftscience.model.GetDecisionFieldSet;
 
 import java.io.IOException;
-import com.google.common.base.Joiner;
 import okhttp3.Credentials;
 import okhttp3.HttpUrl;
 import okhttp3.OkHttpClient;
@@ -12,7 +11,6 @@ import okhttp3.Response;
 
 
 public class GetDecisionsRequest extends SiftRequest<GetDecisionsResponse> {
-    private final Joiner joiner = Joiner.on(",");
 
     GetDecisionsRequest(HttpUrl baseUrl, OkHttpClient okClient, FieldSet fields) {
         super(baseUrl, okClient, fields);
@@ -53,7 +51,7 @@ public class GetDecisionsRequest extends SiftRequest<GetDecisionsResponse> {
             path.addQueryParameter(Query.FROM.toString(), String.valueOf(fieldSet.getFrom()));
         }
         if (fieldSet.getAbuseTypes() != null && !fieldSet.getAbuseTypes().isEmpty()) {
-            path.addQueryParameter(Query.ABUSE_TYPES.toString(), joiner.join(fieldSet.getAbuseTypes()));
+            path.addQueryParameter(Query.ABUSE_TYPES.toString(), StringUtils.joinWithComma(fieldSet.getAbuseTypes()));
         }
 
         return path.build();

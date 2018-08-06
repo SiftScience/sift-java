@@ -1,6 +1,5 @@
 package com.siftscience;
 
-import com.google.common.collect.Lists;
 import com.siftscience.model.GetDecisionFieldSet;
 import okhttp3.HttpUrl;
 import okhttp3.mockwebserver.MockResponse;
@@ -15,6 +14,7 @@ import static com.siftscience.model.GetDecisionFieldSet.AbuseType.ACCOUNT_TAKEOV
 import static com.siftscience.model.GetDecisionFieldSet.EntityType.ORDER;
 import static com.siftscience.model.GetDecisionFieldSet.EntityType.SESSION;
 import static java.net.HttpURLConnection.HTTP_OK;
+import java.util.Arrays;
 
 public class GetDecisionsTest {
     
@@ -65,7 +65,7 @@ public class GetDecisionsTest {
         GetDecisionsRequest getDecisionsRequest = client.buildRequest(new GetDecisionFieldSet()
                 .setAccountId(accountId)
                 .setLimit(11)
-                .setAbuseTypes(Lists.newArrayList(ACCOUNT_ABUSE, ACCOUNT_TAKEOVER))
+                .setAbuseTypes(Arrays.asList(ACCOUNT_ABUSE, ACCOUNT_TAKEOVER))
                 .setFrom(1)
                 .setEntityType(ORDER)
 
@@ -137,7 +137,7 @@ public class GetDecisionsTest {
         GetDecisionsRequest getDecisionsRequest = client.buildRequest(new GetDecisionFieldSet()
                 .setAccountId(accountId)
                 .setLimit(11)
-                .setAbuseTypes(Lists.newArrayList(ACCOUNT_ABUSE, ACCOUNT_TAKEOVER))
+                .setAbuseTypes(Arrays.asList(ACCOUNT_ABUSE, ACCOUNT_TAKEOVER))
                 .setFrom(1)
                 .setEntityType(SESSION)
 
