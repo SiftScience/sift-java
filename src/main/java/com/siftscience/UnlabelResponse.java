@@ -1,7 +1,6 @@
 package com.siftscience;
 
 import okhttp3.Response;
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 import java.io.IOException;
 
@@ -17,6 +16,6 @@ public class UnlabelResponse extends SiftResponse {
      */
     @Override
     void populateBodyFromJson(String jsonBody) {
-        throw new NotImplementedException();
+        throw new UnsupportedOperationException();
     }
 }
