@@ -1,3 +1,7 @@
+2.2.1 (2018-08-06)
+- Remove Guava dependency
+- Replace use of internal Sun API class
+
 2.2.0 (2018-07-05)
 =================
 
