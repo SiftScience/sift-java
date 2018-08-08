@@ -1,6 +1,6 @@
 package com.siftscience;
 
-import com.siftscience.model.AbuseScoreV205;
+import com.siftscience.model.AbuseScore;
 import com.siftscience.model.EntityScoreResponseBody;
 import okhttp3.Response;
 
@@ -16,7 +16,7 @@ public class EntityScoreResponse extends SiftResponse<EntityScoreResponseBody> {
         body = EntityScoreResponseBody.fromJson(jsonBody);
     }
 
-    public AbuseScoreV205 getScoreResponse(String abuseType) {
+    public AbuseScore getScoreResponse(String abuseType) {
         if (this.getBody() != null && this.getBody().getScores() != null) {
             return this.getBody().getScores().get(abuseType);
         }
@@ -24,7 +24,7 @@ public class EntityScoreResponse extends SiftResponse<EntityScoreResponseBody> {
     }
 
     public Double getScore(String abuseType) {
-        AbuseScoreV205 abuseScore = getScoreResponse(abuseType);
+        AbuseScore abuseScore = getScoreResponse(abuseType);
         if (abuseScore != null) {
             return abuseScore.getScore();
         }

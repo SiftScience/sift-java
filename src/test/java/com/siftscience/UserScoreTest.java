@@ -153,7 +153,6 @@ public class UserScoreTest {
         UserScoreRequest request = client.buildRequest(userScoreFieldSet);
         EntityScoreResponse siftResponse = request.send();
 
-
         // Verify the request.
         RecordedRequest request1 = server.takeRequest();
         Assert.assertEquals(userScoreFieldSet.getRescoreUser() ? "POST" : "GET",

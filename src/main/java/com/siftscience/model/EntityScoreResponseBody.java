@@ -13,7 +13,7 @@ public class EntityScoreResponseBody extends BaseResponseBody<EntityScoreRespons
 
     @Expose @SerializedName("entity_type") private String entityType;
     @Expose @SerializedName("entity_id") private String entityId;
-    @Expose @SerializedName("scores") private Map<String, AbuseScoreV205> scores;
+    @Expose @SerializedName("scores") private Map<String, AbuseScore> scores;
     @Expose @SerializedName("latest_labels") private Map<String, Label> latestLabels;
     @Expose @SerializedName("latest_decisions") private Map<String, Decision> latestDecisions;
     @Expose @SerializedName("workflow_statuses") private List<WorkflowStatus> workflowStatuses;
@@ -36,11 +36,11 @@ public class EntityScoreResponseBody extends BaseResponseBody<EntityScoreRespons
         return this;
     }
 
-    public Map<String, AbuseScoreV205> getScores() {
+    public Map<String, AbuseScore> getScores() {
         return scores;
     }
 
-    public EntityScoreResponseBody setScores(Map<String, AbuseScoreV205> scores) {
+    public EntityScoreResponseBody setScores(Map<String, AbuseScore> scores) {
         this.scores = scores;
         return this;
     }
