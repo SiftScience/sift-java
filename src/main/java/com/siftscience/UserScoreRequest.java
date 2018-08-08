@@ -54,12 +54,8 @@ public class UserScoreRequest extends SiftRequest<EntityScoreResponse> {
                 .addQueryParameter("api_key", userScoreFieldSet.getApiKey());
         if (userScoreFieldSet.getAbuseTypes() != null
                 && !userScoreFieldSet.getAbuseTypes().isEmpty()) {
-            String queryParamVal = "";
-            for (String abuseType : userScoreFieldSet.getAbuseTypes()) {
-                queryParamVal += (abuseType + ",");
-            }
-            builder.addQueryParameter("abuse_types",
-                    queryParamVal.substring(0, queryParamVal.length() - 1));
+            String queryParamVal = StringUtils.joinWithComma(userScoreFieldSet.getAbuseTypes());
+            builder.addQueryParameter("abuse_types", queryParamVal);
         }
         return builder.build();
     }
