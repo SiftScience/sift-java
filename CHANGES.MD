@@ -1,4 +1,11 @@
+2.3.0 (2018-08-08)
+=================
+
+- Add support for Rescore User and Get User Score APIs
+
 2.2.1 (2018-08-06)
+=================
+
 - Remove Guava dependency
 - Replace use of internal Sun API class
 

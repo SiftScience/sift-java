@@ -144,7 +144,7 @@ public class WorkflowStatusTest {
         Assert.assertEquals(HTTP_OK, siftResponse.getHttpStatusCode());
         Assert.assertEquals(0, (int) siftResponse.getBody().getStatus());
         JSONAssert.assertEquals(response.getBody().readUtf8(),
-                siftResponse.getBody().toJson(), true);
+                siftResponse.getBody().toJson(), false);
         Assert.assertEquals(siftResponse.getAbuseScore("payment_abuse").getScore(),
                 (Double) 0.898391231245);
         Assert.assertEquals(siftResponse.getWorkflowStatuses().get(0).getId(), "6dbq76qbaaaaa");
