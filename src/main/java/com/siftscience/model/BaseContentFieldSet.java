@@ -6,7 +6,7 @@ import com.google.gson.annotations.SerializedName;
 import java.util.List;
 
 public abstract class BaseContentFieldSet<T extends BaseContentFieldSet<T>>
-        extends EventsApiRequestFieldSet<T> {
+        extends BaseAppBrowserFieldSet<T> {
     @Expose @SerializedName("$content_id") private String contentId;
     @Expose @SerializedName("$status") private String status;
 

@@ -1,8 +1,8 @@
 package com.siftscience;
 
+import com.siftscience.model.AddItemToCartFieldSet;
 import com.siftscience.model.App;
 import com.siftscience.model.Browser;
-import com.siftscience.model.RemoveItemFromCartFieldSet;
 import okhttp3.HttpUrl;
 import okhttp3.mockwebserver.MockResponse;
 import okhttp3.mockwebserver.MockWebServer;
@@ -13,14 +13,14 @@ import org.skyscreamer.jsonassert.JSONAssert;
 
 import static java.net.HttpURLConnection.HTTP_OK;
 
-public class RemoveItemFromCartEventTest {
+public class AddItemToCartEventTest {
 
     @Test
-    public void testRemoveItemFromCartWithApp() throws Exception {
+    public void testAddItemToCartWithApp() throws Exception {
         String operatingSystem = "iOS";
         String appName = "Calculator";
         String expectedRequestBody = "{\n" +
-                "  \"$type\"       : \"$remove_item_from_cart\",\n" +
+                "  \"$type\"       : \"$add_item_to_cart\",\n" +
                 "  \"$api_key\"    : \"your_api_key_here\",\n" +
                 "  \"$user_id\"    : \"billy_jones_301\",\n" +
                 "\n" +
@@ -29,15 +29,15 @@ public class RemoveItemFromCartEventTest {
                 "    \"$item_id\"        : \"B004834GQO\",\n" +
                 "    \"$product_title\"  : \"The Slanket Blanket-Texas Tea\",\n" +
                 "    \"$price\"          : 39990000,\n" +
-                "    \"$quantity\"       : 2,\n" +
                 "    \"$upc\"            : \"67862114510011\",\n" +
                 "    \"$sku\"            : \"004834GQ\",\n" +
                 "    \"$brand\"          : \"Slanket\",\n" +
                 "    \"$manufacturer\"   : \"Slanket\",\n" +
                 "    \"$category\"       : \"Blankets & Throws\",\n" +
                 "    \"$tags\"           : [\"Awesome\", \"Wintertime specials\"],\n" +
-                "    \"$color\"          : \"Texas Tea\"\n" +
-                "  },\n" +
+                "    \"$color\"          : \"Texas Tea\",\n" +
+                "    \"$quantity\"       : 2\n" +
+                "   },\n" +
                 "  \"$app\"          : {\n" +
                 "      \"$os\"       : \"" + operatingSystem + "\",\n" +
                 "      \"$app_name\" : \"" + appName + "\"\n" +
@@ -63,12 +63,13 @@ public class RemoveItemFromCartEventTest {
         client.setBaseUrl(baseUrl);
 
         // Build and execute the request against the mock server.
-        SiftRequest request = client.buildRequest(new RemoveItemFromCartFieldSet()
+        SiftRequest request = client.buildRequest(new AddItemToCartFieldSet()
                 .setUserId("billy_jones_301")
                 .setSessionId("gigtleqddo84l8cm15qe4il")
                 .setApp(new App().setAppName(appName)
                     .setOperatingSystem(operatingSystem))
                 .setItem(TestUtils.sampleItem2()));
+
 
         SiftResponse siftResponse = request.send();
 
@@ -88,10 +89,10 @@ public class RemoveItemFromCartEventTest {
     }
 
     @Test
-    public void testRemoveItemFromCartWithBrowser() throws Exception {
+    public void testAddItemToCartWithBrowser() throws Exception {
         String userAgent = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_3)";
         String expectedRequestBody = "{\n" +
-                "  \"$type\"       : \"$remove_item_from_cart\",\n" +
+                "  \"$type\"       : \"$add_item_to_cart\",\n" +
                 "  \"$api_key\"    : \"your_api_key_here\",\n" +
                 "  \"$user_id\"    : \"billy_jones_301\",\n" +
                 "\n" +
@@ -100,15 +101,15 @@ public class RemoveItemFromCartEventTest {
                 "    \"$item_id\"        : \"B004834GQO\",\n" +
                 "    \"$product_title\"  : \"The Slanket Blanket-Texas Tea\",\n" +
                 "    \"$price\"          : 39990000,\n" +
-                "    \"$quantity\"       : 2,\n" +
                 "    \"$upc\"            : \"67862114510011\",\n" +
                 "    \"$sku\"            : \"004834GQ\",\n" +
                 "    \"$brand\"          : \"Slanket\",\n" +
                 "    \"$manufacturer\"   : \"Slanket\",\n" +
                 "    \"$category\"       : \"Blankets & Throws\",\n" +
                 "    \"$tags\"           : [\"Awesome\", \"Wintertime specials\"],\n" +
-                "    \"$color\"          : \"Texas Tea\"\n" +
-                "  },\n" +
+                "    \"$color\"          : \"Texas Tea\",\n" +
+                "    \"$quantity\"       : 2\n" +
+                "   },\n" +
                 "  \"$browser\"          : {\n" +
                 "      \"$user_agent\"       : \"" + userAgent + "\"\n" +
                 "   }\n" +
@@ -133,11 +134,12 @@ public class RemoveItemFromCartEventTest {
         client.setBaseUrl(baseUrl);
 
         // Build and execute the request against the mock server.
-        SiftRequest request = client.buildRequest(new RemoveItemFromCartFieldSet()
+        SiftRequest request = client.buildRequest(new AddItemToCartFieldSet()
                 .setUserId("billy_jones_301")
                 .setSessionId("gigtleqddo84l8cm15qe4il")
                 .setBrowser(new Browser().setUserAgent(userAgent))
                 .setItem(TestUtils.sampleItem2()));
+
 
         SiftResponse siftResponse = request.send();
 
