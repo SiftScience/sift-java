@@ -154,7 +154,7 @@ public class BaseAppBrowserFieldSetTest {
         server.shutdown();
     }
 
-    private class TestFieldSet extends BaseAppBrowserFieldSet<TestFieldSet> {
+    private static class TestFieldSet extends BaseAppBrowserFieldSet<TestFieldSet> {
         public TestFieldSet fromJson(String json) {
             return gson.fromJson(json, TestFieldSet.class);
         }
