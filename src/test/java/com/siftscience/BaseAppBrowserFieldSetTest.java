@@ -2,9 +2,28 @@ package com.siftscience;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
+import com.siftscience.model.AddItemToCartFieldSet;
+import com.siftscience.model.AddPromotionFieldSet;
 import com.siftscience.model.App;
 import com.siftscience.model.BaseAppBrowserFieldSet;
 import com.siftscience.model.Browser;
+import com.siftscience.model.CreateAccountFieldSet;
+import com.siftscience.model.CreateCommentFieldSet;
+import com.siftscience.model.CreateListingFieldSet;
+import com.siftscience.model.CreateMessageFieldSet;
+import com.siftscience.model.CreatePostFieldSet;
+import com.siftscience.model.CreateProfileFieldSet;
+import com.siftscience.model.CreateReviewFieldSet;
+import com.siftscience.model.CustomEventFieldSet;
+import com.siftscience.model.LoginFieldSet;
+import com.siftscience.model.TransactionFieldSet;
+import com.siftscience.model.UpdateAccountFieldSet;
+import com.siftscience.model.UpdateCommentFieldSet;
+import com.siftscience.model.UpdateListingFieldSet;
+import com.siftscience.model.UpdateMessageFieldSet;
+import com.siftscience.model.UpdatePostFieldSet;
+import com.siftscience.model.UpdateProfileFieldSet;
+import com.siftscience.model.UpdateReviewFieldSet;
 import okhttp3.HttpUrl;
 import okhttp3.mockwebserver.MockResponse;
 import okhttp3.mockwebserver.MockWebServer;
@@ -14,6 +33,8 @@ import org.junit.Test;
 import org.skyscreamer.jsonassert.JSONAssert;
 
 import static java.net.HttpURLConnection.HTTP_OK;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.object.IsCompatibleType.typeCompatibleWith;
 
 public class BaseAppBrowserFieldSetTest {
 
@@ -27,6 +48,35 @@ public class BaseAppBrowserFieldSetTest {
         "\"$user_id\"   : \"" + DUMMY_USERID + "\"" +
         "%s" +
         "\n}";
+
+    @Test
+    public void testAllSubclasses() {
+        Class<?> [] subclasses = {
+            AddItemToCartFieldSet.class,
+            AddPromotionFieldSet.class,
+            CreateAccountFieldSet.class,
+            CreateCommentFieldSet.class,
+            CreateListingFieldSet.class,
+            CreateMessageFieldSet.class,
+            CreatePostFieldSet.class,
+            CreateProfileFieldSet.class,
+            CreateReviewFieldSet.class,
+            CustomEventFieldSet.class,
+            LoginFieldSet.class,
+            TransactionFieldSet.class,
+            UpdateAccountFieldSet.class,
+            UpdateCommentFieldSet.class,
+            UpdateListingFieldSet.class,
+            UpdateMessageFieldSet.class,
+            UpdatePostFieldSet.class,
+            UpdateProfileFieldSet.class,
+            UpdateReviewFieldSet.class
+        };
+
+        for (Class<?> subclass : subclasses) {
+            assertThat(subclass, typeCompatibleWith(BaseAppBrowserFieldSet.class));
+        }
+    }
 
     @Test
     public void testApp() throws Exception {
