@@ -11,16 +11,19 @@ import com.siftscience.model.CreateAccountFieldSet;
 import com.siftscience.model.CreateCommentFieldSet;
 import com.siftscience.model.CreateListingFieldSet;
 import com.siftscience.model.CreateMessageFieldSet;
+import com.siftscience.model.CreateOrderFieldSet;
 import com.siftscience.model.CreatePostFieldSet;
 import com.siftscience.model.CreateProfileFieldSet;
 import com.siftscience.model.CreateReviewFieldSet;
 import com.siftscience.model.CustomEventFieldSet;
 import com.siftscience.model.LoginFieldSet;
+import com.siftscience.model.RemoveItemFromCartFieldSet;
 import com.siftscience.model.TransactionFieldSet;
 import com.siftscience.model.UpdateAccountFieldSet;
 import com.siftscience.model.UpdateCommentFieldSet;
 import com.siftscience.model.UpdateListingFieldSet;
 import com.siftscience.model.UpdateMessageFieldSet;
+import com.siftscience.model.UpdateOrderFieldSet;
 import com.siftscience.model.UpdatePostFieldSet;
 import com.siftscience.model.UpdateProfileFieldSet;
 import com.siftscience.model.UpdateReviewFieldSet;
@@ -58,16 +61,19 @@ public class BaseAppBrowserFieldSetTest {
             CreateCommentFieldSet.class,
             CreateListingFieldSet.class,
             CreateMessageFieldSet.class,
+            CreateOrderFieldSet.class,
             CreatePostFieldSet.class,
             CreateProfileFieldSet.class,
             CreateReviewFieldSet.class,
             CustomEventFieldSet.class,
             LoginFieldSet.class,
+            RemoveItemFromCartFieldSet.class,
             TransactionFieldSet.class,
             UpdateAccountFieldSet.class,
             UpdateCommentFieldSet.class,
             UpdateListingFieldSet.class,
             UpdateMessageFieldSet.class,
+            UpdateOrderFieldSet.class,
             UpdatePostFieldSet.class,
             UpdateProfileFieldSet.class,
             UpdateReviewFieldSet.class
