@@ -3,8 +3,7 @@ package com.siftscience.model;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class RemoveItemFromCartFieldSet
-        extends EventsApiRequestFieldSet<RemoveItemFromCartFieldSet> {
+public class RemoveItemFromCartFieldSet extends BaseAppBrowserFieldSet<RemoveItemFromCartFieldSet> {
     public static RemoveItemFromCartFieldSet fromJson(String json) {
         return gson.fromJson(json, RemoveItemFromCartFieldSet.class);
     }
