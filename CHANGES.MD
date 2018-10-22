@@ -1,4 +1,4 @@
-2.3.1 (2018-10-22)
+2.4.0 (2018-10-22)
 =================
 - Add support for `$app` and `$browser` to the following events: `AddItemToCart`, `AddPromotion`, `CreateAccount`, `CreateContent`, `CreateOrder`, `CustomEvent`, `RemoveItemFromCart`, `Transaction`, `UpdateAccount`, and `UpdateContent`
 
