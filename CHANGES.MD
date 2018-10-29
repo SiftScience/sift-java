@@ -1,6 +1,8 @@
-2.4.0 (2018-10-22)
+2.4.0 (2018-10-24)
 =================
-- Add support for `$app` and `$browser` to the following events: `AddItemToCart`, `AddPromotion`, `CreateAccount`, `CreateContent`, `CreateOrder`, `CustomEvent`, `RemoveItemFromCart`, `Transaction`, `UpdateAccount`, and `UpdateContent`
+- Add support for Rescore User and Get User Score APIs
+- Add support for `$app` and `$browser` to the following events: `AddItemToCart`, `AddPromotion`, `CreateAccount`, `CreateContent`, `CreateOrder`, `CustomEvent`, `Logout`, `RemoveItemFromCart`, `Transaction`, `UpdateAccount`, and `UpdateContent`
+- Upgrade okhttp3 to 3.4.2
 
 2.3.0 (2018-08-08)
 =================

@@ -17,6 +17,7 @@ import com.siftscience.model.CreateProfileFieldSet;
 import com.siftscience.model.CreateReviewFieldSet;
 import com.siftscience.model.CustomEventFieldSet;
 import com.siftscience.model.LoginFieldSet;
+import com.siftscience.model.LogoutFieldSet;
 import com.siftscience.model.RemoveItemFromCartFieldSet;
 import com.siftscience.model.TransactionFieldSet;
 import com.siftscience.model.UpdateAccountFieldSet;
@@ -67,6 +68,7 @@ public class BaseAppBrowserFieldSetTest {
             CreateReviewFieldSet.class,
             CustomEventFieldSet.class,
             LoginFieldSet.class,
+            LogoutFieldSet.class,
             RemoveItemFromCartFieldSet.class,
             TransactionFieldSet.class,
             UpdateAccountFieldSet.class,

@@ -1,6 +1,6 @@
 package com.siftscience.model;
 
-public class LogoutFieldSet extends EventsApiRequestFieldSet<LogoutFieldSet> {
+public class LogoutFieldSet extends BaseAppBrowserFieldSet<LogoutFieldSet> {
     public static LogoutFieldSet fromJson(String json) {
         return gson.fromJson(json, LogoutFieldSet.class);
     }
