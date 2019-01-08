@@ -1,5 +1,8 @@
 package com.siftscience;
 
+import java.util.Arrays;
+import java.util.List;
+
 import com.siftscience.model.App;
 import com.siftscience.model.Browser;
 import com.siftscience.model.LoginFieldSet;
@@ -28,7 +31,11 @@ public class LoginEventTest {
                 "  \"$app\"          : {\n" +
                 "      \"$os\"       : \"" + operatingSystem + "\",\n" +
                 "      \"$app_name\" : \"" + appName + "\"\n" +
-                "  }\n" +
+                "  },\n" +
+                " \"$failure_reason\": \"$account_suspended\",\n" +
+                " \"$username\"      : \"seattle_001\",\n" +
+                " \"$social_sign_on_type\" : \"$facebook\",\n" +
+                " \"$account_types\" : [\"merchant\", \"premium\"]\n" +
                 "}";
 
         // Start a new mock server and enqueue a mock response.
@@ -55,7 +62,11 @@ public class LoginEventTest {
                 .setLoginStatus("$success")
                 .setApp(new App()
                         .setOperatingSystem(operatingSystem)
-                        .setAppName(appName)));
+                        .setAppName(appName))
+                .setFailureReason("$account_suspended")
+                .setUsername("seattle_001")
+                .setSocialSignOnType("$facebook")
+                .setAccountTypes(Arrays.asList("merchant", "premium")));
 
         SiftResponse siftResponse = request.send();
 
