@@ -1,3 +1,11 @@
+2.5.0 (2019-01-09)
+=================
+
+- Add support for `$failure_reason` to the `$login` event
+- Add support for `$account_types` to the `$login` event
+- Add support for `$username` to the `$login` event
+- Add support for `$social_sign_on_type` to the `$login` event
+
 2.4.0 (2018-10-24)
 =================
 - Add support for Rescore User and Get User Score APIs
