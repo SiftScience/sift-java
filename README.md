@@ -1,6 +1,6 @@
-# Sift Science Java API
+# Sift API
 
-The official Java bindings for the latest version (v205) of the [Sift Science API](https://siftscience.com/developers/docs/java/apis-overview) .
+The official Java bindings for the latest version (v205) of the [Sift API](https://sift.com/developers/docs/java/apis-overview) .
 
 ## Requirements
 Java 1.7 or later.
@@ -40,7 +40,7 @@ SiftClient client = new SiftClient("your_api_key");
 
 ### Send Events
 
-[API Docs](https://siftscience.com/developers/docs/java/events-api)
+[API Docs](https://sift.com/developers/docs/java/events-api)
 
 All request types can be built using the overloaded `client.buildRequest`.
 Here's an example for the `$create_order` event type.
@@ -68,7 +68,7 @@ EventRequest createOrderRequest = client.buildRequest(new CreateOrderFieldSet()
                 .setZipCode("03257"))
         .setExpeditedShipping(true)
         // More supported fields documented at:
-        // https://siftscience.com/developers/docs/java/events-api/reserved-events/create-order
+        // https://sift.com/developers/docs/java/events-api/reserved-events/create-order
 
         // Custom fields.
         .setCustomField("digital_wallet", "apple_pay")
@@ -97,7 +97,7 @@ EventResponseBody body = response.getBody();
 ### Get Scores
 #### Synchronous Scoring
 
-[API Docs](https://siftscience.com/developers/docs/java/score-api/synchronous-scores)
+[API Docs](https://sift.com/developers/docs/java/score-api/synchronous-scores)
 
 To get a score in the response body of an event request, build your event
 request as usual and then augment the request with a list of abuse types
@@ -124,7 +124,7 @@ scores for all abuse types.
 
 #### Score API
 
-[API Docs](https://siftscience.com/developers/docs/java/score-api/score-api)
+[API Docs](https://sift.com/developers/docs/java/score-api/score-api)
 
 Scores may also be requested separately from incoming event requests.
 Provide a `ScoreFieldSet` containing a list of abuse types `client.buildRequest`
@@ -147,7 +147,7 @@ AbuseScore paymentAbuseScore = response.getAbuseScore("payment_abuse");
 ### Labels
 #### Label User
 
-[API Docs](https://siftscience.com/developers/docs/java/labels-api)
+[API Docs](https://sift.com/developers/docs/java/labels-api)
 
 To send a label, build a request using a `LabelFieldSet`;
 ```java
@@ -163,7 +163,7 @@ LabelRequest request = client.buildRequest(new LabelFieldSet()
 
 #### Unlabel User
 
-[API Docs](https://siftscience.com/developers/docs/java/labels-api/unlabel-user)
+[API Docs](https://sift.com/developers/docs/java/labels-api/unlabel-user)
 
 Similarly, use an `UnlabelFieldSet` to unlabel a user.
 ```java
@@ -177,7 +177,7 @@ UnlabelRequest request = client.buildRequest(new UnlabelFieldSet()
 ### Workflow Status
 #### Synchronous Workflow Statuses
 
-[API Docs](https://siftscience.com/developers/docs/java/workflows-api/workflow-decisions)
+[API Docs](https://sift.com/developers/docs/java/workflows-api/workflow-decisions)
 
 Similarly to the Scores API, EventRequest objects can also be modified to
 return a Workflow Status using the `EventRequest#withWorkflowStatus` method.
@@ -188,7 +188,7 @@ EventRequest createOrderRequest = client.buildRequest(createOrderFieldSet)
 
 #### Workflow Status API
 
-[API Docs](https://siftscience.com/developers/docs/java/workflows-api/workflow-status)
+[API Docs](https://sift.com/developers/docs/java/workflows-api/workflow-status)
 
 To query the Workflow Status API, create a request with a WorkflowStatusFieldSet.
 ```java
@@ -199,7 +199,7 @@ WorkflowStatusRequest request = client.buildRequest(new WorkflowStatusFieldSet()
 
 ### Apply Decision API
 
-[API Docs](https://siftscience.com/developers/docs/java/decisions-api/apply-decision)
+[API Docs](https://sift.com/developers/docs/java/decisions-api/apply-decision)
 
 To apply a decision to a user, create a request with accountId, userId, and ApplyDecisionFieldSet.
 ```java
@@ -258,7 +258,7 @@ ApplyDecisionRequest request = client.buildRequest(
 
 #### Get decisions
 
-[API Docs](https://siftscience.com/developers/docs/java/decisions-api/get-decisions)
+[API Docs](https://sift.com/developers/docs/java/decisions-api/get-decisions)
 
 To retrieve available decisions, build a request with a GetDecisionsFieldSet.
 ```java
@@ -297,7 +297,7 @@ GetDecisionsRequest nextRequest = client.buildRequest(GetDecisionsFieldSet.fromN
 
 ### Decision Status API
 
-[API Docs](https://siftscience.com/developers/docs/java/decisions-api/decision-status)
+[API Docs](https://sift.com/developers/docs/java/decisions-api/decision-status)
 
 To query the Decision Status API, create a request with a DecisionStatusFieldSet.
 ```java
