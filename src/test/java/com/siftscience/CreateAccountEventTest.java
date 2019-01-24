@@ -12,6 +12,7 @@ import org.junit.Test;
 import org.skyscreamer.jsonassert.JSONAssert;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import static java.net.HttpURLConnection.HTTP_OK;
@@ -76,7 +77,8 @@ public class CreateAccountEventTest {
                 "  \"location\"                : \"New London, NH\",\n" +
                 "  \"referral_code\"           : \"MIKEFRIENDS\",\n" +
                 "  \"email_confirmed_status\"  : \"$pending\",\n" +
-                "  \"phone_confirmed_status\"  : \"$pending\"\n" +
+                "  \"phone_confirmed_status\"  : \"$pending\",\n" +
+                "  \"$account_types\" : [\"merchant\", \"premium\"]\n" +
                 "}";
 
         // Start a new mock server and enqueue a mock response.
@@ -124,7 +126,9 @@ public class CreateAccountEventTest {
                         .setCustomField("location", "New London, NH")
                         .setCustomField("referral_code", "MIKEFRIENDS")
                         .setCustomField("email_confirmed_status", "$pending")
-                        .setCustomField("phone_confirmed_status", "$pending"));
+                        .setCustomField("phone_confirmed_status", "$pending")
+                        .setAccountTypes(Arrays.asList("merchant", "premium")));
+
         SiftResponse siftResponse = request.send();
 
         // Verify the request.

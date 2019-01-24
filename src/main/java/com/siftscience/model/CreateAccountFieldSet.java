@@ -10,6 +10,7 @@ public class CreateAccountFieldSet extends BaseAccountFieldSet<CreateAccountFiel
         return gson.fromJson(json, CreateAccountFieldSet.class);
     }
 
+    @Expose @SerializedName("$account_types") private List<String> accountTypes;
     @Expose @SerializedName("$promotions") private List<Promotion> promotions;
 
     @Override
@@ -23,6 +24,13 @@ public class CreateAccountFieldSet extends BaseAccountFieldSet<CreateAccountFiel
 
     public CreateAccountFieldSet setPromotions(List<Promotion> promotions) {
         this.promotions = promotions;
+        return this;
+    }
+
+    public List<String> getAccountTypes() { return accountTypes; }
+
+    public CreateAccountFieldSet setAccountTypes(List<String> accountTypes) {
+        this.accountTypes = accountTypes;
         return this;
     }
 }

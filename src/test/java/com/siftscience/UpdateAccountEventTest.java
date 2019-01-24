@@ -11,6 +11,7 @@ import org.junit.Test;
 import org.skyscreamer.jsonassert.JSONAssert;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import static java.net.HttpURLConnection.HTTP_OK;
@@ -57,7 +58,8 @@ public class UpdateAccountEventTest {
                 "  },\n" +
                 "  \"$social_sign_on_type\"   : \"$twitter\",\n" +
                 "  \"email_confirmed_status\"  : \"$success\",\n" +
-                "  \"phone_confirmed_status\"  : \"$success\"\n" +
+                "  \"phone_confirmed_status\"  : \"$success\",\n" +
+                "  \"$account_types\" : [\"merchant\", \"premium\"]\n" +
                 "}";
 
         // Start a new mock server and enqueue a mock response.
@@ -96,7 +98,8 @@ public class UpdateAccountEventTest {
                         .setShippingAddress(TestUtils.sampleAddress2())
                         .setSocialSignOnType("$twitter")
                         .setCustomField("email_confirmed_status", "$success")
-                        .setCustomField("phone_confirmed_status", "$success"));
+                        .setCustomField("phone_confirmed_status", "$success")
+                        .setAccountTypes(Arrays.asList("merchant", "premium")));
 
         SiftResponse siftResponse = request.send();
 
