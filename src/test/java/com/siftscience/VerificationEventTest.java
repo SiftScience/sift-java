@@ -1,5 +1,6 @@
 package com.siftscience;
 
+import com.siftscience.model.App;
 import com.siftscience.model.VerificationFieldSet;
 import okhttp3.HttpUrl;
 import okhttp3.mockwebserver.MockResponse;
@@ -17,15 +18,30 @@ public class VerificationEventTest {
     public void testVerification() throws Exception {
         String sessionId = "gigtleqddo84l8cm15qe4il";
         String verifiedValue = "14155551212";
+        String verifiedEvent = "$create_content";
+        String verifiedEntityId = "chekle212452";
+        String reason = "$user_setting";
 
         String expectedRequestBody = "{\n" +
                 "  \"$type\"         : \"$verification\",\n" +
                 "  \"$api_key\"      : \"your_api_key_here\",\n" +
                 "  \"$user_id\"      : \"billy_jones_301\",\n" +
                 "  \"$session_id\"   : \"" + sessionId + "\",\n" +
+                "  \"$app\"          : {\n" +
+                "      \"$os\"       : \"iOS\",\n" +
+                "      \"$app_name\" : \"Calculator\",\n" +
+                "      \"$device_manufacturer\" : \"Apple\",\n" +
+                "      \"$device_model\" : \"iPhone 4,2\",\n" +
+                "      \"$device_unique_id\" : \"A3D261E4-DE0A-470B-9E4A-720F3D3D22E6\",\n" +
+                "      \"$app_version\" : \"3.2.7\",\n" +
+                "  },\n" +
                 "  \"$status\"       : \"$pending\",\n" +
                 "  \"$verification_type\" : \"$sms\",\n" +
-                "  \"$verified_value\" : \"" + verifiedValue + "\"\n" +
+                "  \"$verified_value\" : \"" + verifiedValue + "\",\n" +
+                "  \"$verified_event\" : \"" + verifiedEvent + "\",\n" +
+                "  \"$verified_entity_id\" : \"" + verifiedEntityId + "\",\n" +
+                "  \"$reason\" : \"" + reason + "\",\n" +
+                "  \"$ip\" : \"128.148.1.135\",\n" +
                 "}";
 
         // Start a new mock server and enqueue a mock response.
@@ -52,7 +68,18 @@ public class VerificationEventTest {
                 .setSessionId(sessionId)
                 .setStatus("$pending")
                 .setVerificationType("$sms")
-                .setVerifiedValue(verifiedValue));
+                .setVerifiedValue(verifiedValue)
+                .setReason(reason)
+                .setVerifiedEvent(verifiedEvent)
+                .setVerifiedEntityId(verifiedEntityId)
+                .setIp("128.148.1.135")
+                .setApp(new App()
+                        .setAppName("Calculator")
+                        .setAppVersion("3.2.7")
+                        .setDeviceManufacturer("Apple")
+                        .setDeviceModel("iPhone 4,2")
+                        .setDeviceUniqueId("A3D261E4-DE0A-470B-9E4A-720F3D3D22E6")
+                        .setOperatingSystem("iOS")));
 
         SiftResponse siftResponse = request.send();
 
@@ -69,6 +96,5 @@ public class VerificationEventTest {
                 siftResponse.getBody().toJson(), true);
 
         server.shutdown();
-
     }
 }
