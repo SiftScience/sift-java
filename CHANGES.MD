@@ -1,3 +1,11 @@
+2.6.0 (2019-01-30)
+=================
+
+- Add support for `$account_types` to the `$create_account` event and the `$update_account` event
+- Add support for the new event `$update_password`
+- Add support for `$verified_event`, `$reason`, `$verified_entity_id` to the `$verification` event
+- Add support for `$ip`, `$browser`, `$app` to the `$verification` event
+
 2.5.0 (2019-01-09)
 =================
 

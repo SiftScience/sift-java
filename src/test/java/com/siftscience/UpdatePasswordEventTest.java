@@ -1,7 +1,7 @@
 package com.siftscience;
 
 import com.siftscience.model.App;
-import com.siftscience.model.VerificationFieldSet;
+import com.siftscience.model.UpdatePasswordFieldSet;
 import okhttp3.HttpUrl;
 import okhttp3.mockwebserver.MockResponse;
 import okhttp3.mockwebserver.MockWebServer;
@@ -12,21 +12,18 @@ import org.skyscreamer.jsonassert.JSONAssert;
 
 import static java.net.HttpURLConnection.HTTP_OK;
 
-public class VerificationEventTest {
+/**
+ * Unit tests around the Update_password events.
+ */
 
+public class UpdatePasswordEventTest {
     @Test
-    public void testVerification() throws Exception {
-        String sessionId = "gigtleqddo84l8cm15qe4il";
-        String verifiedValue = "14155551212";
-        String verifiedEvent = "$create_content";
-        String verifiedEntityId = "chekle212452";
-        String reason = "$user_setting";
-
+    public void testUpdatePassword() throws Exception {
         String expectedRequestBody = "{\n" +
-                "  \"$type\"         : \"$verification\",\n" +
+                "  \"$type\"         : \"$update_password\",\n" +
                 "  \"$api_key\"      : \"your_api_key_here\",\n" +
                 "  \"$user_id\"      : \"billy_jones_301\",\n" +
-                "  \"$session_id\"   : \"" + sessionId + "\",\n" +
+                "  \"$session_id\" : \"gigtleqddo84l8cm15qe4il\",\n" +
                 "  \"$app\"          : {\n" +
                 "      \"$os\"       : \"iOS\",\n" +
                 "      \"$app_name\" : \"Calculator\",\n" +
@@ -35,16 +32,11 @@ public class VerificationEventTest {
                 "      \"$device_unique_id\" : \"A3D261E4-DE0A-470B-9E4A-720F3D3D22E6\",\n" +
                 "      \"$app_version\" : \"3.2.7\",\n" +
                 "  },\n" +
-                "  \"$status\"       : \"$pending\",\n" +
-                "  \"$verification_type\" : \"$sms\",\n" +
-                "  \"$verified_value\" : \"" + verifiedValue + "\",\n" +
-                "  \"$verified_event\" : \"" + verifiedEvent + "\",\n" +
-                "  \"$verified_entity_id\" : \"" + verifiedEntityId + "\",\n" +
-                "  \"$reason\" : \"" + reason + "\",\n" +
-                "  \"$ip\" : \"128.148.1.135\",\n" +
+                " \"$reason\" : \"$forced_reset\",\n" +
+                " \"$status\" : \"$success\",\n" +
+                " \"$ip\" : \"128.148.1.135\",\n" +
                 "}";
 
-        // Start a new mock server and enqueue a mock response.
         MockWebServer server = new MockWebServer();
         MockResponse response = new MockResponse();
         response.setResponseCode(HTTP_OK);
@@ -63,15 +55,11 @@ public class VerificationEventTest {
         client.setBaseUrl(baseUrl);
 
         // Build and execute the request against the mock server.
-        SiftRequest request = client.buildRequest(new VerificationFieldSet()
+        UpdatePasswordFieldSet fieldSet = new UpdatePasswordFieldSet()
                 .setUserId("billy_jones_301")
-                .setSessionId(sessionId)
-                .setStatus("$pending")
-                .setVerificationType("$sms")
-                .setVerifiedValue(verifiedValue)
-                .setReason(reason)
-                .setVerifiedEvent(verifiedEvent)
-                .setVerifiedEntityId(verifiedEntityId)
+                .setSessionId("gigtleqddo84l8cm15qe4il")
+                .setReason("$forced_reset")
+                .setStatus("$success")
                 .setIp("128.148.1.135")
                 .setApp(new App()
                         .setAppName("Calculator")
@@ -79,11 +67,12 @@ public class VerificationEventTest {
                         .setDeviceManufacturer("Apple")
                         .setDeviceModel("iPhone 4,2")
                         .setDeviceUniqueId("A3D261E4-DE0A-470B-9E4A-720F3D3D22E6")
-                        .setOperatingSystem("iOS")));
+                        .setOperatingSystem("iOS"));
 
+        SiftRequest request = client.buildRequest(fieldSet);
         SiftResponse siftResponse = request.send();
 
-        // Verify the request.
+        //Verify the request
         RecordedRequest request1 = server.takeRequest();
         Assert.assertEquals("POST", request1.getMethod());
         Assert.assertEquals("/v205/events", request1.getPath());
@@ -92,8 +81,7 @@ public class VerificationEventTest {
         // Verify the response.
         Assert.assertEquals(HTTP_OK, siftResponse.getHttpStatusCode());
         Assert.assertEquals(0, (int) siftResponse.getBody().getStatus());
-        JSONAssert.assertEquals(response.getBody().readUtf8(),
-                siftResponse.getBody().toJson(), true);
+        JSONAssert.assertEquals(response.getBody().readUtf8(), siftResponse.getBody().toJson(), true);
 
         server.shutdown();
     }

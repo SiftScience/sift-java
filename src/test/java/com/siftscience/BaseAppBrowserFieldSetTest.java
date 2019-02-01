@@ -25,9 +25,11 @@ import com.siftscience.model.UpdateCommentFieldSet;
 import com.siftscience.model.UpdateListingFieldSet;
 import com.siftscience.model.UpdateMessageFieldSet;
 import com.siftscience.model.UpdateOrderFieldSet;
+import com.siftscience.model.UpdatePasswordFieldSet;
 import com.siftscience.model.UpdatePostFieldSet;
 import com.siftscience.model.UpdateProfileFieldSet;
 import com.siftscience.model.UpdateReviewFieldSet;
+import com.siftscience.model.VerificationFieldSet;
 import okhttp3.HttpUrl;
 import okhttp3.mockwebserver.MockResponse;
 import okhttp3.mockwebserver.MockWebServer;
@@ -76,9 +78,11 @@ public class BaseAppBrowserFieldSetTest {
             UpdateListingFieldSet.class,
             UpdateMessageFieldSet.class,
             UpdateOrderFieldSet.class,
+            UpdatePasswordFieldSet.class,
             UpdatePostFieldSet.class,
             UpdateProfileFieldSet.class,
-            UpdateReviewFieldSet.class
+            UpdateReviewFieldSet.class,
+            VerificationFieldSet.class
         };
 
         for (Class<?> subclass : subclasses) {
