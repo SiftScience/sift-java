@@ -35,7 +35,7 @@ $ ./gradlew distZip   # Zip file saved to ./build/distributions/
 Create a SiftClient object with your API key. SiftClient is thread safe
 and can be used to access all supported APIs.
 ```java
-SiftClient client = new SiftClient("your_api_key");
+SiftClient client = new SiftClient("YOUR_API_KEY");
 ```
 
 ### Send Events

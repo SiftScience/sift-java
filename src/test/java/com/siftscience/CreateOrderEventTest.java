@@ -1,7 +1,16 @@
 package com.siftscience;
 
-import com.siftscience.model.*;
+import static java.net.HttpURLConnection.HTTP_OK;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+
+import com.siftscience.model.CreateOrderFieldSet;
+import com.siftscience.model.Item;
+import com.siftscience.model.PaymentMethod;
+import com.siftscience.model.Promotion;
 import okhttp3.HttpUrl;
+import okhttp3.OkHttpClient;
 import okhttp3.mockwebserver.MockResponse;
 import okhttp3.mockwebserver.MockWebServer;
 import okhttp3.mockwebserver.RecordedRequest;
@@ -9,12 +18,6 @@ import org.json.JSONException;
 import org.junit.Assert;
 import org.junit.Test;
 import org.skyscreamer.jsonassert.JSONAssert;
-
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-
-import static java.net.HttpURLConnection.HTTP_OK;
 
 public class CreateOrderEventTest {
 
@@ -25,7 +28,7 @@ public class CreateOrderEventTest {
         // The expected JSON payload of the request.
         String expectedRequestBody = "{\n" +
                 "  \"$type\"             : \"$create_order\",\n" +
-                "  \"$api_key\"          : \"your_api_key_here\",\n" +
+                "  \"$api_key\"          : \"YOUR_API_KEY\",\n" +
                 "  \"$user_id\"          : \"billy_jones_301\",\n" +
                 "\n" +
                 "  \"$session_id\"       : \"gigtleqddo84l8cm15qe4il\",\n" +
@@ -128,8 +131,10 @@ public class CreateOrderEventTest {
         HttpUrl baseUrl = server.url("");
 
         // Create a new client and link it to the mock server.
-        SiftClient client = new SiftClient("your_api_key_here");
-        client.setBaseUrl(baseUrl);
+        SiftClient client = new SiftClient("YOUR_API_KEY",
+            new OkHttpClient.Builder()
+                .addInterceptor(OkHttpUtils.urlRewritingInterceptor(server))
+                .build());
 
         // Build the request body.
         // Payment methods.

@@ -1,15 +1,16 @@
 package com.siftscience;
 
+import static java.net.HttpURLConnection.HTTP_OK;
+
 import com.siftscience.model.SecurityNotificationFieldSet;
 import okhttp3.HttpUrl;
+import okhttp3.OkHttpClient;
 import okhttp3.mockwebserver.MockResponse;
 import okhttp3.mockwebserver.MockWebServer;
 import okhttp3.mockwebserver.RecordedRequest;
 import org.junit.Assert;
 import org.junit.Test;
 import org.skyscreamer.jsonassert.JSONAssert;
-
-import static java.net.HttpURLConnection.HTTP_OK;
 
 /**
  * Unit tests around the Security notification events.
@@ -23,7 +24,7 @@ public class SecurityNotificationEventTest {
 
         String expectedRequestBody = "{\n" +
                 "  \"$type\"         : \"$security_notification\",\n" +
-                "  \"$api_key\"      : \"your_api_key_here\",\n" +
+                "  \"$api_key\"      : \"YOUR_API_KEY\",\n" +
                 "  \"$user_id\"      : \"billy_jones_301\",\n" +
                 "  \"$session_id\"   : \"" + sessionId + "\",\n" +
                 "  \"$notification_status\"       : \"$sent\",\n" +
@@ -46,8 +47,10 @@ public class SecurityNotificationEventTest {
         HttpUrl baseUrl = server.url("");
 
         // Create a new client and link it to the mock server.
-        SiftClient client = new SiftClient("your_api_key_here");
-        client.setBaseUrl(baseUrl);
+        SiftClient client = new SiftClient("YOUR_API_KEY",
+            new OkHttpClient.Builder()
+                .addInterceptor(OkHttpUtils.urlRewritingInterceptor(server))
+                .build());
 
         // Build and execute the request against the mock server.
         SecurityNotificationFieldSet fieldSet = new SecurityNotificationFieldSet()

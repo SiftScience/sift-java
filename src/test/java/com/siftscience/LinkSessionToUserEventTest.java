@@ -1,15 +1,16 @@
 package com.siftscience;
 
+import static java.net.HttpURLConnection.HTTP_OK;
+
 import com.siftscience.model.LinkSessionToUserFieldSet;
 import okhttp3.HttpUrl;
+import okhttp3.OkHttpClient;
 import okhttp3.mockwebserver.MockResponse;
 import okhttp3.mockwebserver.MockWebServer;
 import okhttp3.mockwebserver.RecordedRequest;
 import org.junit.Assert;
 import org.junit.Test;
 import org.skyscreamer.jsonassert.JSONAssert;
-
-import static java.net.HttpURLConnection.HTTP_OK;
 
 public class LinkSessionToUserEventTest {
     @Test
@@ -36,8 +37,10 @@ public class LinkSessionToUserEventTest {
         HttpUrl baseUrl = server.url("");
 
         // Create a new client and link it to the mock server.
-        SiftClient client = new SiftClient("209f490k25lb9021");
-        client.setBaseUrl(baseUrl);
+        SiftClient client = new SiftClient("209f490k25lb9021",
+            new OkHttpClient.Builder()
+                .addInterceptor(OkHttpUtils.urlRewritingInterceptor(server))
+                .build());
 
         // Build and execute the request against the mock server.
         SiftRequest request = client.buildRequest(new LinkSessionToUserFieldSet()

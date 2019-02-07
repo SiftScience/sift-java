@@ -1,20 +1,21 @@
 package com.siftscience;
 
+import static java.net.HttpURLConnection.HTTP_OK;
+import java.util.Arrays;
+
+import static com.siftscience.model.GetDecisionFieldSet.AbuseType.ACCOUNT_ABUSE;
+import static com.siftscience.model.GetDecisionFieldSet.AbuseType.ACCOUNT_TAKEOVER;
+import static com.siftscience.model.GetDecisionFieldSet.EntityType.ORDER;
+import static com.siftscience.model.GetDecisionFieldSet.EntityType.SESSION;
 import com.siftscience.model.GetDecisionFieldSet;
 import okhttp3.HttpUrl;
+import okhttp3.OkHttpClient;
 import okhttp3.mockwebserver.MockResponse;
 import okhttp3.mockwebserver.MockWebServer;
 import okhttp3.mockwebserver.RecordedRequest;
 import org.junit.Assert;
 import org.junit.Test;
 import org.skyscreamer.jsonassert.JSONAssert;
-
-import static com.siftscience.model.GetDecisionFieldSet.AbuseType.ACCOUNT_ABUSE;
-import static com.siftscience.model.GetDecisionFieldSet.AbuseType.ACCOUNT_TAKEOVER;
-import static com.siftscience.model.GetDecisionFieldSet.EntityType.ORDER;
-import static com.siftscience.model.GetDecisionFieldSet.EntityType.SESSION;
-import static java.net.HttpURLConnection.HTTP_OK;
-import java.util.Arrays;
 
 public class GetDecisionsTest {
     
@@ -58,8 +59,10 @@ public class GetDecisionsTest {
         baseUrl = server.url("");
 
         // Create a new client and link it to the mock server.
-        SiftClient client = new SiftClient("your_api_key");
-        client.setBaseUrl(baseUrl);
+        SiftClient client = new SiftClient("YOUR_API_KEY",
+            new OkHttpClient.Builder()
+                .addInterceptor(OkHttpUtils.urlRewritingInterceptor(server))
+                .build());
 
         // Build and execute the request against the mock server.
         GetDecisionsRequest getDecisionsRequest = client.buildRequest(new GetDecisionFieldSet()
@@ -78,7 +81,7 @@ public class GetDecisionsTest {
         Assert.assertEquals("/v3/accounts/" + accountId + "/decisions?entity_type=ORDER&limit=11" +
                 "&from=1&abuse_types=ACCOUNT_ABUSE,ACCOUNT_TAKEOVER",
                 request.getPath());
-        Assert.assertEquals(request.getHeader("Authorization"), "Basic eW91cl9hcGlfa2V5Og==");
+        Assert.assertEquals(request.getHeader("Authorization"), "Basic WU9VUl9BUElfS0VZOg==");
 
 
         // Verify the response was parsed correctly.
@@ -130,8 +133,10 @@ public class GetDecisionsTest {
         baseUrl = server.url("");
 
         // Create a new client and link it to the mock server.
-        SiftClient client = new SiftClient("your_api_key");
-        client.setBaseUrl(baseUrl);
+        SiftClient client = new SiftClient("YOUR_API_KEY",
+            new OkHttpClient.Builder()
+                .addInterceptor(OkHttpUtils.urlRewritingInterceptor(server))
+                .build());
 
         // Build and execute the request against the mock server.
         GetDecisionsRequest getDecisionsRequest = client.buildRequest(new GetDecisionFieldSet()
@@ -150,7 +155,7 @@ public class GetDecisionsTest {
         Assert.assertEquals("/v3/accounts/" + accountId + "/decisions?entity_type=SESSION&limit=11" +
                         "&from=1&abuse_types=ACCOUNT_ABUSE,ACCOUNT_TAKEOVER",
                 request.getPath());
-        Assert.assertEquals(request.getHeader("Authorization"), "Basic eW91cl9hcGlfa2V5Og==");
+        Assert.assertEquals(request.getHeader("Authorization"), "Basic WU9VUl9BUElfS0VZOg==");
 
 
         // Verify the response was parsed correctly.

@@ -1,15 +1,16 @@
 package com.siftscience;
 
+import static java.net.HttpURLConnection.HTTP_OK;
+
 import com.siftscience.model.DecisionStatusFieldSet;
 import okhttp3.HttpUrl;
+import okhttp3.OkHttpClient;
 import okhttp3.mockwebserver.MockResponse;
 import okhttp3.mockwebserver.MockWebServer;
 import okhttp3.mockwebserver.RecordedRequest;
 import org.junit.Assert;
 import org.junit.Test;
 import org.skyscreamer.jsonassert.JSONAssert;
-
-import static java.net.HttpURLConnection.HTTP_OK;
 
 public class DecisionStatusTest {
     @Test
@@ -65,8 +66,10 @@ public class DecisionStatusTest {
         baseUrl = server.url("");
 
         // Create a new client and link it to the mock server.
-        SiftClient client = new SiftClient("your_api_key");
-        client.setBaseUrl(baseUrl);
+        SiftClient client = new SiftClient("YOUR_API_KEY",
+            new OkHttpClient.Builder()
+                .addInterceptor(OkHttpUtils.urlRewritingInterceptor(server))
+                .build());
 
         // Build and execute the request against the mock server.
         DecisionStatusRequest request = client.buildRequest(
@@ -81,7 +84,7 @@ public class DecisionStatusTest {
         Assert.assertEquals("GET", request1.getMethod());
         Assert.assertEquals("/v3/accounts/your_account_id/orders/someid/decisions",
                 request1.getPath());
-        Assert.assertEquals(request1.getHeader("Authorization"), "Basic eW91cl9hcGlfa2V5Og==");
+        Assert.assertEquals(request1.getHeader("Authorization"), "Basic WU9VUl9BUElfS0VZOg==");
 
         // Verify the response was parsed correctly.
         Assert.assertEquals(HTTP_OK, siftResponse.getHttpStatusCode());
@@ -114,8 +117,10 @@ public class DecisionStatusTest {
         baseUrl = server.url("");
 
         // Create a new client and link it to the mock server.
-        SiftClient client = new SiftClient("your_api_key");
-        client.setBaseUrl(baseUrl);
+        SiftClient client = new SiftClient("YOUR_API_KEY",
+            new OkHttpClient.Builder()
+                .addInterceptor(OkHttpUtils.urlRewritingInterceptor(server))
+                .build());
 
         // Build and execute the request against the mock server.
         DecisionStatusRequest request = client.buildRequest(
@@ -131,7 +136,7 @@ public class DecisionStatusTest {
         Assert.assertEquals("GET", request1.getMethod());
         Assert.assertEquals("/v3/accounts/your_account_id/users/some_user/content/someid/decisions",
             request1.getPath());
-        Assert.assertEquals(request1.getHeader("Authorization"), "Basic eW91cl9hcGlfa2V5Og==");
+        Assert.assertEquals(request1.getHeader("Authorization"), "Basic WU9VUl9BUElfS0VZOg==");
 
         // Verify the response was parsed correctly.
         Assert.assertEquals(HTTP_OK, siftResponse.getHttpStatusCode());

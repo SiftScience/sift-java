@@ -1,6 +1,10 @@
 package com.siftscience;
 
 import static java.net.HttpURLConnection.HTTP_OK;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 
 import com.siftscience.model.Address;
 import com.siftscience.model.Comment;
@@ -24,6 +28,7 @@ import com.siftscience.model.UpdatePostFieldSet;
 import com.siftscience.model.UpdateProfileFieldSet;
 import com.siftscience.model.UpdateReviewFieldSet;
 import okhttp3.HttpUrl;
+import okhttp3.OkHttpClient;
 import okhttp3.mockwebserver.MockResponse;
 import okhttp3.mockwebserver.MockWebServer;
 import okhttp3.mockwebserver.RecordedRequest;
@@ -31,18 +36,13 @@ import org.junit.Assert;
 import org.junit.Test;
 import org.skyscreamer.jsonassert.JSONAssert;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
-
 public class ContentEventTest {
 
     @Test
     public void testCreateComment() throws Exception {
         String expectedRequestBody = "{\n" +
             "  \"$type\"       : \"$create_content\",\n" +
-            "  \"$api_key\"    : \"YOUR_API_KEY_HERE\",\n" +
+            "  \"$api_key\"    : \"YOUR_API_KEY\",\n" +
             "  \"$user_id\"    : \"fyw3989sjpqr71\",\n" +
             "  \"$content_id\"       : \"comment-23412\",\n" +
             "\n" +
@@ -77,8 +77,10 @@ public class ContentEventTest {
         HttpUrl baseUrl = server.url("");
 
         // Create a new client and link it to the mock server.
-        SiftClient client = new SiftClient("YOUR_API_KEY_HERE");
-        client.setBaseUrl(baseUrl);
+        SiftClient client = new SiftClient("YOUR_API_KEY",
+            new OkHttpClient.Builder()
+                .addInterceptor(OkHttpUtils.urlRewritingInterceptor(server))
+                .build());
 
         Image image = new Image()
             .setDescription("An old picture")
@@ -97,7 +99,7 @@ public class ContentEventTest {
 
         // Build and execute the request against the mock server.
         SiftRequest request = client.buildRequest(new CreateCommentFieldSet()
-            .setApiKey("YOUR_API_KEY_HERE")
+            .setApiKey("YOUR_API_KEY")
             .setUserId("fyw3989sjpqr71")
             .setContentId("comment-23412")
             .setSessionId("a234ksjfgn435sfg")
@@ -127,7 +129,7 @@ public class ContentEventTest {
     public void testCreateListing() throws Exception {
         String expectedRequestBody = "{\n" +
             "  \"$type\"       : \"$create_content\",\n" +
-            "  \"$api_key\"    : \"YOUR_API_KEY_HERE\",\n" +
+            "  \"$api_key\"    : \"YOUR_API_KEY\",\n" +
             "  \"$user_id\"    : \"fyw3989sjpqr71\",\n" +
             "  \"$content_id\"       : \"comment-23412\",\n" +
             "\n" +
@@ -182,8 +184,10 @@ public class ContentEventTest {
         HttpUrl baseUrl = server.url("");
 
         // Create a new client and link it to the mock server.
-        SiftClient client = new SiftClient("YOUR_API_KEY_HERE");
-        client.setBaseUrl(baseUrl);
+        SiftClient client = new SiftClient("YOUR_API_KEY",
+            new OkHttpClient.Builder()
+                .addInterceptor(OkHttpUtils.urlRewritingInterceptor(server))
+                .build());
 
         Image image = new Image()
             .setDescription("Billy's picture")
@@ -224,7 +228,7 @@ public class ContentEventTest {
 
         // Build and execute the request against the mock server.
         SiftRequest request = client.buildRequest(new CreateListingFieldSet()
-            .setApiKey("YOUR_API_KEY_HERE")
+            .setApiKey("YOUR_API_KEY")
             .setUserId("fyw3989sjpqr71")
             .setContentId("comment-23412")
             .setSessionId("a234ksjfgn435sfg")
@@ -253,7 +257,7 @@ public class ContentEventTest {
     public void testCreateMessage() throws Exception {
         String expectedRequestBody = "{\n" +
             "  \"$type\"       : \"$create_content\",\n" +
-            "  \"$api_key\"    : \"YOUR_API_KEY_HERE\",\n" +
+            "  \"$api_key\"    : \"YOUR_API_KEY\",\n" +
             "  \"$user_id\"    : \"fyw3989sjpqr71\",\n" +
             "  \"$content_id\"       : \"comment-23412\",\n" +
             "\n" +
@@ -287,8 +291,10 @@ public class ContentEventTest {
         HttpUrl baseUrl = server.url("");
 
         // Create a new client and link it to the mock server.
-        SiftClient client = new SiftClient("YOUR_API_KEY_HERE");
-        client.setBaseUrl(baseUrl);
+        SiftClient client = new SiftClient("YOUR_API_KEY",
+            new OkHttpClient.Builder()
+                .addInterceptor(OkHttpUtils.urlRewritingInterceptor(server))
+                .build());
 
         Image image = new Image()
             .setDescription("My hike today!")
@@ -306,7 +312,7 @@ public class ContentEventTest {
 
         // Build and execute the request against the mock server.
         SiftRequest request = client.buildRequest(new CreateMessageFieldSet()
-            .setApiKey("YOUR_API_KEY_HERE")
+            .setApiKey("YOUR_API_KEY")
             .setUserId("fyw3989sjpqr71")
             .setContentId("comment-23412")
             .setSessionId("a234ksjfgn435sfg")
@@ -335,7 +341,7 @@ public class ContentEventTest {
     public void testCreateProfile() throws Exception {
         String expectedRequestBody = "{\n" +
             "  \"$type\"       : \"$create_content\",\n" +
-            "  \"$api_key\"    : \"YOUR_API_KEY_HERE\",\n" +
+            "  \"$api_key\"    : \"YOUR_API_KEY\",\n" +
             "  \"$user_id\"    : \"fyw3989sjpqr71\",\n" +
             "  \"$content_id\"       : \"comment-23412\",\n" +
             "\n" +
@@ -377,8 +383,10 @@ public class ContentEventTest {
         HttpUrl baseUrl = server.url("");
 
         // Create a new client and link it to the mock server.
-        SiftClient client = new SiftClient("YOUR_API_KEY_HERE");
-        client.setBaseUrl(baseUrl);
+        SiftClient client = new SiftClient("YOUR_API_KEY",
+            new OkHttpClient.Builder()
+                .addInterceptor(OkHttpUtils.urlRewritingInterceptor(server))
+                .build());
 
         Image image = new Image()
             .setDescription("Alex’s picture")
@@ -405,7 +413,7 @@ public class ContentEventTest {
 
         // Build and execute the request against the mock server.
         SiftRequest request = client.buildRequest(new CreateProfileFieldSet()
-            .setApiKey("YOUR_API_KEY_HERE")
+            .setApiKey("YOUR_API_KEY")
             .setUserId("fyw3989sjpqr71")
             .setContentId("comment-23412")
             .setSessionId("a234ksjfgn435sfg")
@@ -434,7 +442,7 @@ public class ContentEventTest {
     public void testCreatePost() throws Exception {
         String expectedRequestBody = "{\n" +
             "  \"$type\"       : \"$create_content\",\n" +
-            "  \"$api_key\"    : \"YOUR_API_KEY_HERE\",\n" +
+            "  \"$api_key\"    : \"YOUR_API_KEY\",\n" +
             "  \"$user_id\"    : \"fyw3989sjpqr71\",\n" +
             "  \"$content_id\"       : \"comment-23412\",\n" +
             "\n" +
@@ -483,8 +491,10 @@ public class ContentEventTest {
         HttpUrl baseUrl = server.url("");
 
         // Create a new client and link it to the mock server.
-        SiftClient client = new SiftClient("YOUR_API_KEY_HERE");
-        client.setBaseUrl(baseUrl);
+        SiftClient client = new SiftClient("YOUR_API_KEY",
+            new OkHttpClient.Builder()
+                .addInterceptor(OkHttpUtils.urlRewritingInterceptor(server))
+                .build());
 
         Image image = new Image()
             .setDescription("An old picture")
@@ -521,7 +531,7 @@ public class ContentEventTest {
 
         // Build and execute the request against the mock server.
         SiftRequest request = client.buildRequest(new CreatePostFieldSet()
-            .setApiKey("YOUR_API_KEY_HERE")
+            .setApiKey("YOUR_API_KEY")
             .setUserId("fyw3989sjpqr71")
             .setContentId("comment-23412")
             .setSessionId("a234ksjfgn435sfg")
@@ -550,7 +560,7 @@ public class ContentEventTest {
     public void testCreateReview() throws Exception {
         String expectedRequestBody = "{\n" +
             "  \"$type\"       : \"$create_content\",\n" +
-            "  \"$api_key\"    : \"YOUR_API_KEY_HERE\",\n" +
+            "  \"$api_key\"    : \"YOUR_API_KEY\",\n" +
             "  \"$user_id\"    : \"fyw3989sjpqr71\",\n" +
             "  \"$content_id\"       : \"comment-23412\",\n" +
             "\n" +
@@ -593,8 +603,10 @@ public class ContentEventTest {
         HttpUrl baseUrl = server.url("");
 
         // Create a new client and link it to the mock server.
-        SiftClient client = new SiftClient("YOUR_API_KEY_HERE");
-        client.setBaseUrl(baseUrl);
+        SiftClient client = new SiftClient("YOUR_API_KEY",
+            new OkHttpClient.Builder()
+                .addInterceptor(OkHttpUtils.urlRewritingInterceptor(server))
+                .build());
 
         Image image = new Image()
             .setDescription("Calamari tacos.")
@@ -621,7 +633,7 @@ public class ContentEventTest {
 
         // Build and execute the request against the mock server.
         SiftRequest request = client.buildRequest(new CreateReviewFieldSet()
-            .setApiKey("YOUR_API_KEY_HERE")
+            .setApiKey("YOUR_API_KEY")
             .setUserId("fyw3989sjpqr71")
             .setContentId("comment-23412")
             .setSessionId("a234ksjfgn435sfg")
@@ -650,7 +662,7 @@ public class ContentEventTest {
     public void testUpdateComment() throws Exception {
         String expectedRequestBody = "{\n" +
             "  \"$type\"       : \"$update_content\",\n" +
-            "  \"$api_key\"    : \"YOUR_API_KEY_HERE\",\n" +
+            "  \"$api_key\"    : \"YOUR_API_KEY\",\n" +
             "  \"$user_id\"    : \"fyw3989sjpqr71\",\n" +
             "  \"$content_id\"       : \"comment-23412\",\n" +
             "\n" +
@@ -686,8 +698,10 @@ public class ContentEventTest {
         HttpUrl baseUrl = server.url("");
 
         // Create a new client and link it to the mock server.
-        SiftClient client = new SiftClient("YOUR_API_KEY_HERE");
-        client.setBaseUrl(baseUrl);
+        SiftClient client = new SiftClient("YOUR_API_KEY",
+            new OkHttpClient.Builder()
+                .addInterceptor(OkHttpUtils.urlRewritingInterceptor(server))
+                .build());
 
         Image image = new Image()
             .setDescription("An old picture")
@@ -706,7 +720,7 @@ public class ContentEventTest {
 
         // Build and execute the request against the mock server.
         SiftRequest request = client.buildRequest(new UpdateCommentFieldSet()
-            .setApiKey("YOUR_API_KEY_HERE")
+            .setApiKey("YOUR_API_KEY")
             .setUserId("fyw3989sjpqr71")
             .setContentId("comment-23412")
             .setSessionId("a234ksjfgn435sfg")
@@ -736,7 +750,7 @@ public class ContentEventTest {
     public void testUpdateListing() throws Exception {
         String expectedRequestBody = "{\n" +
             "  \"$type\"       : \"$update_content\",\n" +
-            "  \"$api_key\"    : \"YOUR_API_KEY_HERE\",\n" +
+            "  \"$api_key\"    : \"YOUR_API_KEY\",\n" +
             "  \"$user_id\"    : \"fyw3989sjpqr71\",\n" +
             "  \"$content_id\"       : \"comment-23412\",\n" +
             "\n" +
@@ -791,8 +805,10 @@ public class ContentEventTest {
         HttpUrl baseUrl = server.url("");
 
         // Create a new client and link it to the mock server.
-        SiftClient client = new SiftClient("YOUR_API_KEY_HERE");
-        client.setBaseUrl(baseUrl);
+        SiftClient client = new SiftClient("YOUR_API_KEY",
+            new OkHttpClient.Builder()
+                .addInterceptor(OkHttpUtils.urlRewritingInterceptor(server))
+                .build());
 
         Image image = new Image()
             .setDescription("Billy's picture")
@@ -833,7 +849,7 @@ public class ContentEventTest {
 
         // Build and execute the request against the mock server.
         SiftRequest request = client.buildRequest(new UpdateListingFieldSet()
-            .setApiKey("YOUR_API_KEY_HERE")
+            .setApiKey("YOUR_API_KEY")
             .setUserId("fyw3989sjpqr71")
             .setContentId("comment-23412")
             .setSessionId("a234ksjfgn435sfg")
@@ -862,7 +878,7 @@ public class ContentEventTest {
     public void testUpdateMessage() throws Exception {
         String expectedRequestBody = "{\n" +
             "  \"$type\"       : \"$update_content\",\n" +
-            "  \"$api_key\"    : \"YOUR_API_KEY_HERE\",\n" +
+            "  \"$api_key\"    : \"YOUR_API_KEY\",\n" +
             "  \"$user_id\"    : \"fyw3989sjpqr71\",\n" +
             "  \"$content_id\"       : \"comment-23412\",\n" +
             "\n" +
@@ -898,8 +914,10 @@ public class ContentEventTest {
         HttpUrl baseUrl = server.url("");
 
         // Create a new client and link it to the mock server.
-        SiftClient client = new SiftClient("YOUR_API_KEY_HERE");
-        client.setBaseUrl(baseUrl);
+        SiftClient client = new SiftClient("YOUR_API_KEY",
+            new OkHttpClient.Builder()
+                .addInterceptor(OkHttpUtils.urlRewritingInterceptor(server))
+                .build());
 
         Image image = new Image()
             .setDescription("My hike today!")
@@ -919,7 +937,7 @@ public class ContentEventTest {
 
         // Build and execute the request against the mock server.
         SiftRequest request = client.buildRequest(new UpdateMessageFieldSet()
-            .setApiKey("YOUR_API_KEY_HERE")
+            .setApiKey("YOUR_API_KEY")
             .setUserId("fyw3989sjpqr71")
             .setContentId("comment-23412")
             .setSessionId("a234ksjfgn435sfg")
@@ -948,7 +966,7 @@ public class ContentEventTest {
     public void testUpdateProfile() throws Exception {
         String expectedRequestBody = "{\n" +
             "  \"$type\"       : \"$update_content\",\n" +
-            "  \"$api_key\"    : \"YOUR_API_KEY_HERE\",\n" +
+            "  \"$api_key\"    : \"YOUR_API_KEY\",\n" +
             "  \"$user_id\"    : \"fyw3989sjpqr71\",\n" +
             "  \"$content_id\"       : \"comment-23412\",\n" +
             "\n" +
@@ -990,8 +1008,10 @@ public class ContentEventTest {
         HttpUrl baseUrl = server.url("");
 
         // Create a new client and link it to the mock server.
-        SiftClient client = new SiftClient("YOUR_API_KEY_HERE");
-        client.setBaseUrl(baseUrl);
+        SiftClient client = new SiftClient("YOUR_API_KEY",
+            new OkHttpClient.Builder()
+                .addInterceptor(OkHttpUtils.urlRewritingInterceptor(server))
+                .build());
 
         Image image = new Image()
             .setDescription("Alex’s picture")
@@ -1018,7 +1038,7 @@ public class ContentEventTest {
 
         // Build and execute the request against the mock server.
         SiftRequest request = client.buildRequest(new UpdateProfileFieldSet()
-            .setApiKey("YOUR_API_KEY_HERE")
+            .setApiKey("YOUR_API_KEY")
             .setUserId("fyw3989sjpqr71")
             .setContentId("comment-23412")
             .setSessionId("a234ksjfgn435sfg")
@@ -1047,7 +1067,7 @@ public class ContentEventTest {
     public void testUpdatePost() throws Exception {
         String expectedRequestBody = "{\n" +
             "  \"$type\"       : \"$update_content\",\n" +
-            "  \"$api_key\"    : \"YOUR_API_KEY_HERE\",\n" +
+            "  \"$api_key\"    : \"YOUR_API_KEY\",\n" +
             "  \"$user_id\"    : \"fyw3989sjpqr71\",\n" +
             "  \"$content_id\"       : \"comment-23412\",\n" +
             "\n" +
@@ -1096,8 +1116,10 @@ public class ContentEventTest {
         HttpUrl baseUrl = server.url("");
 
         // Create a new client and link it to the mock server.
-        SiftClient client = new SiftClient("YOUR_API_KEY_HERE");
-        client.setBaseUrl(baseUrl);
+        SiftClient client = new SiftClient("YOUR_API_KEY",
+            new OkHttpClient.Builder()
+                .addInterceptor(OkHttpUtils.urlRewritingInterceptor(server))
+                .build());
 
         Image image = new Image()
             .setDescription("An old picture")
@@ -1134,7 +1156,7 @@ public class ContentEventTest {
 
         // Build and execute the request against the mock server.
         SiftRequest request = client.buildRequest(new UpdatePostFieldSet()
-            .setApiKey("YOUR_API_KEY_HERE")
+            .setApiKey("YOUR_API_KEY")
             .setUserId("fyw3989sjpqr71")
             .setContentId("comment-23412")
             .setSessionId("a234ksjfgn435sfg")
@@ -1163,7 +1185,7 @@ public class ContentEventTest {
     public void testUpdateReview() throws Exception {
         String expectedRequestBody = "{\n" +
             "  \"$type\"       : \"$update_content\",\n" +
-            "  \"$api_key\"    : \"YOUR_API_KEY_HERE\",\n" +
+            "  \"$api_key\"    : \"YOUR_API_KEY\",\n" +
             "  \"$user_id\"    : \"fyw3989sjpqr71\",\n" +
             "  \"$content_id\"       : \"comment-23412\",\n" +
             "\n" +
@@ -1206,8 +1228,10 @@ public class ContentEventTest {
         HttpUrl baseUrl = server.url("");
 
         // Create a new client and link it to the mock server.
-        SiftClient client = new SiftClient("YOUR_API_KEY_HERE");
-        client.setBaseUrl(baseUrl);
+        SiftClient client = new SiftClient("YOUR_API_KEY",
+            new OkHttpClient.Builder()
+                .addInterceptor(OkHttpUtils.urlRewritingInterceptor(server))
+                .build());
 
         Image image = new Image()
             .setDescription("Calamari tacos.")
@@ -1234,7 +1258,7 @@ public class ContentEventTest {
 
         // Build and execute the request against the mock server.
         SiftRequest request = client.buildRequest(new UpdateReviewFieldSet()
-            .setApiKey("YOUR_API_KEY_HERE")
+            .setApiKey("YOUR_API_KEY")
             .setUserId("fyw3989sjpqr71")
             .setContentId("comment-23412")
             .setSessionId("a234ksjfgn435sfg")

@@ -1,8 +1,13 @@
 package com.siftscience;
 
+import static java.net.HttpURLConnection.HTTP_OK;
+import java.util.ArrayList;
+import java.util.List;
+
 import com.siftscience.model.AddPromotionFieldSet;
 import com.siftscience.model.Promotion;
 import okhttp3.HttpUrl;
+import okhttp3.OkHttpClient;
 import okhttp3.mockwebserver.MockResponse;
 import okhttp3.mockwebserver.MockWebServer;
 import okhttp3.mockwebserver.RecordedRequest;
@@ -10,17 +15,12 @@ import org.junit.Assert;
 import org.junit.Test;
 import org.skyscreamer.jsonassert.JSONAssert;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import static java.net.HttpURLConnection.HTTP_OK;
-
 public class AddPromotionEventTest {
     @Test
     public void testAddPromotion() throws Exception {
         String expectedRequestBody = "{\n" +
                 "  \"$type\"       : \"$add_promotion\",\n" +
-                "  \"$api_key\"    : \"your_api_key\",\n" +
+                "  \"$api_key\"    : \"YOUR_API_KEY\",\n" +
                 "  \"$user_id\"    : \"billy_jones_301\",\n" +
                 "\n" +
                 "  \"$promotions\" : [\n" +
@@ -52,8 +52,10 @@ public class AddPromotionEventTest {
         HttpUrl baseUrl = server.url("");
 
         // Create a new client and link it to the mock server.
-        SiftClient client = new SiftClient("your_api_key");
-        client.setBaseUrl(baseUrl);
+        SiftClient client = new SiftClient("YOUR_API_KEY",
+            new OkHttpClient.Builder()
+                .addInterceptor(OkHttpUtils.urlRewritingInterceptor(server))
+                .build());
 
         // Sample promotions.
         List<Promotion> promotions = new ArrayList<>();
