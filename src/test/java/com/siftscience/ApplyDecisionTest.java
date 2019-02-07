@@ -1,5 +1,8 @@
 package com.siftscience;
 
+import static java.net.HttpURLConnection.HTTP_OK;
+
+import static com.siftscience.model.ApplyDecisionFieldSet.DecisionSource;
 import com.siftscience.model.ApplyDecisionFieldSet;
 import okhttp3.HttpUrl;
 import okhttp3.mockwebserver.MockResponse;
@@ -8,9 +11,6 @@ import okhttp3.mockwebserver.RecordedRequest;
 import org.junit.Assert;
 import org.junit.Test;
 import org.skyscreamer.jsonassert.JSONAssert;
-
-import static com.siftscience.model.ApplyDecisionFieldSet.*;
-import static java.net.HttpURLConnection.HTTP_OK;
 
 public class ApplyDecisionTest {
 
@@ -51,7 +51,7 @@ public class ApplyDecisionTest {
 
         // Create a new client and link it to the mock server.
         SiftClient client = new SiftClient("your_api_key");
-        client.setBaseApi3Url(baseApi3Url);
+        client.setBaseUrl(baseApi3Url);
 
         // Build and execute the request against the mock server.
         ApplyDecisionRequest request = client.buildRequest(
@@ -115,7 +115,7 @@ public class ApplyDecisionTest {
 
         // Create a new client and link it to the mock server.
         SiftClient client = new SiftClient("your_api_key");
-        client.setBaseApi3Url(baseApi3Url);
+        client.setBaseUrl(baseApi3Url);
 
         // Build and execute the request against the mock server.
         ApplyDecisionRequest request = client.buildRequest(
@@ -187,7 +187,7 @@ public class ApplyDecisionTest {
 
         // Create a new client and link it to the mock server.
         SiftClient client = new SiftClient("your_api_key");
-        client.setBaseApi3Url(baseApi3Url);
+        client.setBaseUrl(baseApi3Url);
 
         // Build and execute the request against the mock server.
         ApplyDecisionRequest request = client.buildRequest(

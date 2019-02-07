@@ -213,7 +213,7 @@ public class WorkflowStatusTest {
 
         // Create a new client and link it to the mock server.
         SiftClient client = new SiftClient("your_api_key");
-        client.setBaseApi3Url(baseUrl);
+        client.setBaseUrl(baseUrl);
 
         // Build and execute the request against the mock server.
         WorkflowStatusRequest request = client.buildRequest(

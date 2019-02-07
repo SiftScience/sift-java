@@ -41,8 +41,7 @@ import okhttp3.OkHttpClient;
 public class SiftClient {
     private String apiKey;
     private OkHttpClient okClient;
-    private HttpUrl baseUrl = HttpUrl.parse("https://api.siftscience.com");
-    private HttpUrl baseApi3Url = HttpUrl.parse("https://api3.siftscience.com");
+    private HttpUrl baseUrl = HttpUrl.parse("https://api.sift.com");
 
     public SiftClient(String apiKey) {
         this(apiKey, new OkHttpClient());
@@ -64,17 +63,17 @@ public class SiftClient {
 
     public ApplyDecisionRequest buildRequest(ApplyDecisionFieldSet fields) {
         setupApiKey(fields);
-        return new ApplyDecisionRequest(baseApi3Url, okClient, fields);
+        return new ApplyDecisionRequest(baseUrl, okClient, fields);
     }
 
     public GetDecisionsRequest buildRequest(GetDecisionFieldSet fields) {
         setupApiKey(fields);
-        return new GetDecisionsRequest(baseApi3Url, okClient, fields);
+        return new GetDecisionsRequest(baseUrl, okClient, fields);
     }
 
     public DecisionStatusRequest buildRequest(DecisionStatusFieldSet fields) {
         setupApiKey(fields);
-        return new DecisionStatusRequest(baseApi3Url, okClient, fields);
+        return new DecisionStatusRequest(baseUrl, okClient, fields);
     }
 
     public LabelRequest buildRequest(LabelFieldSet fields) {
@@ -99,7 +98,7 @@ public class SiftClient {
 
     public WorkflowStatusRequest buildRequest(WorkflowStatusFieldSet fields) {
         setupApiKey(fields);
-        return new WorkflowStatusRequest(baseApi3Url, okClient, fields);
+        return new WorkflowStatusRequest(baseUrl, okClient, fields);
     }
 
     private void setupApiKey(FieldSet fields) {
@@ -111,10 +110,6 @@ public class SiftClient {
     // For testing.
     SiftClient setBaseUrl(HttpUrl baseUrl) {
         this.baseUrl = baseUrl;
-        return this;
-    }
-    SiftClient setBaseApi3Url(HttpUrl baseApi3Url) {
-        this.baseApi3Url = baseApi3Url;
         return this;
     }
 }
