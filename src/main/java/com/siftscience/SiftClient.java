@@ -1,10 +1,15 @@
 package com.siftscience;
 
-import com.siftscience.model.*;
+import com.siftscience.model.ApplyDecisionFieldSet;
+import com.siftscience.model.DecisionStatusFieldSet;
+import com.siftscience.model.GetDecisionFieldSet;
+import com.siftscience.model.LabelFieldSet;
+import com.siftscience.model.ScoreFieldSet;
+import com.siftscience.model.UnlabelFieldSet;
+import com.siftscience.model.UserScoreFieldSet;
+import com.siftscience.model.WorkflowStatusFieldSet;
 import okhttp3.HttpUrl;
 import okhttp3.OkHttpClient;
-
-import java.util.List;
 
 /**
  * Use a SiftClient to access all supported Sift Science APIs. It may be used concurrently from
@@ -35,12 +40,17 @@ import java.util.List;
  */
 public class SiftClient {
     private String apiKey;
-    private OkHttpClient okClient = new OkHttpClient();
+    private OkHttpClient okClient;
     private HttpUrl baseUrl = HttpUrl.parse("https://api.siftscience.com");
     private HttpUrl baseApi3Url = HttpUrl.parse("https://api3.siftscience.com");
 
     public SiftClient(String apiKey) {
+        this(apiKey, new OkHttpClient());
+    }
+
+    public SiftClient(String apiKey, OkHttpClient okHttpClient) {
         this.apiKey = apiKey;
+        this.okClient = okHttpClient;
     }
 
     public String getApiKey() {
