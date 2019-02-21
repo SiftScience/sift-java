@@ -7,6 +7,7 @@ import com.siftscience.model.AddPromotionFieldSet;
 import com.siftscience.model.App;
 import com.siftscience.model.BaseAppBrowserFieldSet;
 import com.siftscience.model.Browser;
+import com.siftscience.model.ContentStatusFieldSet;
 import com.siftscience.model.CreateAccountFieldSet;
 import com.siftscience.model.CreateCommentFieldSet;
 import com.siftscience.model.CreateListingFieldSet;
@@ -18,7 +19,9 @@ import com.siftscience.model.CreateReviewFieldSet;
 import com.siftscience.model.CustomEventFieldSet;
 import com.siftscience.model.LoginFieldSet;
 import com.siftscience.model.LogoutFieldSet;
+import com.siftscience.model.OrderStatusFieldSet;
 import com.siftscience.model.RemoveItemFromCartFieldSet;
+import com.siftscience.model.SecurityNotificationFieldSet;
 import com.siftscience.model.TransactionFieldSet;
 import com.siftscience.model.UpdateAccountFieldSet;
 import com.siftscience.model.UpdateCommentFieldSet;
@@ -60,6 +63,7 @@ public class BaseAppBrowserFieldSetTest {
         Class<?> [] subclasses = {
             AddItemToCartFieldSet.class,
             AddPromotionFieldSet.class,
+            ContentStatusFieldSet.class,
             CreateAccountFieldSet.class,
             CreateCommentFieldSet.class,
             CreateListingFieldSet.class,
@@ -71,7 +75,9 @@ public class BaseAppBrowserFieldSetTest {
             CustomEventFieldSet.class,
             LoginFieldSet.class,
             LogoutFieldSet.class,
+            OrderStatusFieldSet.class,
             RemoveItemFromCartFieldSet.class,
+            SecurityNotificationFieldSet.class,
             TransactionFieldSet.class,
             UpdateAccountFieldSet.class,
             UpdateCommentFieldSet.class,

@@ -3,7 +3,8 @@ package com.siftscience.model;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class SecurityNotificationFieldSet extends EventsApiRequestFieldSet<SecurityNotificationFieldSet> {
+public class SecurityNotificationFieldSet extends
+    BaseAppBrowserFieldSet<SecurityNotificationFieldSet> {
     public static SecurityNotificationFieldSet fromJson(String json) {
         return gson.fromJson(json, SecurityNotificationFieldSet.class);
     }
