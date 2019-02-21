@@ -5,7 +5,7 @@ apply plugin: 'signing'
 apply plugin: 'java-library-distribution'
 
 group = 'com.siftscience'
-version = '2.6.0'
+version = '2.7.0'
 sourceCompatibility = 1.7
 targetCompatibility = 1.7
 
