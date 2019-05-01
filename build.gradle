@@ -50,6 +50,9 @@ artifacts {
 }
 
 signing {
+    required {
+        System.getenv('CIRCLE_BRANCH') == null
+    }
     sign configurations.archives
 }
 
