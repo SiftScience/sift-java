@@ -40,7 +40,7 @@ public class LabelTest {
         HttpUrl baseUrl = server.url("");
 
         // Create a new client and link it to the mock server.
-        SiftClient client = new SiftClient("23b87a99k099fc98");
+        SiftClient client = new SiftClient("23b87a99k099fc98", "account_id");
         client.setBaseUrl(baseUrl);
 
         // Build and execute the request against the mock server.

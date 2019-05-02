@@ -53,7 +53,7 @@ public class LoginEventTest {
         HttpUrl baseUrl = server.url("");
 
         // Create a new client and link it to the mock server.
-        SiftClient client = new SiftClient("your_api_key_here");
+        SiftClient client = new SiftClient("your_api_key_here", "your_account_id_here");
         client.setBaseUrl(baseUrl);
 
         // Build and execute the request against the mock server.
@@ -115,7 +115,7 @@ public class LoginEventTest {
         HttpUrl baseUrl = server.url("");
 
         // Create a new client and link it to the mock server.
-        SiftClient client = new SiftClient("your_api_key_here");
+        SiftClient client = new SiftClient("your_api_key_here", "your_account_id_here");
         client.setBaseUrl(baseUrl);
 
         // Build and execute the request against the mock server.

@@ -65,13 +65,12 @@ public class DecisionStatusTest {
         baseUrl = server.url("");
 
         // Create a new client and link it to the mock server.
-        SiftClient client = new SiftClient("your_api_key");
-        client.setBaseApi3Url(baseUrl);
+        SiftClient client = new SiftClient("your_api_key", "your_account_id");
+        client.setBaseUrl(baseUrl);
 
         // Build and execute the request against the mock server.
         DecisionStatusRequest request = client.buildRequest(
                 new DecisionStatusFieldSet()
-                        .setAccountId("your_account_id")
                         .setEntity(DecisionStatusFieldSet.ENTITY_ORDERS)
                         .setEntityId("someid"));
         DecisionStatusResponse siftResponse = request.send();
@@ -114,13 +113,12 @@ public class DecisionStatusTest {
         baseUrl = server.url("");
 
         // Create a new client and link it to the mock server.
-        SiftClient client = new SiftClient("your_api_key");
-        client.setBaseApi3Url(baseUrl);
+        SiftClient client = new SiftClient("your_api_key", "your_account_id");
+        client.setBaseUrl(baseUrl);
 
         // Build and execute the request against the mock server.
         DecisionStatusRequest request = client.buildRequest(
             new DecisionStatusFieldSet()
-                .setAccountId("your_account_id")
                 .setEntity(DecisionStatusFieldSet.ENTITY_CONTENT)
                 .setEntityId("someid")
                 .setUserId("some_user"));

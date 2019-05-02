@@ -7,21 +7,20 @@ import okhttp3.*;
 import java.io.IOException;
 
 public class WorkflowStatusRequest extends SiftRequest<WorkflowStatusResponse> {
-    WorkflowStatusRequest(HttpUrl baseUrl, OkHttpClient okClient, FieldSet fields) {
-        super(baseUrl, okClient, fields);
+    WorkflowStatusRequest(HttpUrl baseUrl, String accountId, OkHttpClient okClient, FieldSet fields) {
+        super(baseUrl, accountId, okClient, fields);
     }
 
     @Override
     protected HttpUrl path(HttpUrl baseUrl) {
-        HttpUrl url = baseUrl.newBuilder()
+        return baseUrl.newBuilder()
                 .addPathSegment("v3")
                 .addPathSegment("accounts")
-                .addPathSegment(((WorkflowStatusFieldSet)fieldSet).getAccountId())
+                .addPathSegment(getAccountId())
                 .addPathSegment("workflows")
                 .addPathSegment("runs")
                 .addPathSegment(((WorkflowStatusFieldSet)fieldSet).getWorkflowRunId())
                 .build();
-        return url;
     }
 
     @Override

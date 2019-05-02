@@ -1,10 +1,15 @@
 package com.siftscience;
 
-import com.siftscience.model.*;
+import com.siftscience.model.ApplyDecisionFieldSet;
+import com.siftscience.model.DecisionStatusFieldSet;
+import com.siftscience.model.GetDecisionFieldSet;
+import com.siftscience.model.LabelFieldSet;
+import com.siftscience.model.ScoreFieldSet;
+import com.siftscience.model.UnlabelFieldSet;
+import com.siftscience.model.UserScoreFieldSet;
+import com.siftscience.model.WorkflowStatusFieldSet;
 import okhttp3.HttpUrl;
 import okhttp3.OkHttpClient;
-
-import java.util.List;
 
 /**
  * Use a SiftClient to access all supported Sift Science APIs. It may be used concurrently from
@@ -34,77 +39,78 @@ import java.util.List;
  *
  */
 public class SiftClient {
-    private String apiKey;
+    private final String accountId;
+    private final String apiKey;
     private OkHttpClient okClient = new OkHttpClient();
-    private HttpUrl baseUrl = HttpUrl.parse("https://api.siftscience.com");
-    private HttpUrl baseApi3Url = HttpUrl.parse("https://api3.siftscience.com");
+    private HttpUrl baseUrl = HttpUrl.parse("https://api.sift.com");
 
-    public SiftClient(String apiKey) {
+    public SiftClient(String apiKey, String accountId) {
         this.apiKey = apiKey;
+        this.accountId = accountId;
     }
 
     public String getApiKey() {
         return apiKey;
     }
 
+    public String getAccountId() {
+        return accountId;
+    }
+
     public EventRequest buildRequest(FieldSet fields) {
         setupApiKey(fields);
-        return new EventRequest(baseUrl, okClient, fields);
+        return new EventRequest(baseUrl, getAccountId(), okClient, fields);
     }
 
     public ApplyDecisionRequest buildRequest(ApplyDecisionFieldSet fields) {
         setupApiKey(fields);
-        return new ApplyDecisionRequest(baseApi3Url, okClient, fields);
+        return new ApplyDecisionRequest(baseUrl, getAccountId(), okClient, fields);
     }
 
     public GetDecisionsRequest buildRequest(GetDecisionFieldSet fields) {
         setupApiKey(fields);
-        return new GetDecisionsRequest(baseApi3Url, okClient, fields);
+        return new GetDecisionsRequest(baseUrl, getAccountId(), okClient, fields);
     }
 
     public DecisionStatusRequest buildRequest(DecisionStatusFieldSet fields) {
         setupApiKey(fields);
-        return new DecisionStatusRequest(baseApi3Url, okClient, fields);
+        return new DecisionStatusRequest(baseUrl, getAccountId(), okClient, fields);
     }
 
     public LabelRequest buildRequest(LabelFieldSet fields) {
         setupApiKey(fields);
-        return new LabelRequest(baseUrl, okClient, fields);
+        return new LabelRequest(baseUrl, getAccountId(), okClient, fields);
     }
 
     public UnlabelRequest buildRequest(UnlabelFieldSet fields) {
         setupApiKey(fields);
-        return new UnlabelRequest(baseUrl, okClient, fields);
+        return new UnlabelRequest(baseUrl, getAccountId(), okClient, fields);
     }
 
     public ScoreRequest buildRequest(ScoreFieldSet fields) {
         setupApiKey(fields);
-        return new ScoreRequest(baseUrl, okClient, fields);
+        return new ScoreRequest(baseUrl, getAccountId(), okClient, fields);
     }
 
     public UserScoreRequest buildRequest(UserScoreFieldSet fields) {
         setupApiKey(fields);
-        return new UserScoreRequest(baseUrl, okClient, fields);
+        return new UserScoreRequest(baseUrl, getAccountId(), okClient, fields);
     }
 
     public WorkflowStatusRequest buildRequest(WorkflowStatusFieldSet fields) {
         setupApiKey(fields);
-        return new WorkflowStatusRequest(baseApi3Url, okClient, fields);
+        return new WorkflowStatusRequest(baseUrl, getAccountId(), okClient, fields);
     }
 
     private void setupApiKey(FieldSet fields) {
         if (fields.getApiKey() == null) {
-            fields.setApiKey(apiKey);
+            fields.setApiKey(getApiKey());
         }
     }
 
     // For testing.
     SiftClient setBaseUrl(HttpUrl baseUrl) {
         this.baseUrl = baseUrl;
-        return this;
-    }
-    SiftClient setBaseApi3Url(HttpUrl baseApi3Url) {
-        this.baseApi3Url = baseApi3Url;
         return this;
     }
 }

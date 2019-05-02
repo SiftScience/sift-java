@@ -58,12 +58,11 @@ public class GetDecisionsTest {
         baseUrl = server.url("");
 
         // Create a new client and link it to the mock server.
-        SiftClient client = new SiftClient("your_api_key");
-        client.setBaseApi3Url(baseUrl);
+        SiftClient client = new SiftClient("your_api_key", accountId);
+        client.setBaseUrl(baseUrl);
 
         // Build and execute the request against the mock server.
         GetDecisionsRequest getDecisionsRequest = client.buildRequest(new GetDecisionFieldSet()
-                .setAccountId(accountId)
                 .setLimit(11)
                 .setAbuseTypes(Arrays.asList(ACCOUNT_ABUSE, ACCOUNT_TAKEOVER))
                 .setFrom(1)
@@ -86,8 +85,7 @@ public class GetDecisionsTest {
         JSONAssert.assertEquals(response.getBody().readUtf8(),
                 siftResponse.getBody().toJson(), true);
 
-        GetDecisionsRequest nextRequest = client.buildRequest(GetDecisionFieldSet.fromNextRef(
-                siftResponse.getBody().getNextRef()));
+        client.buildRequest(GetDecisionFieldSet.fromNextRef(siftResponse.getBody().getNextRef()));
     }
 
     @Test
@@ -130,12 +128,11 @@ public class GetDecisionsTest {
         baseUrl = server.url("");
 
         // Create a new client and link it to the mock server.
-        SiftClient client = new SiftClient("your_api_key");
-        client.setBaseApi3Url(baseUrl);
+        SiftClient client = new SiftClient("your_api_key", accountId);
+        client.setBaseUrl(baseUrl);
 
         // Build and execute the request against the mock server.
         GetDecisionsRequest getDecisionsRequest = client.buildRequest(new GetDecisionFieldSet()
-                .setAccountId(accountId)
                 .setLimit(11)
                 .setAbuseTypes(Arrays.asList(ACCOUNT_ABUSE, ACCOUNT_TAKEOVER))
                 .setFrom(1)

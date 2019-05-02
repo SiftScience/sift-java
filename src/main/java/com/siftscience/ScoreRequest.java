@@ -13,8 +13,8 @@ import java.io.IOException;
  * https://siftscience.com/developers/docs/curl/score-api
  */
 public class ScoreRequest extends SiftRequest<ScoreResponse> {
-    ScoreRequest(HttpUrl baseUrl, OkHttpClient okClient, ScoreFieldSet fields) {
-        super(baseUrl, okClient, fields);
+    ScoreRequest(HttpUrl baseUrl, String accountId, OkHttpClient okClient, ScoreFieldSet fields) {
+        super(baseUrl, accountId, okClient, fields);
     }
 
     /**
@@ -42,12 +42,8 @@ public class ScoreRequest extends SiftRequest<ScoreResponse> {
         builder.addPathSegment("score").addPathSegment(scoreFieldSet.getUserId())
                 .addQueryParameter("api_key", scoreFieldSet.getApiKey());
         if (scoreFieldSet.getAbuseTypes() != null && scoreFieldSet.getAbuseTypes().size() > 0) {
-            String queryParamVal = "";
-            for (String abuseType : scoreFieldSet.getAbuseTypes()) {
-                queryParamVal += (abuseType + ",");
-            }
             builder.addQueryParameter("abuse_types",
-                    queryParamVal.substring(0, queryParamVal.length() - 1));
+                StringUtils.joinWithComma(scoreFieldSet.getAbuseTypes()));
         }
         return builder.build();
     }

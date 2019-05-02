@@ -52,7 +52,7 @@ public class AddPromotionEventTest {
         HttpUrl baseUrl = server.url("");
 
         // Create a new client and link it to the mock server.
-        SiftClient client = new SiftClient("your_api_key");
+        SiftClient client = new SiftClient("your_api_key", "your_account_id");
         client.setBaseUrl(baseUrl);
 
         // Sample promotions.

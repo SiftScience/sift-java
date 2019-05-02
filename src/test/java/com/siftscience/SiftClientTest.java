@@ -34,7 +34,7 @@ public class SiftClientTest {
         HttpUrl baseUrl = server.url("");
 
         // Create a new client and link it to the mock server.
-        client = new SiftClient("some_api_key");
+        client = new SiftClient("your_api_key_here", "your_account_id_here");
         client.setBaseUrl(baseUrl);
     }
 

@@ -124,7 +124,7 @@ public class WorkflowStatusTest {
         baseUrl = server.url("");
 
         // Create a new client and link it to the mock server.
-        SiftClient client = new SiftClient("your_api_key_here");
+        SiftClient client = new SiftClient("your_api_key_here", "your_account_id_here");
         client.setBaseUrl(baseUrl);
 
         // Build and execute the request against the mock server.
@@ -212,13 +212,12 @@ public class WorkflowStatusTest {
         baseUrl = server.url("");
 
         // Create a new client and link it to the mock server.
-        SiftClient client = new SiftClient("your_api_key");
-        client.setBaseApi3Url(baseUrl);
+        SiftClient client = new SiftClient("your_api_key", "your_account_id");
+        client.setBaseUrl(baseUrl);
 
         // Build and execute the request against the mock server.
         WorkflowStatusRequest request = client.buildRequest(
-                new WorkflowStatusFieldSet().setAccountId("your_account_id")
-                        .setWorkflowRunId("someid"));
+                new WorkflowStatusFieldSet().setWorkflowRunId("someid"));
         WorkflowStatusResponse siftResponse = request.send();
 
         // Verify the request.

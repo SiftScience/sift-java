@@ -77,7 +77,7 @@ public class ContentEventTest {
         HttpUrl baseUrl = server.url("");
 
         // Create a new client and link it to the mock server.
-        SiftClient client = new SiftClient("YOUR_API_KEY_HERE");
+        SiftClient client = new SiftClient("your_api_key_here", "your_account_id_here");
         client.setBaseUrl(baseUrl);
 
         Image image = new Image()
@@ -182,7 +182,7 @@ public class ContentEventTest {
         HttpUrl baseUrl = server.url("");
 
         // Create a new client and link it to the mock server.
-        SiftClient client = new SiftClient("YOUR_API_KEY_HERE");
+        SiftClient client = new SiftClient("your_api_key_here", "your_account_id_here");
         client.setBaseUrl(baseUrl);
 
         Image image = new Image()
@@ -287,7 +287,7 @@ public class ContentEventTest {
         HttpUrl baseUrl = server.url("");
 
         // Create a new client and link it to the mock server.
-        SiftClient client = new SiftClient("YOUR_API_KEY_HERE");
+        SiftClient client = new SiftClient("your_api_key_here", "your_account_id_here");
         client.setBaseUrl(baseUrl);
 
         Image image = new Image()
@@ -377,7 +377,7 @@ public class ContentEventTest {
         HttpUrl baseUrl = server.url("");
 
         // Create a new client and link it to the mock server.
-        SiftClient client = new SiftClient("YOUR_API_KEY_HERE");
+        SiftClient client = new SiftClient("your_api_key_here", "your_account_id_here");
         client.setBaseUrl(baseUrl);
 
         Image image = new Image()
@@ -483,7 +483,7 @@ public class ContentEventTest {
         HttpUrl baseUrl = server.url("");
 
         // Create a new client and link it to the mock server.
-        SiftClient client = new SiftClient("YOUR_API_KEY_HERE");
+        SiftClient client = new SiftClient("your_api_key_here", "your_account_id_here");
         client.setBaseUrl(baseUrl);
 
         Image image = new Image()
@@ -593,7 +593,7 @@ public class ContentEventTest {
         HttpUrl baseUrl = server.url("");
 
         // Create a new client and link it to the mock server.
-        SiftClient client = new SiftClient("YOUR_API_KEY_HERE");
+        SiftClient client = new SiftClient("your_api_key_here", "your_account_id_here");
         client.setBaseUrl(baseUrl);
 
         Image image = new Image()
@@ -686,7 +686,7 @@ public class ContentEventTest {
         HttpUrl baseUrl = server.url("");
 
         // Create a new client and link it to the mock server.
-        SiftClient client = new SiftClient("YOUR_API_KEY_HERE");
+        SiftClient client = new SiftClient("your_api_key_here", "your_account_id_here");
         client.setBaseUrl(baseUrl);
 
         Image image = new Image()
@@ -791,7 +791,7 @@ public class ContentEventTest {
         HttpUrl baseUrl = server.url("");
 
         // Create a new client and link it to the mock server.
-        SiftClient client = new SiftClient("YOUR_API_KEY_HERE");
+        SiftClient client = new SiftClient("your_api_key_here", "your_account_id_here");
         client.setBaseUrl(baseUrl);
 
         Image image = new Image()
@@ -898,7 +898,7 @@ public class ContentEventTest {
         HttpUrl baseUrl = server.url("");
 
         // Create a new client and link it to the mock server.
-        SiftClient client = new SiftClient("YOUR_API_KEY_HERE");
+        SiftClient client = new SiftClient("your_api_key_here", "your_account_id_here");
         client.setBaseUrl(baseUrl);
 
         Image image = new Image()
@@ -990,7 +990,7 @@ public class ContentEventTest {
         HttpUrl baseUrl = server.url("");
 
         // Create a new client and link it to the mock server.
-        SiftClient client = new SiftClient("YOUR_API_KEY_HERE");
+        SiftClient client = new SiftClient("your_api_key_here", "your_account_id_here");
         client.setBaseUrl(baseUrl);
 
         Image image = new Image()
@@ -1096,7 +1096,7 @@ public class ContentEventTest {
         HttpUrl baseUrl = server.url("");
 
         // Create a new client and link it to the mock server.
-        SiftClient client = new SiftClient("YOUR_API_KEY_HERE");
+        SiftClient client = new SiftClient("your_api_key_here", "your_account_id_here");
         client.setBaseUrl(baseUrl);
 
         Image image = new Image()
@@ -1206,7 +1206,7 @@ public class ContentEventTest {
         HttpUrl baseUrl = server.url("");
 
         // Create a new client and link it to the mock server.
-        SiftClient client = new SiftClient("YOUR_API_KEY_HERE");
+        SiftClient client = new SiftClient("your_api_key_here", "your_account_id_here");
         client.setBaseUrl(baseUrl);
 
         Image image = new Image()

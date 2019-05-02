@@ -12,8 +12,8 @@ import java.io.IOException;
  * https://siftscience.com/developers/docs/curl/labels-api
  */
 public class LabelRequest extends SiftRequest<LabelResponse> {
-    LabelRequest(HttpUrl baseUrl, OkHttpClient okClient, LabelFieldSet fields) {
-        super(baseUrl, okClient, fields);
+    LabelRequest(HttpUrl baseUrl, String accountId, OkHttpClient okClient, LabelFieldSet fields) {
+        super(baseUrl, accountId, okClient, fields);
     }
 
     @Override

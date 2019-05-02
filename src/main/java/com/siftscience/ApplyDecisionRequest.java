@@ -7,14 +7,14 @@ import okhttp3.*;
 
 public class ApplyDecisionRequest extends SiftRequest<ApplyDecisionResponse>{
 
-    ApplyDecisionRequest(HttpUrl baseUrl, OkHttpClient okClient, ApplyDecisionFieldSet fields) {
-        super(baseUrl, okClient, fields);
+    ApplyDecisionRequest(HttpUrl baseUrl, String accountId, OkHttpClient okClient, ApplyDecisionFieldSet fields) {
+        super(baseUrl, accountId, okClient, fields);
     }
 
     @Override
     protected HttpUrl path(HttpUrl baseUrl) {
         HttpUrl.Builder path = baseUrl.newBuilder("v3/accounts")
-                .addPathSegment(((ApplyDecisionFieldSet) fieldSet).getAccountId())
+                .addPathSegment(getAccountId())
                 .addPathSegment("users")
                 .addPathSegment(((ApplyDecisionFieldSet) fieldSet).getUserId());
 

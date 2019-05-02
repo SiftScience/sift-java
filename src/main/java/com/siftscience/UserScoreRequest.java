@@ -19,8 +19,9 @@ import java.io.IOException;
  *    See details here: https://siftscience.com/developers/docs/java/score-api/rescore
  */
 public class UserScoreRequest extends SiftRequest<EntityScoreResponse> {
-    UserScoreRequest(HttpUrl baseUrl, OkHttpClient okClient, UserScoreFieldSet fields) {
-        super(baseUrl, okClient, fields);
+    UserScoreRequest(HttpUrl baseUrl, String accountId, OkHttpClient okClient,
+                     UserScoreFieldSet fields) {
+        super(baseUrl, accountId, okClient, fields);
     }
 
     /**

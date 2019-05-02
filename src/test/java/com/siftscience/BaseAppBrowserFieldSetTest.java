@@ -48,6 +48,7 @@ import static org.hamcrest.object.IsCompatibleType.typeCompatibleWith;
 public class BaseAppBrowserFieldSetTest {
 
     private static final String DUMMY_API_KEY = "your_api_key_here";
+    private static final String DUMMY_ACCOUNT_ID = "your_account_id_here";
     private static final String DUMMY_TEST_FIELD = "test";
     private static final String DUMMY_USERID = "billy_jones_301";
     private static final String REQUEST_BODY_TEMPLATE = "{\n" +
@@ -151,7 +152,7 @@ public class BaseAppBrowserFieldSetTest {
         HttpUrl baseUrl = server.url("");
 
         // Create a new client and link it to the mock server.
-        SiftClient client = new SiftClient(DUMMY_API_KEY);
+        SiftClient client = new SiftClient(DUMMY_API_KEY, DUMMY_ACCOUNT_ID);
         client.setBaseUrl(baseUrl);
 
         SiftRequest request = client.buildRequest(t);

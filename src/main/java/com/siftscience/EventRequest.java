@@ -18,8 +18,8 @@ public class EventRequest extends SiftRequest<EventResponse> {
     private boolean isWorkflowStatus = false;
     private boolean forceWorkflowRun = false;
 
-    EventRequest(HttpUrl baseUrl, OkHttpClient okClient, FieldSet fields) {
-        super(baseUrl, okClient, fields);
+    EventRequest(HttpUrl baseUrl, String accountId, OkHttpClient okClient, FieldSet fields) {
+        super(baseUrl, accountId, okClient, fields);
         abuseTypes = null;
     }
 
@@ -46,12 +46,7 @@ public class EventRequest extends SiftRequest<EventResponse> {
 
         // returnScore and abuseTypes are encoded into the URL as query params rather than JSON.
         if (abuseTypes != null && abuseTypes.size() > 0) {
-            String queryParamVal = "";
-            for (String abuseType : abuseTypes) {
-                queryParamVal += (abuseType + ",");
-            }
-            builder.addQueryParameter("abuse_types",
-                    queryParamVal.substring(0, queryParamVal.length() - 1));
+            builder.addQueryParameter("abuse_types", StringUtils.joinWithComma(abuseTypes));
         }
         return builder.build();
     }

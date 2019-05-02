@@ -9,8 +9,8 @@ import static com.siftscience.model.DecisionStatusFieldSet.ENTITY_CONTENT;
 import static com.siftscience.model.DecisionStatusFieldSet.ENTITY_SESSIONS;
 
 public class DecisionStatusRequest extends SiftRequest<DecisionStatusResponse> {
-    DecisionStatusRequest(HttpUrl baseUrl, OkHttpClient okClient, DecisionStatusFieldSet fields) {
-        super(baseUrl, okClient, fields);
+    DecisionStatusRequest(HttpUrl baseUrl, String accountId, OkHttpClient okClient, DecisionStatusFieldSet fields) {
+        super(baseUrl, accountId, okClient, fields);
     }
 
     @Override
@@ -18,7 +18,7 @@ public class DecisionStatusRequest extends SiftRequest<DecisionStatusResponse> {
         HttpUrl.Builder builder = baseUrl.newBuilder()
             .addPathSegment("v3")
             .addPathSegment("accounts")
-            .addPathSegment(((DecisionStatusFieldSet)fieldSet).getAccountId());
+            .addPathSegment(getAccountId());
         String entity = ((DecisionStatusFieldSet)fieldSet).getEntity();
         if (entity.equals(ENTITY_CONTENT) || entity.equals(ENTITY_SESSIONS)) {
             builder = builder
