@@ -1,5 +1,9 @@
 package com.siftscience;
 
+import static java.net.HttpURLConnection.HTTP_OK;
+
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.object.IsCompatibleType.typeCompatibleWith;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 import com.siftscience.model.AddItemToCartFieldSet;
@@ -34,6 +38,7 @@ import com.siftscience.model.UpdateProfileFieldSet;
 import com.siftscience.model.UpdateReviewFieldSet;
 import com.siftscience.model.VerificationFieldSet;
 import okhttp3.HttpUrl;
+import okhttp3.OkHttpClient;
 import okhttp3.mockwebserver.MockResponse;
 import okhttp3.mockwebserver.MockWebServer;
 import okhttp3.mockwebserver.RecordedRequest;
@@ -41,13 +46,9 @@ import org.junit.Assert;
 import org.junit.Test;
 import org.skyscreamer.jsonassert.JSONAssert;
 
-import static java.net.HttpURLConnection.HTTP_OK;
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.object.IsCompatibleType.typeCompatibleWith;
-
 public class BaseAppBrowserFieldSetTest {
 
-    private static final String DUMMY_API_KEY = "your_api_key_here";
+    private static final String DUMMY_API_KEY = "YOUR_API_KEY";
     private static final String DUMMY_TEST_FIELD = "test";
     private static final String DUMMY_USERID = "billy_jones_301";
     private static final String REQUEST_BODY_TEMPLATE = "{\n" +
@@ -151,8 +152,10 @@ public class BaseAppBrowserFieldSetTest {
         HttpUrl baseUrl = server.url("");
 
         // Create a new client and link it to the mock server.
-        SiftClient client = new SiftClient(DUMMY_API_KEY);
-        client.setBaseUrl(baseUrl);
+        SiftClient client = new SiftClient(DUMMY_API_KEY,
+            new OkHttpClient.Builder()
+                .addInterceptor(OkHttpUtils.urlRewritingInterceptor(server))
+                .build());
 
         SiftRequest request = client.buildRequest(t);
         SiftResponse siftResponse = request.send();

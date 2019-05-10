@@ -1,8 +1,16 @@
 package com.siftscience;
 
+import static java.net.HttpURLConnection.HTTP_OK;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import com.siftscience.model.Decision;
 import com.siftscience.model.UserScoreFieldSet;
 import okhttp3.HttpUrl;
+import okhttp3.OkHttpClient;
 import okhttp3.mockwebserver.MockResponse;
 import okhttp3.mockwebserver.MockWebServer;
 import okhttp3.mockwebserver.RecordedRequest;
@@ -10,14 +18,6 @@ import org.json.JSONException;
 import org.junit.Assert;
 import org.junit.Test;
 import org.skyscreamer.jsonassert.JSONAssert;
-
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
-import static java.net.HttpURLConnection.HTTP_OK;
 
 public class UserScoreTest {
 
@@ -81,7 +81,7 @@ public class UserScoreTest {
                 .setRescoreUser(false);
 
         testUserScore(userScoreFieldSet,
-                "/v205/users/billy_jones_301/score?api_key=your_api_key_here");
+                "/v205/users/billy_jones_301/score?api_key=YOUR_API_KEY");
     }
 
     @Test
@@ -97,7 +97,7 @@ public class UserScoreTest {
                         .setRescoreUser(false);
 
         testUserScore(userScoreFieldSet,
-                "/v205/users/billy_jones_301/score?api_key=your_api_key_here&" +
+                "/v205/users/billy_jones_301/score?api_key=YOUR_API_KEY&" +
                 "abuse_types=payment_abuse,promotion_abuse");
     }
 
@@ -110,7 +110,7 @@ public class UserScoreTest {
                 .setRescoreUser(true);
 
         testUserScore(userScoreFieldSet,
-                "/v205/users/billy_jones_301/score?api_key=your_api_key_here");
+                "/v205/users/billy_jones_301/score?api_key=YOUR_API_KEY");
     }
 
     @Test
@@ -126,7 +126,7 @@ public class UserScoreTest {
                 .setRescoreUser(true);
 
         testUserScore(userScoreFieldSet,
-                "/v205/users/billy_jones_301/score?api_key=your_api_key_here&" +
+                "/v205/users/billy_jones_301/score?api_key=YOUR_API_KEY&" +
                         "abuse_types=payment_abuse,promotion_abuse");
     }
 
@@ -147,8 +147,10 @@ public class UserScoreTest {
         HttpUrl baseUrl = server.url("");
 
         // Create a new client and link it to the mock server.
-        SiftClient client = new SiftClient("your_api_key_here");
-        client.setBaseUrl(baseUrl);
+        SiftClient client = new SiftClient("YOUR_API_KEY",
+            new OkHttpClient.Builder()
+                .addInterceptor(OkHttpUtils.urlRewritingInterceptor(server))
+                .build());
 
         UserScoreRequest request = client.buildRequest(userScoreFieldSet);
         EntityScoreResponse siftResponse = request.send();

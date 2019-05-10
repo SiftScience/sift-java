@@ -1,7 +1,10 @@
 package com.siftscience;
 
+import static java.net.HttpURLConnection.HTTP_OK;
+
 import com.siftscience.model.AddItemToCartFieldSet;
 import okhttp3.HttpUrl;
+import okhttp3.OkHttpClient;
 import okhttp3.mockwebserver.MockResponse;
 import okhttp3.mockwebserver.MockWebServer;
 import okhttp3.mockwebserver.RecordedRequest;
@@ -9,15 +12,13 @@ import org.junit.Assert;
 import org.junit.Test;
 import org.skyscreamer.jsonassert.JSONAssert;
 
-import static java.net.HttpURLConnection.HTTP_OK;
-
 public class AddItemToCartEventTest {
 
     @Test
     public void testAddItemToCart() throws Exception {
         String expectedRequestBody = "{\n" +
             "  \"$type\"       : \"$add_item_to_cart\",\n" +
-            "  \"$api_key\"    : \"your_api_key_here\",\n" +
+            "  \"$api_key\"    : \"YOUR_API_KEY\",\n" +
             "  \"$user_id\"    : \"billy_jones_301\",\n" +
             "\n" +
             "  \"$session_id\" : \"gigtleqddo84l8cm15qe4il\",\n" +
@@ -51,8 +52,10 @@ public class AddItemToCartEventTest {
         HttpUrl baseUrl = server.url("");
 
         // Create a new client and link it to the mock server.
-        SiftClient client = new SiftClient("your_api_key_here");
-        client.setBaseUrl(baseUrl);
+        SiftClient client = new SiftClient("YOUR_API_KEY",
+            new OkHttpClient.Builder()
+                .addInterceptor(OkHttpUtils.urlRewritingInterceptor(server))
+                .build());
 
         // Build and execute the request against the mock server.
         SiftRequest request = client.buildRequest(new AddItemToCartFieldSet()

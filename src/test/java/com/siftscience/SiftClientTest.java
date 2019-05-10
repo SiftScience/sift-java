@@ -1,8 +1,16 @@
 package com.siftscience;
 
-import com.siftscience.exception.*;
+import static java.net.HttpURLConnection.HTTP_BAD_REQUEST;
+import static java.net.HttpURLConnection.HTTP_INTERNAL_ERROR;
+import java.io.IOException;
+
+import com.siftscience.exception.InvalidApiKeyException;
+import com.siftscience.exception.InvalidFieldException;
+import com.siftscience.exception.MissingFieldException;
+import com.siftscience.exception.RateLimitException;
+import com.siftscience.exception.ServerException;
 import com.siftscience.model.CreateOrderFieldSet;
-import okhttp3.HttpUrl;
+import okhttp3.OkHttpClient;
 import okhttp3.mockwebserver.MockResponse;
 import okhttp3.mockwebserver.MockWebServer;
 import org.json.JSONException;
@@ -11,11 +19,6 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.skyscreamer.jsonassert.JSONAssert;
-
-import java.io.IOException;
-
-import static java.net.HttpURLConnection.HTTP_BAD_REQUEST;
-import static java.net.HttpURLConnection.HTTP_INTERNAL_ERROR;
 
 /**
  * This class includes tests for the basic functionality of the client such as error handling and
@@ -31,11 +34,11 @@ public class SiftClientTest {
     public void setup() throws IOException {
         server.start();
 
-        HttpUrl baseUrl = server.url("");
-
         // Create a new client and link it to the mock server.
-        client = new SiftClient("some_api_key");
-        client.setBaseUrl(baseUrl);
+        client = new SiftClient("YOUR_API_KEY",
+            new OkHttpClient.Builder()
+                .addInterceptor(OkHttpUtils.urlRewritingInterceptor(server))
+                .build());
     }
 
     @After
@@ -103,7 +106,7 @@ public class SiftClientTest {
 
         String expectedRequestBody = "{\n" +
                 "  \"$type\"             : \"$create_order\",\n" +
-                "  \"$api_key\"          : \"your_api_key\",\n" +
+                "  \"$api_key\"          : \"YOUR_API_KEY\",\n" +
                 "  \"$user_id\"          : \"billy_jones_301\",\n" +
                 "  \"$order_id\"          : \"ORDER-28168441\"\n" +
                 "}";
@@ -145,10 +148,6 @@ public class SiftClientTest {
      */
     @Test
     public void testInvalidCustomFieldKeyException() throws IOException {
-
-        // Create a new client and link it to a fake server address.
-        client.setBaseUrl(HttpUrl.parse("http://fakehost.invalid:1234"));
-
         // Build a simple request. The exception should happen here instead of the request send
         // method.
         InvalidFieldException invalidFieldException = null;
@@ -175,7 +174,7 @@ public class SiftClientTest {
 
         String expectedRequestBody = "{\n" +
                 "  \"$type\"             : \"$create_order\",\n" +
-                "  \"$api_key\"          : \"some_api_key\",\n" +
+                "  \"$api_key\"          : \"YOUR_API_KEY\",\n" +
                 "  \"$user_id\"          : \"billy_jones_301\",\n" +
                 "  \"$order_id\"          : \"ORDER-28168441\",\n" +
                 "  \"$user_email\"          : \"bill@gmail.com\",\n" +
@@ -194,7 +193,7 @@ public class SiftClientTest {
 
         // Build a simplified request body.
         CreateOrderFieldSet fields = new CreateOrderFieldSet()
-                .setApiKey("some_api_key")
+                .setApiKey("YOUR_API_KEY")
                 .setUserId("billy_jones_301")
                 .setOrderId("ORDER-28168441")
                 .setUserEmail("bill@gmail.com");
@@ -227,7 +226,7 @@ public class SiftClientTest {
 
         // Build a simplified request body.
         CreateOrderFieldSet fields = new CreateOrderFieldSet()
-                .setApiKey("some_api_key")
+                .setApiKey("YOUR_API_KEY")
                 .setUserId("billy_jones_301")
                 .setOrderId("ORDER-28168441")
                 .setUserEmail("bill@gmail.com");
@@ -261,7 +260,7 @@ public class SiftClientTest {
 
         // Build a simplified request body.
         CreateOrderFieldSet fields = new CreateOrderFieldSet()
-                .setApiKey("some_api_key")
+                .setApiKey("YOUR_API_KEY")
                 .setUserId("billy_jones_301")
                 .setOrderId("ORDER-28168441")
                 .setUserEmail("bill@gmail.com");
