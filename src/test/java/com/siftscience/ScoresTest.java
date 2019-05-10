@@ -23,7 +23,7 @@ public class ScoresTest {
         // The expected JSON payload of the request.
         String expectedRequestBody = "{\n" +
                 "  \"$type\"             : \"$create_order\",\n" +
-                "  \"$api_key\"          : \"your_api_key_here\",\n" +
+                "  \"$api_key\"          : \"\",\n" +
                 "  \"$user_id\"          : \"billy_jones_301\"\n" +
                 "}";
 
@@ -77,7 +77,7 @@ public class ScoresTest {
         HttpUrl baseUrl = server.url("");
 
         // Create a new client and link it to the mock server.
-        SiftClient client = new SiftClient("your_api_key_here", "your_account_id_here");
+        SiftClient client = new SiftClient("", "YOUR_ACCOUNT_ID");
         client.setBaseUrl(baseUrl);
 
         // Build and execute the request against the mock server.
@@ -109,7 +109,7 @@ public class ScoresTest {
         // The expected JSON payload of the request.
         String expectedRequestBody = "{\n" +
                 "  \"$type\"             : \"$create_order\",\n" +
-                "  \"$api_key\"          : \"your_api_key_here\",\n" +
+                "  \"$api_key\"          : \"\",\n" +
                 "  \"$user_id\"          : \"billy_jones_301\"\n" +
                 "}";
 
@@ -163,7 +163,7 @@ public class ScoresTest {
         HttpUrl baseUrl = server.url("");
 
         // Create a new client and link it to the mock server.
-        SiftClient client = new SiftClient("your_api_key_here", "your_account_id_here");
+        SiftClient client = new SiftClient("", "YOUR_ACCOUNT_ID");
         client.setBaseUrl(baseUrl);
 
         // Build and execute the request against the mock server.
@@ -234,7 +234,7 @@ public class ScoresTest {
         HttpUrl baseUrl = server.url("");
 
         // Create a new client and link it to the mock server.
-        SiftClient client = new SiftClient("your_api_key_here", "your_account_id_here");
+        SiftClient client = new SiftClient("", "YOUR_ACCOUNT_ID");
         client.setBaseUrl(baseUrl);
 
         List<String> abuseTypes = new ArrayList<>();
@@ -250,7 +250,7 @@ public class ScoresTest {
         // Verify the request.
         RecordedRequest request1 = server.takeRequest();
         Assert.assertEquals("GET", request1.getMethod());
-        Assert.assertEquals("/v205/score/billy_jones_301?api_key=your_api_key_here&" +
+        Assert.assertEquals("/v205/score/billy_jones_301?api_key=&" +
                 "abuse_types=payment_abuse,promotion_abuse", request1.getPath());
 
         // Verify the response.

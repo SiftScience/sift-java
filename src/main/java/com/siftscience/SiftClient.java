@@ -17,7 +17,7 @@ import okhttp3.OkHttpClient;
  *
  * Usage:
  *
- * SiftClient client = new SiftClient("your_api_key");
+ * SiftClient client = new SiftClient("YOUR_API_KEY");
  * EventRequest txEventRequest = client.buildRequest(
  *      new TransactionFieldSet()
  *              .setUserId("some_user_id")

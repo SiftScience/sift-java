@@ -16,7 +16,7 @@ public class RemoveItemFromCartEventTest {
     public void testRemoveItemFromCart() throws Exception {
         String expectedRequestBody = "{\n" +
                 "  \"$type\"       : \"$remove_item_from_cart\",\n" +
-                "  \"$api_key\"    : \"your_api_key_here\",\n" +
+                "  \"$api_key\"    : \"\",\n" +
                 "  \"$user_id\"    : \"billy_jones_301\",\n" +
                 "\n" +
                 "  \"$session_id\" : \"gigtleqddo84l8cm15qe4il\",\n" +
@@ -50,7 +50,7 @@ public class RemoveItemFromCartEventTest {
         HttpUrl baseUrl = server.url("");
 
         // Create a new client and link it to the mock server.
-        SiftClient client = new SiftClient("your_api_key_here", "your_account_id_here");
+        SiftClient client = new SiftClient("", "YOUR_ACCOUNT_ID");
         client.setBaseUrl(baseUrl);
 
         // Build and execute the request against the mock server.

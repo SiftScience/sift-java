@@ -16,7 +16,7 @@ public class FlagContentEventTest {
     public void testFlagContent() throws Exception {
         String expectedRequestBody = "{\n" +
                 "  \"$type\"       : \"$flag_content\", \n" +
-                "  \"$api_key\"    : \"your_api_key_here\",\n" +
+                "  \"$api_key\"    : \"\",\n" +
                 "  \"$user_id\"    : \"billy_jones_301\",\n" +
                 "  \"$content_id\" : \"9671500641\",\n" +
                 "\n" +
@@ -39,7 +39,7 @@ public class FlagContentEventTest {
         HttpUrl baseUrl = server.url("");
 
         // Create a new client and link it to the mock server.
-        SiftClient client = new SiftClient("your_api_key_here", "your_account_id_here");
+        SiftClient client = new SiftClient("", "YOUR_ACCOUNT_ID");
         client.setBaseUrl(baseUrl);
 
         // Build and execute the request against the mock server.

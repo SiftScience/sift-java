@@ -16,7 +16,7 @@ public class ChargebackEventTest {
     public void testChargeback() throws Exception {
         String expectedRequestBody = "{\n" +
                 "  \"$type\"              : \"$chargeback\",\n" +
-                "  \"$api_key\"           : \"your_api_key_here\",\n" +
+                "  \"$api_key\"           : \"\",\n" +
                 "  \"$user_id\"           : \"billy_jones_301\",\n" +
                 "  \"$order_id\"          : \"ORDER-123124124\",\n" +
                 "  \"$transaction_id\"    : \"719637215\",\n" +
@@ -40,7 +40,7 @@ public class ChargebackEventTest {
         HttpUrl baseUrl = server.url("");
 
         // Create a new client and link it to the mock server.
-        SiftClient client = new SiftClient("your_api_key_here", "your_account_id_here");
+        SiftClient client = new SiftClient("", "YOUR_ACCOUNT_ID");
         client.setBaseUrl(baseUrl);
 
         // Build and execute the request against the mock server.

@@ -22,7 +22,7 @@ public class UpdateAccountEventTest {
         String expectedRequestBody = "\n" +
                 "{\n" +
                 "  \"$type\"       : \"$update_account\",\n" +
-                "  \"$api_key\"    : \"your_api_key_here\",\n" +
+                "  \"$api_key\"    : \"\",\n" +
                 "  \"$user_id\"    : \"billy_jones_301\",\n" +
                 "  \"$changed_password\" : true,\n" +
                 "  \"$user_email\"       : \"bill@gmail.com\",\n" +
@@ -77,7 +77,7 @@ public class UpdateAccountEventTest {
         HttpUrl baseUrl = server.url("");
 
         // Create a new client and link it to the mock server.
-        SiftClient client = new SiftClient("your_api_key_here", "your_account_id_here");
+        SiftClient client = new SiftClient("", "YOUR_ACCOUNT_ID");
         client.setBaseUrl(baseUrl);
 
         // Payment methods.

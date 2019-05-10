@@ -19,7 +19,7 @@ public class WorkflowStatusTest {
         // The expected JSON payload of the request.
         String expectedRequestBody = "{\n" +
                 "  \"$type\"             : \"$create_order\",\n" +
-                "  \"$api_key\"          : \"your_api_key_here\",\n" +
+                "  \"$api_key\"          : \"\",\n" +
                 "  \"$user_id\"          : \"billy_jones_301\"\n" +
                 "}";
 
@@ -124,7 +124,7 @@ public class WorkflowStatusTest {
         baseUrl = server.url("");
 
         // Create a new client and link it to the mock server.
-        SiftClient client = new SiftClient("your_api_key_here", "your_account_id_here");
+        SiftClient client = new SiftClient("", "YOUR_ACCOUNT_ID");
         client.setBaseUrl(baseUrl);
 
         // Build and execute the request against the mock server.
@@ -212,7 +212,7 @@ public class WorkflowStatusTest {
         baseUrl = server.url("");
 
         // Create a new client and link it to the mock server.
-        SiftClient client = new SiftClient("your_api_key", "your_account_id");
+        SiftClient client = new SiftClient("YOUR_API_KEY", "YOUR_ACCOUNT_ID");
         client.setBaseUrl(baseUrl);
 
         // Build and execute the request against the mock server.
@@ -223,7 +223,7 @@ public class WorkflowStatusTest {
         // Verify the request.
         RecordedRequest request1 = server.takeRequest();
         Assert.assertEquals("GET", request1.getMethod());
-        Assert.assertEquals("/v3/accounts/your_account_id/workflows/runs/someid",
+        Assert.assertEquals("/v3/accounts/YOUR_ACCOUNT_ID/workflows/runs/someid",
                 request1.getPath());
         Assert.assertEquals(request1.getHeader("Authorization"), "Basic eW91cl9hcGlfa2V5Og==");
 

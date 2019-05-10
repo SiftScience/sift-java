@@ -20,7 +20,7 @@ public class AddPromotionEventTest {
     public void testAddPromotion() throws Exception {
         String expectedRequestBody = "{\n" +
                 "  \"$type\"       : \"$add_promotion\",\n" +
-                "  \"$api_key\"    : \"your_api_key\",\n" +
+                "  \"$api_key\"    : \"YOUR_API_KEY\",\n" +
                 "  \"$user_id\"    : \"billy_jones_301\",\n" +
                 "\n" +
                 "  \"$promotions\" : [\n" +
@@ -52,7 +52,7 @@ public class AddPromotionEventTest {
         HttpUrl baseUrl = server.url("");
 
         // Create a new client and link it to the mock server.
-        SiftClient client = new SiftClient("your_api_key", "your_account_id");
+        SiftClient client = new SiftClient("YOUR_API_KEY", "YOUR_ACCOUNT_ID");
         client.setBaseUrl(baseUrl);
 
         // Sample promotions.

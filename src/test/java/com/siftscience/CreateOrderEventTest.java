@@ -25,7 +25,7 @@ public class CreateOrderEventTest {
         // The expected JSON payload of the request.
         String expectedRequestBody = "{\n" +
                 "  \"$type\"             : \"$create_order\",\n" +
-                "  \"$api_key\"          : \"your_api_key_here\",\n" +
+                "  \"$api_key\"          : \"\",\n" +
                 "  \"$user_id\"          : \"billy_jones_301\",\n" +
                 "\n" +
                 "  \"$session_id\"       : \"gigtleqddo84l8cm15qe4il\",\n" +
@@ -128,7 +128,7 @@ public class CreateOrderEventTest {
         HttpUrl baseUrl = server.url("");
 
         // Create a new client and link it to the mock server.
-        SiftClient client = new SiftClient("your_api_key_here", "your_account_id_here");
+        SiftClient client = new SiftClient("", "YOUR_ACCOUNT_ID");
         client.setBaseUrl(baseUrl);
 
         // Build the request body.

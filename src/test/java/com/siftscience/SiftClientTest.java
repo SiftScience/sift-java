@@ -34,7 +34,7 @@ public class SiftClientTest {
         HttpUrl baseUrl = server.url("");
 
         // Create a new client and link it to the mock server.
-        client = new SiftClient("your_api_key_here", "your_account_id_here");
+        client = new SiftClient("", "YOUR_ACCOUNT_ID");
         client.setBaseUrl(baseUrl);
     }
 
@@ -103,7 +103,7 @@ public class SiftClientTest {
 
         String expectedRequestBody = "{\n" +
                 "  \"$type\"             : \"$create_order\",\n" +
-                "  \"$api_key\"          : \"your_api_key\",\n" +
+                "  \"$api_key\"          : \"YOUR_API_KEY\",\n" +
                 "  \"$user_id\"          : \"billy_jones_301\",\n" +
                 "  \"$order_id\"          : \"ORDER-28168441\"\n" +
                 "}";

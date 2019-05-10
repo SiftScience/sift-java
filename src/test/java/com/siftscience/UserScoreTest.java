@@ -81,7 +81,7 @@ public class UserScoreTest {
                 .setRescoreUser(false);
 
         testUserScore(userScoreFieldSet,
-                "/v205/users/billy_jones_301/score?api_key=your_api_key_here");
+                "/v205/users/billy_jones_301/score?api_key=");
     }
 
     @Test
@@ -97,7 +97,7 @@ public class UserScoreTest {
                         .setRescoreUser(false);
 
         testUserScore(userScoreFieldSet,
-                "/v205/users/billy_jones_301/score?api_key=your_api_key_here&" +
+                "/v205/users/billy_jones_301/score?api_key=&" +
                 "abuse_types=payment_abuse,promotion_abuse");
     }
 
@@ -110,7 +110,7 @@ public class UserScoreTest {
                 .setRescoreUser(true);
 
         testUserScore(userScoreFieldSet,
-                "/v205/users/billy_jones_301/score?api_key=your_api_key_here");
+                "/v205/users/billy_jones_301/score?api_key=");
     }
 
     @Test
@@ -126,7 +126,7 @@ public class UserScoreTest {
                 .setRescoreUser(true);
 
         testUserScore(userScoreFieldSet,
-                "/v205/users/billy_jones_301/score?api_key=your_api_key_here&" +
+                "/v205/users/billy_jones_301/score?api_key=&" +
                         "abuse_types=payment_abuse,promotion_abuse");
     }
 
@@ -147,7 +147,7 @@ public class UserScoreTest {
         HttpUrl baseUrl = server.url("");
 
         // Create a new client and link it to the mock server.
-        SiftClient client = new SiftClient("your_api_key_here", "your_account_id_here");
+        SiftClient client = new SiftClient("", "YOUR_ACCOUNT_ID");
         client.setBaseUrl(baseUrl);
 
         UserScoreRequest request = client.buildRequest(userScoreFieldSet);

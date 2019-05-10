@@ -65,7 +65,7 @@ public class DecisionStatusTest {
         baseUrl = server.url("");
 
         // Create a new client and link it to the mock server.
-        SiftClient client = new SiftClient("your_api_key", "your_account_id");
+        SiftClient client = new SiftClient("YOUR_API_KEY", "YOUR_ACCOUNT_ID");
         client.setBaseUrl(baseUrl);
 
         // Build and execute the request against the mock server.
@@ -78,7 +78,7 @@ public class DecisionStatusTest {
         // Verify the request.
         RecordedRequest request1 = server.takeRequest();
         Assert.assertEquals("GET", request1.getMethod());
-        Assert.assertEquals("/v3/accounts/your_account_id/orders/someid/decisions",
+        Assert.assertEquals("/v3/accounts/YOUR_ACCOUNT_ID/orders/someid/decisions",
                 request1.getPath());
         Assert.assertEquals(request1.getHeader("Authorization"), "Basic eW91cl9hcGlfa2V5Og==");
 
@@ -113,7 +113,7 @@ public class DecisionStatusTest {
         baseUrl = server.url("");
 
         // Create a new client and link it to the mock server.
-        SiftClient client = new SiftClient("your_api_key", "your_account_id");
+        SiftClient client = new SiftClient("YOUR_API_KEY", "YOUR_ACCOUNT_ID");
         client.setBaseUrl(baseUrl);
 
         // Build and execute the request against the mock server.
@@ -127,7 +127,7 @@ public class DecisionStatusTest {
         // Verify the request.
         RecordedRequest request1 = server.takeRequest();
         Assert.assertEquals("GET", request1.getMethod());
-        Assert.assertEquals("/v3/accounts/your_account_id/users/some_user/content/someid/decisions",
+        Assert.assertEquals("/v3/accounts/YOUR_ACCOUNT_ID/users/some_user/content/someid/decisions",
             request1.getPath());
         Assert.assertEquals(request1.getHeader("Authorization"), "Basic eW91cl9hcGlfa2V5Og==");
 

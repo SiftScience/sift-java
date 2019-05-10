@@ -44,13 +44,13 @@ public class ApplyDecisionTest {
         server.enqueue(response);
         server.start();
 
-        String accountId = "your_account_id";
+        String accountId = "YOUR_ACCOUNT_ID";
         String userId = "a_user_id";
 
         HttpUrl baseUrl = server.url("").newBuilder().build();
 
         // Create a new client and link it to the mock server.
-        SiftClient client = new SiftClient("your_api_key", accountId);
+        SiftClient client = new SiftClient("YOUR_API_KEY", accountId);
         client.setBaseUrl(baseUrl);
 
         // Build and execute the request against the mock server.
@@ -106,14 +106,14 @@ public class ApplyDecisionTest {
         server.enqueue(response);
         server.start();
 
-        String accountId = "your_account_id";
+        String accountId = "YOUR_ACCOUNT_ID";
         String userId = "a_user_id";
         String orderId = "an_order_id";
 
         HttpUrl baseUrl = server.url("").newBuilder().build();
 
         // Create a new client and link it to the mock server.
-        SiftClient client = new SiftClient("your_api_key", accountId);
+        SiftClient client = new SiftClient("YOUR_API_KEY", accountId);
         client.setBaseUrl(baseUrl);
 
         // Build and execute the request against the mock server.
@@ -177,14 +177,14 @@ public class ApplyDecisionTest {
         server.enqueue(response);
         server.start();
 
-        String accountId = "your_account_id";
+        String accountId = "YOUR_ACCOUNT_ID";
         String userId = "a_user_id";
         String contentId = "a_content_id";
 
         HttpUrl baseUrl = server.url("").newBuilder().build();
 
         // Create a new client and link it to the mock server.
-        SiftClient client = new SiftClient("your_api_key", accountId);
+        SiftClient client = new SiftClient("YOUR_API_KEY", accountId);
         client.setBaseUrl(baseUrl);
 
         // Build and execute the request against the mock server.

@@ -24,7 +24,7 @@ public class VerificationEventTest {
 
         String expectedRequestBody = "{\n" +
                 "  \"$type\"         : \"$verification\",\n" +
-                "  \"$api_key\"      : \"your_api_key_here\",\n" +
+                "  \"$api_key\"      : \"\",\n" +
                 "  \"$user_id\"      : \"billy_jones_301\",\n" +
                 "  \"$session_id\"   : \"" + sessionId + "\",\n" +
                 "  \"$app\"          : {\n" +
@@ -59,7 +59,7 @@ public class VerificationEventTest {
         HttpUrl baseUrl = server.url("");
 
         // Create a new client and link it to the mock server.
-        SiftClient client = new SiftClient("your_api_key_here", "your_account_id_here");
+        SiftClient client = new SiftClient("", "YOUR_ACCOUNT_ID");
         client.setBaseUrl(baseUrl);
 
         // Build and execute the request against the mock server.
