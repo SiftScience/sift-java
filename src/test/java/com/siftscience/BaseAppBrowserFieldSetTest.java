@@ -49,7 +49,7 @@ import org.skyscreamer.jsonassert.JSONAssert;
 public class BaseAppBrowserFieldSetTest {
 
     private static final String DUMMY_API_KEY = "YOUR_API_KEY";
-    private static final String DUMMY_API_KEY = "YOUR_ACCOUNT_ID";
+    private static final String DUMMY_ACCOUNT_ID = "YOUR_ACCOUNT_ID";
     private static final String DUMMY_TEST_FIELD = "test";
     private static final String DUMMY_USERID = "billy_jones_301";
     private static final String REQUEST_BODY_TEMPLATE = "{\n" +

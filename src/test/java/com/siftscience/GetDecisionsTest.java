@@ -21,7 +21,7 @@ public class GetDecisionsTest {
     
     @Test
     public void testDecisionStatus() throws Exception {
-        String accountId = "8675308";
+        String accountId = "YOUR_ACCOUNT_ID";
         String responseBody = "{" +
                 "   \"data\": [" +
                 "       {" +
@@ -57,7 +57,7 @@ public class GetDecisionsTest {
         server.start();
 
         // Create a new client and link it to the mock server.
-        SiftClient client = new SiftClient("YOUR_API_KEY", "YOUR_ACCOUNT_ID",
+        SiftClient client = new SiftClient("YOUR_API_KEY", accountId,
             new OkHttpClient.Builder()
                 .addInterceptor(OkHttpUtils.urlRewritingInterceptor(server))
                 .build());
@@ -92,7 +92,7 @@ public class GetDecisionsTest {
 
     @Test
     public void testDecisionStatusWithEntityTypeSession() throws Exception {
-        String accountId = "8675308";
+        String accountId = "YOUR_ACCOUNT_ID";
         String responseBody = "{" +
                 "   \"data\": [" +
                 "       {" +
@@ -128,7 +128,7 @@ public class GetDecisionsTest {
         server.start();
 
         // Create a new client and link it to the mock server.
-        SiftClient client = new SiftClient("YOUR_API_KEY",
+        SiftClient client = new SiftClient("YOUR_API_KEY", accountId,
             new OkHttpClient.Builder()
                 .addInterceptor(OkHttpUtils.urlRewritingInterceptor(server))
                 .build());

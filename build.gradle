@@ -6,11 +6,18 @@ apply plugin: 'java-library-distribution'
 
 group = 'com.siftscience'
 version = '3.0.0'
-sourceCompatibility = 1.7
-targetCompatibility = 1.7
 
 repositories {
     mavenCentral()
+}
+
+compileJava {
+  sourceCompatibility = 1.7
+  targetCompatibility = 1.7
+}
+
+compileTestJava {
+  sourceCompatibility = 1.8
 }
 
 dependencies {

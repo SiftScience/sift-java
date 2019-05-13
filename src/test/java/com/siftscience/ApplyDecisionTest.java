@@ -52,7 +52,7 @@ public class ApplyDecisionTest {
         SiftClient client = new SiftClient("YOUR_API_KEY", "YOUR_ACCOUNT_ID",
             new OkHttpClient.Builder()
                 .addInterceptor(OkHttpUtils.urlRewritingInterceptor(server))
-                .build());        .build());
+                .build());
 
         // Build and execute the request against the mock server.
         ApplyDecisionRequest request = client.buildRequest(

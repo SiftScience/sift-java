@@ -38,7 +38,7 @@ public class ContentDecisionStatusTest {
         server.start();
 
         // Create a new client and link it to the mock server.
-        SiftClient client = new SiftClient("YOUR_API_KEY", "YOUR_ACCOUNT_ID"
+        SiftClient client = new SiftClient("YOUR_API_KEY", "YOUR_ACCOUNT_ID",
             new OkHttpClient.Builder()
                 .addInterceptor(OkHttpUtils.urlRewritingInterceptor(server))
                 .build());
