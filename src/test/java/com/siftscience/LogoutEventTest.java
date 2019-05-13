@@ -16,7 +16,7 @@ public class LogoutEventTest {
     public void testLogout() throws Exception {
         String expectedRequestBody = "{\n" +
                 "  \"$type\"      : \"$logout\",\n" +
-                "  \"$api_key\"   : \"209f490k25lb9021\",\n" +
+                "  \"$api_key\"   : \"YOUR_API_KEY\",\n" +
                 "  \"$user_id\"   : \"billy_jones_301\"\n" +
                 "}";
 
@@ -34,7 +34,7 @@ public class LogoutEventTest {
         server.start();
 
         // Create a new client and link it to the mock server.
-        SiftClient client = new SiftClient("209f490k25lb9021",
+        SiftClient client = new SiftClient("YOUR_API_KEY", "YOUR_ACCOUNT_ID",
             new OkHttpClient.Builder()
                 .addInterceptor(OkHttpUtils.urlRewritingInterceptor(server))
                 .build());

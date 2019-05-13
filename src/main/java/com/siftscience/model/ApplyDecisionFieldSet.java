@@ -50,7 +50,6 @@ public class ApplyDecisionFieldSet extends FieldSet<ApplyDecisionFieldSet> {
     @Expose @SerializedName("analyst") private String analyst;
     @Expose @SerializedName("description") private String description;
     @Expose @SerializedName("time") private Long time;
-    private String accountId;
     private String userId;
     private String orderId;
     private String sessionId;
@@ -80,15 +79,6 @@ public class ApplyDecisionFieldSet extends FieldSet<ApplyDecisionFieldSet> {
 
     public ApplyDecisionFieldSet setTime(Long time) {
         this.time = time;
-        return this;
-    }
-
-    public String getAccountId() {
-        return accountId;
-    }
-
-    public ApplyDecisionFieldSet setAccountId(String accountId) {
-        this.accountId = accountId;
         return this;
     }
 

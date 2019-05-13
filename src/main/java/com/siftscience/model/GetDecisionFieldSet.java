@@ -14,13 +14,10 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class GetDecisionFieldSet extends FieldSet<GetDecisionFieldSet> {
-    private String accountId;
     private Integer limit;
     private Integer from;
     private EntityType entityType;
     private List<AbuseType> abuseTypes;
-    private static final Pattern ACCOUNT_ID_PATTERN = Pattern
-            .compile("(?<=accounts/)\\p{XDigit}+[^/]");
 
     public GetDecisionFieldSet() {}
 
@@ -32,17 +29,10 @@ public class GetDecisionFieldSet extends FieldSet<GetDecisionFieldSet> {
         Objects.requireNonNull(nextRef,"Must provide valid nextRef");
         URI uri = URI.create(nextRef);
         String queries = uri.getQuery();
-            if ( queries == null || queries.isEmpty()) {
+            if (queries == null || queries.isEmpty()) {
             throw new InvalidRequestException("Invalid format for nextRef " + nextRef);
         } else {
             GetDecisionFieldSet fieldSet = new GetDecisionFieldSet();
-                Matcher matcher = ACCOUNT_ID_PATTERN.matcher(uri.getPath());
-                if (matcher.find()) {
-                    fieldSet.setAccountId(matcher.group());
-                } else {
-                    throw new InvalidFieldException("Unable to parse accountId from ref " +
-                            nextRef);
-                }
             for (String query : queries.split("&")) {
                 String[] pair = query.split("=");
                 if (pair.length == 2) {
@@ -84,11 +74,6 @@ public class GetDecisionFieldSet extends FieldSet<GetDecisionFieldSet> {
     public enum EntityType {USER, ORDER, SESSION, CONTENT}
     public enum DecisionCategory {BLOCK, WATCH, ACCEPT}
 
-    public GetDecisionFieldSet setAccountId(String accountId) {
-        this.accountId = accountId;
-        return this;
-    }
-
     public GetDecisionFieldSet setLimit(Integer limit) {
         this.limit = limit;
         return this;
@@ -107,10 +92,6 @@ public class GetDecisionFieldSet extends FieldSet<GetDecisionFieldSet> {
     public GetDecisionFieldSet setAbuseTypes(List<AbuseType> abuseTypes) {
         this.abuseTypes = abuseTypes;
         return this;
-    }
-
-    public String getAccountId() {
-        return accountId;
     }
 
     public Integer getLimit() {

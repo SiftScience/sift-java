@@ -39,16 +39,18 @@ import okhttp3.OkHttpClient;
  *
  */
 public class SiftClient {
-    private String apiKey;
+    private final String accountId;
+    private final String apiKey;
     private OkHttpClient okClient;
     private HttpUrl baseUrl = HttpUrl.parse("https://api.sift.com");
 
-    public SiftClient(String apiKey) {
-        this(apiKey, new OkHttpClient());
+    public SiftClient(String apiKey, String accountId) {
+        this(apiKey, accountId, new OkHttpClient());
     }
 
-    public SiftClient(String apiKey, OkHttpClient okHttpClient) {
+    public SiftClient(String apiKey, String accountId, OkHttpClient okHttpClient) {
         this.apiKey = apiKey;
+        this.accountId = accountId;
         this.okClient = okHttpClient;
     }
 
@@ -56,54 +58,64 @@ public class SiftClient {
         return apiKey;
     }
 
+    public String getAccountId() {
+        return accountId;
+    }
+
     public EventRequest buildRequest(FieldSet fields) {
         setupApiKey(fields);
-        return new EventRequest(baseUrl, okClient, fields);
+        return new EventRequest(baseUrl, getAccountId(), okClient, fields);
     }
 
     public ApplyDecisionRequest buildRequest(ApplyDecisionFieldSet fields) {
         setupApiKey(fields);
-        return new ApplyDecisionRequest(baseUrl, okClient, fields);
+        return new ApplyDecisionRequest(baseUrl, getAccountId(), okClient, fields);
     }
 
     public GetDecisionsRequest buildRequest(GetDecisionFieldSet fields) {
         setupApiKey(fields);
-        return new GetDecisionsRequest(baseUrl, okClient, fields);
+        return new GetDecisionsRequest(baseUrl, getAccountId(), okClient, fields);
     }
 
     public DecisionStatusRequest buildRequest(DecisionStatusFieldSet fields) {
         setupApiKey(fields);
-        return new DecisionStatusRequest(baseUrl, okClient, fields);
+        return new DecisionStatusRequest(baseUrl, getAccountId(), okClient, fields);
     }
 
     public LabelRequest buildRequest(LabelFieldSet fields) {
         setupApiKey(fields);
-        return new LabelRequest(baseUrl, okClient, fields);
+        return new LabelRequest(baseUrl, getAccountId(), okClient, fields);
     }
 
     public UnlabelRequest buildRequest(UnlabelFieldSet fields) {
         setupApiKey(fields);
-        return new UnlabelRequest(baseUrl, okClient, fields);
+        return new UnlabelRequest(baseUrl, getAccountId(), okClient, fields);
     }
 
     public ScoreRequest buildRequest(ScoreFieldSet fields) {
         setupApiKey(fields);
-        return new ScoreRequest(baseUrl, okClient, fields);
+        return new ScoreRequest(baseUrl, getAccountId(), okClient, fields);
     }
 
     public UserScoreRequest buildRequest(UserScoreFieldSet fields) {
         setupApiKey(fields);
-        return new UserScoreRequest(baseUrl, okClient, fields);
+        return new UserScoreRequest(baseUrl, getAccountId(), okClient, fields);
     }
 
     public WorkflowStatusRequest buildRequest(WorkflowStatusFieldSet fields) {
         setupApiKey(fields);
-        return new WorkflowStatusRequest(baseUrl, okClient, fields);
+        return new WorkflowStatusRequest(baseUrl, getAccountId(), okClient, fields);
     }
 
     private void setupApiKey(FieldSet fields) {
         if (fields.getApiKey() == null) {
-            fields.setApiKey(apiKey);
+            fields.setApiKey(getApiKey());
         }
+    }
+
+    // For testing.
+    SiftClient setBaseUrl(HttpUrl baseUrl) {
+        this.baseUrl = baseUrl;
+        return this;
     }
 }

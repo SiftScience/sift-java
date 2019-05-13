@@ -16,7 +16,7 @@ public class LabelTest {
     @Test
     public void testLabel() throws Exception {
         String expectedRequestBody = "{ \n" +
-                "  \"$api_key\"     : \"23b87a99k099fc98\", \n" +
+                "  \"$api_key\"     : \"YOUR_API_KEY\", \n" +
                 "  \"$is_bad\"      : true, \n" +
                 "  \"$abuse_type\"  : \"payment_abuse\",\n" +
                 "  \"$description\" :" +
@@ -38,10 +38,9 @@ public class LabelTest {
                 "}");
         server.enqueue(response);
         server.start();
-        HttpUrl baseUrl = server.url("");
 
         // Create a new client and link it to the mock server.
-        SiftClient client = new SiftClient("23b87a99k099fc98",
+        SiftClient client = new SiftClient("YOUR_API_KEY", "YOUR_ACCOUNT_ID",
             new OkHttpClient.Builder()
                 .addInterceptor(OkHttpUtils.urlRewritingInterceptor(server))
                 .build());

@@ -7,7 +7,7 @@ import java.util.List;
 
 public class TestUtils {
     static String unescapeJson(String json) {
-        return json.replaceAll("\\\"", "\\\\\"").replaceAll("\n", "");
+        return json.replaceAll("\"", "\\\\\"").replaceAll("\n", "");
     }
 
     static Address sampleAddress1() {

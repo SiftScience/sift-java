@@ -45,21 +45,18 @@ public class ApplyDecisionTest {
         server.enqueue(response);
         server.start();
 
-        String accountId = "your_account_id";
+        String accountId = "YOUR_ACCOUNT_ID";
         String userId = "a_user_id";
 
-        HttpUrl baseApi3Url = server.url("").newBuilder().build();
-
         // Create a new client and link it to the mock server.
-        SiftClient client = new SiftClient("YOUR_API_KEY",
+        SiftClient client = new SiftClient("YOUR_API_KEY", "YOUR_ACCOUNT_ID",
             new OkHttpClient.Builder()
                 .addInterceptor(OkHttpUtils.urlRewritingInterceptor(server))
-                .build());
+                .build());        .build());
 
         // Build and execute the request against the mock server.
         ApplyDecisionRequest request = client.buildRequest(
                 new ApplyDecisionFieldSet()
-                        .setAccountId(accountId)
                         .setUserId(userId)
                         .setDecisionId("looks_ok_account_abuse")
                         .setSource(DecisionSource.MANUAL_REVIEW)
@@ -110,14 +107,12 @@ public class ApplyDecisionTest {
         server.enqueue(response);
         server.start();
 
-        String accountId = "your_account_id";
+        String accountId = "YOUR_ACCOUNT_ID";
         String userId = "a_user_id";
         String orderId = "an_order_id";
 
-        HttpUrl baseApi3Url = server.url("").newBuilder().build();
-
         // Create a new client and link it to the mock server.
-        SiftClient client = new SiftClient("YOUR_API_KEY",
+        SiftClient client = new SiftClient("YOUR_API_KEY", "YOUR_ACCOUNT_ID",
             new OkHttpClient.Builder()
                 .addInterceptor(OkHttpUtils.urlRewritingInterceptor(server))
                 .build());
@@ -125,7 +120,6 @@ public class ApplyDecisionTest {
         // Build and execute the request against the mock server.
         ApplyDecisionRequest request = client.buildRequest(
                 new ApplyDecisionFieldSet()
-                        .setAccountId(accountId)
                         .setUserId(userId)
                         .setOrderId(orderId)
                         .setDecisionId("order_looks_bad_payment_abuse")
@@ -184,14 +178,12 @@ public class ApplyDecisionTest {
         server.enqueue(response);
         server.start();
 
-        String accountId = "your_account_id";
+        String accountId = "YOUR_ACCOUNT_ID";
         String userId = "a_user_id";
         String contentId = "a_content_id";
 
-        HttpUrl baseApi3Url = server.url("").newBuilder().build();
-
         // Create a new client and link it to the mock server.
-        SiftClient client = new SiftClient("YOUR_API_KEY",
+        SiftClient client = new SiftClient("YOUR_API_KEY", "YOUR_ACCOUNT_ID",
             new OkHttpClient.Builder()
                 .addInterceptor(OkHttpUtils.urlRewritingInterceptor(server))
                 .build());
@@ -199,7 +191,6 @@ public class ApplyDecisionTest {
         // Build and execute the request against the mock server.
         ApplyDecisionRequest request = client.buildRequest(
             new ApplyDecisionFieldSet()
-                .setAccountId(accountId)
                 .setUserId(userId)
                 .setContentId(contentId)
                 .setDecisionId("content_looks_bad_content_abuse")

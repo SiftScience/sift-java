@@ -9,19 +9,9 @@ public class DecisionStatusFieldSet extends FieldSet<DecisionStatusFieldSet> {
     public static final String ENTITY_SESSIONS = "sessions";
     public static final String ENTITY_CONTENT = "content";
 
-    private String accountId;
     private String entity;
     private String entityId;
     private String userId;
-
-    public String getAccountId() {
-        return accountId;
-    }
-
-    public DecisionStatusFieldSet setAccountId(String accountId) {
-        this.accountId = accountId;
-        return this;
-    }
 
     public String getEntity() {
         return entity;

@@ -62,11 +62,9 @@ public class DecisionStatusTest {
         response.setBody(rspBody);
         server.enqueue(response);
         server.start();
-        HttpUrl baseUrl;
-        baseUrl = server.url("");
 
         // Create a new client and link it to the mock server.
-        SiftClient client = new SiftClient("YOUR_API_KEY",
+        SiftClient client = new SiftClient("YOUR_API_KEY", "YOUR_ACCOUNT_ID",
             new OkHttpClient.Builder()
                 .addInterceptor(OkHttpUtils.urlRewritingInterceptor(server))
                 .build());
@@ -74,7 +72,6 @@ public class DecisionStatusTest {
         // Build and execute the request against the mock server.
         DecisionStatusRequest request = client.buildRequest(
                 new DecisionStatusFieldSet()
-                        .setAccountId("your_account_id")
                         .setEntity(DecisionStatusFieldSet.ENTITY_ORDERS)
                         .setEntityId("someid"));
         DecisionStatusResponse siftResponse = request.send();
@@ -82,7 +79,7 @@ public class DecisionStatusTest {
         // Verify the request.
         RecordedRequest request1 = server.takeRequest();
         Assert.assertEquals("GET", request1.getMethod());
-        Assert.assertEquals("/v3/accounts/your_account_id/orders/someid/decisions",
+        Assert.assertEquals("/v3/accounts/YOUR_ACCOUNT_ID/orders/someid/decisions",
                 request1.getPath());
         Assert.assertEquals(request1.getHeader("Authorization"), "Basic WU9VUl9BUElfS0VZOg==");
 
@@ -113,11 +110,9 @@ public class DecisionStatusTest {
         response.setBody(rspBody);
         server.enqueue(response);
         server.start();
-        HttpUrl baseUrl;
-        baseUrl = server.url("");
 
         // Create a new client and link it to the mock server.
-        SiftClient client = new SiftClient("YOUR_API_KEY",
+        SiftClient client = new SiftClient("YOUR_API_KEY", "YOUR_ACCOUNT_ID",
             new OkHttpClient.Builder()
                 .addInterceptor(OkHttpUtils.urlRewritingInterceptor(server))
                 .build());
@@ -125,7 +120,6 @@ public class DecisionStatusTest {
         // Build and execute the request against the mock server.
         DecisionStatusRequest request = client.buildRequest(
             new DecisionStatusFieldSet()
-                .setAccountId("your_account_id")
                 .setEntity(DecisionStatusFieldSet.ENTITY_CONTENT)
                 .setEntityId("someid")
                 .setUserId("some_user"));
@@ -134,7 +128,7 @@ public class DecisionStatusTest {
         // Verify the request.
         RecordedRequest request1 = server.takeRequest();
         Assert.assertEquals("GET", request1.getMethod());
-        Assert.assertEquals("/v3/accounts/your_account_id/users/some_user/content/someid/decisions",
+        Assert.assertEquals("/v3/accounts/YOUR_ACCOUNT_ID/users/some_user/content/someid/decisions",
             request1.getPath());
         Assert.assertEquals(request1.getHeader("Authorization"), "Basic WU9VUl9BUElfS0VZOg==");
 

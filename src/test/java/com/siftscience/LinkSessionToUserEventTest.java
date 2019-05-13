@@ -17,7 +17,7 @@ public class LinkSessionToUserEventTest {
     public void testLinkSessionToUser() throws Exception {
         String expectedRequestBody = "{\n" +
                 "  \"$type\"       : \"$link_session_to_user\",\n" +
-                "  \"$api_key\"    : \"209f490k25lb9021\",\n" +
+                "  \"$api_key\"    : \"YOUR_API_KEY\",\n" +
                 "  \"$user_id\"    : \"billy_jones_301\",\n" +
                 "  \"$session_id\" : \"gigtleqddo84l8cm15qe4il\"\n" +
                 "}";
@@ -34,10 +34,9 @@ public class LinkSessionToUserEventTest {
                 "}");
         server.enqueue(response);
         server.start();
-        HttpUrl baseUrl = server.url("");
 
         // Create a new client and link it to the mock server.
-        SiftClient client = new SiftClient("209f490k25lb9021",
+        SiftClient client = new SiftClient("YOUR_API_KEY", "YOUR_ACCOUNT_ID",
             new OkHttpClient.Builder()
                 .addInterceptor(OkHttpUtils.urlRewritingInterceptor(server))
                 .build());
