@@ -231,11 +231,11 @@ public abstract class FieldSet<T extends FieldSet<T>> {
 
     private String apiKey;
 
-    public String getApiKey() {
+    protected final String getApiKey() {
         return apiKey;
     }
 
-    public T setApiKey(String apiKey) {
+    T setApiKey(String apiKey) {
         this.apiKey = apiKey;
         return (T) this;
     }

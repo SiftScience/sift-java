@@ -41,8 +41,8 @@ import okhttp3.OkHttpClient;
 public class SiftClient {
     private final String accountId;
     private final String apiKey;
-    private OkHttpClient okClient;
-    private HttpUrl baseUrl = HttpUrl.parse("https://api.sift.com");
+    private final OkHttpClient okClient;
+    private final HttpUrl baseUrl = HttpUrl.parse("https://api.sift.com");
 
     public SiftClient(String apiKey, String accountId) {
         this(apiKey, accountId, new OkHttpClient());
@@ -108,14 +108,6 @@ public class SiftClient {
     }
 
     private void setupApiKey(FieldSet fields) {
-        if (fields.getApiKey() == null) {
-            fields.setApiKey(getApiKey());
-        }
-    }
-
-    // For testing.
-    SiftClient setBaseUrl(HttpUrl baseUrl) {
-        this.baseUrl = baseUrl;
-        return this;
+        fields.setApiKey(getApiKey());
     }
 }

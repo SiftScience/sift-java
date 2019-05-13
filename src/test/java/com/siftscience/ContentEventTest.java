@@ -98,7 +98,6 @@ public class ContentEventTest {
 
         // Build and execute the request against the mock server.
         SiftRequest request = client.buildRequest(new CreateCommentFieldSet()
-            .setApiKey("YOUR_API_KEY")
             .setUserId("fyw3989sjpqr71")
             .setContentId("comment-23412")
             .setSessionId("a234ksjfgn435sfg")
@@ -226,7 +225,6 @@ public class ContentEventTest {
 
         // Build and execute the request against the mock server.
         SiftRequest request = client.buildRequest(new CreateListingFieldSet()
-            .setApiKey("YOUR_API_KEY")
             .setUserId("fyw3989sjpqr71")
             .setContentId("comment-23412")
             .setSessionId("a234ksjfgn435sfg")
@@ -309,7 +307,6 @@ public class ContentEventTest {
 
         // Build and execute the request against the mock server.
         SiftRequest request = client.buildRequest(new CreateMessageFieldSet()
-            .setApiKey("YOUR_API_KEY")
             .setUserId("fyw3989sjpqr71")
             .setContentId("comment-23412")
             .setSessionId("a234ksjfgn435sfg")
@@ -409,7 +406,6 @@ public class ContentEventTest {
 
         // Build and execute the request against the mock server.
         SiftRequest request = client.buildRequest(new CreateProfileFieldSet()
-            .setApiKey("YOUR_API_KEY")
             .setUserId("fyw3989sjpqr71")
             .setContentId("comment-23412")
             .setSessionId("a234ksjfgn435sfg")
@@ -526,7 +522,6 @@ public class ContentEventTest {
 
         // Build and execute the request against the mock server.
         SiftRequest request = client.buildRequest(new CreatePostFieldSet()
-            .setApiKey("YOUR_API_KEY")
             .setUserId("fyw3989sjpqr71")
             .setContentId("comment-23412")
             .setSessionId("a234ksjfgn435sfg")
@@ -627,7 +622,6 @@ public class ContentEventTest {
 
         // Build and execute the request against the mock server.
         SiftRequest request = client.buildRequest(new CreateReviewFieldSet()
-            .setApiKey("YOUR_API_KEY")
             .setUserId("fyw3989sjpqr71")
             .setContentId("comment-23412")
             .setSessionId("a234ksjfgn435sfg")
@@ -713,7 +707,6 @@ public class ContentEventTest {
 
         // Build and execute the request against the mock server.
         SiftRequest request = client.buildRequest(new UpdateCommentFieldSet()
-            .setApiKey("YOUR_API_KEY")
             .setUserId("fyw3989sjpqr71")
             .setContentId("comment-23412")
             .setSessionId("a234ksjfgn435sfg")
@@ -841,7 +834,6 @@ public class ContentEventTest {
 
         // Build and execute the request against the mock server.
         SiftRequest request = client.buildRequest(new UpdateListingFieldSet()
-            .setApiKey("YOUR_API_KEY")
             .setUserId("fyw3989sjpqr71")
             .setContentId("comment-23412")
             .setSessionId("a234ksjfgn435sfg")
@@ -928,7 +920,6 @@ public class ContentEventTest {
 
         // Build and execute the request against the mock server.
         SiftRequest request = client.buildRequest(new UpdateMessageFieldSet()
-            .setApiKey("YOUR_API_KEY")
             .setUserId("fyw3989sjpqr71")
             .setContentId("comment-23412")
             .setSessionId("a234ksjfgn435sfg")
@@ -1028,7 +1019,6 @@ public class ContentEventTest {
 
         // Build and execute the request against the mock server.
         SiftRequest request = client.buildRequest(new UpdateProfileFieldSet()
-            .setApiKey("YOUR_API_KEY")
             .setUserId("fyw3989sjpqr71")
             .setContentId("comment-23412")
             .setSessionId("a234ksjfgn435sfg")
@@ -1145,7 +1135,6 @@ public class ContentEventTest {
 
         // Build and execute the request against the mock server.
         SiftRequest request = client.buildRequest(new UpdatePostFieldSet()
-            .setApiKey("YOUR_API_KEY")
             .setUserId("fyw3989sjpqr71")
             .setContentId("comment-23412")
             .setSessionId("a234ksjfgn435sfg")
@@ -1246,7 +1235,6 @@ public class ContentEventTest {
 
         // Build and execute the request against the mock server.
         SiftRequest request = client.buildRequest(new UpdateReviewFieldSet()
-            .setApiKey("YOUR_API_KEY")
             .setUserId("fyw3989sjpqr71")
             .setContentId("comment-23412")
             .setSessionId("a234ksjfgn435sfg")

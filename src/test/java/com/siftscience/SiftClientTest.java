@@ -52,6 +52,11 @@ public class SiftClientTest {
      */
     @Test
     public void testInvalidAPIKeyException() throws Exception {
+        // Create a new client with an invalid API key
+        client = new SiftClient("INVALID_API_KEY", "YOUR_ACCOUNT_ID",
+            new OkHttpClient.Builder()
+                .addInterceptor(OkHttpUtils.urlRewritingInterceptor(server))
+                .build());
 
         String expectedRequestBody = "{\n" +
                 "  \"$type\"             : \"$create_order\",\n" +
@@ -74,7 +79,6 @@ public class SiftClientTest {
 
         // Build a simplified request body.
         CreateOrderFieldSet fields = new CreateOrderFieldSet()
-                .setApiKey("INVALID_API_KEY")
                 .setUserId("billy_jones_301")
                 .setOrderId("ORDER-28168441")
                 .setUserEmail("bill@gmail.com");
@@ -193,7 +197,6 @@ public class SiftClientTest {
 
         // Build a simplified request body.
         CreateOrderFieldSet fields = new CreateOrderFieldSet()
-                .setApiKey("YOUR_API_KEY")
                 .setUserId("billy_jones_301")
                 .setOrderId("ORDER-28168441")
                 .setUserEmail("bill@gmail.com");
@@ -226,7 +229,6 @@ public class SiftClientTest {
 
         // Build a simplified request body.
         CreateOrderFieldSet fields = new CreateOrderFieldSet()
-                .setApiKey("YOUR_API_KEY")
                 .setUserId("billy_jones_301")
                 .setOrderId("ORDER-28168441")
                 .setUserEmail("bill@gmail.com");
@@ -260,7 +262,6 @@ public class SiftClientTest {
 
         // Build a simplified request body.
         CreateOrderFieldSet fields = new CreateOrderFieldSet()
-                .setApiKey("YOUR_API_KEY")
                 .setUserId("billy_jones_301")
                 .setOrderId("ORDER-28168441")
                 .setUserEmail("bill@gmail.com");
