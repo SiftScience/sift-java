@@ -13,13 +13,13 @@ Java 1.7 or later.
 <dependency>
     <groupId>com.siftscience</groupId>
     <artifactId>sift-java</artifactId>
-    <version>2.7.0</version>
+    <version>3.0.0</version>
 </dependency>
 ```
 ### Gradle
 ```
 dependencies {
-    compile 'com.siftscience:sift-java:2.7.0'
+    compile 'com.siftscience:sift-java:3.0.0'
 }
 ```
 ### Other
@@ -34,10 +34,10 @@ $ ./gradlew distZip   # Zip file saved to ./build/distributions/
 
 ## How To Use
 
-Create a SiftClient object with your API key. SiftClient is thread safe
+Create a SiftClient object with your API key and account id. SiftClient is thread-safe
 and can be used to access all supported APIs.
 ```java
-SiftClient client = new SiftClient("YOUR_API_KEY");
+SiftClient client = new SiftClient("YOUR_API_KEY", "YOUR_ACCOUNT_ID");
 ```
 
 ### Send Events
@@ -195,7 +195,6 @@ EventRequest createOrderRequest = client.buildRequest(createOrderFieldSet)
 To query the Workflow Status API, create a request with a WorkflowStatusFieldSet.
 ```java
 WorkflowStatusRequest request = client.buildRequest(new WorkflowStatusFieldSet()
-        .setAccountId("your_account_id")
         .setWorkflowRunId("someid"));
 ```
 
@@ -203,11 +202,10 @@ WorkflowStatusRequest request = client.buildRequest(new WorkflowStatusFieldSet()
 
 [API Docs](https://sift.com/developers/docs/java/decisions-api/apply-decision)
 
-To apply a decision to a user, create a request with accountId, userId, and ApplyDecisionFieldSet.
+To apply a decision to a user, create a request with userId and ApplyDecisionFieldSet.
 ```java
 ApplyDecisionRequest request = client.buildRequest(
         new ApplyDecisionFieldSet()
-            .setAccountId("your_account_id")
             .setUserId("a_user_id")
             .setDecisionId("decision_id")
             .setSource(DecisionSource.AUTOMATED_RULE)
@@ -215,11 +213,10 @@ ApplyDecisionRequest request = client.buildRequest(
 );
 ```
 
-To apply a decision to an order, create a request with accountId, userId, orderId and ApplyDecisionFieldSet.
+To apply a decision to an order, create a request with userId, orderId, and ApplyDecisionFieldSet.
 ```java
 ApplyDecisionRequest request = client.buildRequest(
         new ApplyDecisionFieldSet()
-            .setAccountId("your_account_id")
             .setUserId("a_user_id")
             .setOrderId("a_order_id")
             .setDecisionId("decision_id")
@@ -229,11 +226,10 @@ ApplyDecisionRequest request = client.buildRequest(
 );
 ```
 
-To apply a decision to a session, create a request with accountId, userId, sessionId and ApplyDecisionFieldSet.
+To apply a decision to a session, create a request with userId, sessionId, and ApplyDecisionFieldSet.
 ```java
 ApplyDecisionRequest request = client.buildRequest(
         new ApplyDecisionFieldSet()
-            .setAccountId("your_account_id")
             .setUserId("a_user_id")
             .setSessionId("a_session_id")
             .setDecisionId("decision_id")
@@ -243,11 +239,10 @@ ApplyDecisionRequest request = client.buildRequest(
 );
 ```
 
-To apply a decision to a piece of content, create a request with accountId, userId, contentId and ApplyDecisionFieldSet.
+To apply a decision to a piece of content, create a request with userId, contentId, and ApplyDecisionFieldSet.
 ```java
 ApplyDecisionRequest request = client.buildRequest(
         new ApplyDecisionFieldSet()
-            .setAccountId("your_account_id")
             .setUserId("a_user_id")
             .setContentId("a_content_id")
             .setDecisionId("decision_id")
@@ -265,14 +260,12 @@ ApplyDecisionRequest request = client.buildRequest(
 To retrieve available decisions, build a request with a GetDecisionsFieldSet.
 ```java
 GetDecisionsRequest request = client.buildRequest(new GetDecisionsFieldSet()
-        .setAbuseTypes(ImmutableList.of(AbuseType.PAYMENT_ABUSE, AbuseType.CONTENT_ABUSE))
-        .setAccountId("your_account_id"));
+        .setAbuseTypes(ImmutableList.of(AbuseType.PAYMENT_ABUSE, AbuseType.CONTENT_ABUSE)));
 ```
 
 Additionally, this field set supports filtering on results by entity and abuse type(s).
 ```java
-GetDecisionsRequest request = client.buildRequest(new GetDecisionsFieldSet()
-        .setAccountId("your_account_id"))
+GetDecisionsRequest request = client.buildRequest(new GetDecisionsFieldSet())
         .setEntityType(EntityType.ORDER)
         .setAbuseTypes(ImmutableList.of(AbuseType.PAYMENT_ABUSE, AbuseType.CONTENT_ABUSE))
 ```
@@ -281,8 +274,7 @@ Pagination is also supported, with offset by index (`from`) and limit (`limit`).
 The default `limit` is to return up to 100 results.
 The default offset value `from` is 0.
 ```java
-GetDecisionsRequest request = client.buildRequest(new GetDecisionsFieldSet()
-        .setAccountId("your_account_id"))
+GetDecisionsRequest request = client.buildRequest(new GetDecisionsFieldSet())
         .setFrom(15)
         .setLimit(10);  
 ```
@@ -304,7 +296,6 @@ GetDecisionsRequest nextRequest = client.buildRequest(GetDecisionsFieldSet.fromN
 To query the Decision Status API, create a request with a DecisionStatusFieldSet.
 ```java
 DecisionStatusRequest request = client.buildRequest(new DecisionStatusFieldSet()
-        .setAccountId("your_account_id")
         .setEntity(DecisionStatusFieldSet.ENTITY_ORDERS) // or ENTITY_USERS
         .setEntityId("someid"));
 ```
@@ -312,7 +303,6 @@ DecisionStatusRequest request = client.buildRequest(new DecisionStatusFieldSet()
 To query the Decision Status API for a Session, create a request with a DecisionStatusFieldSet, including a user id.
 ```java
 DecisionStatusRequest request = client.buildRequest(new DecisionStatusFieldSet()
-        .setAccountId("your_account_id")
         .setEntity(DecisionStatusFieldSet.ENTITY_SESSIONS)
         .setUserId("a_user_id")
         .setEntityId("a_session_id"));
@@ -321,7 +311,6 @@ DecisionStatusRequest request = client.buildRequest(new DecisionStatusFieldSet()
 To query the Decision Status API for Content, create a request with a DecisionStatusFieldSet, including a user id.
 ```java
 DecisionStatusRequest request = client.buildRequest(new DecisionStatusFieldSet()
-        .setAccountId("your_account_id")
         .setEntity(DecisionStatusFieldSet.ENTITY_CONTENT)
         .setUserId("a_user_id")
         .setEntityId("a_content_id"));

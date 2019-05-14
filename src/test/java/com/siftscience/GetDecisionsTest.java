@@ -21,7 +21,7 @@ public class GetDecisionsTest {
     
     @Test
     public void testDecisionStatus() throws Exception {
-        String accountId = "8675308";
+        String accountId = "YOUR_ACCOUNT_ID";
         String responseBody = "{" +
                 "   \"data\": [" +
                 "       {" +
@@ -55,18 +55,15 @@ public class GetDecisionsTest {
         response.setBody(responseBody);
         server.enqueue(response);
         server.start();
-        HttpUrl baseUrl;
-        baseUrl = server.url("");
 
         // Create a new client and link it to the mock server.
-        SiftClient client = new SiftClient("YOUR_API_KEY",
+        SiftClient client = new SiftClient("YOUR_API_KEY", accountId,
             new OkHttpClient.Builder()
                 .addInterceptor(OkHttpUtils.urlRewritingInterceptor(server))
                 .build());
 
         // Build and execute the request against the mock server.
         GetDecisionsRequest getDecisionsRequest = client.buildRequest(new GetDecisionFieldSet()
-                .setAccountId(accountId)
                 .setLimit(11)
                 .setAbuseTypes(Arrays.asList(ACCOUNT_ABUSE, ACCOUNT_TAKEOVER))
                 .setFrom(1)
@@ -89,13 +86,13 @@ public class GetDecisionsTest {
         JSONAssert.assertEquals(response.getBody().readUtf8(),
                 siftResponse.getBody().toJson(), true);
 
-        GetDecisionsRequest nextRequest = client.buildRequest(GetDecisionFieldSet.fromNextRef(
+        client.buildRequest(GetDecisionFieldSet.fromNextRef(
                 siftResponse.getBody().getNextRef()));
     }
 
     @Test
     public void testDecisionStatusWithEntityTypeSession() throws Exception {
-        String accountId = "8675308";
+        String accountId = "YOUR_ACCOUNT_ID";
         String responseBody = "{" +
                 "   \"data\": [" +
                 "       {" +
@@ -129,18 +126,15 @@ public class GetDecisionsTest {
         response.setBody(responseBody);
         server.enqueue(response);
         server.start();
-        HttpUrl baseUrl;
-        baseUrl = server.url("");
 
         // Create a new client and link it to the mock server.
-        SiftClient client = new SiftClient("YOUR_API_KEY",
+        SiftClient client = new SiftClient("YOUR_API_KEY", accountId,
             new OkHttpClient.Builder()
                 .addInterceptor(OkHttpUtils.urlRewritingInterceptor(server))
                 .build());
 
         // Build and execute the request against the mock server.
         GetDecisionsRequest getDecisionsRequest = client.buildRequest(new GetDecisionFieldSet()
-                .setAccountId(accountId)
                 .setLimit(11)
                 .setAbuseTypes(Arrays.asList(ACCOUNT_ABUSE, ACCOUNT_TAKEOVER))
                 .setFrom(1)

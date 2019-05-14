@@ -59,6 +59,11 @@ public abstract class SiftResponse<T extends BaseResponseBody<T>> {
         return this;
     }
 
+    /**
+     * @deprecated as of 3.0.0 – this simply mirrors the original request body
+     * and as such is not useful to provide access to
+     */
+    @Deprecated
     public FieldSet getRequestBody() {
         return requestBody;
     }

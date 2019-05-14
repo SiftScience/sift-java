@@ -12,8 +12,8 @@ import okhttp3.Response;
 
 public class GetDecisionsRequest extends SiftRequest<GetDecisionsResponse> {
 
-    GetDecisionsRequest(HttpUrl baseUrl, OkHttpClient okClient, FieldSet fields) {
-        super(baseUrl, okClient, fields);
+    GetDecisionsRequest(HttpUrl baseUrl, String accountId, OkHttpClient okClient, FieldSet fields) {
+        super(baseUrl, accountId, okClient, fields);
     }
 
     public enum Query {
@@ -38,7 +38,7 @@ public class GetDecisionsRequest extends SiftRequest<GetDecisionsResponse> {
     protected HttpUrl path(HttpUrl baseUrl) {
         GetDecisionFieldSet fieldSet = (GetDecisionFieldSet) this.fieldSet;
         HttpUrl.Builder path = baseUrl.newBuilder("/v3/accounts")
-                .addPathSegment(fieldSet.getAccountId())
+                .addPathSegment(getAccountId())
                 .addPathSegment("decisions");
 
         if (fieldSet.getEntityType() != null) {

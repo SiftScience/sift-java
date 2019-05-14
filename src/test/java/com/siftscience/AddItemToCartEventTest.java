@@ -1,7 +1,5 @@
 package com.siftscience;
 
-import static java.net.HttpURLConnection.HTTP_OK;
-
 import com.siftscience.model.AddItemToCartFieldSet;
 import okhttp3.HttpUrl;
 import okhttp3.OkHttpClient;
@@ -11,6 +9,8 @@ import okhttp3.mockwebserver.RecordedRequest;
 import org.junit.Assert;
 import org.junit.Test;
 import org.skyscreamer.jsonassert.JSONAssert;
+
+import static java.net.HttpURLConnection.HTTP_OK;
 
 public class AddItemToCartEventTest {
 
@@ -49,10 +49,9 @@ public class AddItemToCartEventTest {
             "}");
         server.enqueue(response);
         server.start();
-        HttpUrl baseUrl = server.url("");
 
         // Create a new client and link it to the mock server.
-        SiftClient client = new SiftClient("YOUR_API_KEY",
+        SiftClient client = new SiftClient("YOUR_API_KEY", "YOUR_ACCOUNT_ID",
             new OkHttpClient.Builder()
                 .addInterceptor(OkHttpUtils.urlRewritingInterceptor(server))
                 .build());

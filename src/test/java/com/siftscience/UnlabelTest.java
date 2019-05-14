@@ -21,10 +21,9 @@ public class UnlabelTest {
         response.setResponseCode(HTTP_NO_CONTENT);
         server.enqueue(response);
         server.start();
-        HttpUrl baseUrl = server.url("");
 
         // Create a new client and link it to the mock server.
-        SiftClient client = new SiftClient("23b87a99k099fc98",
+        SiftClient client = new SiftClient("YOUR_API_KEY", "YOUR_ACCOUNT_ID",
             new OkHttpClient.Builder()
                 .addInterceptor(OkHttpUtils.urlRewritingInterceptor(server))
                 .build());
@@ -38,7 +37,7 @@ public class UnlabelTest {
         // Verify the request.
         RecordedRequest request1 = server.takeRequest();
         Assert.assertEquals("DELETE", request1.getMethod());
-        Assert.assertEquals("/v205/users/billy_jones_301/labels?api_key=23b87a99k099fc98" +
+        Assert.assertEquals("/v205/users/billy_jones_301/labels?api_key=YOUR_API_KEY" +
                         "&abuse_type=payment_abuse", request1.getPath());
 
         // Verify the response.
@@ -56,10 +55,9 @@ public class UnlabelTest {
         response.setResponseCode(HTTP_NO_CONTENT);
         server.enqueue(response);
         server.start();
-        HttpUrl baseUrl = server.url("");
 
         // Create a new client and link it to the mock server.
-        SiftClient client = new SiftClient("23b87a99k099fc98",
+        SiftClient client = new SiftClient("YOUR_API_KEY", "YOUR_ACCOUNT_ID",
             new OkHttpClient.Builder()
                 .addInterceptor(OkHttpUtils.urlRewritingInterceptor(server))
                 .build());
@@ -73,7 +71,7 @@ public class UnlabelTest {
         // Verify the request.
         RecordedRequest request1 = server.takeRequest();
         Assert.assertEquals("DELETE", request1.getMethod());
-        Assert.assertEquals("/v205/users/billy_jones_301/labels?api_key=23b87a99k099fc98",
+        Assert.assertEquals("/v205/users/billy_jones_301/labels?api_key=YOUR_API_KEY",
                 request1.getPath());
 
         // Verify the response.

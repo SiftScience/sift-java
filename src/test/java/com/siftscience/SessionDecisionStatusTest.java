@@ -36,18 +36,15 @@ public class SessionDecisionStatusTest {
         response.setBody(rspBody);
         server.enqueue(response);
         server.start();
-        HttpUrl baseUrl;
-        baseUrl = server.url("");
 
         // Create a new client and link it to the mock server.
-        SiftClient client = new SiftClient("YOUR_API_KEY",
+        SiftClient client = new SiftClient("YOUR_API_KEY", "YOUR_ACCOUNT_ID",
             new OkHttpClient.Builder()
                 .addInterceptor(OkHttpUtils.urlRewritingInterceptor(server))
                 .build());
         // Build and execute the request against the mock server.
         DecisionStatusRequest request = client.buildRequest(
             new DecisionStatusFieldSet()
-                .setAccountId("your_account_id")
                 .setUserId("someuser")
                 .setEntity(DecisionStatusFieldSet.ENTITY_SESSIONS)
                 .setEntityId("someid"));
@@ -56,7 +53,7 @@ public class SessionDecisionStatusTest {
         // Verify the request.
         RecordedRequest request1 = server.takeRequest();
         Assert.assertEquals("GET", request1.getMethod());
-        Assert.assertEquals("/v3/accounts/your_account_id/users/someuser/sessions/someid/decisions",
+        Assert.assertEquals("/v3/accounts/YOUR_ACCOUNT_ID/users/someuser/sessions/someid/decisions",
             request1.getPath());
         Assert.assertEquals(request1.getHeader("Authorization"), "Basic WU9VUl9BUElfS0VZOg==");
 

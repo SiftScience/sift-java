@@ -49,6 +49,7 @@ import org.skyscreamer.jsonassert.JSONAssert;
 public class BaseAppBrowserFieldSetTest {
 
     private static final String DUMMY_API_KEY = "YOUR_API_KEY";
+    private static final String DUMMY_ACCOUNT_ID = "YOUR_ACCOUNT_ID";
     private static final String DUMMY_TEST_FIELD = "test";
     private static final String DUMMY_USERID = "billy_jones_301";
     private static final String REQUEST_BODY_TEMPLATE = "{\n" +
@@ -149,10 +150,9 @@ public class BaseAppBrowserFieldSetTest {
             "}");
         server.enqueue(response);
         server.start();
-        HttpUrl baseUrl = server.url("");
 
         // Create a new client and link it to the mock server.
-        SiftClient client = new SiftClient(DUMMY_API_KEY,
+        SiftClient client = new SiftClient(DUMMY_API_KEY, DUMMY_ACCOUNT_ID,
             new OkHttpClient.Builder()
                 .addInterceptor(OkHttpUtils.urlRewritingInterceptor(server))
                 .build());

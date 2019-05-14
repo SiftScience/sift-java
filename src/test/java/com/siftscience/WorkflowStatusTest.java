@@ -121,11 +121,9 @@ public class WorkflowStatusTest {
         response.setBody(bodyStr);
         server.enqueue(response);
         server.start();
-        HttpUrl baseUrl;
-        baseUrl = server.url("");
 
         // Create a new client and link it to the mock server.
-        SiftClient client = new SiftClient("YOUR_API_KEY",
+        SiftClient client = new SiftClient("YOUR_API_KEY", "YOUR_ACCOUNT_ID",
             new OkHttpClient.Builder()
                 .addInterceptor(OkHttpUtils.urlRewritingInterceptor(server))
                 .build());
@@ -211,25 +209,22 @@ public class WorkflowStatusTest {
         response.setBody(rspBody);
         server.enqueue(response);
         server.start();
-        HttpUrl baseUrl;
-        baseUrl = server.url("");
 
         // Create a new client and link it to the mock server.
-        SiftClient client = new SiftClient("YOUR_API_KEY",
+        SiftClient client = new SiftClient("YOUR_API_KEY", "YOUR_ACCOUNT_ID",
             new OkHttpClient.Builder()
                 .addInterceptor(OkHttpUtils.urlRewritingInterceptor(server))
                 .build());
 
         // Build and execute the request against the mock server.
         WorkflowStatusRequest request = client.buildRequest(
-                new WorkflowStatusFieldSet().setAccountId("your_account_id")
-                        .setWorkflowRunId("someid"));
+                new WorkflowStatusFieldSet().setWorkflowRunId("someid"));
         WorkflowStatusResponse siftResponse = request.send();
 
         // Verify the request.
         RecordedRequest request1 = server.takeRequest();
         Assert.assertEquals("GET", request1.getMethod());
-        Assert.assertEquals("/v3/accounts/your_account_id/workflows/runs/someid",
+        Assert.assertEquals("/v3/accounts/YOUR_ACCOUNT_ID/workflows/runs/someid",
                 request1.getPath());
         Assert.assertEquals(request1.getHeader("Authorization"), "Basic WU9VUl9BUElfS0VZOg==");
 
