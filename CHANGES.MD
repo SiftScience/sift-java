@@ -1,3 +1,8 @@
+3.0.0 (2019-05-14)
+=================
+- Add account id and OkHttpClient to constructor
+- Add Circle build
+
 2.7.0 (2019-02-18)
 =================
 - Add support for `$app` and `$browser` to `$content_status`, `$order_status`, and `$security_notification`
