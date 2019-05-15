@@ -1,4 +1,4 @@
-# Sift API
+# sift-java
 
 [![CircleCI](https://circleci.com/gh/SiftScience/sift-java.svg?style=svg)](https://circleci.com/gh/SiftScience/sift-java)
 
