@@ -2,7 +2,7 @@
 
 [![CircleCI](https://circleci.com/gh/SiftScience/sift-java.svg?style=svg)](https://circleci.com/gh/SiftScience/sift-java)
 
-The official Java bindings for the latest version (v205) of the [Sift API](https://sift.com/developers/docs/java/apis-overview) .
+The official Java bindings for the latest version (v205) of the [Sift API](https://sift.com/developers/docs/java/apis-overview).
 
 ## Requirements
 Java 1.7 or later.
