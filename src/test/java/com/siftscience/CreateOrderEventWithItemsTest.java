@@ -5,11 +5,10 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.siftscience.model.CreateOrderFieldSet;
 import com.siftscience.model.Item;
 import com.siftscience.model.PaymentMethod;
 import com.siftscience.model.Promotion;
-import com.siftscience.model.UpdateOrderFieldSet;
-import okhttp3.HttpUrl;
 import okhttp3.OkHttpClient;
 import okhttp3.mockwebserver.MockResponse;
 import okhttp3.mockwebserver.MockWebServer;
@@ -19,14 +18,15 @@ import org.junit.Assert;
 import org.junit.Test;
 import org.skyscreamer.jsonassert.JSONAssert;
 
-public class UpdateOrderEventTest {
+public class CreateOrderEventWithItemsTest {
 
     @Test
-    public void testUpdateOrderEvent() throws JSONException, IOException, InterruptedException {
+    public void testCreateOrderEvent() throws JSONException, IOException,
+            InterruptedException {
 
         // The expected JSON payload of the request.
         String expectedRequestBody = "{\n" +
-                "  \"$type\"             : \"$update_order\",\n" +
+                "  \"$type\"             : \"$create_order\",\n" +
                 "  \"$api_key\"          : \"YOUR_API_KEY\",\n" +
                 "  \"$user_id\"          : \"billy_jones_301\",\n" +
                 "\n" +
@@ -124,7 +124,7 @@ public class UpdateOrderEventTest {
                 "    \"error_message\" : \"OK\",\n" +
                 "    \"time\" : 1327604222,\n" +
                 "    \"request\" : \"" + TestUtils.unescapeJson(expectedRequestBody) + "\"\n" +
-                "}");
+        "}");
         server.enqueue(response);
         server.start();
 
@@ -148,10 +148,9 @@ public class UpdateOrderEventTest {
         List<Promotion> promotionList = new ArrayList<>();
         promotionList.add(TestUtils.samplePromotion1());
 
-
         // Build and execute the request against the mock server.
-        SiftRequest request = client.buildRequest(
-                new UpdateOrderFieldSet()
+        EventRequest request = client.buildRequest(
+                new CreateOrderFieldSet()
                         .setUserId("billy_jones_301")
                         .setSessionId("gigtleqddo84l8cm15qe4il")
                         .setOrderId("ORDER-28168441")
@@ -170,7 +169,7 @@ public class UpdateOrderEventTest {
                         .setCustomField("coupon_code", "dollarMadness")
                         .setCustomField("shipping_choice", "FedEx Ground Courier")
                         .setCustomField("is_first_time_buyer", false));
-        SiftResponse siftResponse = request.send();
+        EventResponse siftResponse = request.send();
 
         // Verify the request.
         RecordedRequest request1 = server.takeRequest();

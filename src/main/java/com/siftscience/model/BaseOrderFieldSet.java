@@ -19,6 +19,7 @@ public abstract class BaseOrderFieldSet<T extends BaseOrderFieldSet<T>>
     @Expose @SerializedName("$seller_user_id") private String sellerUserId;
     @Expose @SerializedName("$promotions") private List<Promotion> promotions;
     @Expose @SerializedName("$shipping_method") private String shippingMethod;
+    @Expose @SerializedName("$bookings") private List<Booking> bookings;
 
     public String getOrderId() {
         return orderId;
@@ -102,6 +103,15 @@ public abstract class BaseOrderFieldSet<T extends BaseOrderFieldSet<T>>
 
     public T setItems(List<Item> items) {
         this.items = items;
+        return (T) this;
+    }
+
+    public List<Booking> getBookings() {
+        return bookings;
+    }
+
+    public T setBookings(List<Booking> bookings) {
+        this.bookings = bookings;
         return (T) this;
     }
 
