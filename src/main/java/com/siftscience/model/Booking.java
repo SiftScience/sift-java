@@ -18,7 +18,7 @@ public class Booking {
     @Expose @SerializedName("$room_type") private String roomType;
     @Expose @SerializedName("$event_id") private String eventId;
     @Expose @SerializedName("$venue_id") private String venueId;
-    @Expose @SerializedName("$location") private String location;
+    @Expose @SerializedName("$location") private Address location;
     @Expose @SerializedName("$category") private String category;
 
     public String getBookingType() {
@@ -129,11 +129,11 @@ public class Booking {
         return this;
     }
 
-    public String getLocation() {
+    public Address getLocation() {
         return location;
     }
 
-    public Booking setLocation(String location) {
+    public Booking setLocation(Address location) {
         this.location = location;
         return this;
     }
