@@ -102,6 +102,52 @@ public class TestUtils {
                 .setQuantity(2L);
     }
 
+    static Booking sampleBooking() {
+        List<Guest> guests = new ArrayList<>();
+        guests.add(sampleGuest1());
+        guests.add(sampleGuest2());
+
+        List<Segment> segments = new ArrayList<>();
+        segments.add(sampleSegment());
+
+        return new Booking()
+            .setBookingType("$flight")
+            .setTitle("SFO - LAS, 2 Adults")
+            .setStartTime(12038412903L)
+            .setEndTime(12048412903L)
+            .setGuests(guests)
+            .setSegments(segments)
+            .setPrice(49900000L)
+            .setCurrencyCode("USD")
+            .setQuantity(1L);
+    }
+
+    static Guest sampleGuest1() {
+        return new Guest()
+                .setName("John Doe")
+                .setBirthDate("1985-01-19")
+                .setLoyaltyProgram("skymiles")
+                .setLoyaltyProgramId("PSOV34DF")
+                .setPhone("1-415-555-6040")
+                .setEmail("jdeo@domain.com");
+    }
+
+    static Guest sampleGuest2() {
+        return new Guest()
+            .setName("Jane Doe");
+    }
+
+    static Segment sampleSegment() {
+        return new Segment()
+            .setDepartureAddress(sampleAddress1())
+            .setArrivalAddress(sampleAddress2())
+            .setStartTime(2190121220L)
+            .setEndTime(2290122129L)
+            .setVesselNumber("LH454")
+            .setFareClass("Premium Economy")
+            .setDepartureAirportCode("SFO")
+            .setArrivalAirportCode("LAS");
+    }
     static Discount sampleDiscount1() {
         return new Discount()
                 .setAmount(5000000L)
