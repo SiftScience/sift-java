@@ -1,3 +1,7 @@
+3.1.0 (2019-07-17)
+=================
+- Add support for `$bookings` complex field to `$create_order` and `$update_order` events
+
 3.0.0 (2019-05-14)
 =================
 - Add account id and OkHttpClient to constructor
