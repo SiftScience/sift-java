@@ -20,6 +20,7 @@ public class Booking {
     @Expose @SerializedName("$venue_id") private String venueId;
     @Expose @SerializedName("$location") private Address location;
     @Expose @SerializedName("$category") private String category;
+    @Expose @SerializedName("$tags") private List<String> tags;
 
     public String getBookingType() {
         return bookingType;
@@ -146,4 +147,14 @@ public class Booking {
         this.category = category;
         return this;
     }
+
+    public List<String> getTags() {
+        return tags;
+    }
+
+    public Booking setTags(List<String> tags) {
+        this.tags = tags;
+        return this;
+    }
+
 }

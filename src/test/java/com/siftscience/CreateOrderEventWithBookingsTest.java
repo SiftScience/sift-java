@@ -78,7 +78,7 @@ public class CreateOrderEventWithBookingsTest {
             "          \"$loyalty_program\": \"skymiles\",\n" +
             "          \"$loyalty_program_id\": \"PSOV34DF\",\n" +
             "          \"$phone\": \"1-415-555-6040\",\n" +
-            "          \"$email\": \"jdeo@domain.com\"\n" +
+            "          \"$email\": \"jdoe@domain.com\"\n" +
             "        },\n" +
             "        {\n" +
             "          \"$name\": \"Jane Doe\"\n" +
@@ -118,7 +118,11 @@ public class CreateOrderEventWithBookingsTest {
             "      ],\n" +
             "      \"$price\": 49900000,\n" +
             "      \"$currency_code\": \"USD\",\n" +
-            "      \"$quantity\": 1\n" +
+            "      \"$quantity\": 1,\n" +
+            "      \"$tags\": [\n" +
+            "        \"team-123\",\n" +
+            "        \"region-123\"\n" +
+            "      ]\n" +
             "    }\n" +
             "  ],\n" +
             "\n" +
