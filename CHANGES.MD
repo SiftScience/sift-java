@@ -1,3 +1,7 @@
+3.2.0 (2019-07-31)
+=================
+- Add support for `$tags` field to `$booking` event
+
 3.1.0 (2019-07-17)
 =================
 - Add support for `$bookings` complex field to `$create_order` and `$update_order` events
