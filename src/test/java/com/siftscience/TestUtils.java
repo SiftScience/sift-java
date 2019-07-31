@@ -1,6 +1,14 @@
 package com.siftscience;
 
-import com.siftscience.model.*;
+import com.siftscience.model.Address;
+import com.siftscience.model.Booking;
+import com.siftscience.model.CreditPoint;
+import com.siftscience.model.Discount;
+import com.siftscience.model.Guest;
+import com.siftscience.model.Item;
+import com.siftscience.model.PaymentMethod;
+import com.siftscience.model.Promotion;
+import com.siftscience.model.Segment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -87,6 +95,13 @@ public class TestUtils {
         return tags;
     }
 
+    static List<String> sampleTags3() {
+        List<String> tags = new ArrayList<>();
+        tags.add("team-123");
+        tags.add("region-123");
+        return tags;
+    }
+
     static Item sampleItem2() {
         return new Item()
                 .setItemId("B004834GQO")
@@ -119,6 +134,7 @@ public class TestUtils {
             .setSegments(segments)
             .setPrice(49900000L)
             .setCurrencyCode("USD")
+            .setTags(sampleTags3())
             .setQuantity(1L);
     }
 
@@ -129,7 +145,7 @@ public class TestUtils {
                 .setLoyaltyProgram("skymiles")
                 .setLoyaltyProgramId("PSOV34DF")
                 .setPhone("1-415-555-6040")
-                .setEmail("jdeo@domain.com");
+                .setEmail("jdoe@domain.com");
     }
 
     static Guest sampleGuest2() {
