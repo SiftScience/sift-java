@@ -1,6 +1,6 @@
 3.2.0 (2019-07-31)
 =================
-- Add support for `$tags` field to `$booking` event
+- Add support for `$tags` field to `$booking` complex field
 
 3.1.0 (2019-07-17)
 =================
