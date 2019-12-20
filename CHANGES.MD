@@ -1,3 +1,10 @@
+3.3.0 (2020-01-07)
+=================
+- Add support for `$client_language` field to `$app` complex field
+- Add support for `$accept_language` and `content_language` fields to `$browser` complex field
+- Add support for `$brand_name`, `$site_country` and `$site_domain` fields to custom events and all reserved events except `$chargeback`, `$link_session_to_user` and `$flag_content`
+- Add support for `$ordered_from` complex field to `$create_order`, `$update_order`, and `$transaction` events
+
 3.2.0 (2019-07-31)
 =================
 - Add support for `$tags` field to `$booking` complex field

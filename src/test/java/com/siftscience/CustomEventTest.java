@@ -19,6 +19,9 @@ public class CustomEventTest {
                 "  \"$api_key\"           : \"YOUR_API_KEY\",\n" +
                 "  \"$user_id\"           : \"billy_jones_301\",\n" +
                 "  \"recipient_user_id\"  : \"marylee819\",\n" +
+                "  \"$site_country\": \"US\",\n" +
+                "  \"$site_domain\": \"sift.com\",\n" +
+                "  \"$brand_name\": \"sift\",\n" +
                 "  \"call_duration\"      : 4428\n" +
                 "}";
 
@@ -45,6 +48,9 @@ public class CustomEventTest {
         SiftRequest request = client.buildRequest(new CustomEventFieldSet()
                 .setEventType("make_call")
                 .setUserId("billy_jones_301")
+                .setSiteCountry("US")
+                .setSiteDomain("sift.com")
+                .setBrandName("sift")
                 .setCustomField("recipient_user_id", "marylee819")
                 .setCustomField("call_duration", 4428));
 

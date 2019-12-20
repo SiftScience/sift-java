@@ -4,7 +4,7 @@ import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 public abstract class BaseAppBrowserFieldSet<T extends BaseAppBrowserFieldSet<T>>
-    extends EventsApiRequestFieldSet<T> {
+    extends BaseSiteBrandFieldSet<T> {
     @Expose @SerializedName("$app") private App app;
     @Expose @SerializedName("$browser") private Browser browser;
 
@@ -25,5 +25,4 @@ public abstract class BaseAppBrowserFieldSet<T extends BaseAppBrowserFieldSet<T>
         this.browser = browser;
         return (T) this;
     }
-
 }

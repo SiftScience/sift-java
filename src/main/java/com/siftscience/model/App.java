@@ -11,6 +11,7 @@ public class App {
     @Expose @SerializedName("$device_unique_id") private String deviceUniqueId;
     @Expose @SerializedName("$app_name") private String appName;
     @Expose @SerializedName("$app_version") private String appVersion;
+    @Expose @SerializedName("$client_language") private String clientLanguage;
 
     public String getOperatingSystem() {
         return operatingSystem;
@@ -72,6 +73,15 @@ public class App {
 
     public App setAppVersion(String appVersion) {
         this.appVersion = appVersion;
+        return this;
+    }
+
+    public String getClientLanguage() {
+        return clientLanguage;
+    }
+
+    public App setClientLanguage(String clientLanguage) {
+        this.clientLanguage = clientLanguage;
         return this;
     }
 }

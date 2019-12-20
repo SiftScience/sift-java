@@ -16,6 +16,7 @@ public class TransactionFieldSet extends BaseAppBrowserFieldSet<TransactionField
     @Expose @SerializedName("$shipping_address") private Address shippingAddress;
     @Expose @SerializedName("$seller_user_id") private String sellerUserId;
     @Expose @SerializedName("$transfer_recipient_user_id") private String transferRecipientUserId;
+    @Expose @SerializedName("$ordered_from") private OrderedFrom orderedFrom;
 
     @Override
     public String getEventType() {
@@ -131,6 +132,15 @@ public class TransactionFieldSet extends BaseAppBrowserFieldSet<TransactionField
 
     public TransactionFieldSet setTransferRecipientUserId(String transferRecipientUserId) {
         this.transferRecipientUserId = transferRecipientUserId;
+        return this;
+    }
+
+    public OrderedFrom getOrderedFrom() {
+        return orderedFrom;
+    }
+
+    public TransactionFieldSet setOrderedFrom(OrderedFrom orderedFrom) {
+        this.orderedFrom = orderedFrom;
         return this;
     }
 }

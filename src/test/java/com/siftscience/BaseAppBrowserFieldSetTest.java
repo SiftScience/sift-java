@@ -101,15 +101,18 @@ public class BaseAppBrowserFieldSetTest {
     public void testApp() throws Exception {
         String appName = "Calculator";
         String operatingSystem = "iOS";
+        String clientLanguage = "en-US";
         test(
             new TestFieldSet().setTestField(DUMMY_TEST_FIELD)
                 .setUserId(DUMMY_USERID)
                 .setApp(new App().setAppName(appName)
-                    .setOperatingSystem(operatingSystem)),
+                    .setOperatingSystem(operatingSystem)
+                    .setClientLanguage(clientLanguage)),
             String.format(REQUEST_BODY_TEMPLATE, ",\n" +
                 "  \"$app\"          : {\n" +
                 "      \"$os\"       : \"" + operatingSystem + "\",\n" +
-                "      \"$app_name\" : \"" + appName + "\"\n" +
+                "      \"$app_name\" : \"" + appName + "\",\n" +
+                "      \"$client_language\" : \"" + clientLanguage + "\"\n" +
                 "   }\n")
         );
     }
@@ -117,13 +120,20 @@ public class BaseAppBrowserFieldSetTest {
     @Test
     public void testBrowser() throws Exception {
         String userAgent = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_3)";
+        String acceptLanguage = "en-US";
+        String contentLanguage = "en-GB";
         test(
             new TestFieldSet().setTestField(DUMMY_TEST_FIELD)
                 .setUserId(DUMMY_USERID)
-                .setBrowser(new Browser().setUserAgent(userAgent)),
+                .setBrowser(new Browser()
+                    .setUserAgent(userAgent)
+                    .setAcceptLanguage(acceptLanguage)
+                    .setContentLanguage(contentLanguage)),
             String.format(REQUEST_BODY_TEMPLATE, ",\n" +
                 "  \"$browser\"       : {\n" +
-                "      \"$user_agent\": \"" + userAgent + "\"\n" +
+                "      \"$user_agent\": \"" + userAgent + "\",\n" +
+                "      \"$accept_language\": \"" + acceptLanguage + "\",\n" +
+                "      \"$content_language\": \"" + contentLanguage + "\"\n" +
                 "   }\n")
         );
     }
