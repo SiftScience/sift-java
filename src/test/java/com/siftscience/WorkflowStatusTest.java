@@ -4,7 +4,6 @@ import static java.net.HttpURLConnection.HTTP_OK;
 
 import com.siftscience.model.CreateOrderFieldSet;
 import com.siftscience.model.WorkflowStatusFieldSet;
-import okhttp3.HttpUrl;
 import okhttp3.OkHttpClient;
 import okhttp3.mockwebserver.MockResponse;
 import okhttp3.mockwebserver.MockWebServer;

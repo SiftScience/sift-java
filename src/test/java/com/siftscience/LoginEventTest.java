@@ -6,7 +6,6 @@ import java.util.Arrays;
 import com.siftscience.model.App;
 import com.siftscience.model.Browser;
 import com.siftscience.model.LoginFieldSet;
-import okhttp3.HttpUrl;
 import okhttp3.OkHttpClient;
 import okhttp3.mockwebserver.MockResponse;
 import okhttp3.mockwebserver.MockWebServer;

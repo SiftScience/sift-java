@@ -3,7 +3,6 @@ package com.siftscience;
 import static java.net.HttpURLConnection.HTTP_NO_CONTENT;
 
 import com.siftscience.model.UnlabelFieldSet;
-import okhttp3.HttpUrl;
 import okhttp3.OkHttpClient;
 import okhttp3.mockwebserver.MockResponse;
 import okhttp3.mockwebserver.MockWebServer;

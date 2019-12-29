@@ -1,7 +1,6 @@
 package com.siftscience;
 
 import com.siftscience.model.AddItemToCartFieldSet;
-import okhttp3.HttpUrl;
 import okhttp3.OkHttpClient;
 import okhttp3.mockwebserver.MockResponse;
 import okhttp3.mockwebserver.MockWebServer;

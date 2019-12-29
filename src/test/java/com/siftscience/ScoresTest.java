@@ -7,7 +7,6 @@ import java.util.List;
 
 import com.siftscience.model.CreateOrderFieldSet;
 import com.siftscience.model.ScoreFieldSet;
-import okhttp3.HttpUrl;
 import okhttp3.OkHttpClient;
 import okhttp3.mockwebserver.MockResponse;
 import okhttp3.mockwebserver.MockWebServer;
