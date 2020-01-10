@@ -8,7 +8,6 @@ import static com.siftscience.model.GetDecisionFieldSet.AbuseType.ACCOUNT_TAKEOV
 import static com.siftscience.model.GetDecisionFieldSet.EntityType.ORDER;
 import static com.siftscience.model.GetDecisionFieldSet.EntityType.SESSION;
 import com.siftscience.model.GetDecisionFieldSet;
-import okhttp3.HttpUrl;
 import okhttp3.OkHttpClient;
 import okhttp3.mockwebserver.MockResponse;
 import okhttp3.mockwebserver.MockWebServer;

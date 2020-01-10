@@ -4,7 +4,6 @@ import static java.net.HttpURLConnection.HTTP_OK;
 
 import com.siftscience.model.App;
 import com.siftscience.model.VerificationFieldSet;
-import okhttp3.HttpUrl;
 import okhttp3.OkHttpClient;
 import okhttp3.mockwebserver.MockResponse;
 import okhttp3.mockwebserver.MockWebServer;

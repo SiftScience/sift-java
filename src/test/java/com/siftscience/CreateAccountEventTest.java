@@ -8,7 +8,6 @@ import java.util.List;
 import com.siftscience.model.CreateAccountFieldSet;
 import com.siftscience.model.PaymentMethod;
 import com.siftscience.model.Promotion;
-import okhttp3.HttpUrl;
 import okhttp3.OkHttpClient;
 import okhttp3.mockwebserver.MockResponse;
 import okhttp3.mockwebserver.MockWebServer;
