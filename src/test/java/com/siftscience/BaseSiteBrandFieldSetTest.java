@@ -5,6 +5,7 @@ import static java.net.HttpURLConnection.HTTP_OK;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.object.IsCompatibleType.typeCompatibleWith;
 import com.siftscience.model.BaseAppBrowserFieldSet;
+import com.siftscience.model.BaseSiteBrandFieldSet;
 import okhttp3.OkHttpClient;
 import okhttp3.mockwebserver.MockResponse;
 import okhttp3.mockwebserver.MockWebServer;
@@ -113,7 +114,7 @@ public class BaseSiteBrandFieldSetTest {
         server.shutdown();
     }
 
-    private static class TestFieldSet extends BaseAppBrowserFieldSet<BaseSiteBrandFieldSetTest.TestFieldSet> {
+    private static class TestFieldSet extends BaseSiteBrandFieldSet<TestFieldSet> {
         public BaseSiteBrandFieldSetTest.TestFieldSet fromJson(String json) {
             return gson.fromJson(json, BaseSiteBrandFieldSetTest.TestFieldSet.class);
         }
