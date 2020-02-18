@@ -1,4 +1,4 @@
-3.3.0 (2020-01-07)
+3.3.0 (2020-02-18)
 =================
 - Add support for `$client_language` field to `$app` complex field
 - Add support for `$accept_language` and `$content_language` fields to `$browser` complex field

@@ -6,7 +6,7 @@ import com.google.gson.annotations.SerializedName;
 import java.util.List;
 
 public abstract class BaseOrderFieldSet<T extends BaseOrderFieldSet<T>>
-        extends BaseAppBrowserFieldSet<T> {
+        extends BaseAppBrowserSiteBrandFieldSet<T> {
     @Expose @SerializedName("$order_id") private String orderId;
     @Expose @SerializedName("$user_email") private String userEmail;
     @Expose @SerializedName("$amount") private Long amount;

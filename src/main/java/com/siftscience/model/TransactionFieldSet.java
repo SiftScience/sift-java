@@ -3,7 +3,7 @@ package com.siftscience.model;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class TransactionFieldSet extends BaseAppBrowserFieldSet<TransactionFieldSet> {
+public class TransactionFieldSet extends BaseAppBrowserSiteBrandFieldSet<TransactionFieldSet> {
     @Expose @SerializedName("$amount") private Long amount;
     @Expose @SerializedName("$currency_code") private String currencyCode;
     @Expose @SerializedName("$user_email") private String userEmail;

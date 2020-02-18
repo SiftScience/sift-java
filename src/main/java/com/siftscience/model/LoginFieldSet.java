@@ -5,7 +5,7 @@ import java.util.List;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class LoginFieldSet extends BaseAppBrowserFieldSet<LoginFieldSet> {
+public class LoginFieldSet extends BaseAppBrowserSiteBrandFieldSet<LoginFieldSet> {
     public static LoginFieldSet fromJson(String json) {
         return gson.fromJson(json, LoginFieldSet.class);
     }

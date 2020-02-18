@@ -5,7 +5,7 @@ import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
 
-public class AddPromotionFieldSet extends BaseAppBrowserFieldSet<AddPromotionFieldSet> {
+public class AddPromotionFieldSet extends BaseAppBrowserSiteBrandFieldSet<AddPromotionFieldSet> {
     public static AddPromotionFieldSet fromJson(String json) {
         return gson.fromJson(json, AddPromotionFieldSet.class);
     }
