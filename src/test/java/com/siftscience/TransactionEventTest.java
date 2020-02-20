@@ -26,6 +26,22 @@ public class TransactionEventTest {
                 "  \"$transaction_status\" : \"$success\",\n" +
                 "  \"$order_id\"         : \"ORDER-123124124\",\n" +
                 "  \"$transaction_id\"   : \"719637215\",\n" +
+                "  \"$site_country\": \"US\",\n" +
+                "  \"$site_domain\": \"sift.com\",\n" +
+                "  \"$brand_name\": \"sift\",\n" +
+                "  \"$ordered_from\" : {\n" +
+                "    \"$store_id\"      : \"123\",\n" +
+                "    \"$store_address\" : {\n" +
+                "      \"$address_1\" : \"2100 Main Street\",\n" +
+                "      \"$address_2\" : \"Apt 3B\",\n" +
+                "      \"$city\"      : \"New London\",\n" +
+                "      \"$country\"   : \"US\",\n" +
+                "      \"$name\"      : \"Bill Jones\",\n" +
+                "      \"$phone\"     : \"1-415-555-6040\",\n" +
+                "      \"$region\"    : \"New Hampshire\",\n" +
+                "      \"$zipcode\"   : \"03257\"\n" +
+                "    }\n" +
+                "  },\n" +
                 "\n" +
                 "  \"$billing_address\"  : {\n" +
                 "      \"$name\"         : \"Bill Jones\",\n" +
@@ -90,11 +106,15 @@ public class TransactionEventTest {
                 .setUserEmail("bill@gmail.com")
                 .setTransactionType("$sale")
                 .setTransactionStatus("$success")
+                .setSiteCountry("US")
+                .setSiteDomain("sift.com")
+                .setBrandName("sift")
                 .setOrderId("ORDER-123124124")
                 .setTransactionId("719637215")
                 .setBillingAddress(TestUtils.sampleAddress2())
                 .setPaymentMethod(TestUtils.samplePaymentMethod1())
                 .setShippingAddress(TestUtils.sampleAddress2())
+                .setOrderedFrom(TestUtils.sampleOrderedFrom())
                 .setSessionId("gigtleqddo84l8cm15qe4il")
                 .setSellerUserId("slinkys_emporium")
                 .setCustomField("digital_wallet", "apple_pay")

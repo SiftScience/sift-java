@@ -3,7 +3,7 @@ package com.siftscience.model;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class VerificationFieldSet extends BaseAppBrowserFieldSet<VerificationFieldSet> {
+public class VerificationFieldSet extends BaseAppBrowserSiteBrandFieldSet<VerificationFieldSet> {
     public static VerificationFieldSet fromJson(String json) {
         return gson.fromJson(json, VerificationFieldSet.class);
     }

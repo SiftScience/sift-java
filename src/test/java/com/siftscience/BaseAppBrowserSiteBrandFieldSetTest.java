@@ -9,7 +9,7 @@ import com.google.gson.annotations.SerializedName;
 import com.siftscience.model.AddItemToCartFieldSet;
 import com.siftscience.model.AddPromotionFieldSet;
 import com.siftscience.model.App;
-import com.siftscience.model.BaseAppBrowserFieldSet;
+import com.siftscience.model.BaseAppBrowserSiteBrandFieldSet;
 import com.siftscience.model.Browser;
 import com.siftscience.model.ContentStatusFieldSet;
 import com.siftscience.model.CreateAccountFieldSet;
@@ -45,7 +45,7 @@ import org.junit.Assert;
 import org.junit.Test;
 import org.skyscreamer.jsonassert.JSONAssert;
 
-public class BaseAppBrowserFieldSetTest {
+public class BaseAppBrowserSiteBrandFieldSetTest {
 
     private static final String DUMMY_API_KEY = "YOUR_API_KEY";
     private static final String DUMMY_ACCOUNT_ID = "YOUR_ACCOUNT_ID";
@@ -93,7 +93,7 @@ public class BaseAppBrowserFieldSetTest {
         };
 
         for (Class<?> subclass : subclasses) {
-            assertThat(subclass, typeCompatibleWith(BaseAppBrowserFieldSet.class));
+            assertThat(subclass, typeCompatibleWith(BaseAppBrowserSiteBrandFieldSet.class));
         }
     }
 
@@ -101,15 +101,18 @@ public class BaseAppBrowserFieldSetTest {
     public void testApp() throws Exception {
         String appName = "Calculator";
         String operatingSystem = "iOS";
+        String clientLanguage = "en-US";
         test(
             new TestFieldSet().setTestField(DUMMY_TEST_FIELD)
                 .setUserId(DUMMY_USERID)
                 .setApp(new App().setAppName(appName)
-                    .setOperatingSystem(operatingSystem)),
+                    .setOperatingSystem(operatingSystem)
+                    .setClientLanguage(clientLanguage)),
             String.format(REQUEST_BODY_TEMPLATE, ",\n" +
                 "  \"$app\"          : {\n" +
                 "      \"$os\"       : \"" + operatingSystem + "\",\n" +
-                "      \"$app_name\" : \"" + appName + "\"\n" +
+                "      \"$app_name\" : \"" + appName + "\",\n" +
+                "      \"$client_language\" : \"" + clientLanguage + "\"\n" +
                 "   }\n")
         );
     }
@@ -117,13 +120,20 @@ public class BaseAppBrowserFieldSetTest {
     @Test
     public void testBrowser() throws Exception {
         String userAgent = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_3)";
+        String acceptLanguage = "en-US";
+        String contentLanguage = "en-GB";
         test(
             new TestFieldSet().setTestField(DUMMY_TEST_FIELD)
                 .setUserId(DUMMY_USERID)
-                .setBrowser(new Browser().setUserAgent(userAgent)),
+                .setBrowser(new Browser()
+                    .setUserAgent(userAgent)
+                    .setAcceptLanguage(acceptLanguage)
+                    .setContentLanguage(contentLanguage)),
             String.format(REQUEST_BODY_TEMPLATE, ",\n" +
                 "  \"$browser\"       : {\n" +
-                "      \"$user_agent\": \"" + userAgent + "\"\n" +
+                "      \"$user_agent\": \"" + userAgent + "\",\n" +
+                "      \"$accept_language\": \"" + acceptLanguage + "\",\n" +
+                "      \"$content_language\": \"" + contentLanguage + "\"\n" +
                 "   }\n")
         );
     }
@@ -132,6 +142,52 @@ public class BaseAppBrowserFieldSetTest {
     public void testNeitherAppNorBrowser() throws Exception {
         test(
             new TestFieldSet().setTestField(DUMMY_TEST_FIELD).setUserId(DUMMY_USERID),
+            String.format(REQUEST_BODY_TEMPLATE, "")
+        );
+    }
+
+        @Test
+    public void testSiteCountry() throws Exception {
+        String siteCountry = "US";
+        test(
+            new TestFieldSet()
+                .setTestField(DUMMY_TEST_FIELD)
+                .setUserId(DUMMY_USERID)
+                .setSiteCountry(siteCountry),
+            String.format(REQUEST_BODY_TEMPLATE, ", \"$site_country\" : \"US\"  }\n")
+        );
+    }
+
+    @Test
+    public void testSiteDomain() throws Exception {
+        String siteDomain = "sift.com";
+        test(
+            new TestFieldSet()
+                .setTestField(DUMMY_TEST_FIELD)
+                .setUserId(DUMMY_USERID)
+                .setSiteDomain(siteDomain),
+            String.format(REQUEST_BODY_TEMPLATE, ", \"$site_domain\" : \"sift.com\"  }\n")
+        );
+    }
+
+    @Test
+    public void testBrandName() throws Exception {
+        String brandName = "sift";
+        test(
+            new TestFieldSet()
+                .setTestField(DUMMY_TEST_FIELD)
+                .setUserId(DUMMY_USERID)
+                .setBrandName(brandName),
+            String.format(REQUEST_BODY_TEMPLATE, ", \"$brand_name\" : \"sift\"  }\n")
+        );
+    }
+
+    @Test
+    public void testNoSiteBrandFields() throws Exception {
+        test(
+            new TestFieldSet()
+                .setTestField(DUMMY_TEST_FIELD)
+                .setUserId(DUMMY_USERID),
             String.format(REQUEST_BODY_TEMPLATE, "")
         );
     }
@@ -174,8 +230,8 @@ public class BaseAppBrowserFieldSetTest {
         server.shutdown();
     }
 
-    private static class TestFieldSet extends BaseAppBrowserFieldSet<TestFieldSet> {
-        public TestFieldSet fromJson(String json) {
+    private static class TestFieldSet extends BaseAppBrowserSiteBrandFieldSet<TestFieldSet> {
+        public BaseAppBrowserSiteBrandFieldSetTest.TestFieldSet fromJson(String json) {
             return gson.fromJson(json, TestFieldSet.class);
         }
 

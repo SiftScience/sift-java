@@ -4,7 +4,7 @@ import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 public class SecurityNotificationFieldSet extends
-    BaseAppBrowserFieldSet<SecurityNotificationFieldSet> {
+    BaseAppBrowserSiteBrandFieldSet<SecurityNotificationFieldSet> {
     public static SecurityNotificationFieldSet fromJson(String json) {
         return gson.fromJson(json, SecurityNotificationFieldSet.class);
     }

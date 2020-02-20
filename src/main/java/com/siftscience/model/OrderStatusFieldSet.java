@@ -3,7 +3,7 @@ package com.siftscience.model;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class OrderStatusFieldSet extends BaseAppBrowserFieldSet<OrderStatusFieldSet> {
+public class OrderStatusFieldSet extends BaseAppBrowserSiteBrandFieldSet<OrderStatusFieldSet> {
     public static OrderStatusFieldSet fromJson(String json) {
         return gson.fromJson(json, OrderStatusFieldSet.class);
     }

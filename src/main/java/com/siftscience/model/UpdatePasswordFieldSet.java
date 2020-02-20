@@ -3,7 +3,7 @@ package com.siftscience.model;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class UpdatePasswordFieldSet extends BaseAppBrowserFieldSet<UpdatePasswordFieldSet> {
+public class UpdatePasswordFieldSet extends BaseAppBrowserSiteBrandFieldSet<UpdatePasswordFieldSet> {
     public static UpdatePasswordFieldSet fromJson(String json) {
         return gson.fromJson(json, UpdatePasswordFieldSet.class);
     }

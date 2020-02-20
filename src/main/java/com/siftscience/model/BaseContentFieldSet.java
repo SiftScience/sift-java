@@ -3,10 +3,8 @@ package com.siftscience.model;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-import java.util.List;
-
 public abstract class BaseContentFieldSet<T extends BaseContentFieldSet<T>>
-        extends BaseAppBrowserFieldSet<T> {
+        extends BaseAppBrowserSiteBrandFieldSet<T> {
     @Expose @SerializedName("$content_id") private String contentId;
     @Expose @SerializedName("$status") private String status;
 

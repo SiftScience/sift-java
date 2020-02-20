@@ -6,6 +6,7 @@ import com.siftscience.model.CreditPoint;
 import com.siftscience.model.Discount;
 import com.siftscience.model.Guest;
 import com.siftscience.model.Item;
+import com.siftscience.model.OrderedFrom;
 import com.siftscience.model.PaymentMethod;
 import com.siftscience.model.Promotion;
 import com.siftscience.model.Segment;
@@ -136,6 +137,12 @@ public class TestUtils {
             .setCurrencyCode("USD")
             .setTags(sampleTags3())
             .setQuantity(1L);
+    }
+
+    static OrderedFrom sampleOrderedFrom() {
+        return new OrderedFrom()
+            .setStoreId("123")
+            .setStoreAddress(sampleAddress1());
     }
 
     static Guest sampleGuest1() {
