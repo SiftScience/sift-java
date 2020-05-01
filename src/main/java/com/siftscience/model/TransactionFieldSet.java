@@ -17,6 +17,7 @@ public class TransactionFieldSet extends BaseAppBrowserSiteBrandFieldSet<Transac
     @Expose @SerializedName("$seller_user_id") private String sellerUserId;
     @Expose @SerializedName("$transfer_recipient_user_id") private String transferRecipientUserId;
     @Expose @SerializedName("$ordered_from") private OrderedFrom orderedFrom;
+    @Expose @SerializedName("$decline_category") private String declineCategory;
 
     @Override
     public String getEventType() {
@@ -141,6 +142,15 @@ public class TransactionFieldSet extends BaseAppBrowserSiteBrandFieldSet<Transac
 
     public TransactionFieldSet setOrderedFrom(OrderedFrom orderedFrom) {
         this.orderedFrom = orderedFrom;
+        return this;
+    }
+
+    public String getDeclineCategory() {
+        return declineCategory;
+    }
+
+    public TransactionFieldSet setDeclineCategory(String declineCategory) {
+        this.declineCategory = declineCategory;
         return this;
     }
 }

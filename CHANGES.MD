@@ -1,3 +1,7 @@
+3.4.0 (2020-05-05)
+=================
+- Add support for `$decline_category` field to `$transaction` complex field
+
 3.3.0 (2020-02-19)
 =================
 - Add support for `$client_language` field to `$app` complex field
