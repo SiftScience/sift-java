@@ -23,9 +23,10 @@ public class TransactionEventTest {
                 "\n" +
                 "  \"$user_email\"       : \"bill@gmail.com\",\n" +
                 "  \"$transaction_type\" : \"$sale\",\n" +
-                "  \"$transaction_status\" : \"$success\",\n" +
+                "  \"$transaction_status\" : \"$failure\",\n" +
                 "  \"$order_id\"         : \"ORDER-123124124\",\n" +
                 "  \"$transaction_id\"   : \"719637215\",\n" +
+                "  \"$decline_category\" : \"$lost\",\n" +
                 "  \"$site_country\": \"US\",\n" +
                 "  \"$site_domain\": \"sift.com\",\n" +
                 "  \"$brand_name\": \"sift\",\n" +
@@ -105,7 +106,8 @@ public class TransactionEventTest {
                 .setCurrencyCode("USD")
                 .setUserEmail("bill@gmail.com")
                 .setTransactionType("$sale")
-                .setTransactionStatus("$success")
+                .setTransactionStatus("$failure")
+                .setDeclineCategory("$lost")
                 .setSiteCountry("US")
                 .setSiteDomain("sift.com")
                 .setBrandName("sift")
