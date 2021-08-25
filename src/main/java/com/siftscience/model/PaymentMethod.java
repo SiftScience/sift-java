@@ -26,6 +26,7 @@ public class PaymentMethod {
     @Expose @SerializedName("$stripe_address_zip_check") private String stripeAddressZipCheck;
     @Expose @SerializedName("$stripe_funding") private String stripeFunding;
     @Expose @SerializedName("$stripe_brand") private String stripeBrand;
+    @Expose @SerializedName("$ach") private Ach ach;
 
     public String getPaymentType() {
         return paymentType;
@@ -213,6 +214,15 @@ public class PaymentMethod {
 
     public PaymentMethod setStripeBrand(String stripeBrand) {
         this.stripeBrand = stripeBrand;
+        return this;
+    }
+
+    public Ach getAch() {
+        return ach;
+    }
+
+    public PaymentMethod setAch(Ach ach) {
+        this.ach = ach;
         return this;
     }
 }

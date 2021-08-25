@@ -1,5 +1,6 @@
 package com.siftscience;
 
+import com.siftscience.model.Ach;
 import com.siftscience.model.Address;
 import com.siftscience.model.Booking;
 import com.siftscience.model.CreditPoint;
@@ -64,6 +65,16 @@ public class TestUtils {
                 .setPaymentType("$credit_card")
                 .setCardBin("542486")
                 .setCardLast4("4444");
+    }
+
+    static PaymentMethod samplePaymentMethod3() {
+        return new PaymentMethod()
+                .setAch(new Ach()
+                        .setAchType("$credit")
+                        .setRoutingNumber("072403005")
+                        .setAccountNumber("12345")
+                        .setAccountHolderName("Jane Doe")
+        );
     }
 
     static List<String> sampleTags1() {

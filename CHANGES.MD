@@ -1,6 +1,7 @@
 3.5.0 (2021-08-24)
 =================
 - V206 adds fintech fields.
+- Add support for `$ach` complex field to `$payment_method` complex field
 
 3.4.0 (2020-05-05)
 =================
