@@ -48,7 +48,7 @@ public class UserScoreRequest extends SiftRequest<EntityScoreResponse> {
     @Override
     protected HttpUrl path(HttpUrl baseUrl) {
         UserScoreFieldSet userScoreFieldSet = (UserScoreFieldSet)fieldSet;
-        HttpUrl.Builder builder = baseUrl.newBuilder().addPathSegment("v205");
+        HttpUrl.Builder builder = baseUrl.newBuilder().addPathSegment("v206");
         builder.addPathSegment("users")
                 .addPathSegment(userScoreFieldSet.getUserId())
                 .addPathSegment("score")

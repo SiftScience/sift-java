@@ -2,7 +2,7 @@
 
 [![CircleCI](https://circleci.com/gh/SiftScience/sift-java.svg?style=svg)](https://circleci.com/gh/SiftScience/sift-java)
 
-The official Java bindings for the latest version (v205) of the [Sift API](https://sift.com/developers/docs/java/apis-overview).
+The official Java bindings for the latest version (v206) of the [Sift API](https://sift.com/developers/docs/java/apis-overview).
 
 ## Requirements
 Java 1.7 or later.
@@ -13,13 +13,13 @@ Java 1.7 or later.
 <dependency>
     <groupId>com.siftscience</groupId>
     <artifactId>sift-java</artifactId>
-    <version>3.4.0</version>
+    <version>3.5.0</version>
 </dependency>
 ```
 ### Gradle
 ```
 dependencies {
-    compile 'com.siftscience:sift-java:3.4.0'
+    compile 'com.siftscience:sift-java:3.5.0'
 }
 ```
 ### Other

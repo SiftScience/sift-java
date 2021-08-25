@@ -1,11 +1,10 @@
-
 apply plugin: 'java'
 apply plugin: 'maven-publish'
 apply plugin: 'signing'
 apply plugin: 'java-library-distribution'
 
 group = 'com.siftscience'
-version = '3.4.0'
+version = '3.5.0'
 
 repositories {
     mavenCentral()

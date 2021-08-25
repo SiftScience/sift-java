@@ -32,7 +32,7 @@ public class EventRequest extends SiftRequest<EventResponse> {
     @Override
     protected HttpUrl path(HttpUrl baseUrl) {
         HttpUrl.Builder builder = baseUrl.newBuilder()
-                .addPathSegment("v205").addPathSegment("events");
+                .addPathSegment("v206").addPathSegment("events");
 
         if (isWorkflowStatus) {
             builder.addQueryParameter("return_workflow_status", "true");

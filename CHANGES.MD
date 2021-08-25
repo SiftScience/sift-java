@@ -1,3 +1,7 @@
+3.5.0 (2021-08-24)
+=================
+- V206 adds fintech fields.
+
 3.4.0 (2020-05-05)
 =================
 - Add support for `$decline_category` field to `$transaction` event

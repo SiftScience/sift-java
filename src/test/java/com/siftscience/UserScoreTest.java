@@ -80,7 +80,7 @@ public class UserScoreTest {
                 .setRescoreUser(false);
 
         testUserScore(userScoreFieldSet,
-                "/v205/users/billy_jones_301/score?api_key=YOUR_API_KEY");
+                "/v206/users/billy_jones_301/score?api_key=YOUR_API_KEY");
     }
 
     @Test
@@ -96,7 +96,7 @@ public class UserScoreTest {
                         .setRescoreUser(false);
 
         testUserScore(userScoreFieldSet,
-                "/v205/users/billy_jones_301/score?api_key=YOUR_API_KEY&" +
+                "/v206/users/billy_jones_301/score?api_key=YOUR_API_KEY&" +
                 "abuse_types=payment_abuse,promotion_abuse");
     }
 
@@ -109,7 +109,7 @@ public class UserScoreTest {
                 .setRescoreUser(true);
 
         testUserScore(userScoreFieldSet,
-                "/v205/users/billy_jones_301/score?api_key=YOUR_API_KEY");
+                "/v206/users/billy_jones_301/score?api_key=YOUR_API_KEY");
     }
 
     @Test
@@ -125,7 +125,7 @@ public class UserScoreTest {
                 .setRescoreUser(true);
 
         testUserScore(userScoreFieldSet,
-                "/v205/users/billy_jones_301/score?api_key=YOUR_API_KEY&" +
+                "/v206/users/billy_jones_301/score?api_key=YOUR_API_KEY&" +
                         "abuse_types=payment_abuse,promotion_abuse");
     }
 

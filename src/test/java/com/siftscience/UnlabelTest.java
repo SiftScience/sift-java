@@ -36,7 +36,7 @@ public class UnlabelTest {
         // Verify the request.
         RecordedRequest request1 = server.takeRequest();
         Assert.assertEquals("DELETE", request1.getMethod());
-        Assert.assertEquals("/v205/users/billy_jones_301/labels?api_key=YOUR_API_KEY" +
+        Assert.assertEquals("/v206/users/billy_jones_301/labels?api_key=YOUR_API_KEY" +
                         "&abuse_type=payment_abuse", request1.getPath());
 
         // Verify the response.
@@ -70,7 +70,7 @@ public class UnlabelTest {
         // Verify the request.
         RecordedRequest request1 = server.takeRequest();
         Assert.assertEquals("DELETE", request1.getMethod());
-        Assert.assertEquals("/v205/users/billy_jones_301/labels?api_key=YOUR_API_KEY",
+        Assert.assertEquals("/v206/users/billy_jones_301/labels?api_key=YOUR_API_KEY",
                 request1.getPath());
 
         // Verify the response.

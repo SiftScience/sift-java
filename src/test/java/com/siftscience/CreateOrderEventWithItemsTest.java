@@ -174,7 +174,7 @@ public class CreateOrderEventWithItemsTest {
         // Verify the request.
         RecordedRequest request1 = server.takeRequest();
         Assert.assertEquals("POST", request1.getMethod());
-        Assert.assertEquals("/v205/events", request1.getPath());
+        Assert.assertEquals("/v206/events", request1.getPath());
         JSONAssert.assertEquals(expectedRequestBody, request.getFieldSet().toJson(), true);
 
         // Verify the response.
