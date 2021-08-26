@@ -11,6 +11,7 @@ import com.siftscience.model.OrderedFrom;
 import com.siftscience.model.PaymentMethod;
 import com.siftscience.model.Promotion;
 import com.siftscience.model.Segment;
+import com.siftscience.model.Sepa;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -69,12 +70,17 @@ public class TestUtils {
 
     static PaymentMethod samplePaymentMethod3() {
         return new PaymentMethod()
-                .setAch(new Ach()
-                        .setAchType("$credit")
-                        .setRoutingNumber("072403005")
-                        .setAccountNumber("12345")
-                        .setAccountHolderName("Jane Doe")
-        );
+            .setAch(new Ach()
+                .setAchType("$credit")
+                .setRoutingNumber("072403005")
+                .setAccountNumber("12345")
+                .setAccountHolderName("Jane Doe")
+            );
+    }
+
+    static PaymentMethod samplePaymentMethodWithSepa() {
+        return new PaymentMethod()
+                .setSepa(sampleSepa());
     }
 
     static List<String> sampleTags1() {
@@ -232,5 +238,14 @@ public class TestUtils {
         categories.add("Apartments");
         categories.add("2 Bedrooms");
         return categories;
+    }
+
+    static Sepa sampleSepa() {
+        return new Sepa()
+                .setSepaType("$instant_credit")
+                .setAccountHolderName("John Doe")
+                .setShortenedIban("FR76300060")
+                .setBic("testtest1")
+                .setMandateId("mandate_id");
     }
 }

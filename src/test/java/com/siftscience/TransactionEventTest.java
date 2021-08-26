@@ -136,6 +136,78 @@ public class TransactionEventTest {
         Assert.assertEquals(0, (int) siftResponse.getBody().getStatus());
         JSONAssert.assertEquals(response.getBody().readUtf8(),
                 siftResponse.getBody().toJson(), true);
+        server.shutdown();
+    }
+
+    @Test
+    public void testTransactionEventWithSepaPaymentMethod() throws Exception {
+        String expectedRequestBody = "{\n" +
+                "  \"$type\"             : \"$transaction\",\n" +
+                "  \"$api_key\"          : \"YOUR_API_KEY\",\n" +
+                "  \"$user_id\"          : \"billy_jones_301\",\n" +
+                "  \"$amount\"           : 506790000,\n" +
+                "  \"$currency_code\"    : \"USD\",\n" +
+                "\n" +
+                "  \"$user_email\"       : \"bill@gmail.com\",\n" +
+                "  \"$transaction_type\" : \"$sale\",\n" +
+                "  \"$transaction_status\" : \"$success\",\n" +
+                "  \"$order_id\"         : \"ORDER-123124124\",\n" +
+                "  \"$transaction_id\"   : \"719637215\",\n" +
+                "\n" +
+                "  \"$payment_method\" : {\n" +
+                "    \"$sepa\" : {\n" +
+                "      \"$sepa_type\"           : \"$instant_credit\",\n" +
+                "      \"$account_holder_name\" : \"John Doe\",\n" +
+                "      \"$shortened_iban\"      : \"FR76300060\",\n" +
+                "      \"$bic\"                 : \"testtest1\",\n" +
+                "      \"$mandate_id\"          : \"mandate_id\",\n" +
+                "    }\n" +
+                "  },\n" +
+                "}";
+
+        // Start a new mock server and enqueue a mock response.
+        MockWebServer server = new MockWebServer();
+        MockResponse response = new MockResponse();
+        response.setResponseCode(HTTP_OK);
+        response.setBody("{\n" +
+                "    \"status\" : 0,\n" +
+                "    \"error_message\" : \"OK\",\n" +
+                "    \"time\" : 1327604222,\n" +
+                "    \"request\" : \"" + TestUtils.unescapeJson(expectedRequestBody) + "\"\n" +
+                "}");
+        server.enqueue(response);
+        server.start();
+
+        // Create a new client and link it to the mock server.
+        SiftClient client = new SiftClient("YOUR_API_KEY", "YOUR_ACCOUNT_ID",
+            new OkHttpClient.Builder()
+                .addInterceptor(OkHttpUtils.urlRewritingInterceptor(server))
+                .build());
+
+        // Build and execute the request against the mock server.
+        EventRequest request = client.buildRequest(new TransactionFieldSet()
+                .setUserId("billy_jones_301")
+                .setAmount(506790000L)
+                .setCurrencyCode("USD")
+                .setUserEmail("bill@gmail.com")
+                .setTransactionType("$sale")
+                .setTransactionStatus("$success")
+                .setOrderId("ORDER-123124124")
+                .setTransactionId("719637215")
+                .setPaymentMethod(TestUtils.samplePaymentMethodWithSepa()));
+        EventResponse siftResponse = request.send();
+
+        // Verify the request.
+        RecordedRequest request1 = server.takeRequest();
+        Assert.assertEquals("POST", request1.getMethod());
+        Assert.assertEquals("/v206/events", request1.getPath());
+        JSONAssert.assertEquals(expectedRequestBody, request.getFieldSet().toJson(), true);
+
+        // Verify the response.
+        Assert.assertEquals(HTTP_OK, siftResponse.getHttpStatusCode());
+        Assert.assertEquals(0, (int) siftResponse.getBody().getStatus());
+        JSONAssert.assertEquals(response.getBody().readUtf8(),
+                siftResponse.getBody().toJson(), true);
 
         server.shutdown();
     }

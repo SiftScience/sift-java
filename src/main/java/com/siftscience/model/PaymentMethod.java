@@ -27,6 +27,7 @@ public class PaymentMethod {
     @Expose @SerializedName("$stripe_funding") private String stripeFunding;
     @Expose @SerializedName("$stripe_brand") private String stripeBrand;
     @Expose @SerializedName("$ach") private Ach ach;
+    @Expose @SerializedName("$sepa") private Sepa sepa;
 
     public String getPaymentType() {
         return paymentType;
@@ -223,6 +224,15 @@ public class PaymentMethod {
 
     public PaymentMethod setAch(Ach ach) {
         this.ach = ach;
+        return this;
+    }
+
+    public Sepa getSepa() {
+        return sepa;
+    }
+
+    public PaymentMethod setSepa(Sepa sepa) {
+        this.sepa = sepa;
         return this;
     }
 }
