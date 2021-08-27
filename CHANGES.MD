@@ -2,6 +2,8 @@
 =================
 - V206 adds fintech fields.
 - Add support for `$ach` complex field to `$payment_method` complex field
+- Add support for `$sepa` complex field to `$payment_method` complex field
+- Add support for `$wire` complex field to `$payment_method` complex field
 
 3.4.0 (2020-05-05)
 =================
