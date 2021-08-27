@@ -342,4 +342,107 @@ public class TransactionEventTest {
         server.shutdown();
     }
 
+    @Test
+    public void testTransactionEventWithSenderReceiverAddressesAnd3dsFields() throws Exception {
+        String expectedRequestBody = "{\n" +
+                "  \"$type\"             : \"$transaction\",\n" +
+                "  \"$api_key\"          : \"YOUR_API_KEY\",\n" +
+                "  \"$user_id\"          : \"billy_jones_301\",\n" +
+                "  \"$amount\"           : 506790000,\n" +
+                "  \"$currency_code\"    : \"USD\",\n" +
+                "\n" +
+                "  \"$user_email\"       : \"bill@gmail.com\",\n" +
+                "  \"$transaction_type\" : \"$sale\",\n" +
+                "  \"$transaction_status\" : \"$failure\",\n" +
+                "  \"$order_id\"         : \"ORDER-123124124\",\n" +
+                "  \"$transaction_id\"   : \"719637215\",\n" +
+                "  \"$decline_category\" : \"$lost\",\n" +
+                "  \"$status_3ds\" : \"$authentication_successful\",\n" +
+                "  \"$triggered_3ds\" : true,\n" +
+                "  \"$processor_3ds_requested\" : false,\n" +
+                "  \"$merchant_initiated_transaction\" : true,\n" +
+                "  \"$sender_address\"  : {\n" +
+                "      \"$name\"         : \"Bill Jones\",\n" +
+                "      \"$phone\"        : \"1-415-555-6041\",\n" +
+                "      \"$address_1\"    : \"2100 Main Street\",\n" +
+                "      \"$address_2\"    : \"Apt 3B\",\n" +
+                "      \"$city\"         : \"New London\",\n" +
+                "      \"$region\"       : \"New Hampshire\",\n" +
+                "      \"$country\"      : \"US\",\n" +
+                "      \"$zipcode\"      : \"03257\"\n" +
+                "  },\n" +
+                "  \"$receiver_address\"  : {\n" +
+                "      \"$name\"         : \"Bill Jones\",\n" +
+                "      \"$phone\"        : \"1-415-555-6041\",\n" +
+                "      \"$address_1\"    : \"2100 Main Street\",\n" +
+                "      \"$address_2\"    : \"Apt 3B\",\n" +
+                "      \"$city\"         : \"New London\",\n" +
+                "      \"$region\"       : \"New Hampshire\",\n" +
+                "      \"$country\"      : \"US\",\n" +
+                "      \"$zipcode\"      : \"03257\"\n" +
+                "  },\n" +
+                "  \"$payment_method\"   : {\n" +
+                "      \"$ach\"             : {\n" +
+                "            \"$ach_type\"            : \"$credit\",\n" +
+                "            \"$routing_number\"      : \"072403005\",\n" +
+                "            \"$account_number\"      : \"12345\",\n" +
+                "            \"$account_holder_name\" : \"Jane Doe\"\n" +
+                "      }\n" +
+                "  },\n" +
+                "}";
+
+        // Start a new mock server and enqueue a mock response.
+        MockWebServer server = new MockWebServer();
+        MockResponse response = new MockResponse();
+        response.setResponseCode(HTTP_OK);
+        response.setBody("{\n" +
+                "    \"status\" : 0,\n" +
+                "    \"error_message\" : \"OK\",\n" +
+                "    \"time\" : 1327604222,\n" +
+                "    \"request\" : \"" + TestUtils.unescapeJson(expectedRequestBody) + "\"\n" +
+                "}");
+        server.enqueue(response);
+        server.start();
+
+        // Create a new client and link it to the mock server.
+        SiftClient client = new SiftClient("YOUR_API_KEY", "YOUR_ACCOUNT_ID",
+                new OkHttpClient.Builder()
+                        .addInterceptor(OkHttpUtils.urlRewritingInterceptor(server))
+                        .build());
+
+        // Build and execute the request against the mock server.
+        EventRequest request = client.buildRequest(new TransactionFieldSet()
+                .setUserId("billy_jones_301")
+                .setAmount(506790000L)
+                .setCurrencyCode("USD")
+                .setUserEmail("bill@gmail.com")
+                .setTransactionType("$sale")
+                .setTransactionStatus("$failure")
+                .setDeclineCategory("$lost")
+                .setOrderId("ORDER-123124124")
+                .setTransactionId("719637215")
+                .setStatus3Ds("$authentication_successful")
+                .setTriggered3Ds(true)
+                .setProcessor3DsRequested(false)
+                .setMerchantInitiatedTransaction(true)
+                .setSenderAddress(TestUtils.sampleAddress2())
+                .setReceiverAddress(TestUtils.sampleAddress2())
+                .setPaymentMethod(TestUtils.samplePaymentMethod3()));
+        EventResponse siftResponse = request.send();
+
+        // Verify the request.
+        RecordedRequest request1 = server.takeRequest();
+        Assert.assertEquals("POST", request1.getMethod());
+        Assert.assertEquals("/v206/events", request1.getPath());
+        JSONAssert.assertEquals(expectedRequestBody, request.getFieldSet().toJson(), true);
+
+        // Verify the response.
+        Assert.assertEquals(HTTP_OK, siftResponse.getHttpStatusCode());
+        Assert.assertEquals(0, (int) siftResponse.getBody().getStatus());
+        JSONAssert.assertEquals(response.getBody().readUtf8(),
+                siftResponse.getBody().toJson(), true);
+
+        server.shutdown();
+    }
+
 }
