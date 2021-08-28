@@ -12,6 +12,7 @@ import com.siftscience.model.PaymentMethod;
 import com.siftscience.model.Promotion;
 import com.siftscience.model.Segment;
 import com.siftscience.model.Sepa;
+import com.siftscience.model.Wire;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -68,19 +69,19 @@ public class TestUtils {
                 .setCardLast4("4444");
     }
 
-    static PaymentMethod samplePaymentMethod3() {
+    static PaymentMethod samplePaymentMethodWithAch() {
         return new PaymentMethod()
-            .setAch(new Ach()
-                .setAchType("$credit")
-                .setRoutingNumber("072403005")
-                .setAccountNumber("12345")
-                .setAccountHolderName("Jane Doe")
-            );
+                .setAch(sampleAch());
     }
 
     static PaymentMethod samplePaymentMethodWithSepa() {
         return new PaymentMethod()
                 .setSepa(sampleSepa());
+    }
+
+    static PaymentMethod samplePaymentMethodWithWire() {
+        return new PaymentMethod()
+                .setWire(sampleWire());
     }
 
     static List<String> sampleTags1() {
@@ -240,6 +241,14 @@ public class TestUtils {
         return categories;
     }
 
+    static Ach sampleAch() {
+        return new Ach()
+                .setAchType("$credit")
+                .setRoutingNumber("072403005")
+                .setAccountNumber("12345")
+                .setAccountHolderName("Jane Doe");
+    }
+
     static Sepa sampleSepa() {
         return new Sepa()
                 .setSepaType("$instant_credit")
@@ -248,4 +257,15 @@ public class TestUtils {
                 .setBic("testtest1")
                 .setMandateId("mandate_id");
     }
+
+    static Wire sampleWire() {
+        return new Wire()
+                .setWireType("$credit")
+                .setAccountHolderName("John Doe")
+                .setAccountNumber("12345")
+                .setBankName("Chase")
+                .setBankCountry("US")
+                .setBic("CHASUS88");
+    }
+
 }
