@@ -1,3 +1,8 @@
+3.4.1 (2021-09-21)
+=================
+- Add support for `$account_number_last5`, `$account_holder_name`, `$bank_name`, `$bank_country` and `$bic` to `$payment_method` complex field
+- Add support for `$wire_credit`, `$wire_debit` value for `$payment_type` in `$payment_method` complex field
+
 3.4.0 (2020-05-05)
 =================
 - Add support for `$decline_category` field to `$transaction` event
