@@ -66,6 +66,16 @@ public class TestUtils {
                 .setCardLast4("4444");
     }
 
+    static PaymentMethod samplePaymentMethodWire() {
+        return new PaymentMethod()
+                .setPaymentType("$wire_credit")
+                .setAccountHolderName("John Doe")
+                .setAccountNumberLast5("12345")
+                .setBankName("Chase")
+                .setBankCountry("US")
+                .setBic("CHASUS88");
+    }
+
     static List<String> sampleTags1() {
         List<String> tags = new ArrayList<>();
         tags.add("Popcorn");
