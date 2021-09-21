@@ -1,7 +1,7 @@
 3.4.2 (2021-10-05)
 =================
 - Add support for `$account_number_last5`, `$account_holder_name`, `$bank_name` and `$bank_country` to `$payment_method` complex field
-- Add support for `$ach_credit`, `$ach_debit``$wire_credit`, `$wire_debit` value for `$payment_type` in `$payment_method` complex field
+- Add support for `$ach_credit`, `$ach_debit`, `$wire_credit`, `$wire_debit` value for `$payment_type` in `$payment_method` complex field
 
 3.4.1 (2021-10-05)
 =================
