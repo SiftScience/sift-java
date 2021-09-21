@@ -66,14 +66,22 @@ public class TestUtils {
                 .setCardLast4("4444");
     }
 
+    static PaymentMethod samplePaymentMethodAch() {
+        return new PaymentMethod()
+                .setPaymentType("$ach_credit")
+                .setRoutingNumber("072403005")
+                .setAccountNumberLast5("12345")
+                .setAccountHolderName("Jane Doe");
+    }
+
     static PaymentMethod samplePaymentMethodWire() {
         return new PaymentMethod()
                 .setPaymentType("$wire_credit")
-                .setAccountHolderName("John Doe")
+                .setRoutingNumber("CHASUS88")
                 .setAccountNumberLast5("12345")
+                .setAccountHolderName("John Doe")
                 .setBankName("Chase")
-                .setBankCountry("US")
-                .setRoutingNumber("CHASUS88");
+                .setBankCountry("US");
     }
 
     static List<String> sampleTags1() {
