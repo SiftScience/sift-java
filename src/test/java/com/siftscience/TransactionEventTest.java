@@ -160,7 +160,7 @@ public class TransactionEventTest {
                 "      \"$account_number_last5\" : \"12345\",\n" +
                 "      \"$bank_name\"            : \"Chase\",\n" +
                 "      \"$bank_country\"         : \"US\",\n" +
-                "      \"$bic\"                  : \"CHASUS88\",\n" +
+                "      \"$routing_number\"       : \"CHASUS88\",\n" +
                 "  }\n" +
                 "}";
 

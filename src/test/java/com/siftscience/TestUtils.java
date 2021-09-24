@@ -73,7 +73,7 @@ public class TestUtils {
                 .setAccountNumberLast5("12345")
                 .setBankName("Chase")
                 .setBankCountry("US")
-                .setBic("CHASUS88");
+                .setRoutingNumber("CHASUS88");
     }
 
     static List<String> sampleTags1() {
