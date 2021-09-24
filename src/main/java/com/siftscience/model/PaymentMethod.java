@@ -30,7 +30,6 @@ public class PaymentMethod {
     @Expose @SerializedName("$account_holder_name") private String accountHolderName;
     @Expose @SerializedName("$bank_name") private String bankName;
     @Expose @SerializedName("$bank_country") private String bankCountry;
-    @Expose @SerializedName("$bic") private String bic;
 
     public String getPaymentType() {
         return paymentType;
@@ -254,15 +253,6 @@ public class PaymentMethod {
 
     public PaymentMethod setBankCountry(String bankCountry) {
         this.bankCountry = bankCountry;
-        return this;
-    }
-
-    public String getBic() {
-        return bic;
-    }
-
-    public PaymentMethod setBic(String bic) {
-        this.bic = bic;
         return this;
     }
 }
