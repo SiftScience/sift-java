@@ -25,6 +25,7 @@ public class LoginEventTest {
                 "  \"$type\"         : \"$login\",\n" +
                 "  \"$api_key\"      : \"YOUR_API_KEY\",\n" +
                 "  \"$user_id\"      : \"billy_jones_301\",\n" +
+                "  \"$user_email\"   : \"billy_jones_301@gmail.com\",\n" +
                 "  \"$login_status\" : \"$success\",\n" +
                 "  \"$app\"          : {\n" +
                 "      \"$os\"       : \"" + operatingSystem + "\",\n" +
@@ -58,6 +59,7 @@ public class LoginEventTest {
         // Build and execute the request against the mock server.
         SiftRequest request = client.buildRequest(new LoginFieldSet()
                 .setUserId("billy_jones_301")
+                .setUserEmail("billy_jones_301@gmail.com")
                 .setLoginStatus("$success")
                 .setApp(new App()
                         .setOperatingSystem(operatingSystem)
@@ -93,6 +95,7 @@ public class LoginEventTest {
                 "  \"$type\"         : \"$login\",\n" +
                 "  \"$api_key\"      : \"YOUR_API_KEY\",\n" +
                 "  \"$user_id\"      : \"billy_jones_301\",\n" +
+                "  \"$user_email\"   : \"billy_jones_301@gmail.com\",\n" +
                 "  \"$login_status\" : \"$success\",\n" +
                 "  \"$browser\"          : {\n" +
                 "      \"$user_agent\"       : \"" + userAgent + "\"\n" +
@@ -121,6 +124,7 @@ public class LoginEventTest {
         // Build and execute the request against the mock server.
         SiftRequest request = client.buildRequest(new LoginFieldSet()
                 .setUserId("billy_jones_301")
+                .setUserEmail("billy_jones_301@gmail.com")
                 .setLoginStatus("$success")
                 .setBrowser(new Browser()
                         .setUserAgent(userAgent)));

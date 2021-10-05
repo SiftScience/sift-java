@@ -15,6 +15,7 @@ public class LoginFieldSet extends BaseAppBrowserSiteBrandFieldSet<LoginFieldSet
     @Expose @SerializedName("$username") private String username;
     @Expose @SerializedName("$social_sign_on_type") private String socialSignOnType;
     @Expose @SerializedName("$account_types") private List<String> accountTypes;
+    @Expose @SerializedName("$user_email") private String userEmail;
 
     @Override
     public String getEventType() {
@@ -57,6 +58,15 @@ public class LoginFieldSet extends BaseAppBrowserSiteBrandFieldSet<LoginFieldSet
 
     public LoginFieldSet setAccountTypes(List<String> accountTypes) {
         this.accountTypes = accountTypes;
+        return this;
+    }
+
+    public String getUserEmail() {
+        return userEmail;
+    }
+
+    public LoginFieldSet setUserEmail(String userEmail) {
+        this.userEmail = userEmail;
         return this;
     }
 }

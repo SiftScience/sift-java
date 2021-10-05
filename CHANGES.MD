@@ -1,3 +1,7 @@
+3.4.1 (2021-10-05)
+=================
+- Add support for `$user_email` field to `$login` event
+
 3.4.0 (2020-05-05)
 =================
 - Add support for `$decline_category` field to `$transaction` event
