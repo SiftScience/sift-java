@@ -26,6 +26,10 @@ public class PaymentMethod {
     @Expose @SerializedName("$stripe_address_zip_check") private String stripeAddressZipCheck;
     @Expose @SerializedName("$stripe_funding") private String stripeFunding;
     @Expose @SerializedName("$stripe_brand") private String stripeBrand;
+    @Expose @SerializedName("$account_number_last5") private String accountNumberLast5;
+    @Expose @SerializedName("$account_holder_name") private String accountHolderName;
+    @Expose @SerializedName("$bank_name") private String bankName;
+    @Expose @SerializedName("$bank_country") private String bankCountry;
 
     public String getPaymentType() {
         return paymentType;
@@ -213,6 +217,42 @@ public class PaymentMethod {
 
     public PaymentMethod setStripeBrand(String stripeBrand) {
         this.stripeBrand = stripeBrand;
+        return this;
+    }
+
+    public String getAccountNumberLast5() {
+        return accountNumberLast5;
+    }
+
+    public PaymentMethod setAccountNumberLast5(String accountNumberLast5) {
+        this.accountNumberLast5 = accountNumberLast5;
+        return this;
+    }
+
+    public String getAccountHolderName() {
+        return accountHolderName;
+    }
+
+    public PaymentMethod setAccountHolderName(String accountHolderName) {
+        this.accountHolderName = accountHolderName;
+        return this;
+    }
+
+    public String getBankName() {
+        return bankName;
+    }
+
+    public PaymentMethod setBankName(String bankName) {
+        this.bankName = bankName;
+        return this;
+    }
+
+    public String getBankCountry() {
+        return bankCountry;
+    }
+
+    public PaymentMethod setBankCountry(String bankCountry) {
+        this.bankCountry = bankCountry;
         return this;
     }
 }

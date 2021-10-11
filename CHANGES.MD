@@ -1,3 +1,7 @@
+3.4.2 (2021-10-11)
+=================
+- Add support for `$account_number_last5`, `$account_holder_name`, `$bank_name` and `$bank_country` to `$payment_method` complex field
+
 3.4.1 (2021-10-05)
 =================
 - Add support for `$user_email` field to `$login` event
