@@ -44,6 +44,4 @@ public class MerchantProfile {
         this.merchantAddress = merchantAddress;
         return this;
     }
-
-
 }
