@@ -1,8 +1,12 @@
-3.4.2 (2021-10-06)
+3.4.3 (2021-10-12)
 =================
 - Add support for `$shortened_iban_first6`, `$shortened_iban_last4`, and `$sepa_direct_debit_mandate` to `$payment_method` complex field and `$transaction` event
 - Add support for `$merchant_profile` complex field to `$create_order`, `$update_order`, and `$transaction` events
 - Add support for `$status_3ds`, `$triggered_3ds`, `$merchant_initiated_transaction`, `$sent_address`, and `$received_address` to `$transaction` event
+
+3.4.2 (2021-10-11)
+=================
+- Add support for `$account_number_last5`, `$account_holder_name`, `$bank_name` and `$bank_country` to `$payment_method` complex field
 
 3.4.1 (2021-10-05)
 =================
