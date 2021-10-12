@@ -30,6 +30,9 @@ public class PaymentMethod {
     @Expose @SerializedName("$account_holder_name") private String accountHolderName;
     @Expose @SerializedName("$bank_name") private String bankName;
     @Expose @SerializedName("$bank_country") private String bankCountry;
+    @Expose @SerializedName("$shortened_iban_first6") private String shortenedIbanFirst6;
+    @Expose @SerializedName("$shortened_iban_last4") private String shortenedIbanLast4;
+    @Expose @SerializedName("$sepa_direct_debit_mandate") private Boolean sepaDirectDebitMandate;
 
     public String getPaymentType() {
         return paymentType;
@@ -253,6 +256,33 @@ public class PaymentMethod {
 
     public PaymentMethod setBankCountry(String bankCountry) {
         this.bankCountry = bankCountry;
+        return this;
+    }
+
+    public String getShortenedIbanFirst6() {
+        return shortenedIbanFirst6;
+    }
+
+    public PaymentMethod setShortenedIbanFirst6(String shortenedIbanFirst6) {
+        this.shortenedIbanFirst6 = shortenedIbanFirst6;
+        return this;
+    }
+
+    public String getShortenedIbanLast4() {
+        return shortenedIbanLast4;
+    }
+
+    public PaymentMethod setShortenedIbanLast4(String shortenedIbanLast4) {
+        this.shortenedIbanLast4 = shortenedIbanLast4;
+        return this;
+    }
+
+    public Boolean getSepaDirectDebitMandate() {
+        return sepaDirectDebitMandate;
+    }
+
+    public PaymentMethod setSepaDirectDebitMandate(Boolean sepaDirectDebitMandate) {
+        this.sepaDirectDebitMandate = sepaDirectDebitMandate;
         return this;
     }
 }

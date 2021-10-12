@@ -18,6 +18,14 @@ public class TransactionFieldSet extends BaseAppBrowserSiteBrandFieldSet<Transac
     @Expose @SerializedName("$transfer_recipient_user_id") private String transferRecipientUserId;
     @Expose @SerializedName("$ordered_from") private OrderedFrom orderedFrom;
     @Expose @SerializedName("$decline_category") private String declineCategory;
+    @Expose @SerializedName("$merchant_profile") private MerchantProfile merchantProfile;
+    @Expose @SerializedName("$sent_address") private Address sentAddress;
+    @Expose @SerializedName("$received_address") private Address receivedAddress;
+    @Expose @SerializedName("$status_3ds") private String status3ds;
+    @Expose @SerializedName("$triggered_3ds") private String triggered3ds;
+    @Expose @SerializedName("$merchant_initiated_transaction")
+        private Boolean merchantInitiatedTransaction;
+
 
     @Override
     public String getEventType() {
@@ -151,6 +159,61 @@ public class TransactionFieldSet extends BaseAppBrowserSiteBrandFieldSet<Transac
 
     public TransactionFieldSet setDeclineCategory(String declineCategory) {
         this.declineCategory = declineCategory;
+        return this;
+    }
+
+    public MerchantProfile getMerchantProfile() {
+        return merchantProfile;
+    }
+
+    public TransactionFieldSet setMerchantProfile(MerchantProfile merchantProfile) {
+        this.merchantProfile = merchantProfile;
+        return this;
+    }
+
+    public Address getSentAddress() {
+        return sentAddress;
+    }
+
+    public TransactionFieldSet setSentAddress(Address sentAddress) {
+        this.sentAddress = sentAddress;
+        return this;
+    }
+
+    public Address getReceivedAddress() {
+        return receivedAddress;
+    }
+
+    public TransactionFieldSet setReceivedAddress(Address receivedAddress) {
+        this.receivedAddress = receivedAddress;
+        return this;
+    }
+
+    public String getStatus3ds() {
+        return status3ds;
+    }
+
+    public TransactionFieldSet setStatus3ds(String status3ds) {
+        this.status3ds = status3ds;
+        return this;
+    }
+
+    public String getTriggered3ds() {
+        return triggered3ds;
+    }
+
+    public TransactionFieldSet setTriggered3ds(String triggered3ds) {
+        this.triggered3ds = triggered3ds;
+        return this;
+    }
+
+    public Boolean getMerchantInitiatedTransaction() {
+        return merchantInitiatedTransaction;
+    }
+
+    public TransactionFieldSet setMerchantInitiatedTransaction(
+            Boolean merchantInitiatedTransaction) {
+        this.merchantInitiatedTransaction = merchantInitiatedTransaction;
         return this;
     }
 }
