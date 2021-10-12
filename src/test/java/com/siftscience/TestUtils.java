@@ -6,6 +6,7 @@ import com.siftscience.model.CreditPoint;
 import com.siftscience.model.Discount;
 import com.siftscience.model.Guest;
 import com.siftscience.model.Item;
+import com.siftscience.model.MerchantProfile;
 import com.siftscience.model.OrderedFrom;
 import com.siftscience.model.PaymentMethod;
 import com.siftscience.model.Promotion;
@@ -66,6 +67,7 @@ public class TestUtils {
                 .setCardLast4("4444");
     }
 
+
     static PaymentMethod samplePaymentMethodAch() {
         return new PaymentMethod()
                 .setPaymentType("$ach_credit")
@@ -82,6 +84,15 @@ public class TestUtils {
                 .setAccountHolderName("John Doe")
                 .setBankName("Chase")
                 .setBankCountry("US");
+
+    }
+
+    static PaymentMethod samplePaymentMethodSepa() {
+        return new PaymentMethod()
+                .setPaymentType("$sepa_instant_credit")
+                .setShortenedIbanFirst6("FR7630")
+                .setShortenedIbanLast4("1234")
+                .setSepaDirectDebitMandate(true);
     }
 
     static List<String> sampleTags1() {
@@ -106,6 +117,13 @@ public class TestUtils {
                 .setQuantity(4L);
     }
 
+    static MerchantProfile sampleMerchantProfile() {
+        return new MerchantProfile()
+                .setMerchantId("12345")
+                .setMerchantCategoryCode("9876")
+                .setMerchantName("ABC Merchant")
+                .setMerchantAddress(sampleAddress1());
+    }
 
     static List<String> sampleTags2() {
         List<String> tags = new ArrayList<>();
