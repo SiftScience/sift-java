@@ -89,7 +89,7 @@ public class LoginEventTest {
 
     @Test
     public void testLoginWithBrowswer() throws Exception {
-        String userAgent = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_3)";
+        String userAgent = "SiftScience/v205 sift-java/3.4.4";
 
         String expectedRequestBody = "{\n" +
                 "  \"$type\"         : \"$login\",\n" +

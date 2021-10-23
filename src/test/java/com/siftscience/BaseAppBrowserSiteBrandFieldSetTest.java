@@ -119,14 +119,13 @@ public class BaseAppBrowserSiteBrandFieldSetTest {
 
     @Test
     public void testBrowser() throws Exception {
-        String userAgent = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_3)";
+        String userAgent = "SiftScience/v205 sift-java/3.4.4";
         String acceptLanguage = "en-US";
         String contentLanguage = "en-GB";
         test(
             new TestFieldSet().setTestField(DUMMY_TEST_FIELD)
                 .setUserId(DUMMY_USERID)
                 .setBrowser(new Browser()
-                    .setUserAgent(userAgent)
                     .setAcceptLanguage(acceptLanguage)
                     .setContentLanguage(contentLanguage)),
             String.format(REQUEST_BODY_TEMPLATE, ",\n" +
