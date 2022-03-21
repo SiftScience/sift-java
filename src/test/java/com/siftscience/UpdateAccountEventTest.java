@@ -58,8 +58,23 @@ public class UpdateAccountEventTest {
                 "  \"$social_sign_on_type\"   : \"$twitter\",\n" +
                 "  \"email_confirmed_status\"  : \"$success\",\n" +
                 "  \"phone_confirmed_status\"  : \"$success\",\n" +
-                "  \"$account_types\" : [\"merchant\", \"premium\"]\n" +
-                "}";
+                "  \"$account_types\" : [\"merchant\", \"premium\"],\n" +
+                "  \"$merchant_profile\" : {\n" +
+                "    \"$merchant_id\"            : \"12345\",\n" +
+                "    \"$merchant_category_code\" : \"9876\",\n" +
+                "    \"$merchant_name\"          : \"ABC Merchant\",\n" +
+                "    \"$merchant_address\" : {\n" +
+                "      \"$address_1\" : \"2100 Main Street\",\n" +
+                "      \"$address_2\" : \"Apt 3B\",\n" +
+                "      \"$city\"      : \"New London\",\n" +
+                "      \"$country\"   : \"US\",\n" +
+                "      \"$name\"      : \"Bill Jones\",\n" +
+                "      \"$phone\"     : \"1-415-555-6040\",\n" +
+                "      \"$region\"    : \"New Hampshire\",\n" +
+                "      \"$zipcode\"   : \"03257\"\n" +
+                "    }\n" +
+                "  }\n" +
+                "}\n";
 
         // Start a new mock server and enqueue a mock response.
         MockWebServer server = new MockWebServer();
@@ -99,7 +114,9 @@ public class UpdateAccountEventTest {
                         .setSocialSignOnType("$twitter")
                         .setCustomField("email_confirmed_status", "$success")
                         .setCustomField("phone_confirmed_status", "$success")
-                        .setAccountTypes(Arrays.asList("merchant", "premium")));
+                        .setAccountTypes(Arrays.asList("merchant", "premium"))
+                        .setMerchantProfile(TestUtils.sampleMerchantProfile()));
+
 
         SiftResponse siftResponse = request.send();
 

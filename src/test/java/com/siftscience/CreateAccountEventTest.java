@@ -77,8 +77,23 @@ public class CreateAccountEventTest {
                 "  \"referral_code\"           : \"MIKEFRIENDS\",\n" +
                 "  \"email_confirmed_status\"  : \"$pending\",\n" +
                 "  \"phone_confirmed_status\"  : \"$pending\",\n" +
-                "  \"$account_types\" : [\"merchant\", \"premium\"]\n" +
-                "}";
+                "  \"$account_types\" : [\"merchant\", \"premium\"],\n" +
+                "  \"$merchant_profile\" : {\n" +
+                "    \"$merchant_id\"            : \"12345\",\n" +
+                "    \"$merchant_category_code\" : \"9876\",\n" +
+                "    \"$merchant_name\"          : \"ABC Merchant\",\n" +
+                "    \"$merchant_address\" : {\n" +
+                "      \"$address_1\" : \"2100 Main Street\",\n" +
+                "      \"$address_2\" : \"Apt 3B\",\n" +
+                "      \"$city\"      : \"New London\",\n" +
+                "      \"$country\"   : \"US\",\n" +
+                "      \"$name\"      : \"Bill Jones\",\n" +
+                "      \"$phone\"     : \"1-415-555-6040\",\n" +
+                "      \"$region\"    : \"New Hampshire\",\n" +
+                "      \"$zipcode\"   : \"03257\"\n" +
+                "    }\n" +
+                "  }\n" +
+                "}\n";
 
         // Start a new mock server and enqueue a mock response.
         MockWebServer server = new MockWebServer();
@@ -127,7 +142,8 @@ public class CreateAccountEventTest {
                         .setCustomField("referral_code", "MIKEFRIENDS")
                         .setCustomField("email_confirmed_status", "$pending")
                         .setCustomField("phone_confirmed_status", "$pending")
-                        .setAccountTypes(Arrays.asList("merchant", "premium")));
+                        .setAccountTypes(Arrays.asList("merchant", "premium"))
+                        .setMerchantProfile(TestUtils.sampleMerchantProfile()));
 
         SiftResponse siftResponse = request.send();
 

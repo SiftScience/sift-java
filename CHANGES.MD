@@ -1,3 +1,7 @@
+3.4.4 (2022-03-24)
+=================
+- Add support for `$merchant_profile` complex field to `$create_account`, `$update_account`, and `$chargeback` events
+
 3.4.3 (2021-10-12)
 =================
 - Add support for `$shortened_iban_first6`, `$shortened_iban_last4`, and `$sepa_direct_debit_mandate` to `$payment_method` complex field and `$transaction` event
