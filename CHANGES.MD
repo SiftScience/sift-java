@@ -1,4 +1,8 @@
-3.4.4 (2022-03-24)
+3.4.5 (2022-04-05)
+=================
+- Updated Gradle version to 6.8.3
+
+3.4.4 (2022-04-04)
 =================
 - Add support for `$merchant_profile` complex field to `$create_account`, `$update_account`, and `$chargeback` events
 
