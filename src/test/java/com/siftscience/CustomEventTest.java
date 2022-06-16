@@ -51,6 +51,7 @@ public class CustomEventTest {
                 .setSiteCountry("US")
                 .setSiteDomain("sift.com")
                 .setBrandName("sift")
+                .setUserEmail("email")
                 .setCustomField("recipient_user_id", "marylee819")
                 .setCustomField("call_duration", 4428));
 
