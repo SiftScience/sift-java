@@ -25,8 +25,8 @@ public class CustomEventFieldSet extends BaseAppBrowserSiteBrandFieldSet<CustomE
         return userEmail;
     }
 
-    public T setUserEmail(String userEmail) {
+    public CustomEventFieldSet setUserEmail(String userEmail) {
         this.userEmail = userEmail;
-        return (T) this;
+        return this;
     }
 }

@@ -22,6 +22,7 @@ public class CustomEventTest {
                 "  \"$site_country\": \"US\",\n" +
                 "  \"$site_domain\": \"sift.com\",\n" +
                 "  \"$brand_name\": \"sift\",\n" +
+                "  \"$user_email\": \"email\",\n" +
                 "  \"call_duration\"      : 4428\n" +
                 "}";
 
