@@ -1,3 +1,7 @@
+3.4.6 (2022-06-16)
+=================
+- Reverting Gradle version upgrade
+
 3.4.5 (2022-04-05)
 =================
 - Updated Gradle version to 6.8.3
