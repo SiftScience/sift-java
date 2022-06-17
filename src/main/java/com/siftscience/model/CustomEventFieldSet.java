@@ -9,6 +9,7 @@ public class CustomEventFieldSet extends BaseAppBrowserSiteBrandFieldSet<CustomE
     }
 
     @Expose @SerializedName(EVENT_TYPE) private String eventType;
+    @Expose @SerializedName("$user_email") private String userEmail;
 
     @Override
     public String getEventType() {
@@ -17,6 +18,15 @@ public class CustomEventFieldSet extends BaseAppBrowserSiteBrandFieldSet<CustomE
 
     public CustomEventFieldSet setEventType(String eventType) {
         this.eventType = eventType;
+        return this;
+    }
+
+    public String getUserEmail() {
+        return userEmail;
+    }
+
+    public CustomEventFieldSet setUserEmail(String userEmail) {
+        this.userEmail = userEmail;
         return this;
     }
 }
