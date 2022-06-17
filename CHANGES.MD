@@ -1,6 +1,8 @@
-3.4.6 (2022-06-16)
+3.4.6 (2022-06-17)
 =================
 - Reverting Gradle version upgrade
+- Adding support for $user_email in custom events
+
 
 3.4.5 (2022-04-05)
 =================
