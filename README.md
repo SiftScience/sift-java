@@ -13,13 +13,13 @@ Java 1.7 or later.
 <dependency>
     <groupId>com.siftscience</groupId>
     <artifactId>sift-java</artifactId>
-    <version>3.4.6</version>
+    <version>3.4.7</version>
 </dependency>
 ```
 ### Gradle
 ```
 dependencies {
-    compile 'com.siftscience:sift-java:3.4.4'
+    compile 'com.siftscience:sift-java:3.4.7'
 }
 ```
 ### Other

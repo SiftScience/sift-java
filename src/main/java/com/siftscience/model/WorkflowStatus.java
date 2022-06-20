@@ -13,6 +13,7 @@ public class WorkflowStatus extends BaseResponseBody<WorkflowStatus> {
     @Expose @SerializedName("abuse_types") private List<String> abuseTypes;
     @Expose @SerializedName("entity") private WorkflowStatusEntity entity;
     @Expose @SerializedName("history") private List<WorkflowStatusHistoryItem> history;
+    @Expose @SerializedName("route") private WorkflowRouteInfo route;
 
     public static WorkflowStatus fromJson(String jsonBody) {
         return gson.fromJson(jsonBody, WorkflowStatus.class);
@@ -69,6 +70,15 @@ public class WorkflowStatus extends BaseResponseBody<WorkflowStatus> {
 
     public WorkflowStatus setEntity(WorkflowStatusEntity entity) {
         this.entity = entity;
+        return this;
+    }
+
+    public WorkflowRouteInfo getRoute() {
+        return route;
+    }
+
+    public WorkflowStatus setRoute(WorkflowRouteInfo route) {
+        this.route = route;
         return this;
     }
 

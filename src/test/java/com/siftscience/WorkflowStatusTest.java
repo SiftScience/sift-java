@@ -111,7 +111,10 @@ public class WorkflowStatusTest {
                 "              \"name\": \"Event\",\n" +
                 "              \"state\": \"finished\"\n" +
                 "            }\n" +
-                "          ]\n" +
+                "          ],\n" +
+                "          \"route\": {\n" +
+                "            \"name\": \"route 1\"\n" +
+                "          }\n" +
                 "        }\n" +
                 "      ]\n" +
 
@@ -130,14 +133,16 @@ public class WorkflowStatusTest {
         // Build and execute the request against the mock server.
         EventRequest request = client.buildRequest(
                 new CreateOrderFieldSet().setUserId("billy_jones_301"))
-                        .withScores("payment_abuse", "promotion_abuse").withWorkflowStatus();
+            .withScores("payment_abuse", "promotion_abuse").withWorkflowStatus()
+            .withRouteInfo();
         EventResponse siftResponse = request.send();
 
         // Verify the request.
         RecordedRequest request1 = server.takeRequest();
         Assert.assertEquals("POST", request1.getMethod());
-        Assert.assertEquals("/v205/events?return_workflow_status=true&abuse_types=" +
-                "payment_abuse,promotion_abuse", request1.getPath());
+        Assert.assertEquals("/v205/events?return_workflow_status=true" +
+            "&return_route_info=true&abuse_types=" +
+            "payment_abuse,promotion_abuse", request1.getPath());
         JSONAssert.assertEquals(expectedRequestBody, request.getFieldSet().toJson(), true);
 
         // Verify the response.
@@ -150,6 +155,7 @@ public class WorkflowStatusTest {
         Assert.assertEquals(siftResponse.getWorkflowStatuses().get(0).getId(), "6dbq76qbaaaaa");
         Assert.assertEquals(siftResponse.getWorkflowStatuses().get(0)
                 .getHistory().get(0).getState(), "running");
+        Assert.assertNotNull(siftResponse.getWorkflowStatuses().get(0).getRoute());
 
         server.shutdown();
     }

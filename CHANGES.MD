@@ -1,3 +1,7 @@
+3.4.7 (2022-06-21)
+=================
+- Adding support for return_route_info query parameter for [Sync request](https://sift.com/developers/docs/curl/workflows-api/running-workflows/synchronous)
+
 3.4.6 (2022-06-17)
 =================
 - Reverting Gradle version upgrade
