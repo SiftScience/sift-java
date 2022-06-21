@@ -156,7 +156,8 @@ public class WorkflowStatusTest {
         Assert.assertEquals(siftResponse.getWorkflowStatuses().get(0)
                 .getHistory().get(0).getState(), "running");
         Assert.assertNotNull(siftResponse.getWorkflowStatuses().get(0).getRoute());
-
+        Assert.assertEquals("route 1",
+            siftResponse.getWorkflowStatuses().get(0).getRoute().getName());
         server.shutdown();
     }
 
