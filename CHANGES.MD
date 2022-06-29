@@ -1,4 +1,4 @@
-3.4.7 (2022-06-21)
+3.5.0 (2022-06-21)
 =================
 - Adding support for return_route_info query parameter for [Sync request](https://sift.com/developers/docs/curl/workflows-api/running-workflows/synchronous)
 
