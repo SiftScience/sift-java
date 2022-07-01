@@ -21,6 +21,7 @@ public class CustomEventTest {
                 "  \"recipient_user_id\"  : \"marylee819\",\n" +
                 "  \"$site_country\": \"US\",\n" +
                 "  \"$site_domain\": \"sift.com\",\n" +
+                "  \"$keyless_user_id\": \"keylessUserId-123\",\n" +
                 "  \"$brand_name\": \"sift\",\n" +
                 "  \"$user_email\": \"sift@sift.com\",\n" +
                 "  \"call_duration\"      : 4428\n" +
@@ -51,6 +52,7 @@ public class CustomEventTest {
                 .setUserId("billy_jones_301")
                 .setSiteCountry("US")
                 .setSiteDomain("sift.com")
+                .setKeyLessUserId("keylessUserId-123")
                 .setBrandName("sift")
                 .setUserEmail("sift@sift.com")
                 .setCustomField("recipient_user_id", "marylee819")
