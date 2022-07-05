@@ -24,7 +24,7 @@ public class CustomEventTest {
                 "  \"$brand_name\": \"sift\",\n" +
                 "  \"$user_email\": \"sift@sift.com\",\n" +
                 "  \"$name\": \"Sift\",\n" +
-                "  \"phone\": \"(415) 882-7709\",\n" +
+                "  \"$phone\": \"(415) 882-7709\",\n" +
                 "  \"call_duration\"      : 4428\n" +
                 "}";
 
