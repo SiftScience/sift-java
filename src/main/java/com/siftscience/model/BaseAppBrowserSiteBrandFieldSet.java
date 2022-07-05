@@ -10,7 +10,6 @@ public abstract class BaseAppBrowserSiteBrandFieldSet<T extends BaseAppBrowserSi
     @Expose @SerializedName("$brand_name") private String brandName;
     @Expose @SerializedName("$site_country") private String siteCountry;
     @Expose @SerializedName("$site_domain") private String siteDomain;
-    @Expose @SerializedName("$keyless_user_id") private String keyLessUserId;
 
     public App getApp() {
         return app;
@@ -57,12 +56,4 @@ public abstract class BaseAppBrowserSiteBrandFieldSet<T extends BaseAppBrowserSi
         return (T) this;
     }
 
-    public String getKeyLessUserId() {
-        return keyLessUserId;
-    }
-
-    public T setKeyLessUserId(String keyLessUserId) {
-        this.keyLessUserId = keyLessUserId;
-        return (T) this;
-    }
 }
