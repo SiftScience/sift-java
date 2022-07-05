@@ -1,7 +1,8 @@
-
 3.5.1 (2022-07-01)
 =================
 - Added $keyless_user_id 
+- Added support for $name and $phone is custom events
+
 
 3.5.0 (2022-06-21)
 =================
