@@ -36,6 +36,7 @@ public abstract class FieldSet<T extends FieldSet<T>> {
     public static final String TIME = "$time";
     public static final String IS_BAD = "$is_bad";
     public static final String ABUSE_TYPE = "$abuse_type";
+    public static final String KEYLESS_USER_ID = "$keyless_user_id";
 
     // Serialization happens in two stages. First, the object is serialized with `defaultGson`
     // according to the @Expose and @SerializedName annotations on the subclass type. Then, the

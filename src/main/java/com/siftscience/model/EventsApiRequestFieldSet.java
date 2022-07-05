@@ -10,6 +10,7 @@ public abstract class EventsApiRequestFieldSet<T extends EventsApiRequestFieldSe
     @Expose @SerializedName(SESSION_ID) private String sessionId;
     @Expose @SerializedName(TIME) private Long time;
     @Expose @SerializedName(IP) private String ip;
+    @Expose @SerializedName(KEYLESS_USER_ID) private String keyLessUserId;
 
     public T setCustomField(String key, Number val) {
         return super.setCustomField(key, val);
@@ -69,6 +70,15 @@ public abstract class EventsApiRequestFieldSet<T extends EventsApiRequestFieldSe
 
     public T setIp(String ip) {
         this.ip = ip;
+        return (T) this;
+    }
+
+    public String getKeyLessUserId() {
+        return keyLessUserId;
+    }
+
+    public T setKeyLessUserId(String keylessUserId) {
+        this.keyLessUserId = keylessUserId;
         return (T) this;
     }
 }
