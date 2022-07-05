@@ -1,3 +1,8 @@
+
+3.5.1 (2022-07-01)
+=================
+- Added $keyless_user_id 
+
 3.5.0 (2022-06-21)
 =================
 - Adding support for return_route_info query parameter for [Sync request](https://sift.com/developers/docs/curl/workflows-api/running-workflows/synchronous)

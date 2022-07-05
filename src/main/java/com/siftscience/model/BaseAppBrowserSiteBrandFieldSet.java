@@ -55,4 +55,5 @@ public abstract class BaseAppBrowserSiteBrandFieldSet<T extends BaseAppBrowserSi
         this.siteDomain = siteDomain;
         return (T) this;
     }
+
 }
