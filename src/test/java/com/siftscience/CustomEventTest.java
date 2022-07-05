@@ -23,6 +23,8 @@ public class CustomEventTest {
                 "  \"$site_domain\": \"sift.com\",\n" +
                 "  \"$brand_name\": \"sift\",\n" +
                 "  \"$user_email\": \"sift@sift.com\",\n" +
+                "  \"$name\": \"Sift\",\n" +
+                "  \"phone\": \"(415) 882-7709\",\n" +
                 "  \"call_duration\"      : 4428\n" +
                 "}";
 
@@ -53,6 +55,8 @@ public class CustomEventTest {
                 .setSiteDomain("sift.com")
                 .setBrandName("sift")
                 .setUserEmail("sift@sift.com")
+                .setName("Sift")
+                .setPhone("(415) 882-7709")
                 .setCustomField("recipient_user_id", "marylee819")
                 .setCustomField("call_duration", 4428));
 
