@@ -42,7 +42,7 @@ public class SiftClient {
     private final String accountId;
     private final String apiKey;
     private final OkHttpClient okClient;
-    private final HttpUrl baseUrl = HttpUrl.parse("https://api.sift.com");
+    private HttpUrl baseUrl = HttpUrl.parse("https://api.sift.com");
 
     public SiftClient(String apiKey, String accountId) {
         this(apiKey, accountId, new OkHttpClient());
@@ -52,6 +52,17 @@ public class SiftClient {
         this.apiKey = apiKey;
         this.accountId = accountId;
         this.okClient = okHttpClient;
+    }
+
+    /**
+     * Used for testing to stub the endpoint
+     * @param apiKey
+     * @param accountId
+     * @param baseUrl
+     */
+    public SiftClient(String apiKey, String accountId, HttpUrl baseUrl) {
+        this(apiKey, accountId, new OkHttpClient());
+        this.baseUrl = baseUrl;
     }
 
     public String getApiKey() {
