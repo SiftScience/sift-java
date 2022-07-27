@@ -1,3 +1,7 @@
+3.5.2 (2022-07-27)
+=================
+- Added SiftClient constructor to override the baseUrl
+
 3.5.1 (2022-07-01)
 =================
 - Added $keyless_user_id 
