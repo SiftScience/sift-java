@@ -1,3 +1,7 @@
+3.5.3 (2022-08-17)
+=================
+- Added $verification_phone_number to $add_item_to_cart, $add_promotion, $content_status, $create_account, $create_content, $create_order, $custom_event, $flag_content, $login, $remove_item_from_cart, $transaction, $update_account, $update_content, $update_order, and $update_password events
+
 3.5.2 (2022-07-27)
 =================
 - Added SiftClient constructor to override the baseUrl
