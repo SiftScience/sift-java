@@ -32,7 +32,8 @@ public class RemoveItemFromCartEventTest {
                 "    \"$category\"       : \"Blankets & Throws\",\n" +
                 "    \"$tags\"           : [\"Awesome\", \"Wintertime specials\"],\n" +
                 "    \"$color\"          : \"Texas Tea\"\n" +
-                "  }\n" +
+                "  },\n" +
+                "  \"$verification_phone_number\" : \"+12345678901\"\n" +
                 "}";
 
         // Start a new mock server and enqueue a mock response.
@@ -58,7 +59,8 @@ public class RemoveItemFromCartEventTest {
         SiftRequest request = client.buildRequest(new RemoveItemFromCartFieldSet()
                 .setUserId("billy_jones_301")
                 .setSessionId("gigtleqddo84l8cm15qe4il")
-                .setItem(TestUtils.sampleItem2()));
+                .setItem(TestUtils.sampleItem2())
+                .setVerificationPhoneNumber("+12345678901"));
 
         SiftResponse siftResponse = request.send();
 

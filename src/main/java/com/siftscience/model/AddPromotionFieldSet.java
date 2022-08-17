@@ -11,6 +11,7 @@ public class AddPromotionFieldSet extends BaseAppBrowserSiteBrandFieldSet<AddPro
     }
 
     @Expose @SerializedName("$promotions") private List<Promotion> promotions;
+    @Expose @SerializedName(VERIFICATION_PHONE_NUMBER) private String verificationPhoneNumber;
 
     @Override
     public String getEventType() {
@@ -23,6 +24,15 @@ public class AddPromotionFieldSet extends BaseAppBrowserSiteBrandFieldSet<AddPro
 
     public AddPromotionFieldSet setPromotions(List<Promotion> promotions) {
         this.promotions = promotions;
+        return this;
+    }
+
+    public String getVerificationPhoneNumber() {
+        return verificationPhoneNumber;
+    }
+
+    public AddPromotionFieldSet setVerificationPhoneNumber(String verificationPhoneNumber) {
+        this.verificationPhoneNumber = verificationPhoneNumber;
         return this;
     }
 }

@@ -92,7 +92,8 @@ public class CreateAccountEventTest {
                 "      \"$region\"    : \"New Hampshire\",\n" +
                 "      \"$zipcode\"   : \"03257\"\n" +
                 "    }\n" +
-                "  }\n" +
+                "  },\n" +
+                "  \"$verification_phone_number\" : \"+12345678901\"\n" +
                 "}\n";
 
         // Start a new mock server and enqueue a mock response.
@@ -143,7 +144,8 @@ public class CreateAccountEventTest {
                         .setCustomField("email_confirmed_status", "$pending")
                         .setCustomField("phone_confirmed_status", "$pending")
                         .setAccountTypes(Arrays.asList("merchant", "premium"))
-                        .setMerchantProfile(TestUtils.sampleMerchantProfile()));
+                        .setMerchantProfile(TestUtils.sampleMerchantProfile())
+                        .setVerificationPhoneNumber("+12345678901"));
 
         SiftResponse siftResponse = request.send();
 

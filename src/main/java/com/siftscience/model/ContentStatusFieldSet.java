@@ -10,6 +10,7 @@ public class ContentStatusFieldSet extends BaseAppBrowserSiteBrandFieldSet<Conte
 
     @Expose @SerializedName("$content_id") private String contentId;
     @Expose @SerializedName("$status") private String status;
+    @Expose @SerializedName(VERIFICATION_PHONE_NUMBER) private String verificationPhoneNumber;
 
     @Override
     public String getEventType() {
@@ -25,13 +26,21 @@ public class ContentStatusFieldSet extends BaseAppBrowserSiteBrandFieldSet<Conte
         return this;
     }
 
-
     public String getContentId() {
         return contentId;
     }
 
     public ContentStatusFieldSet setContentId(String contentId) {
         this.contentId = contentId;
+        return this;
+    }
+
+    public String getVerificationPhoneNumber() {
+        return verificationPhoneNumber;
+    }
+
+    public ContentStatusFieldSet setVerificationPhoneNumber(String verificationPhoneNumber) {
+        this.verificationPhoneNumber = verificationPhoneNumber;
         return this;
     }
 }

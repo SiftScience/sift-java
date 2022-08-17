@@ -58,7 +58,8 @@ public class ContentEventTest {
             "           \"$link\": \"https://www.domain.com/file.png\",\n" +
             "           \"$description\": \"An old picture\"\n" +
             "       }]\n" +
-            "   }" +
+            "   }," +
+            "  \"$verification_phone_number\" : \"+12345678901\"\n" +
             "}";
 
         // Start a new mock server and enqueue a mock response.
@@ -102,7 +103,8 @@ public class ContentEventTest {
             .setSessionId("a234ksjfgn435sfg")
             .setStatus("$active")
             .setIp("255.255.255.0")
-            .setComment(c));
+            .setComment(c)
+            .setVerificationPhoneNumber("+12345678901"));
 
 
         SiftResponse siftResponse = request.send();
@@ -162,7 +164,8 @@ public class ContentEventTest {
             "           \"$description\": \"Billy's picture\"\n" +
             "       }],\n" +
             "       \"$expiration_time\": 1549063157000,\n" +
-            "   }\n" +
+            "   },\n" +
+            "  \"$verification_phone_number\" : \"+12345678901\"\n" +
             "}";
 
 
@@ -229,7 +232,8 @@ public class ContentEventTest {
             .setSessionId("a234ksjfgn435sfg")
             .setStatus("$active")
             .setIp("255.255.255.0")
-            .setListing(l));
+            .setListing(l)
+            .setVerificationPhoneNumber("+12345678901"));
 
         SiftResponse siftResponse = request.send();
 
@@ -268,7 +272,8 @@ public class ContentEventTest {
             "           \"$link\": \"https://www.domain.com/file.png\",\n" +
             "           \"$description\": \"My hike today!\"\n" +
             "       }],\n" +
-            "   }" +
+            "   }," +
+            "  \"$verification_phone_number\" : \"+12345678901\"\n" +
             "}";
 
         // Start a new mock server and enqueue a mock response.
@@ -311,7 +316,8 @@ public class ContentEventTest {
             .setSessionId("a234ksjfgn435sfg")
             .setStatus("$active")
             .setIp("255.255.255.0")
-            .setMessage(m));
+            .setMessage(m)
+            .setVerificationPhoneNumber("+12345678901"));
 
         SiftResponse siftResponse = request.send();
 
@@ -358,7 +364,8 @@ public class ContentEventTest {
             "           \"$link\": \"https://www.domain.com/file.png\",\n" +
             "           \"$description\": \"Alex’s picture\"\n" +
             "       }],\n" +
-            "   }" +
+            "   }," +
+            "  \"$verification_phone_number\" : \"+12345678901\"\n" +
             "}";
 
         // Start a new mock server and enqueue a mock response.
@@ -410,7 +417,8 @@ public class ContentEventTest {
             .setSessionId("a234ksjfgn435sfg")
             .setStatus("$active")
             .setIp("255.255.255.0")
-            .setProfile(p));
+            .setProfile(p)
+            .setVerificationPhoneNumber("+12345678901"));
 
         SiftResponse siftResponse = request.send();
 
@@ -464,7 +472,8 @@ public class ContentEventTest {
             "           \"$description\": \"An old picture\"\n" +
             "       }],\n" +
             "       \"$expiration_time\": 1549063157000" +
-            "   }" +
+            "   }," +
+            "  \"$verification_phone_number\" : \"+12345678901\"\n" +
             "}";
 
         // Start a new mock server and enqueue a mock response.
@@ -526,7 +535,8 @@ public class ContentEventTest {
             .setSessionId("a234ksjfgn435sfg")
             .setStatus("$active")
             .setIp("255.255.255.0")
-            .setPost(p));
+            .setPost(p)
+            .setVerificationPhoneNumber("+12345678901"));
 
         SiftResponse siftResponse = request.send();
 
@@ -573,7 +583,8 @@ public class ContentEventTest {
             "           \"$description\": \"Calamari tacos.\"\n" +
             "       }],\n" +
             "       \"$rating\": 4.5" +
-            "   }" +
+            "   }," +
+            "  \"$verification_phone_number\" : \"+12345678901\"\n" +
             "}";
 
 
@@ -626,7 +637,8 @@ public class ContentEventTest {
             .setSessionId("a234ksjfgn435sfg")
             .setStatus("$active")
             .setIp("255.255.255.0")
-            .setReview(r));
+            .setReview(r)
+            .setVerificationPhoneNumber("+12345678901"));
 
         SiftResponse siftResponse = request.send();
 
@@ -666,7 +678,8 @@ public class ContentEventTest {
             "           \"$link\": \"https://www.domain.com/file.png\",\n" +
             "           \"$description\": \"An old picture\"\n" +
             "       }]\n" +
-            "   }" +
+            "   }," +
+            "  \"$verification_phone_number\" : \"+12345678901\"\n" +
             "}";
 
 
@@ -711,7 +724,8 @@ public class ContentEventTest {
             .setSessionId("a234ksjfgn435sfg")
             .setStatus("$active")
             .setIp("255.255.255.0")
-            .setComment(c));
+            .setComment(c)
+            .setVerificationPhoneNumber("+12345678901"));
 
 
         SiftResponse siftResponse = request.send();
@@ -771,7 +785,8 @@ public class ContentEventTest {
             "           \"$description\": \"Billy's picture\"\n" +
             "       }],\n" +
             "       \"$expiration_time\": 1549063157000,\n" +
-            "   }\n" +
+            "   },\n" +
+            "  \"$verification_phone_number\" : \"+12345678901\"\n" +
             "}";
 
 
@@ -838,7 +853,8 @@ public class ContentEventTest {
             .setSessionId("a234ksjfgn435sfg")
             .setStatus("$active")
             .setIp("255.255.255.0")
-            .setListing(l));
+            .setListing(l)
+            .setVerificationPhoneNumber("+12345678901"));
 
         SiftResponse siftResponse = request.send();
 
@@ -879,7 +895,8 @@ public class ContentEventTest {
             "           \"$link\": \"https://www.domain.com/file.png\",\n" +
             "           \"$description\": \"My hike today!\"\n" +
             "       }],\n" +
-            "   }" +
+            "   }," +
+            "  \"$verification_phone_number\" : \"+12345678901\"\n" +
             "}";
 
         // Start a new mock server and enqueue a mock response.
@@ -924,7 +941,8 @@ public class ContentEventTest {
             .setSessionId("a234ksjfgn435sfg")
             .setStatus("$active")
             .setIp("255.255.255.0")
-            .setMessage(m));
+            .setMessage(m)
+            .setVerificationPhoneNumber("+12345678901"));
 
         SiftResponse siftResponse = request.send();
 
@@ -971,7 +989,8 @@ public class ContentEventTest {
             "           \"$link\": \"https://www.domain.com/file.png\",\n" +
             "           \"$description\": \"Alex’s picture\"\n" +
             "       }],\n" +
-            "   }" +
+            "   }," +
+            "  \"$verification_phone_number\" : \"+12345678901\"\n" +
             "}";
 
         // Start a new mock server and enqueue a mock response.
@@ -1023,7 +1042,8 @@ public class ContentEventTest {
             .setSessionId("a234ksjfgn435sfg")
             .setStatus("$active")
             .setIp("255.255.255.0")
-            .setProfile(p));
+            .setProfile(p)
+            .setVerificationPhoneNumber("+12345678901"));
 
         SiftResponse siftResponse = request.send();
 
@@ -1077,7 +1097,8 @@ public class ContentEventTest {
             "           \"$description\": \"An old picture\"\n" +
             "       }],\n" +
             "       \"$expiration_time\": 1549063157000" +
-            "   }" +
+            "   }," +
+            "  \"$verification_phone_number\" : \"+12345678901\"\n" +
             "}";
 
         // Start a new mock server and enqueue a mock response.
@@ -1139,7 +1160,8 @@ public class ContentEventTest {
             .setSessionId("a234ksjfgn435sfg")
             .setStatus("$active")
             .setIp("255.255.255.0")
-            .setPost(p));
+            .setPost(p)
+            .setVerificationPhoneNumber("+12345678901"));
 
         SiftResponse siftResponse = request.send();
 
@@ -1186,7 +1208,8 @@ public class ContentEventTest {
             "           \"$description\": \"Calamari tacos.\"\n" +
             "       }],\n" +
             "       \"$rating\": 4.5" +
-            "   }" +
+            "   }," +
+            "  \"$verification_phone_number\" : \"+12345678901\"\n" +
             "}";
 
 
@@ -1239,7 +1262,8 @@ public class ContentEventTest {
             .setSessionId("a234ksjfgn435sfg")
             .setStatus("$active")
             .setIp("255.255.255.0")
-            .setReview(r));
+            .setReview(r)
+            .setVerificationPhoneNumber("+12345678901"));
 
         SiftResponse siftResponse = request.send();
 

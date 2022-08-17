@@ -22,6 +22,7 @@ public abstract class BaseOrderFieldSet<T extends BaseOrderFieldSet<T>>
     @Expose @SerializedName("$bookings") private List<Booking> bookings;
     @Expose @SerializedName("$ordered_from") private OrderedFrom orderedFrom;
     @Expose @SerializedName("$merchant_profile") private MerchantProfile merchantProfile;
+    @Expose @SerializedName(VERIFICATION_PHONE_NUMBER) private String verificationPhoneNumber;
 
     public String getOrderId() {
         return orderId;
@@ -159,6 +160,15 @@ public abstract class BaseOrderFieldSet<T extends BaseOrderFieldSet<T>>
 
     public T setMerchantProfile(MerchantProfile merchantProfile) {
         this.merchantProfile = merchantProfile;
+        return (T) this;
+    }
+
+    public String getVerificationPhoneNumber() {
+        return verificationPhoneNumber;
+    }
+
+    public T setVerificationPhoneNumber(String verificationPhoneNumber) {
+        this.verificationPhoneNumber = verificationPhoneNumber;
         return (T) this;
     }
 }

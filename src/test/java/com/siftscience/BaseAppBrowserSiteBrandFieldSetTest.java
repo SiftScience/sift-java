@@ -167,7 +167,7 @@ public class BaseAppBrowserSiteBrandFieldSetTest {
                 .setTestField(DUMMY_TEST_FIELD)
                 .setUserId(DUMMY_USERID)
                 .setSiteDomain(siteDomain)
-                .setKeyLessUserId(keyLessUserId),
+                .setKeylessUserId(keyLessUserId),
             String.format(REQUEST_BODY_TEMPLATE, ", \"$site_domain\" : \"sift.com\"," +
                 " \"$keyless_user_id\" : \"keylessUserId-123\"  }\n")
         );

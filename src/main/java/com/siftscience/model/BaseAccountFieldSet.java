@@ -16,6 +16,7 @@ public abstract class BaseAccountFieldSet<T extends BaseAccountFieldSet<T>>
     @Expose @SerializedName("$shipping_address") private Address shippingAddress;
     @Expose @SerializedName("$social_sign_on_type") private String socialSignOnType;
     @Expose @SerializedName("$merchant_profile") private MerchantProfile merchantProfile;
+    @Expose @SerializedName(VERIFICATION_PHONE_NUMBER) private String verificationPhoneNumber;
 
     public String getUserEmail() {
         return userEmail;
@@ -95,6 +96,15 @@ public abstract class BaseAccountFieldSet<T extends BaseAccountFieldSet<T>>
 
     public T setMerchantProfile(MerchantProfile merchantProfile) {
         this.merchantProfile = merchantProfile;
+        return (T) this;
+    }
+
+    public String getVerificationPhoneNumber() {
+        return verificationPhoneNumber;
+    }
+
+    public T setVerificationPhoneNumber(String verificationPhoneNumber) {
+        this.verificationPhoneNumber = verificationPhoneNumber;
         return (T) this;
     }
 }
