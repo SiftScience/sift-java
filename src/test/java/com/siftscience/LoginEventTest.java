@@ -34,7 +34,8 @@ public class LoginEventTest {
                 " \"$failure_reason\": \"$account_suspended\",\n" +
                 " \"$username\"      : \"seattle_001\",\n" +
                 " \"$social_sign_on_type\" : \"$facebook\",\n" +
-                " \"$account_types\" : [\"merchant\", \"premium\"]\n" +
+                " \"$account_types\" : [\"merchant\", \"premium\"],\n" +
+                "  \"$verification_phone_number\" : \"+12345678901\"\n" +
                 "}";
 
         // Start a new mock server and enqueue a mock response.
@@ -67,7 +68,8 @@ public class LoginEventTest {
                 .setFailureReason("$account_suspended")
                 .setUsername("seattle_001")
                 .setSocialSignOnType("$facebook")
-                .setAccountTypes(Arrays.asList("merchant", "premium")));
+                .setAccountTypes(Arrays.asList("merchant", "premium"))
+                .setVerificationPhoneNumber("+12345678901"));
 
         SiftResponse siftResponse = request.send();
 

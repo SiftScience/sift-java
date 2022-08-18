@@ -26,7 +26,8 @@ public class CustomEventTest {
                 "  \"$user_email\": \"sift@sift.com\",\n" +
                 "  \"$name\": \"Sift\",\n" +
                 "  \"$phone\": \"(415) 882-7709\",\n" +
-                "  \"call_duration\"      : 4428\n" +
+                "  \"call_duration\"      : 4428,\n" +
+                "  \"$verification_phone_number\" : \"+12345678901\"\n" +
                 "}";
 
         // Start a new mock server and enqueue a mock response.
@@ -54,13 +55,14 @@ public class CustomEventTest {
                 .setUserId("billy_jones_301")
                 .setSiteCountry("US")
                 .setSiteDomain("sift.com")
-                .setKeyLessUserId("keylessUserId-123")
+                .setKeylessUserId("keylessUserId-123")
                 .setBrandName("sift")
                 .setUserEmail("sift@sift.com")
                 .setName("Sift")
                 .setPhone("(415) 882-7709")
                 .setCustomField("recipient_user_id", "marylee819")
-                .setCustomField("call_duration", 4428));
+                .setCustomField("call_duration", 4428)
+                .setVerificationPhoneNumber("+12345678901"));
 
         SiftResponse siftResponse = request.send();
 

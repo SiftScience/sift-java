@@ -483,7 +483,7 @@ public class UpdateOrderEventTest {
                 .setBillingAddress(TestUtils.sampleAddress2())
                 .setOrderedFrom(TestUtils.sampleOrderedFrom())
                 .setSiteDomain("sift.com")
-                .setKeyLessUserId("keylessUserId-123")
+                .setKeylessUserId("keylessUserId-123")
                 .setSiteCountry("US")
                 .setBrandName("sift")
                 .setPaymentMethods(paymentMethodList)
