@@ -145,7 +145,8 @@ public class CreateOrderEventTest {
             "  \"digital_wallet\"      : \"apple_pay\",\n" +
             "  \"coupon_code\"         : \"dollarMadness\",\n" +
             "  \"shipping_choice\"     : \"FedEx Ground Courier\",\n" +
-            "  \"is_first_time_buyer\" : false\n" +
+            "  \"is_first_time_buyer\" : false,\n" +
+            "  \"$verification_phone_number\" : \"+12345678901\"\n" +
             "}";
 
         // Start a new mock server and enqueue a mock response.
@@ -200,7 +201,8 @@ public class CreateOrderEventTest {
                 .setCustomField("digital_wallet", "apple_pay")
                 .setCustomField("coupon_code", "dollarMadness")
                 .setCustomField("shipping_choice", "FedEx Ground Courier")
-                .setCustomField("is_first_time_buyer", false));
+                .setCustomField("is_first_time_buyer", false)
+                .setVerificationPhoneNumber("+12345678901"));
 
         EventResponse siftResponse = request.send();
 
@@ -310,7 +312,8 @@ public class CreateOrderEventTest {
                 "  \"digital_wallet\"      : \"apple_pay\",\n" +
                 "  \"coupon_code\"         : \"dollarMadness\",\n" +
                 "  \"shipping_choice\"     : \"FedEx Ground Courier\",\n" +
-                "  \"is_first_time_buyer\" : false\n" +
+                "  \"is_first_time_buyer\" : false,\n" +
+                "  \"$verification_phone_number\" : \"+12345678901\"\n" +
                 "}";
 
 
@@ -367,7 +370,8 @@ public class CreateOrderEventTest {
                         .setCustomField("digital_wallet", "apple_pay")
                         .setCustomField("coupon_code", "dollarMadness")
                         .setCustomField("shipping_choice", "FedEx Ground Courier")
-                        .setCustomField("is_first_time_buyer", false));
+                        .setCustomField("is_first_time_buyer", false)
+                        .setVerificationPhoneNumber("+12345678901"));
         EventResponse siftResponse = request.send();
 
         // Verify the request.
@@ -401,6 +405,7 @@ public class CreateOrderEventTest {
             "  \"$currency_code\": \"USD\",\n" +
             "  \"$site_country\": \"US\",\n" +
             "  \"$site_domain\": \"sift.com\",\n" +
+            "  \"$keyless_user_id\": \"keylessUserId-123\",\n" +
             "  \"$brand_name\": \"sift\",\n" +
             "  \"$payment_methods\": [\n" +
             "    {\n" +
@@ -444,7 +449,8 @@ public class CreateOrderEventTest {
             "      \"$region\"    : \"New Hampshire\",\n" +
             "      \"$zipcode\"   : \"03257\"\n" +
             "    }\n" +
-            "  }\n" +
+            "  },\n" +
+            "  \"$verification_phone_number\" : \"+12345678901\"\n" +
             "}\n";
 
         // Start a new mock server and enqueue a mock response.
@@ -482,12 +488,14 @@ public class CreateOrderEventTest {
                 .setBillingAddress(TestUtils.sampleAddress2())
                 .setOrderedFrom(TestUtils.sampleOrderedFrom())
                 .setSiteDomain("sift.com")
+                .setKeylessUserId("keylessUserId-123")
                 .setSiteCountry("US")
                 .setBrandName("sift")
                 .setPaymentMethods(paymentMethodList)
                 .setShippingAddress(TestUtils.sampleAddress2())
                 .setExpeditedShipping(true)
-                .setShippingMethod("$physical"));
+                .setShippingMethod("$physical")
+                .setVerificationPhoneNumber("+12345678901"));
 
         EventResponse siftResponse = request.send();
 
@@ -543,6 +551,7 @@ public class CreateOrderEventTest {
             "      \"$zipcode\"   : \"03257\"\n" +
             "    }\n" +
             "  },\n" +
+            "  \"$verification_phone_number\" : \"+12345678901\"\n" +
             "}\n";
 
         // Start a new mock server and enqueue a mock response.
@@ -578,7 +587,8 @@ public class CreateOrderEventTest {
                 .setAmount(115940000L)
                 .setCurrencyCode("USD")
                 .setPaymentMethods(paymentMethodList)
-                .setMerchantProfile(TestUtils.sampleMerchantProfile()));
+                .setMerchantProfile(TestUtils.sampleMerchantProfile())
+                .setVerificationPhoneNumber("+12345678901"));
 
         EventResponse siftResponse = request.send();
 

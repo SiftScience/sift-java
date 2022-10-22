@@ -10,6 +10,7 @@ public class UpdatePasswordFieldSet extends BaseAppBrowserSiteBrandFieldSet<Upda
 
     @Expose @SerializedName("$reason") private String reason;
     @Expose @SerializedName("$status") private String status;
+    @Expose @SerializedName(VERIFICATION_PHONE_NUMBER) private String verificationPhoneNumber;
 
     @Override
     public String getEventType() {
@@ -27,6 +28,15 @@ public class UpdatePasswordFieldSet extends BaseAppBrowserSiteBrandFieldSet<Upda
 
     public UpdatePasswordFieldSet setStatus(String status) {
         this.status = status;
+        return this;
+    }
+
+    public String getVerificationPhoneNumber() {
+        return verificationPhoneNumber;
+    }
+
+    public UpdatePasswordFieldSet setVerificationPhoneNumber(String verificationPhoneNumber) {
+        this.verificationPhoneNumber = verificationPhoneNumber;
         return this;
     }
 }

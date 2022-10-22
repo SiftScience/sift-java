@@ -22,8 +22,23 @@ public class ChargebackEventTest {
                 "  \"$transaction_id\"    : \"719637215\",\n" +
                 "\n" +
                 "  \"$chargeback_state\"  : \"$lost\",\n" +
-                "  \"$chargeback_reason\" : \"$duplicate\"\n" +
-                "}";
+                "  \"$chargeback_reason\" : \"$duplicate\",\n" +
+                "  \"$merchant_profile\" : {\n" +
+                "    \"$merchant_id\"            : \"12345\",\n" +
+                "    \"$merchant_category_code\" : \"9876\",\n" +
+                "    \"$merchant_name\"          : \"ABC Merchant\",\n" +
+                "    \"$merchant_address\" : {\n" +
+                "      \"$address_1\" : \"2100 Main Street\",\n" +
+                "      \"$address_2\" : \"Apt 3B\",\n" +
+                "      \"$city\"      : \"New London\",\n" +
+                "      \"$country\"   : \"US\",\n" +
+                "      \"$name\"      : \"Bill Jones\",\n" +
+                "      \"$phone\"     : \"1-415-555-6040\",\n" +
+                "      \"$region\"    : \"New Hampshire\",\n" +
+                "      \"$zipcode\"   : \"03257\"\n" +
+                "    }\n" +
+                "  }\n" +
+                "}\n";
 
         // Start a new mock server and enqueue a mock response.
         MockWebServer server = new MockWebServer();
@@ -50,7 +65,8 @@ public class ChargebackEventTest {
                 .setOrderId("ORDER-123124124")
                 .setTransactionId("719637215")
                 .setChargebackState("$lost")
-                .setChargebackReason("$duplicate"));
+                .setChargebackReason("$duplicate")
+                .setMerchantProfile(TestUtils.sampleMerchantProfile()));
 
         EventResponse siftResponse = request.send();
 

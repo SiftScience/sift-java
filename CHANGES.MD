@@ -1,3 +1,35 @@
+3.6.1 (2022-08-18)
+=================
+- Added $verification_phone_number to $add_item_to_cart, $add_promotion, $content_status, $create_account, $create_content, $create_order, $custom_event, $flag_content, $login, $remove_item_from_cart, $transaction, $update_account, $update_content, $update_order, and $update_password events
+
+3.5.2 (2022-07-27)
+=================
+- Added SiftClient constructor to override the baseUrl
+
+3.5.1 (2022-07-01)
+=================
+- Added $keyless_user_id 
+- Added support for $name and $phone is custom events
+
+
+3.5.0 (2022-06-21)
+=================
+- Adding support for return_route_info query parameter for [Sync request](https://sift.com/developers/docs/curl/workflows-api/running-workflows/synchronous)
+
+3.4.6 (2022-06-17)
+=================
+- Reverting Gradle version upgrade
+- Adding support for $user_email in custom events
+
+
+3.4.5 (2022-04-05)
+=================
+- Updated Gradle version to 6.8.3
+
+3.4.4 (2022-04-04)
+=================
+- Add support for `$merchant_profile` complex field to `$create_account`, `$update_account`, and `$chargeback` events
+
 3.4.3 (2021-10-12)
 =================
 - Add support for `$shortened_iban_first6`, `$shortened_iban_last4`, and `$sepa_direct_debit_mandate` to `$payment_method` complex field and `$transaction` event

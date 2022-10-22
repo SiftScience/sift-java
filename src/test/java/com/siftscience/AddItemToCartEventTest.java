@@ -33,7 +33,8 @@ public class AddItemToCartEventTest {
             "    \"$tags\"           : [\"Awesome\", \"Wintertime specials\"],\n" +
             "    \"$color\"          : \"Texas Tea\",\n" +
             "    \"$quantity\"       : 2\n" +
-            "  }\n" +
+            "  },\n" +
+            "  \"$verification_phone_number\" : \"+12345678901\"\n" +
             "}";
 
         // Start a new mock server and enqueue a mock response.
@@ -59,7 +60,8 @@ public class AddItemToCartEventTest {
         SiftRequest request = client.buildRequest(new AddItemToCartFieldSet()
             .setUserId("billy_jones_301")
             .setSessionId("gigtleqddo84l8cm15qe4il")
-            .setItem(TestUtils.sampleItem2()));
+            .setItem(TestUtils.sampleItem2())
+            .setVerificationPhoneNumber("+12345678901"));
 
         SiftResponse siftResponse = request.send();
 

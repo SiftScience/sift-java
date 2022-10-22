@@ -25,6 +25,7 @@ public class TransactionFieldSet extends BaseAppBrowserSiteBrandFieldSet<Transac
     @Expose @SerializedName("$triggered_3ds") private String triggered3ds;
     @Expose @SerializedName("$merchant_initiated_transaction")
         private Boolean merchantInitiatedTransaction;
+    @Expose @SerializedName(VERIFICATION_PHONE_NUMBER) private String verificationPhoneNumber;
 
 
     @Override
@@ -214,6 +215,15 @@ public class TransactionFieldSet extends BaseAppBrowserSiteBrandFieldSet<Transac
     public TransactionFieldSet setMerchantInitiatedTransaction(
             Boolean merchantInitiatedTransaction) {
         this.merchantInitiatedTransaction = merchantInitiatedTransaction;
+        return this;
+    }
+
+    public String getVerificationPhoneNumber() {
+        return verificationPhoneNumber;
+    }
+
+    public TransactionFieldSet setVerificationPhoneNumber(String verificationPhoneNumber) {
+        this.verificationPhoneNumber = verificationPhoneNumber;
         return this;
     }
 }

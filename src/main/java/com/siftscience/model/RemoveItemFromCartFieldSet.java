@@ -9,6 +9,7 @@ public class RemoveItemFromCartFieldSet extends BaseAppBrowserSiteBrandFieldSet<
     }
 
     @Expose @SerializedName("$item") private Item item;
+    @Expose @SerializedName(VERIFICATION_PHONE_NUMBER) private String verificationPhoneNumber;
 
     @Override
     public String getEventType() {
@@ -21,6 +22,15 @@ public class RemoveItemFromCartFieldSet extends BaseAppBrowserSiteBrandFieldSet<
 
     public RemoveItemFromCartFieldSet setItem(Item item) {
         this.item = item;
+        return this;
+    }
+
+    public String getVerificationPhoneNumber() {
+        return verificationPhoneNumber;
+    }
+
+    public RemoveItemFromCartFieldSet setVerificationPhoneNumber(String verificationPhoneNumber) {
+        this.verificationPhoneNumber = verificationPhoneNumber;
         return this;
     }
 }

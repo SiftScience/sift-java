@@ -33,7 +33,8 @@ public class AddPromotionEventTest {
                 "        \"$currency_code\"  : \"USD\"\n" +
                 "      }\n" +
                 "    }\n" +
-                "  ]\n" +
+                "  ],\n" +
+                "  \"$verification_phone_number\" : \"+12345678901\"\n" +
                 "}";
 
         // Start a new mock server and enqueue a mock response.
@@ -62,7 +63,8 @@ public class AddPromotionEventTest {
         // Build and execute the request against the mock server.
         SiftRequest request = client.buildRequest(new AddPromotionFieldSet()
                 .setUserId("billy_jones_301")
-                .setPromotions(promotions));
+                .setPromotions(promotions)
+                .setVerificationPhoneNumber("+12345678901"));
 
         SiftResponse siftResponse = request.send();
 
