@@ -17,6 +17,7 @@ public class EventRequest extends SiftRequest<EventResponse> {
     private List<String> abuseTypes;
     private boolean isWorkflowStatus = false;
     private boolean forceWorkflowRun = false;
+    private boolean isReturnRouteInfo = false;
 
     EventRequest(HttpUrl baseUrl, String accountId, OkHttpClient okClient, FieldSet fields) {
         super(baseUrl, accountId, okClient, fields);
@@ -39,7 +40,9 @@ public class EventRequest extends SiftRequest<EventResponse> {
         } else if (abuseTypes != null) {
             builder.addQueryParameter("return_score", "true");
         }
-
+        if (isReturnRouteInfo) {
+            builder.addQueryParameter("return_route_info", "true");
+        }
         if (forceWorkflowRun) {
             builder.addQueryParameter("force_workflow_run", "true"); 
         }
@@ -63,6 +66,11 @@ public class EventRequest extends SiftRequest<EventResponse> {
 
     public EventRequest withForceWorkflowRun() {
         this.forceWorkflowRun = true;
+        return this;
+    }
+
+    public EventRequest withRouteInfo() {
+        this.isReturnRouteInfo = true;
         return this;
     }
 }

@@ -1,14 +1,16 @@
 package com.siftscience;
 
-import com.siftscience.exception.*;
-import okhttp3.*;
+import com.siftscience.exception.MerchantAPIException;
+import okhttp3.HttpUrl;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
+import okhttp3.Credentials;
+import okhttp3.RequestBody;
+import okhttp3.MediaType;
 
 import java.io.IOException;
 
-/**
- *  It implements the `send` method which
- * should be used by all subtypes as it provides standard error handling logic.
- */
 public abstract class SiftMerchantRequest<T extends SiftMerchantResponse> {
     private final String accountId;
     FieldSet fieldSet;
@@ -41,14 +43,11 @@ public abstract class SiftMerchantRequest<T extends SiftMerchantResponse> {
     public T send() throws IOException {
         fieldSet.validate();
 
-        // Ok now that the fieldSet is valid, construct and send the request.
         Request.Builder okRequestBuilder = new Request.Builder().url(this.url());
         modifyRequestBuilder(okRequestBuilder);
         Request request = okRequestBuilder.build();
         T response = buildResponse(okClient.newCall(request).execute(), fieldSet);
 
-        // If not successful but no exception happened yet, dig deeper into the response so we
-        // can manually throw an appropriate exception.
         if (!response.isOk()) {
                 throw new MerchantAPIException(response.getApiErrorMessage());
         }

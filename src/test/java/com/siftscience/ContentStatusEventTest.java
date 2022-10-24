@@ -19,7 +19,8 @@ public class ContentStatusEventTest {
                 "  \"$api_key\"    : \"YOUR_API_KEY\",\n" +
                 "  \"$user_id\"    : \"billy_jones_301\",\n" +
                 "  \"$content_id\" : \"9671500641\",\n" +
-                "  \"$status\"     : \"$paused\"\n" +
+                "  \"$status\"     : \"$paused\",\n" +
+                "  \"$verification_phone_number\" : \"+12345678901\"\n" +
                 "}";
 
 
@@ -46,7 +47,8 @@ public class ContentStatusEventTest {
         SiftRequest request = client.buildRequest(new ContentStatusFieldSet()
                 .setUserId("billy_jones_301")
                 .setContentId("9671500641")
-                .setStatus("$paused"));
+                .setStatus("$paused")
+                .setVerificationPhoneNumber("+12345678901"));
 
         SiftResponse siftResponse = request.send();
 

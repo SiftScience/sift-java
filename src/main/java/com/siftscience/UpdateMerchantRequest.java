@@ -8,6 +8,7 @@ import okhttp3.Credentials;
 import okhttp3.RequestBody;
 import okhttp3.MediaType;
 
+
 import java.io.IOException;
 
 
@@ -46,5 +47,4 @@ public class UpdateMerchantRequest extends SiftMerchantRequest<UpdateMerchantRes
         builder.header("Authorization", Credentials.basic(fieldSet.getApiKey(), "")).get();
         builder.put(RequestBody.create(MediaType.parse("application/json"), fieldSet.toJson()));
     }
-
 }
