@@ -79,7 +79,7 @@ public class UpdateMerchantEventTest {
 
         // Verify the request.
         RecordedRequest request1 = server.takeRequest();
-        Assert.assertEquals("POST", request1.getMethod());
+        Assert.assertEquals("PUT", request1.getMethod());
         Assert.assertEquals("/v3/accounts/YOUR_ACCOUNT_ID/psp_management/merchants/1234", request1.getPath());
         JSONAssert.assertEquals(expectedRequestBody, request.getFieldSet().toJson(), true);
 
