@@ -4,7 +4,7 @@ public enum MerchantRiskLevelEnum {
 
     LOW("low"),
     HIGH("high"),
-    Medium("medium");
+    MEDIUM("medium");
 
     public final String value;
 

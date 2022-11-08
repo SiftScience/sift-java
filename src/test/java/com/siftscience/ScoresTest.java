@@ -198,6 +198,7 @@ public class ScoresTest {
         String bodyStr = "{\n" +
                 "      \"status\": 0, \n" +
                 "      \"error_message\": \"OK\", \n" +
+                "      \"time\": 1664286242, \n" +
                 "      \"user_id\": \"billy_jones_301\",\n" +
                 "      \"scores\": {\n" +
                 "        \"payment_abuse\": {\n" +
