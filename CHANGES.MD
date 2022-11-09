@@ -1,3 +1,7 @@
+3.7.0 (2022-11-09)
+=================
+- added support for merchant management api
+
 3.6.1 (2022-08-18)
 =================
 - Added $verification_phone_number to $add_item_to_cart, $add_promotion, $content_status, $create_account, $create_content, $create_order, $custom_event, $flag_content, $login, $remove_item_from_cart, $transaction, $update_account, $update_content, $update_order, and $update_password events
