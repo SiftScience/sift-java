@@ -8,6 +8,10 @@ import com.siftscience.model.ScoreFieldSet;
 import com.siftscience.model.UnlabelFieldSet;
 import com.siftscience.model.UserScoreFieldSet;
 import com.siftscience.model.WorkflowStatusFieldSet;
+import com.siftscience.model.GetMerchantFieldSet;
+import com.siftscience.model.CreateMerchantFieldSet;
+import com.siftscience.model.UpdateMerchantFieldSet;
+import com.siftscience.model.GetMerchantsFieldSet;
 import okhttp3.HttpUrl;
 import okhttp3.OkHttpClient;
 
@@ -116,6 +120,26 @@ public class SiftClient {
     public WorkflowStatusRequest buildRequest(WorkflowStatusFieldSet fields) {
         setupApiKey(fields);
         return new WorkflowStatusRequest(baseUrl, getAccountId(), okClient, fields);
+    }
+
+    public GetMerchantsRequest buildRequest(GetMerchantsFieldSet fields) {
+        setupApiKey(fields);
+        return new GetMerchantsRequest(baseUrl, getAccountId(), okClient, fields);
+    }
+
+    public GetMerchantRequest buildRequest(GetMerchantFieldSet fields) {
+        setupApiKey(fields);
+        return new GetMerchantRequest(baseUrl, getAccountId(), okClient, fields);
+    }
+
+    public CreateMerchantRequest buildRequest(CreateMerchantFieldSet fields) {
+        setupApiKey(fields);
+        return new CreateMerchantRequest(baseUrl, getAccountId(), okClient, fields);
+    }
+
+    public UpdateMerchantRequest buildRequest(UpdateMerchantFieldSet fields, String merchantId) {
+        setupApiKey(fields);
+        return new UpdateMerchantRequest(baseUrl, getAccountId(), okClient, fields, merchantId);
     }
 
     private void setupApiKey(FieldSet fields) {
