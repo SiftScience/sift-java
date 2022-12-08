@@ -37,7 +37,8 @@ public class ChargebackEventTest {
                 "      \"$region\"    : \"New Hampshire\",\n" +
                 "      \"$zipcode\"   : \"03257\"\n" +
                 "    }\n" +
-                "  }\n" +
+                "  }\n," +
+                "  \"$ach_return_code\"   : \"B02\"\n" +
                 "}\n";
 
         // Start a new mock server and enqueue a mock response.
@@ -66,7 +67,8 @@ public class ChargebackEventTest {
                 .setTransactionId("719637215")
                 .setChargebackState("$lost")
                 .setChargebackReason("$duplicate")
-                .setMerchantProfile(TestUtils.sampleMerchantProfile()));
+                .setMerchantProfile(TestUtils.sampleMerchantProfile())
+                .setAchReturnCode("B02"));
 
         EventResponse siftResponse = request.send();
 

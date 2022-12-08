@@ -1,3 +1,7 @@
+3.8.0 (2022-12-09)
+=================
+- Add support for `$ach_return_code` field to `$chargeback` event
+
 3.7.0 (2022-11-09)
 =================
 - added support for merchant management api
