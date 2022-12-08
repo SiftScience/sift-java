@@ -5,6 +5,8 @@ import okhttp3.*;
 
 import java.io.IOException;
 
+import static com.siftscience.Constants.USER_AGENT_HEADER;
+
 /**
  * SiftRequest is the base class for all Sift API requests. It implements the `send` method which
  * should be used by all subtypes as it provides standard error handling logic.
@@ -41,7 +43,7 @@ public abstract class SiftRequest<T extends SiftResponse> {
         fieldSet.validate();
 
         // Ok now that the fieldSet is valid, construct and send the request.
-        Request.Builder okRequestBuilder = new Request.Builder().url(this.url());
+        Request.Builder okRequestBuilder = new Request.Builder().addHeader("User-Agent", USER_AGENT_HEADER).url(this.url());
         modifyRequestBuilder(okRequestBuilder);
         Request request = okRequestBuilder.build();
         T response = buildResponse(okClient.newCall(request).execute(), fieldSet);

@@ -11,6 +11,8 @@ import okhttp3.MediaType;
 
 import java.io.IOException;
 
+import static com.siftscience.Constants.USER_AGENT_HEADER;
+
 public abstract class SiftMerchantRequest<T extends SiftMerchantResponse> {
     private final String accountId;
     FieldSet fieldSet;
@@ -43,7 +45,7 @@ public abstract class SiftMerchantRequest<T extends SiftMerchantResponse> {
     public T send() throws IOException {
         fieldSet.validate();
 
-        Request.Builder okRequestBuilder = new Request.Builder().url(this.url());
+        Request.Builder okRequestBuilder = new Request.Builder().addHeader("User-Agent", USER_AGENT_HEADER).url(this.url());
         modifyRequestBuilder(okRequestBuilder);
         Request request = okRequestBuilder.build();
         T response = buildResponse(okClient.newCall(request).execute(), fieldSet);
