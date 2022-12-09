@@ -7,6 +7,7 @@ import java.util.List;
 
 import com.siftscience.model.Booking;
 import com.siftscience.model.CreateOrderFieldSet;
+import com.siftscience.model.DigitalOrder;
 import com.siftscience.model.Item;
 import com.siftscience.model.PaymentMethod;
 import com.siftscience.model.Promotion;
@@ -589,6 +590,93 @@ public class CreateOrderEventTest {
                 .setPaymentMethods(paymentMethodList)
                 .setMerchantProfile(TestUtils.sampleMerchantProfile())
                 .setVerificationPhoneNumber("+12345678901"));
+
+        EventResponse siftResponse = request.send();
+
+        // Verify the request.
+        RecordedRequest request1 = server.takeRequest();
+        Assert.assertEquals("POST", request1.getMethod());
+        Assert.assertEquals("/v205/events", request1.getPath());
+        JSONAssert.assertEquals(expectedRequestBody, request.getFieldSet().toJson(), true);
+
+        // Verify the response.
+        Assert.assertEquals(HTTP_OK, siftResponse.getHttpStatusCode());
+        Assert.assertEquals(0, (int) siftResponse.getBody().getStatus());
+        JSONAssert.assertEquals(response.getBody().readUtf8(),
+            siftResponse.getBody().toJson(), true);
+
+        server.shutdown();
+    }
+
+    @Test
+    public void testCreateOrderEventWithCryptoFields() throws JSONException, IOException,
+        InterruptedException {
+
+        // The expected JSON payload of the request.
+        String expectedRequestBody = "{\n" +
+            "  \"$type\": \"$create_order\",\n" +
+            "  \"$api_key\": \"YOUR_API_KEY\",\n" +
+            "  \"$user_id\": \"billy_jones_301\",\n" +
+            "  \"$session_id\": \"gigtleqddo84l8cm15qe4il\",\n" +
+            "  \"$order_id\": \"ORDER-28168441\",\n" +
+            "  \"$user_email\": \"bill@gmail.com\",\n" +
+            "  \"$amount\": 115940000,\n" +
+            "  \"$currency_code\": \"USD\",\n" +
+            "  \"$payment_methods\": [\n" +
+            "    {\n" +
+            "      \"$wallet_address\": \"ZplYVmchAoywfMvC8jCiKlBLfKSBiFtHU6\",\n" +
+            "      \"$wallet_type\": \"$crypto\",\n" +
+            "    }\n" +
+            "  ],\n" +
+            "  \"$digital_orders\" : [\n" +
+            "    {\n" +
+            "      \"$digital_asset\" : \"BTC\",\n" +
+            "      \"$pair\"          : \"BTC_USD\",\n" +
+            "      \"$asset_type\"    : \"$crypto\",\n" +
+            "      \"$order_type\"    : \"$market\",\n" +
+            "      \"$volume\"        : \"6.0\",\n" +
+            "    }\n" +
+            "  ],\n" +
+            "}\n";
+
+        // Start a new mock server and enqueue a mock response.
+        MockWebServer server = new MockWebServer();
+        MockResponse response = new MockResponse();
+        response.setResponseCode(HTTP_OK);
+        response.setBody("{\n" +
+            "    \"status\" : 0,\n" +
+            "    \"error_message\" : \"OK\",\n" +
+            "    \"time\" : 1327604222,\n" +
+            "    \"request\" : \"" + TestUtils.unescapeJson(expectedRequestBody) + "\"\n" +
+            "}");
+        server.enqueue(response);
+        server.start();
+
+        // Create a new client and link it to the mock server.
+        SiftClient client = new SiftClient("YOUR_API_KEY", "YOUR_ACCOUNT_ID",
+            new OkHttpClient.Builder()
+                .addInterceptor(OkHttpUtils.urlRewritingInterceptor(server))
+                .build());
+
+        // Payment methods.
+        List<PaymentMethod> paymentMethodList = new ArrayList<>();
+        paymentMethodList.add(TestUtils.samplePaymentMethodWalletFields());
+
+        // Digital orders.
+        List<DigitalOrder> digitalOrderList = new ArrayList<>();
+        digitalOrderList.add(TestUtils.sampleDigitalOrder());
+
+        // Build and execute the request against the mock server.
+        EventRequest request = client.buildRequest(
+            new CreateOrderFieldSet()
+                .setUserId("billy_jones_301")
+                .setSessionId("gigtleqddo84l8cm15qe4il")
+                .setOrderId("ORDER-28168441")
+                .setUserEmail("bill@gmail.com")
+                .setAmount(115940000L)
+                .setCurrencyCode("USD")
+                .setPaymentMethods(paymentMethodList)
+                .setDigitalOrders(digitalOrderList));
 
         EventResponse siftResponse = request.send();
 

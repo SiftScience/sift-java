@@ -1,5 +1,7 @@
 package com.siftscience.model;
 
+import java.util.List;
+
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
@@ -26,6 +28,9 @@ public class TransactionFieldSet extends BaseAppBrowserSiteBrandFieldSet<Transac
     @Expose @SerializedName("$merchant_initiated_transaction")
         private Boolean merchantInitiatedTransaction;
     @Expose @SerializedName(VERIFICATION_PHONE_NUMBER) private String verificationPhoneNumber;
+    @Expose @SerializedName("$digital_orders") private List<DigitalOrder> digitalOrders;
+    @Expose @SerializedName("$receiver_wallet_address") private String receiverWalletAddress;
+    @Expose @SerializedName("$receiver_external_address") private Boolean receiverExternalAddress;
 
 
     @Override
@@ -224,6 +229,33 @@ public class TransactionFieldSet extends BaseAppBrowserSiteBrandFieldSet<Transac
 
     public TransactionFieldSet setVerificationPhoneNumber(String verificationPhoneNumber) {
         this.verificationPhoneNumber = verificationPhoneNumber;
+        return this;
+    }
+
+    public List<DigitalOrder> getDigitalOrders() {
+        return digitalOrders;
+    }
+
+    public TransactionFieldSet setDigitalOrders(List<DigitalOrder> digitalOrders) {
+        this.digitalOrders = digitalOrders;
+        return this;
+    }
+
+    public String getReceiverWalletAddress() {
+        return receiverWalletAddress;
+    }
+
+    public TransactionFieldSet setReceiverWalletAddress(String receiverWalletAddress) {
+        this.receiverWalletAddress = receiverWalletAddress;
+        return this;
+    }
+
+    public Boolean getReceiverExternalAddress() {
+        return receiverExternalAddress;
+    }
+
+    public TransactionFieldSet setReceiverExternalAddress(Boolean receiverExternalAddress) {
+        this.receiverExternalAddress = receiverExternalAddress;
         return this;
     }
 }

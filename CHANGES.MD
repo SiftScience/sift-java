@@ -1,6 +1,10 @@
 3.8.0 (2022-12-09)
 =================
 - Add support for `$ach_return_code` field to `$chargeback` event
+- Add support for `$wallet_address` and `$wallet_type` fields to `$payment_method` complex field
+- Add support for `$digital_order` complex field  
+- Add support for `$digital_orders` field to `$transaction`, `$create_order`, and `$update_order` events
+- Add support for `$receiver_wallet_address` and `$receiver_external_address` fields to `$transaction` event
 
 3.7.0 (2022-11-09)
 =================
