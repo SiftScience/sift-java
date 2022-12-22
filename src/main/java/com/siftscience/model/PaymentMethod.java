@@ -33,6 +33,8 @@ public class PaymentMethod {
     @Expose @SerializedName("$shortened_iban_first6") private String shortenedIbanFirst6;
     @Expose @SerializedName("$shortened_iban_last4") private String shortenedIbanLast4;
     @Expose @SerializedName("$sepa_direct_debit_mandate") private Boolean sepaDirectDebitMandate;
+    @Expose @SerializedName("$wallet_address") private String walletAddress;
+    @Expose @SerializedName("$wallet_type") private String walletType;
 
     public String getPaymentType() {
         return paymentType;
@@ -283,6 +285,24 @@ public class PaymentMethod {
 
     public PaymentMethod setSepaDirectDebitMandate(Boolean sepaDirectDebitMandate) {
         this.sepaDirectDebitMandate = sepaDirectDebitMandate;
+        return this;
+    }
+
+    public String getWalletAddress() {
+        return walletAddress;
+    }
+
+    public PaymentMethod setWalletAddress(String walletAddress) {
+        this.walletAddress = walletAddress;
+        return this;
+    }
+
+    public String getWalletType() {
+        return walletType;
+    }
+
+    public PaymentMethod setWalletType(String walletType) {
+        this.walletType = walletType;
         return this;
     }
 }

@@ -3,6 +3,7 @@ package com.siftscience;
 import com.siftscience.model.Address;
 import com.siftscience.model.Booking;
 import com.siftscience.model.CreditPoint;
+import com.siftscience.model.DigitalOrder;
 import com.siftscience.model.Discount;
 import com.siftscience.model.Guest;
 import com.siftscience.model.Item;
@@ -93,6 +94,21 @@ public class TestUtils {
                 .setShortenedIbanFirst6("FR7630")
                 .setShortenedIbanLast4("1234")
                 .setSepaDirectDebitMandate(true);
+    }
+
+    static PaymentMethod samplePaymentMethodWalletFields() {
+        return new PaymentMethod()
+            .setWalletAddress("ZplYVmchAoywfMvC8jCiKlBLfKSBiFtHU6")
+            .setWalletType("$crypto");
+    }
+
+    static DigitalOrder sampleDigitalOrder() {
+        return new DigitalOrder()
+            .setDigitalAsset("BTC")
+            .setPair("BTC_USD")
+            .setAssetType("$crypto")
+            .setOrderType("$market")
+            .setVolume("6.0");
     }
 
     static List<String> sampleTags1() {

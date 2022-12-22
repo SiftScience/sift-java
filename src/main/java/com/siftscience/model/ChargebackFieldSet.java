@@ -13,6 +13,7 @@ public class ChargebackFieldSet extends EventsApiRequestFieldSet<ChargebackField
     @Expose @SerializedName("$chargeback_state") private String chargebackState;
     @Expose @SerializedName("$chargeback_reason") private String chargebackReason;
     @Expose @SerializedName("$merchant_profile") private MerchantProfile merchantProfile;
+    @Expose @SerializedName("$ach_return_code") private String achReturnCode;
 
     @Override
     public String getEventType() {
@@ -61,6 +62,15 @@ public class ChargebackFieldSet extends EventsApiRequestFieldSet<ChargebackField
 
     public ChargebackFieldSet setMerchantProfile(MerchantProfile merchantProfile) {
         this.merchantProfile = merchantProfile;
+        return this;
+    }
+
+    public String getAchReturnCode() {
+        return achReturnCode;
+    }
+
+    public ChargebackFieldSet setAchReturnCode(String achReturnCode) {
+        this.achReturnCode = achReturnCode;
         return this;
     }
 }
