@@ -1,12 +1,14 @@
 package com.siftscience;
 
+import java.io.IOException;
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
 import okhttp3.HttpUrl;
 import okhttp3.OkHttpClient;
 import okhttp3.Response;
-
-import java.io.IOException;
-import java.util.Arrays;
-import java.util.List;
 
 /**
  * EventRequest is the request type for the Sift Events API.
@@ -18,6 +20,7 @@ public class EventRequest extends SiftRequest<EventResponse> {
     private boolean isWorkflowStatus = false;
     private boolean forceWorkflowRun = false;
     private boolean isReturnRouteInfo = false;
+    private boolean returnScorePercentiles = false;
 
     EventRequest(HttpUrl baseUrl, String accountId, OkHttpClient okClient, FieldSet fields) {
         super(baseUrl, accountId, okClient, fields);
@@ -26,14 +29,14 @@ public class EventRequest extends SiftRequest<EventResponse> {
 
     @Override
     EventResponse buildResponse(Response response, FieldSet requestFields)
-            throws IOException {
+        throws IOException {
         return new EventResponse(response, requestFields);
     }
 
     @Override
     protected HttpUrl path(HttpUrl baseUrl) {
         HttpUrl.Builder builder = baseUrl.newBuilder()
-                .addPathSegment("v205").addPathSegment("events");
+            .addPathSegment("v205").addPathSegment("events");
 
         if (isWorkflowStatus) {
             builder.addQueryParameter("return_workflow_status", "true");
@@ -44,7 +47,14 @@ public class EventRequest extends SiftRequest<EventResponse> {
             builder.addQueryParameter("return_route_info", "true");
         }
         if (forceWorkflowRun) {
-            builder.addQueryParameter("force_workflow_run", "true"); 
+            builder.addQueryParameter("force_workflow_run", "true");
+        }
+        Set<String> fields = new HashSet<>();
+        if (returnScorePercentiles) {
+            fields.add("score_percentiles");
+        }
+        if (fields.size() > 0) {
+            builder.addQueryParameter("fields", StringUtils.joinWithComma(fields));
         }
 
         // returnScore and abuseTypes are encoded into the URL as query params rather than JSON.
@@ -71,6 +81,11 @@ public class EventRequest extends SiftRequest<EventResponse> {
 
     public EventRequest withRouteInfo() {
         this.isReturnRouteInfo = true;
+        return this;
+    }
+
+    public EventRequest withScorePercentiles() {
+        this.returnScorePercentiles = true;
         return this;
     }
 }
