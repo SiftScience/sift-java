@@ -124,6 +124,23 @@ AbuseScore paymentAbuseScore = response.getAbuseScore("payment_abuse");
 You may also invoke the `withScores` method with no arguments to return
 scores for all abuse types.
 
+EventRequest objects can also be modified to
+return a Score Percentiles using the `EventRequest#withScorePercentiles` method.
+
+```java
+// Build the ScoreRequest with score percentiles
+EventRequest createOrderRequest = client.buildRequest(createOrderFieldSet)
+        .withScores("payment_abuse")
+        .withScorePercentiles();
+
+// Send the request. May throw a SiftException.
+ScoreResponse response = request.send();
+
+// Inspect score percentiles.
+Map<String, Double> percentiles = siftResponse.getAbuseScore("payment_abuse").getPercentiles();
+```
+
+
 #### Score API
 
 [API Docs](https://sift.com/developers/docs/java/score-api/score-api)
