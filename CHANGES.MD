@@ -1,3 +1,7 @@
+3.9.0 (2023-03-10)
+=================
+- Add support for score percentiles
+
 3.8.0 (2022-12-09)
 =================
 - Add support for `$ach_return_code` field to `$chargeback` event
