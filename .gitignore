@@ -19,3 +19,4 @@ gradle.properties
 
 # macOS files
 .DB_Store
+**/.DB_Store
