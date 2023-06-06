@@ -402,7 +402,6 @@ public class UpdateOrderEventTest {
             "  \"$currency_code\": \"USD\",\n" +
             "  \"$site_country\": \"US\",\n" +
             "  \"$site_domain\": \"sift.com\",\n" +
-            "  \"$keyless_user_id\": \"keylessUserId-123\",\n" +
             "  \"$brand_name\": \"sift\",\n" +
             "  \"$payment_methods\": [\n" +
             "    {\n" +
@@ -484,7 +483,6 @@ public class UpdateOrderEventTest {
                 .setBillingAddress(TestUtils.sampleAddress2())
                 .setOrderedFrom(TestUtils.sampleOrderedFrom())
                 .setSiteDomain("sift.com")
-                .setKeylessUserId("keylessUserId-123")
                 .setSiteCountry("US")
                 .setBrandName("sift")
                 .setPaymentMethods(paymentMethodList)

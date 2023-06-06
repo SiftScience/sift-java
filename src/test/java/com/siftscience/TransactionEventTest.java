@@ -34,7 +34,6 @@ public class TransactionEventTest {
                 "  \"$decline_category\" : \"$lost\",\n" +
                 "  \"$site_country\": \"US\",\n" +
                 "  \"$site_domain\": \"sift.com\",\n" +
-                "  \"$keyless_user_id\": \"keylessUserId-123\",\n" +
                 "  \"$brand_name\": \"sift\",\n" +
                 "  \"$ordered_from\" : {\n" +
                 "    \"$store_id\"      : \"123\",\n" +
@@ -116,7 +115,6 @@ public class TransactionEventTest {
                 .setDeclineCategory("$lost")
                 .setSiteCountry("US")
                 .setSiteDomain("sift.com")
-                .setKeylessUserId("keylessUserId-123")
                 .setBrandName("sift")
                 .setOrderId("ORDER-123124124")
                 .setTransactionId("719637215")
@@ -163,7 +161,6 @@ public class TransactionEventTest {
                 "  \"$decline_category\" : \"$lost\",\n" +
                 "  \"$site_country\": \"US\",\n" +
                 "  \"$site_domain\": \"sift.com\",\n" +
-                "  \"$keyless_user_id\": \"keylessUserId-123\",\n" +
                 "  \"$brand_name\": \"sift\",\n" +
                 "  \"$ordered_from\" : {\n" +
                 "    \"$store_id\"      : \"123\",\n" +
@@ -245,7 +242,6 @@ public class TransactionEventTest {
                 .setDeclineCategory("$lost")
                 .setSiteCountry("US")
                 .setSiteDomain("sift.com")
-                .setKeylessUserId("keylessUserId-123")
                 .setBrandName("sift")
                 .setOrderId("ORDER-123124124")
                 .setTransactionId("719637215")
