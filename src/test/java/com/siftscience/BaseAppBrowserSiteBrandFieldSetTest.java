@@ -161,15 +161,12 @@ public class BaseAppBrowserSiteBrandFieldSetTest {
     @Test
     public void testSiteDomain() throws Exception {
         String siteDomain = "sift.com";
-        String keyLessUserId = "keylessUserId-123";
         test(
             new TestFieldSet()
                 .setTestField(DUMMY_TEST_FIELD)
                 .setUserId(DUMMY_USERID)
-                .setSiteDomain(siteDomain)
-                .setKeylessUserId(keyLessUserId),
-            String.format(REQUEST_BODY_TEMPLATE, ", \"$site_domain\" : \"sift.com\"," +
-                " \"$keyless_user_id\" : \"keylessUserId-123\"  }\n")
+                .setSiteDomain(siteDomain),
+            String.format(REQUEST_BODY_TEMPLATE, ", \"$site_domain\" : \"sift.com\" }\n")
         );
     }
 

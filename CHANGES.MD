@@ -1,3 +1,7 @@
+3.10.0 (2023-06-06)
+=================
+- Remove support for `$keyless_user_id` field for Events API 
+
 3.9.0 (2023-03-10)
 =================
 - Add support for score percentiles
