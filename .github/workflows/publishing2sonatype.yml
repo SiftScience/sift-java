@@ -28,8 +28,8 @@ jobs:
           echo $(ls -la)
       - name: Prepare build.gradle
         run: |
-          sed -i 's/.*sonatypeUsername.*/                username = "${{ secrets.SUSER }}"/' ./build.gradle
-          sed -i 's/.*sonatypePassword.*/                password = "${{ secrets.SPASSWORD }}"/' ./build.gradle
+          sed -i 's/.*sonatypeUsername.*/                username = "${{ secrets.SUSER }}"/g' ./build.gradle
+          sed -i 's/.*sonatypePassword.*/                password = "${{ secrets.SPASSWORD }}"/g' ./build.gradle
       - name: Publish to Sonatype
         run: |
           ./gradlew publishJarPublicationToStagingRepository
