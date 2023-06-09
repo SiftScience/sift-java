@@ -20,12 +20,12 @@ jobs:
       - name: Prepare gradle.properties
         run: |
           echo -e "${{ secrets.SECRING }}" | base64 -d > ./secring.gpg      
-          touch ./gradle/gradle.properties  
-          echo "signing.keyId=${{ secrets.KEYID }}" >> ./gradle/gradle.properties
-          echo "signing.password=${{ secrets.PASS }}" >> ./gradle/gradle.properties
-          echo "signing.secretKeyRingFile=./secring.gpg" >> ./gradle/gradle.properties
-          echo "sonatypeUsername=${{ secrets.SUSER }}" >> ./gradle/gradle.properties
-          echo "sonatypePassword=${{ secrets.SPASSWORD }}" >> ./gradle/gradle.properties
+          touch ./gradle.properties  
+          echo "signing.keyId=${{ secrets.KEYID }}" >> ./gradle.properties
+          echo "signing.password=${{ secrets.PASS }}" >> ./gradle.properties
+          echo "signing.secretKeyRingFile=./secring.gpg" >> ./gradle.properties
+          echo "sonatypeUsername=${{ secrets.SUSER }}" >> ./gradle.properties
+          echo "sonatypePassword=${{ secrets.SPASSWORD }}" >> ./gradle.properties
       - name: Prepare build.gradle
         run: |
           sed -i -e 's|.*sonatypeUsername.*|                username = "${{ secrets.SUSER }}"|' ./build.gradle 
