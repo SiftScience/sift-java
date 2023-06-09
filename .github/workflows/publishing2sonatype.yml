@@ -25,11 +25,10 @@ jobs:
           echo "signing.secretKeyRingFile=./secring.gpg" >> ./gradle/wrapper/gradle-wrapper.properties
           echo "sonatypeUsername=${{ secrets.SUSER }}" >> ./gradle/wrapper/gradle-wrapper.properties
           echo "sonatypePassword=${{ secrets.SPASSWORD }}" >> ./gradle/wrapper/gradle-wrapper.properties
-          echo $(ls -la)
       - name: Prepare build.gradle
         run: |
-          sed -i 's/.*sonatypeUsername.*/                username = "${{ secrets.SUSER }}"/g' ./build.gradle
-          sed -i 's/.*sonatypePassword.*/                password = "${{ secrets.SPASSWORD }}"/g' ./build.gradle
+          sed -i -E 's/.*sonatypeUsername.*/                username = "${{ secrets.SUSER }}"/g' ./build.gradle 
+          sed -i -E 's/.*sonatypePassword.*/                password = "${{ secrets.SPASSWORD }}"/g' ./build.gradle 
       - name: Publish to Sonatype
         run: |
           ./gradlew publishJarPublicationToStagingRepository
