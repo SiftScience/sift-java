@@ -23,7 +23,7 @@ jobs:
           touch ./gradle.properties  
           echo "signing.keyId=${{ secrets.KEYID }}" >> ./gradle.properties
           echo "signing.password=${{ secrets.PASS }}" >> ./gradle.properties
-          echo "signing.secretKeyRingFile=./secring.gpg" >> ./gradle.properties
+          echo "signing.secretKeyRingFile=/home/runner/work/sift-java/sift-java/secring.gpg" >> ./gradle.properties
           echo "sonatypeUsername=${{ secrets.SUSER }}" >> ./gradle.properties
           echo "sonatypePassword=${{ secrets.SPASSWORD }}" >> ./gradle.properties
       - name: Prepare build.gradle
