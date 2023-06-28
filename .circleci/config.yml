@@ -91,9 +91,10 @@ jobs:
           name: Clone sift-java-integration-app and extract sift-java
           command: |
             export GIT_SSH_COMMAND='ssh -i ~/.ssh/id_rsa_4cc71df295873cf6614e465ac82ad7c9'
+            version=$(./gradlew properties -q | grep "version:" | awk '{print $2}')
             git clone git@github.com:SiftScience/sift-java-integration-app.git
             cd sift-java-integration-app
-            unzip -j ../build/distributions/sift-java-*.zip -d app/libs/
+            unzip -j ../build/distributions/sift-java-${version}.zip -d app/libs/
 
       - run:
           name: Running tests in sift-java-integration-app
@@ -107,8 +108,8 @@ workflows:
       - build:
           context: *context
       - java_integration:
-          filters:
-            branches:
-              only:
-                - master
+#           filters:
+#             branches:
+#               only:
+#                 - master
           context: *context
