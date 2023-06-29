@@ -22,6 +22,7 @@ public class FlagContentEventTest {
                 "  \"$content_id\" : \"9671500641\",\n" +
                 "\n" +
                 "  \"$flagged_by\" : \"jamieli89\",\n" +
+                "  \"$reason\" : \"$toxic\",\n" +
                 "  \"$user_email\" : \"billy_jones_301@email.com\",\n" +
                 "  \"$verification_phone_number\" : \"+12345678901\"\n" +
                 "}";
@@ -51,6 +52,7 @@ public class FlagContentEventTest {
                 .setUserId("billy_jones_301")
                 .setContentId("9671500641")
                 .setFlaggedBy("jamieli89")
+                .setReason(FlagContentFieldSet.FlagContentReason.TOXIC)
                 .setUserEmail("billy_jones_301@email.com")
                 .setVerificationPhoneNumber("+12345678901"));
 
