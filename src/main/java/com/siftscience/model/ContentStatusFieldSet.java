@@ -10,7 +10,7 @@ public class ContentStatusFieldSet extends BaseAppBrowserSiteBrandFieldSet<Conte
 
     @Expose @SerializedName("$content_id") private String contentId;
     @Expose @SerializedName("$status") private String status;
-    @Expose @SerializedName("$user_email") private String userEmail;
+    @Expose @SerializedName(USER_EMAIL) private String userEmail;
     @Expose @SerializedName(VERIFICATION_PHONE_NUMBER) private String verificationPhoneNumber;
 
     @Override

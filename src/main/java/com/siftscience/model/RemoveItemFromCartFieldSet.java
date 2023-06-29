@@ -9,7 +9,7 @@ public class RemoveItemFromCartFieldSet extends BaseAppBrowserSiteBrandFieldSet<
     }
 
     @Expose @SerializedName("$item") private Item item;
-    @Expose @SerializedName("$user_email") private String userEmail;
+    @Expose @SerializedName(USER_EMAIL) private String userEmail;
     @Expose @SerializedName(VERIFICATION_PHONE_NUMBER) private String verificationPhoneNumber;
 
     @Override

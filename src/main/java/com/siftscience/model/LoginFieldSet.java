@@ -15,7 +15,7 @@ public class LoginFieldSet extends BaseAppBrowserSiteBrandFieldSet<LoginFieldSet
     @Expose @SerializedName("$username") private String username;
     @Expose @SerializedName("$social_sign_on_type") private String socialSignOnType;
     @Expose @SerializedName("$account_types") private List<String> accountTypes;
-    @Expose @SerializedName("$user_email") private String userEmail;
+    @Expose @SerializedName(USER_EMAIL) private String userEmail;
     @Expose @SerializedName(VERIFICATION_PHONE_NUMBER) private String verificationPhoneNumber;
 
     @Override
