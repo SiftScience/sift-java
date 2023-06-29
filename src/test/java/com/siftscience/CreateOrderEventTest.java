@@ -3,6 +3,7 @@ package com.siftscience;
 import static java.net.HttpURLConnection.HTTP_OK;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import com.siftscience.model.Booking;
@@ -67,6 +68,8 @@ public class CreateOrderEventTest {
             "  },\n" +
             "  \"$expedited_shipping\" : true,\n" +
             "  \"$shipping_method\"    : \"$physical\",\n" +
+            "  \"shipping_carrier\"    : \"The Best Carrier\",\n" +
+            "  \"shipping_tracking_numbers\" : [\"track-1\", \"track-2\"],\n" +
             "  \"$bookings\": [\n" +
             "    {\n" +
             "      \"$booking_type\": \"$flight\",\n" +
@@ -196,6 +199,8 @@ public class CreateOrderEventTest {
                 .setShippingAddress(TestUtils.sampleAddress2())
                 .setExpeditedShipping(true)
                 .setShippingMethod("$physical")
+                .setShippingCarrier("The Best Carrier")
+                .setShippingTrackingNumbers(Arrays.asList("track-1", "track-2"))
                 .setBookings(bookingList)
                 .setSellerUserId("slinkys_emporium")
                 .setPromotions(promotionList)
@@ -216,6 +221,7 @@ public class CreateOrderEventTest {
         // Verify the response.
         Assert.assertEquals(HTTP_OK, siftResponse.getHttpStatusCode());
         Assert.assertEquals(0, (int) siftResponse.getBody().getStatus());
+        Assert.assertNotNull(response.getBody());
         JSONAssert.assertEquals(response.getBody().readUtf8(),
             siftResponse.getBody().toJson(), true);
 
@@ -267,6 +273,8 @@ public class CreateOrderEventTest {
                 "  },\n" +
                 "  \"$expedited_shipping\" : true,\n" +
                 "  \"$shipping_method\"    : \"$physical\",\n" +
+                "  \"shipping_carrier\"    : \"The Best Carrier\",\n" +
+                "  \"shipping_tracking_numbers\" : [\"track-1\", \"track-2\"],\n" +
                 "  \"$items\"             : [\n" +
                 "    {\n" +
                 "      \"$item_id\"        : \"12344321\",\n" +
@@ -365,6 +373,8 @@ public class CreateOrderEventTest {
                         .setShippingAddress(TestUtils.sampleAddress2())
                         .setExpeditedShipping(true)
                         .setShippingMethod("$physical")
+                        .setShippingCarrier("The Best Carrier")
+                        .setShippingTrackingNumbers(Arrays.asList("track-1", "track-2"))
                         .setItems(itemList)
                         .setSellerUserId("slinkys_emporium")
                         .setPromotions(promotionList)
@@ -384,6 +394,7 @@ public class CreateOrderEventTest {
         // Verify the response.
         Assert.assertEquals(HTTP_OK, siftResponse.getHttpStatusCode());
         Assert.assertEquals(0, (int) siftResponse.getBody().getStatus());
+        Assert.assertNotNull(response.getBody());
         JSONAssert.assertEquals(response.getBody().readUtf8(),
                 siftResponse.getBody().toJson(), true);
 
@@ -437,6 +448,8 @@ public class CreateOrderEventTest {
             "  },\n" +
             "  \"$expedited_shipping\": true,\n" +
             "  \"$shipping_method\": \"$physical\",\n" +
+            "  \"shipping_carrier\"    : \"The Best Carrier\",\n" +
+            "  \"shipping_tracking_numbers\" : [\"track-1\", \"track-2\"],\n" +
             "  \"$ordered_from\" : {\n" +
             "    \"$store_id\"      : \"123\",\n" +
             "    \"$store_address\" : {\n" +
@@ -494,6 +507,8 @@ public class CreateOrderEventTest {
                 .setShippingAddress(TestUtils.sampleAddress2())
                 .setExpeditedShipping(true)
                 .setShippingMethod("$physical")
+                .setShippingCarrier("The Best Carrier")
+                .setShippingTrackingNumbers(Arrays.asList("track-1", "track-2"))
                 .setVerificationPhoneNumber("+12345678901"));
 
         EventResponse siftResponse = request.send();
@@ -507,6 +522,7 @@ public class CreateOrderEventTest {
         // Verify the response.
         Assert.assertEquals(HTTP_OK, siftResponse.getHttpStatusCode());
         Assert.assertEquals(0, (int) siftResponse.getBody().getStatus());
+        Assert.assertNotNull(response.getBody());
         JSONAssert.assertEquals(response.getBody().readUtf8(),
             siftResponse.getBody().toJson(), true);
 
