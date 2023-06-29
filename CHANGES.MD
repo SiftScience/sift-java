@@ -1,3 +1,9 @@
+3.11.0 (2023-06-29)
+=================
+- Add support for `$user_email` field to `$add_item_to_cart`, `$add_promotion`, `$content_status`, `$flag_content`, `$remove_item_from_cart` and `$update_password` events
+- Add support for `$shipping_carrier` and `$shipping_tracking_numbers` fields to `$create_order` and `$update_order` events
+- Add support for `reason` field to `flag_content` event
+
 3.10.0 (2023-06-06)
 =================
 - Remove support for `$keyless_user_id` field for Events API 
