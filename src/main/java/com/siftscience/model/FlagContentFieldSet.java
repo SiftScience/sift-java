@@ -10,6 +10,7 @@ public class FlagContentFieldSet extends EventsApiRequestFieldSet<FlagContentFie
 
     @Expose @SerializedName("$content_id") private String contentId;
     @Expose @SerializedName("$flagged_by") private String flaggedBy;
+    @Expose @SerializedName("$user_email") private String userEmail;
     @Expose @SerializedName(VERIFICATION_PHONE_NUMBER) private String verificationPhoneNumber;
 
     @Override
@@ -32,6 +33,15 @@ public class FlagContentFieldSet extends EventsApiRequestFieldSet<FlagContentFie
 
     public FlagContentFieldSet setFlaggedBy(String flaggedBy) {
         this.flaggedBy = flaggedBy;
+        return this;
+    }
+
+    public String getUserEmail() {
+        return userEmail;
+    }
+
+    public FlagContentFieldSet setUserEmail(String userEmail) {
+        this.userEmail = userEmail;
         return this;
     }
 

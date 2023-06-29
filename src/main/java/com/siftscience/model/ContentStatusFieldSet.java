@@ -10,6 +10,7 @@ public class ContentStatusFieldSet extends BaseAppBrowserSiteBrandFieldSet<Conte
 
     @Expose @SerializedName("$content_id") private String contentId;
     @Expose @SerializedName("$status") private String status;
+    @Expose @SerializedName("$user_email") private String userEmail;
     @Expose @SerializedName(VERIFICATION_PHONE_NUMBER) private String verificationPhoneNumber;
 
     @Override
@@ -32,6 +33,15 @@ public class ContentStatusFieldSet extends BaseAppBrowserSiteBrandFieldSet<Conte
 
     public ContentStatusFieldSet setContentId(String contentId) {
         this.contentId = contentId;
+        return this;
+    }
+
+    public String getUserEmail() {
+        return userEmail;
+    }
+
+    public ContentStatusFieldSet setUserEmail(String userEmail) {
+        this.userEmail = userEmail;
         return this;
     }
 

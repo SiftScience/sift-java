@@ -1,6 +1,7 @@
 package com.siftscience;
 
 import com.siftscience.model.AddItemToCartFieldSet;
+import com.siftscience.model.EventResponseBody;
 import okhttp3.OkHttpClient;
 import okhttp3.mockwebserver.MockResponse;
 import okhttp3.mockwebserver.MockWebServer;
@@ -34,6 +35,7 @@ public class AddItemToCartEventTest {
             "    \"$color\"          : \"Texas Tea\",\n" +
             "    \"$quantity\"       : 2\n" +
             "  },\n" +
+            "  \"$user_email\" : \"billy_jones_301@email.com\",\n" +
             "  \"$verification_phone_number\" : \"+12345678901\"\n" +
             "}";
 
@@ -57,13 +59,14 @@ public class AddItemToCartEventTest {
                 .build());
 
         // Build and execute the request against the mock server.
-        SiftRequest request = client.buildRequest(new AddItemToCartFieldSet()
+        SiftRequest<EventResponse> request = client.buildRequest(new AddItemToCartFieldSet()
             .setUserId("billy_jones_301")
             .setSessionId("gigtleqddo84l8cm15qe4il")
             .setItem(TestUtils.sampleItem2())
+            .setUserEmail("billy_jones_301@email.com")
             .setVerificationPhoneNumber("+12345678901"));
 
-        SiftResponse siftResponse = request.send();
+        SiftResponse<EventResponseBody> siftResponse = request.send();
 
         // Verify the request.
         RecordedRequest request1 = server.takeRequest();
@@ -74,6 +77,7 @@ public class AddItemToCartEventTest {
         // Verify the response.
         Assert.assertEquals(HTTP_OK, siftResponse.getHttpStatusCode());
         Assert.assertEquals(0, (int) siftResponse.getBody().getStatus());
+        Assert.assertNotNull(response.getBody());
         JSONAssert.assertEquals(response.getBody().readUtf8(),
             siftResponse.getBody().toJson(), true);
 

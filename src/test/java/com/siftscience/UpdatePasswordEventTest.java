@@ -3,6 +3,7 @@ package com.siftscience;
 import static java.net.HttpURLConnection.HTTP_OK;
 
 import com.siftscience.model.App;
+import com.siftscience.model.EventResponseBody;
 import com.siftscience.model.UpdatePasswordFieldSet;
 import okhttp3.OkHttpClient;
 import okhttp3.mockwebserver.MockResponse;
@@ -35,6 +36,8 @@ public class UpdatePasswordEventTest {
                 " \"$reason\" : \"$forced_reset\",\n" +
                 " \"$status\" : \"$success\",\n" +
                 " \"$ip\" : \"128.148.1.135\",\n" +
+                " \"$user_email\" : \"billy_jones_301@email.com\",\n" +
+                " \"$verification_phone_number\" : \"+12345678901\"\n" +
                 "}";
 
         MockWebServer server = new MockWebServer();
@@ -62,6 +65,8 @@ public class UpdatePasswordEventTest {
                 .setReason("$forced_reset")
                 .setStatus("$success")
                 .setIp("128.148.1.135")
+                .setUserEmail("billy_jones_301@email.com")
+                .setVerificationPhoneNumber("+12345678901")
                 .setApp(new App()
                         .setAppName("Calculator")
                         .setAppVersion("3.2.7")
@@ -70,8 +75,8 @@ public class UpdatePasswordEventTest {
                         .setDeviceUniqueId("A3D261E4-DE0A-470B-9E4A-720F3D3D22E6")
                         .setOperatingSystem("iOS"));
 
-        SiftRequest request = client.buildRequest(fieldSet);
-        SiftResponse siftResponse = request.send();
+        SiftRequest<EventResponse> request = client.buildRequest(fieldSet);
+        SiftResponse<EventResponseBody> siftResponse = request.send();
 
         //Verify the request
         RecordedRequest request1 = server.takeRequest();
@@ -82,6 +87,7 @@ public class UpdatePasswordEventTest {
         // Verify the response.
         Assert.assertEquals(HTTP_OK, siftResponse.getHttpStatusCode());
         Assert.assertEquals(0, (int) siftResponse.getBody().getStatus());
+        Assert.assertNotNull(response.getBody());
         JSONAssert.assertEquals(response.getBody().readUtf8(), siftResponse.getBody().toJson(), true);
 
         server.shutdown();

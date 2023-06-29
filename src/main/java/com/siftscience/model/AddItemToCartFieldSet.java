@@ -9,6 +9,7 @@ public class AddItemToCartFieldSet extends BaseAppBrowserSiteBrandFieldSet<AddIt
     }
 
     @Expose @SerializedName("$item") private Item item;
+    @Expose @SerializedName("$user_email") private String userEmail;
     @Expose @SerializedName(VERIFICATION_PHONE_NUMBER) private String verificationPhoneNumber;
 
     @Override
@@ -22,6 +23,15 @@ public class AddItemToCartFieldSet extends BaseAppBrowserSiteBrandFieldSet<AddIt
 
     public AddItemToCartFieldSet setItem(Item item) {
         this.item = item;
+        return this;
+    }
+
+    public String getUserEmail() {
+        return userEmail;
+    }
+
+    public AddItemToCartFieldSet setUserEmail(String userEmail) {
+        this.userEmail = userEmail;
         return this;
     }
 
