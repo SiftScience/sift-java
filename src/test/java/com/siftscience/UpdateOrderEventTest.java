@@ -69,8 +69,8 @@ public class UpdateOrderEventTest {
             "  },\n" +
             "  \"$expedited_shipping\" : true,\n" +
             "  \"$shipping_method\"    : \"$physical\",\n" +
-            "  \"shipping_carrier\"    : \"The Best Carrier\",\n" +
-            "  \"shipping_tracking_numbers\" : [\"track-1\", \"track-2\"],\n" +
+            "  \"$shipping_carrier\"    : \"The Best Carrier\",\n" +
+            "  \"$shipping_tracking_numbers\" : [\"track-1\", \"track-2\"],\n" +
             "  \"$bookings\": [\n" +
             "    {\n" +
             "      \"$booking_type\": \"$flight\",\n" +
@@ -271,8 +271,8 @@ public class UpdateOrderEventTest {
                 "  },\n" +
                 "  \"$expedited_shipping\" : true,\n" +
                 "  \"$shipping_method\"    : \"$physical\",\n" +
-                "  \"shipping_carrier\"    : \"The Best Carrier\",\n" +
-                "  \"shipping_tracking_numbers\" : [\"track-1\", \"track-2\"],\n" +
+                "  \"$shipping_carrier\"    : \"The Best Carrier\",\n" +
+                "  \"$shipping_tracking_numbers\" : [\"track-1\", \"track-2\"],\n" +
                 "  \"$items\"             : [\n" +
                 "    {\n" +
                 "      \"$item_id\"        : \"12344321\",\n" +
@@ -445,8 +445,8 @@ public class UpdateOrderEventTest {
             "  },\n" +
             "  \"$expedited_shipping\": true,\n" +
             "  \"$shipping_method\": \"$physical\",\n" +
-            "  \"shipping_carrier\"    : \"The Best Carrier\",\n" +
-            "  \"shipping_tracking_numbers\" : [\"track-1\", \"track-2\"],\n" +
+            "  \"$shipping_carrier\"    : \"The Best Carrier\",\n" +
+            "  \"$shipping_tracking_numbers\" : [\"track-1\", \"track-2\"],\n" +
             "  \"$ordered_from\" : {\n" +
             "    \"$store_id\"      : \"123\",\n" +
             "    \"$store_address\" : {\n" +
