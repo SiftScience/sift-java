@@ -19,8 +19,8 @@ public abstract class BaseOrderFieldSet<T extends BaseOrderFieldSet<T>>
     @Expose @SerializedName("$seller_user_id") private String sellerUserId;
     @Expose @SerializedName("$promotions") private List<Promotion> promotions;
     @Expose @SerializedName("$shipping_method") private String shippingMethod;
-    @Expose @SerializedName("shipping_carrier") private String shippingCarrier;
-    @Expose @SerializedName("shipping_tracking_numbers") private List<String> shippingTrackingNumbers;
+    @Expose @SerializedName("$shipping_carrier") private String shippingCarrier;
+    @Expose @SerializedName("$shipping_tracking_numbers") private List<String> shippingTrackingNumbers;
     @Expose @SerializedName("$bookings") private List<Booking> bookings;
     @Expose @SerializedName("$ordered_from") private OrderedFrom orderedFrom;
     @Expose @SerializedName("$merchant_profile") private MerchantProfile merchantProfile;
