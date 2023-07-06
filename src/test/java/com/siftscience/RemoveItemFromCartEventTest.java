@@ -75,8 +75,8 @@ public class RemoveItemFromCartEventTest {
 
         // Verify the response.
         Assert.assertEquals(HTTP_OK, siftResponse.getHttpStatusCode());
+        Assert.assertNotNull(siftResponse.getBody());
         Assert.assertEquals(0, (int) siftResponse.getBody().getStatus());
-        Assert.assertNotNull(response.getBody());
         JSONAssert.assertEquals(response.getBody().readUtf8(),
                 siftResponse.getBody().toJson(), true);
 
