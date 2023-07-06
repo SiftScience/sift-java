@@ -8,8 +8,32 @@ public class FlagContentFieldSet extends EventsApiRequestFieldSet<FlagContentFie
         return gson.fromJson(json, FlagContentFieldSet.class);
     }
 
+    public enum FlagContentReason {
+        TOXIC("$toxic"),
+        IRRELEVANT("$irrelevant"),
+        COMMERCIAL("$commercial"),
+        PHISHING("$phishing"),
+        PRIVATE("$private"),
+        SCAM("$scam"),
+        COPYRIGHT("$copyright"),
+        OTHER("$other");
+
+        public final String value;
+
+        FlagContentReason(String value) {
+            this.value = value;
+        }
+
+        @Override
+        public String toString() {
+            return value;
+        }
+    }
+
     @Expose @SerializedName("$content_id") private String contentId;
     @Expose @SerializedName("$flagged_by") private String flaggedBy;
+    @Expose @SerializedName("$reason") private String reason;
+    @Expose @SerializedName(USER_EMAIL) private String userEmail;
     @Expose @SerializedName(VERIFICATION_PHONE_NUMBER) private String verificationPhoneNumber;
 
     @Override
@@ -32,6 +56,24 @@ public class FlagContentFieldSet extends EventsApiRequestFieldSet<FlagContentFie
 
     public FlagContentFieldSet setFlaggedBy(String flaggedBy) {
         this.flaggedBy = flaggedBy;
+        return this;
+    }
+
+    public String getReason() {
+        return reason;
+    }
+
+    public FlagContentFieldSet setReason(FlagContentReason reason) {
+        this.reason = reason.value;
+        return this;
+    }
+
+    public String getUserEmail() {
+        return userEmail;
+    }
+
+    public FlagContentFieldSet setUserEmail(String userEmail) {
+        this.userEmail = userEmail;
         return this;
     }
 

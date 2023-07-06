@@ -7,7 +7,7 @@ import java.util.List;
 
 public abstract class BaseAccountFieldSet<T extends BaseAccountFieldSet<T>>
         extends BaseAppBrowserSiteBrandFieldSet<T> {
-    @Expose @SerializedName("$user_email") private String userEmail;
+    @Expose @SerializedName(USER_EMAIL) private String userEmail;
     @Expose @SerializedName("$name") private String name;
     @Expose @SerializedName("$phone") private String phone;
     @Expose @SerializedName("$referrer_user_id") private String referrerUserId;

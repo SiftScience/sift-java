@@ -8,7 +8,7 @@ import com.google.gson.annotations.SerializedName;
 public class TransactionFieldSet extends BaseAppBrowserSiteBrandFieldSet<TransactionFieldSet> {
     @Expose @SerializedName("$amount") private Long amount;
     @Expose @SerializedName("$currency_code") private String currencyCode;
-    @Expose @SerializedName("$user_email") private String userEmail;
+    @Expose @SerializedName(USER_EMAIL) private String userEmail;
     @Expose @SerializedName("$transaction_type") private String transactionType;
     @Expose @SerializedName("$transaction_status") private String transactionStatus;
     @Expose @SerializedName("$order_id") private String orderId;

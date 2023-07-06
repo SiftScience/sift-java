@@ -8,7 +8,7 @@ import java.util.List;
 public abstract class BaseOrderFieldSet<T extends BaseOrderFieldSet<T>>
         extends BaseAppBrowserSiteBrandFieldSet<T> {
     @Expose @SerializedName("$order_id") private String orderId;
-    @Expose @SerializedName("$user_email") private String userEmail;
+    @Expose @SerializedName(USER_EMAIL) private String userEmail;
     @Expose @SerializedName("$amount") private Long amount;
     @Expose @SerializedName("$currency_code") private String currencyCode;
     @Expose @SerializedName("$billing_address") private Address billingAddress;
@@ -19,6 +19,8 @@ public abstract class BaseOrderFieldSet<T extends BaseOrderFieldSet<T>>
     @Expose @SerializedName("$seller_user_id") private String sellerUserId;
     @Expose @SerializedName("$promotions") private List<Promotion> promotions;
     @Expose @SerializedName("$shipping_method") private String shippingMethod;
+    @Expose @SerializedName("$shipping_carrier") private String shippingCarrier;
+    @Expose @SerializedName("$shipping_tracking_numbers") private List<String> shippingTrackingNumbers;
     @Expose @SerializedName("$bookings") private List<Booking> bookings;
     @Expose @SerializedName("$ordered_from") private OrderedFrom orderedFrom;
     @Expose @SerializedName("$merchant_profile") private MerchantProfile merchantProfile;
@@ -143,6 +145,24 @@ public abstract class BaseOrderFieldSet<T extends BaseOrderFieldSet<T>>
 
     public T setShippingMethod(String shippingMethod) {
         this.shippingMethod = shippingMethod;
+        return (T) this;
+    }
+
+    public String getShippingCarrier() {
+        return shippingCarrier;
+    }
+
+    public T setShippingCarrier(String shippingCarrier) {
+        this.shippingCarrier = shippingCarrier;
+        return (T) this;
+    }
+
+    public List<String> getShippingTrackingNumbers() {
+        return shippingTrackingNumbers;
+    }
+
+    public T setShippingTrackingNumbers(List<String> shippingTrackingNumbers) {
+        this.shippingTrackingNumbers = shippingTrackingNumbers;
         return (T) this;
     }
 
