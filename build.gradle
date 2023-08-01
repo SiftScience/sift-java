@@ -4,6 +4,10 @@ apply plugin: 'maven-publish'
 apply plugin: 'signing'
 apply plugin: 'java-library-distribution'
 
+plugins {
+  id "org.sonarqube" version "4.2.1.3168"
+}
+
 group = 'com.siftscience'
 version = '3.11.0'
 
@@ -183,3 +187,8 @@ distributions {
         baseName = 'sift-java'
     }
 }
+./gradlew sonar \
+  -Dsonar.projectKey=SiftScience_sift-java_AYmxVFkbSYASB8Gm6EAt \
+  -Dsonar.projectName='sift-java' \
+  -Dsonar.host.url=https://sonarqube.infr.us-e4.gcp.sift.com/ \
+  -Dsonar.token=sqp_056837201b3f8b36877e76c27524a3b63625826b
