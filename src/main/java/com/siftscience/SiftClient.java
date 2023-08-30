@@ -12,6 +12,9 @@ import com.siftscience.model.GetMerchantFieldSet;
 import com.siftscience.model.CreateMerchantFieldSet;
 import com.siftscience.model.UpdateMerchantFieldSet;
 import com.siftscience.model.GetMerchantsFieldSet;
+import com.siftscience.model.VerificationSendFieldSet;
+import com.siftscience.model.VerificationResendFieldSet;
+import com.siftscience.model.VerificationCheckFieldSet;
 import okhttp3.HttpUrl;
 import okhttp3.OkHttpClient;
 
@@ -140,6 +143,21 @@ public class SiftClient {
     public UpdateMerchantRequest buildRequest(UpdateMerchantFieldSet fields, String merchantId) {
         setupApiKey(fields);
         return new UpdateMerchantRequest(baseUrl, getAccountId(), okClient, fields, merchantId);
+    }
+
+    public VerificationSendRequest buildRequest(VerificationSendFieldSet fields) {
+        setupApiKey(fields);
+        return new VerificationSendRequest(baseUrl, getAccountId(), okClient, fields);
+    }
+
+    public VerificationResendRequest buildRequest(VerificationResendFieldSet fields) {
+        setupApiKey(fields);
+        return new VerificationResendRequest(baseUrl, getAccountId(), okClient, fields);
+    }
+
+    public VerificationCheckRequest buildRequest(VerificationCheckFieldSet fields) {
+        setupApiKey(fields);
+        return new VerificationCheckRequest(baseUrl, getAccountId(), okClient, fields);
     }
 
     private void setupApiKey(FieldSet fields) {
