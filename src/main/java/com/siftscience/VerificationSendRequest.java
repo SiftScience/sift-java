@@ -11,7 +11,7 @@ import okhttp3.RequestBody;
 
 import java.io.IOException;
 
-/*
+/**
 *The send call triggers the generation of an OTP code that is stored by Sift
 * and email/sms the code to the user.
 * Check out https://sift.com/developers/docs/java/verification-api/send for more information on our request/response structure.

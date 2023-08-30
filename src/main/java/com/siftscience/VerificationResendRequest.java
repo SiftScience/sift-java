@@ -11,7 +11,7 @@ import okhttp3.RequestBody;
 
 import java.io.IOException;
 
-/*
+/**
 * The resend call generates a new OTP and sends it to the original recipient with the same settings.
 * Check out https://sift.com/developers/docs/java/verification-api/resend for more information on our request/response structuree.
 * */

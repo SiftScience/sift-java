@@ -12,7 +12,7 @@ import okhttp3.RequestBody;
 import java.io.IOException;
 
 
-/*
+/**
 * The check call is used for verifying the OTP provided by the end user to Sift.
 * Check out https://sift.com/developers/docs/java/verification-api/check for more information on our request/response structure.
 */
