@@ -165,8 +165,8 @@ publishing {
             url 'https://oss.sonatype.org/service/local/staging/deploy/maven2/'
 
             credentials {
-                username = "sreejithk@exalture.com"
-                password = "Exalt123ure!"
+                username = "${sonatypeUsername}"
+                password = "${sonatypePassword}"
             }
         }
     }
