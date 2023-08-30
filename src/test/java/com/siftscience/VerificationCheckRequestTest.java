@@ -28,7 +28,7 @@ public class VerificationCheckRequestTest {
         response.setBody("{\n" +
                 "  \"status\": 0,\n" +
                 "  \"error_message\": \"OK\",\n" +
-                "  \"sent_at\": 1566324368002\n" +
+                "  \"checked_at\": 1566324368002\n" +
                 "}");
         server.enqueue(response);
         server.start();
