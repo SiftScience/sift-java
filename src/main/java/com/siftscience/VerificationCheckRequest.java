@@ -16,7 +16,7 @@ import java.io.IOException;
 * The check call is used for verifying the OTP provided by the end user to Sift.
 * Check out https://sift.com/developers/docs/java/verification-api/check for more information on our request/response structure.
 */
-public class VerificationCheckRequest extends SiftRequest<VerificationResponse> {
+public class VerificationCheckRequest extends SiftRequest<VerificationCheckResponse> {
 
     VerificationCheckRequest(HttpUrl baseUrl, String accountId, OkHttpClient okClient, VerificationCheckFieldSet fields) {
         super(baseUrl, accountId, okClient, fields);
@@ -31,8 +31,8 @@ public class VerificationCheckRequest extends SiftRequest<VerificationResponse> 
     }
 
     @Override
-    VerificationResponse buildResponse(Response response, FieldSet requestFields) throws IOException {
-        return new VerificationResponse(response, requestFields);
+    VerificationCheckResponse buildResponse(Response response, FieldSet requestFields) throws IOException {
+        return new VerificationCheckResponse(response, requestFields);
     }
 
     @Override

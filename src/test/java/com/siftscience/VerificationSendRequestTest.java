@@ -2,7 +2,6 @@ package com.siftscience;
 
 import com.siftscience.model.Browser;
 import com.siftscience.model.Event;
-import com.siftscience.model.VerificationResponseBody;
 import com.siftscience.model.VerificationSendFieldSet;
 import okhttp3.OkHttpClient;
 import okhttp3.mockwebserver.MockResponse;
@@ -23,7 +22,7 @@ public class VerificationSendRequestTest {
                 "  \"$user_id\": \"billy_jones_301\",\n" +
                 "  \"$send_to\": \"billy_jones_301@gmail.com\",\n" +
                 "  \"$verification_type\": \"$email\",\n" +
-                "  \"$brand_name\": \"nike\",\n" +
+                "  \"$brand_name\": \"brand\",\n" +
                 "  \"$language\": \"en\",\n" +
                 "  \"$event\": {\n" +
                 "    \"$session_id\": \"gigtleqddo84l8cm15qe4il\",\n" +
@@ -42,7 +41,12 @@ public class VerificationSendRequestTest {
         response.setBody("{\n" +
                 "  \"status\": 0,\n" +
                 "  \"error_message\": \"OK\",\n" +
-                "  \"sent_at\": 1566324368002\n" +
+                "  \"sent_at\": 1566324368002,\n" +
+                "  \"segment_id\": \"4\",\n" +
+                "  \"segment_name\": \"Default template\",\n" +
+                "  \"brand_name\": \"brand\",\n" +
+                "  \"site_country\": \"USA\",\n" +
+                "  \"content_language\": \"English\"\n" +
                 "}");
         server.enqueue(response);
         server.start();
@@ -57,7 +61,7 @@ public class VerificationSendRequestTest {
                 .setUserId("billy_jones_301")
                 .setSendTo("billy_jones_301@gmail.com")
                 .setVerificationType("$email")
-                .setBrandName("nike")
+                .setBrandName("brand")
                 .setLanguage("en")
                 .setVerificationEvent(
                         new Event()

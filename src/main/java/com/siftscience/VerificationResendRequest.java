@@ -15,7 +15,7 @@ import java.io.IOException;
 * The resend call generates a new OTP and sends it to the original recipient with the same settings.
 * Check out https://sift.com/developers/docs/java/verification-api/resend for more information on our request/response structuree.
 * */
-public class VerificationResendRequest extends SiftRequest<VerificationResponse> {
+public class VerificationResendRequest extends SiftRequest<VerificationResendResponse> {
 
     VerificationResendRequest(HttpUrl baseUrl, String accountId, OkHttpClient okClient, VerificationResendFieldSet fields) {
         super(baseUrl, accountId, okClient, fields);
@@ -30,8 +30,8 @@ public class VerificationResendRequest extends SiftRequest<VerificationResponse>
     }
 
     @Override
-    VerificationResponse buildResponse(Response response, FieldSet requestFields) throws IOException {
-        return new VerificationResponse(response, requestFields);
+    VerificationResendResponse buildResponse(Response response, FieldSet requestFields) throws IOException {
+        return new VerificationResendResponse(response, requestFields);
     }
 
     @Override

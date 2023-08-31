@@ -16,7 +16,7 @@ import java.io.IOException;
 * and email/sms the code to the user.
 * Check out https://sift.com/developers/docs/java/verification-api/send for more information on our request/response structure.
 * */
-public class VerificationSendRequest  extends SiftRequest<VerificationResponse> {
+public class VerificationSendRequest  extends SiftRequest<VerificationSendResponse> {
 
     VerificationSendRequest(HttpUrl baseUrl, String accountId, OkHttpClient okClient, VerificationSendFieldSet fields) {
         super(baseUrl, accountId, okClient, fields);
@@ -31,8 +31,8 @@ public class VerificationSendRequest  extends SiftRequest<VerificationResponse> 
     }
 
     @Override
-    VerificationResponse buildResponse(Response response, FieldSet requestFields) throws IOException {
-        return new VerificationResponse(response, requestFields);
+    VerificationSendResponse buildResponse(Response response, FieldSet requestFields) throws IOException {
+        return new VerificationSendResponse(response, requestFields);
     }
 
     @Override
