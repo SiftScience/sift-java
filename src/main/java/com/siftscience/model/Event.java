@@ -12,6 +12,8 @@ public class Event {
 
     @Expose @SerializedName("$browser") private Browser browser;
 
+    @Expose @SerializedName("$app") private App app;
+
     public String getSessionId() {
         return sessionId;
     }
@@ -54,6 +56,15 @@ public class Event {
 
     public Event setBrowser(Browser browser) {
         this.browser = browser;
+        return this;
+    }
+
+    public App getApp() {
+        return app;
+    }
+
+    public Event setApp(App app) {
+        this.app = app;
         return this;
     }
 }

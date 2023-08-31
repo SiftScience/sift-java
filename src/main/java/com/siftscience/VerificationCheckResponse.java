@@ -1,7 +1,6 @@
 package com.siftscience;
 
 import com.siftscience.model.VerificationCheckResponseBody;
-import com.siftscience.model.VerificationResponseBody;
 import okhttp3.Response;
 
 import java.io.IOException;

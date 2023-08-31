@@ -1,5 +1,6 @@
 package com.siftscience;
 
+import com.siftscience.model.App;
 import com.siftscience.model.Browser;
 import com.siftscience.model.Event;
 import com.siftscience.model.VerificationSendFieldSet;
@@ -23,14 +24,27 @@ public class VerificationSendRequestTest {
                 "  \"$send_to\": \"billy_jones_301@gmail.com\",\n" +
                 "  \"$verification_type\": \"$email\",\n" +
                 "  \"$brand_name\": \"brand\",\n" +
-                "  \"$language\": \"en\",\n" +
+                "  \"$site_country\": \"USA\",\n" +
+                "  \"$language\": \"English\",\n" +
                 "  \"$event\": {\n" +
                 "    \"$session_id\": \"gigtleqddo84l8cm15qe4il\",\n" +
                 "    \"$verified_event\": \"$login\",\n" +
                 "    \"$reason\": \"$automated_rule\",\n" +
                 "    \"$ip\": \"192.168.1.1\",\n" +
                 "    \"$browser\": {\n" +
-                "      \"$user_agent\": \"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/56.0.2924.87 Safari/537.36\"\n" +
+                "      \"$user_agent\": \"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/56.0.2924.87 Safari/537.36\",\n" +
+                "      \"$content_language\": \"en-US\",\n" +
+                "      \"$accept_language\": \"en-GB\"\n" +
+                "    },\n" +
+                "    \"$app\": {\n" +
+                "      \"$os\": \"iOS\",\n" +
+                "      \"$os_version\": \"1.0.0\",\n" +
+                "      \"$device_manufacturer\": \"Apple\",\n" +
+                "      \"$device_model\": \"iphone 4.2\",\n" +
+                "      \"$device_unique_id\": \"A3D261E4-DE0A-470B-9E4A-720F3D3D22E6\",\n" +
+                "      \"$app_name\": \"my app\",\n" +
+                "      \"$app_version\": \"1.0\",\n" +
+                "      \"$client_language\": \"en-US\"\n" +
                 "    }\n" +
                 "  }\n" +
                 "}";
@@ -44,8 +58,8 @@ public class VerificationSendRequestTest {
                 "  \"sent_at\": 1566324368002,\n" +
                 "  \"segment_id\": \"4\",\n" +
                 "  \"segment_name\": \"Default template\",\n" +
-                "  \"brand_name\": \"brand\",\n" +
-                "  \"site_country\": \"USA\",\n" +
+                "  \"brand_name\": \"all\",\n" +
+                "  \"site_country\": \"IN\",\n" +
                 "  \"content_language\": \"English\"\n" +
                 "}");
         server.enqueue(response);
@@ -62,7 +76,8 @@ public class VerificationSendRequestTest {
                 .setSendTo("billy_jones_301@gmail.com")
                 .setVerificationType("$email")
                 .setBrandName("brand")
-                .setLanguage("en")
+                .setSiteCountry("USA")
+                .setLanguage("English")
                 .setVerificationEvent(
                         new Event()
                                 .setSessionId(sessionId)
@@ -71,8 +86,20 @@ public class VerificationSendRequestTest {
                                 .setIp("192.168.1.1")
                                 .setBrowser(
                                         new Browser()
-                                                .setUserAgent("Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_3) AppleWebKit/537.36" +
-                                                        " (KHTML, like Gecko) Chrome/56.0.2924.87 Safari/537.36")
+                                                .setUserAgent("Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_3) AppleWebKit/537.36 (KHTML, like Gecko) " +
+                                                        "Chrome/56.0.2924.87 Safari/537.36")
+                                                .setContentLanguage("en-US")
+                                                .setAcceptLanguage("en-GB")
+                                )
+                                .setApp(
+                                        new App().setOperatingSystem("iOS")
+                                                .setOperatingSystemVersion("1.0.0")
+                                                .setDeviceManufacturer("Apple")
+                                                .setDeviceModel("iphone 4.2")
+                                                .setDeviceUniqueId("A3D261E4-DE0A-470B-9E4A-720F3D3D22E6")
+                                                .setAppName("my app")
+                                                .setAppVersion("1.0")
+                                                .setClientLanguage("en-US")
                                 )
 
                 )
