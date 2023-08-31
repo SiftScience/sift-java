@@ -23,6 +23,7 @@ public class VerificationSendRequestTest {
                 "  \"$user_id\": \"billy_jones_301\",\n" +
                 "  \"$send_to\": \"billy_jones_301@gmail.com\",\n" +
                 "  \"$verification_type\": \"$email\",\n" +
+                "  \"$verified_entity_id\": \"entity_id\",\n" +
                 "  \"$brand_name\": \"brand\",\n" +
                 "  \"$site_country\": \"USA\",\n" +
                 "  \"$language\": \"English\",\n" +
@@ -75,6 +76,7 @@ public class VerificationSendRequestTest {
                 .setUserId("billy_jones_301")
                 .setSendTo("billy_jones_301@gmail.com")
                 .setVerificationType("$email")
+                .setVerifiedEntityId("entity_id")
                 .setBrandName("brand")
                 .setSiteCountry("USA")
                 .setLanguage("English")

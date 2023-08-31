@@ -12,6 +12,7 @@ public class VerificationSendFieldSet extends FieldSet<VerificationSendFieldSet>
     @Expose @SerializedName(USER_ID) private String userId;
     @Expose @SerializedName("$send_to") private String sendTo;
     @Expose @SerializedName("$verification_type") private String verificationType;
+    @Expose @SerializedName("$verified_entity_id") private String verifiedEntityId;
     @Expose @SerializedName("$brand_name") private String brandName;
     @Expose @SerializedName("$site_country") private String siteCountry;
     @Expose @SerializedName("$language") private String language;
@@ -41,6 +42,15 @@ public class VerificationSendFieldSet extends FieldSet<VerificationSendFieldSet>
 
     public VerificationSendFieldSet setVerificationType(String verificationType) {
         this.verificationType = verificationType;
+        return this;
+    }
+
+    public String getVerifiedEntityId() {
+        return verifiedEntityId;
+    }
+
+    public VerificationSendFieldSet setVerifiedEntityId(String verifiedEntityId) {
+        this.verifiedEntityId = verifiedEntityId;
         return this;
     }
 
