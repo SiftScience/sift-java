@@ -1,3 +1,7 @@
+3.12.0 (2023-09-01)
+=================
+- Add support for Verification API
+
 3.11.0 (2023-06-29)
 =================
 - Add support for `$user_email` field to `$add_item_to_cart`, `$add_promotion`, `$content_status`, `$flag_content`, `$remove_item_from_cart` and `$update_password` events
