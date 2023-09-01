@@ -5,7 +5,7 @@ apply plugin: 'signing'
 apply plugin: 'java-library-distribution'
 
 group = 'com.siftscience'
-version = '3.11.0'
+version = '3.12.0'
 
 repositories {
     mavenCentral()
