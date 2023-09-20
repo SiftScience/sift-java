@@ -7,6 +7,8 @@ import okhttp3.Request;
 import okhttp3.Response;
 
 import java.io.IOException;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * ScoreRequest is the request type of Sift Score API requests.
@@ -44,6 +46,13 @@ public class ScoreRequest extends SiftRequest<ScoreResponse> {
         if (scoreFieldSet.getAbuseTypes() != null && scoreFieldSet.getAbuseTypes().size() > 0) {
             builder.addQueryParameter("abuse_types",
                 StringUtils.joinWithComma(scoreFieldSet.getAbuseTypes()));
+        }
+        Set<String> fields = new HashSet<>();
+        if (scoreFieldSet.isReturnScorePercentiles()) {
+            fields.add("score_percentiles");
+        }
+        if (fields.size() > 0) {
+            builder.addQueryParameter("fields", StringUtils.joinWithComma(fields));
         }
         return builder.build();
     }

@@ -233,8 +233,14 @@ public class ScoresTest {
                 "                \"users\": \"a, b, c, d\"\n" +
                 "              }\n" +
                 "            }\n" +
-                "          ]\n" +
-                "        },\n" +
+                "          ],\n" +
+                "          \"percentiles\": {\n"+
+                "            \"last_7_days\": -1.0,\n"+
+                "            \"last_1_days\": -1.0,\n"+
+                "            \"last_10_days\": 0.019955654101995565,\n"+
+                "            \"last_5_days\": -1.0\n"+
+                "           }\n"+
+                "         },\n" +
                 "        \"promotion_abuse\": {\n" +
                 "          \"score\": 0.472838192111,\n" +
                 "          \"reasons\": []\n" +
@@ -268,7 +274,8 @@ public class ScoresTest {
         ScoreRequest request = client.buildRequest(
                 new ScoreFieldSet()
                         .setUserId("billy_jones_301")
-                        .setAbuseTypes(abuseTypes));
+                        .setAbuseTypes(abuseTypes)
+                        .setReturnScorePercentiles(true));
         ScoreResponse siftResponse = request.send();
 
 
@@ -276,13 +283,15 @@ public class ScoresTest {
         RecordedRequest request1 = server.takeRequest();
         Assert.assertEquals("GET", request1.getMethod());
         Assert.assertEquals("/v205/score/billy_jones_301?api_key=YOUR_API_KEY&" +
-                "abuse_types=payment_abuse,promotion_abuse", request1.getPath());
+                "abuse_types=payment_abuse,promotion_abuse&fields=score_percentiles", request1.getPath());
 
         // Verify the response.
         Assert.assertEquals(HTTP_OK, siftResponse.getHttpStatusCode());
         Assert.assertEquals(0, (int) siftResponse.getBody().getStatus());
         JSONAssert.assertEquals(response.getBody().readUtf8(),
                 siftResponse.getBody().toJson(), false);
+        Assert.assertEquals(expectedPercentiles(),
+            siftResponse.getScoreResponse("payment_abuse").getPercentiles());
 
         server.shutdown();
 
