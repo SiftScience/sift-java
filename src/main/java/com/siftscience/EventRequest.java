@@ -2,9 +2,7 @@ package com.siftscience;
 
 import java.io.IOException;
 import java.util.Arrays;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 import okhttp3.HttpUrl;
 import okhttp3.OkHttpClient;

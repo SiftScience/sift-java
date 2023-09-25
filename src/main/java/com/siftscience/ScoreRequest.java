@@ -1,14 +1,12 @@
 package com.siftscience;
 
+import java.io.IOException;
+
 import com.siftscience.model.ScoreFieldSet;
 import okhttp3.HttpUrl;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
-
-import java.io.IOException;
-import java.util.HashSet;
-import java.util.Set;
 
 /**
  * ScoreRequest is the request type of Sift Score API requests.
