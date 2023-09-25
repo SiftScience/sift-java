@@ -47,12 +47,8 @@ public class ScoreRequest extends SiftRequest<ScoreResponse> {
             builder.addQueryParameter("abuse_types",
                 StringUtils.joinWithComma(scoreFieldSet.getAbuseTypes()));
         }
-        Set<String> fields = new HashSet<>();
         if (scoreFieldSet.isReturnScorePercentiles()) {
-            fields.add("score_percentiles");
-        }
-        if (fields.size() > 0) {
-            builder.addQueryParameter("fields", StringUtils.joinWithComma(fields));
+            builder.addQueryParameter("fields", "score_percentiles");
         }
         return builder.build();
     }

@@ -49,12 +49,8 @@ public class EventRequest extends SiftRequest<EventResponse> {
         if (forceWorkflowRun) {
             builder.addQueryParameter("force_workflow_run", "true");
         }
-        Set<String> fields = new HashSet<>();
         if (returnScorePercentiles) {
-            fields.add("score_percentiles");
-        }
-        if (fields.size() > 0) {
-            builder.addQueryParameter("fields", StringUtils.joinWithComma(fields));
+            builder.addQueryParameter("fields", "score_percentiles");
         }
 
         // returnScore and abuseTypes are encoded into the URL as query params rather than JSON.
