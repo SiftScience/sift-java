@@ -1,3 +1,7 @@
+3.13.0 (2023-09-19)
+=================
+- Add support for score percentiles in score API
+
 3.12.0 (2023-09-01)
 =================
 - Add support for Verification API

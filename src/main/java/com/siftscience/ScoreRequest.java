@@ -1,12 +1,12 @@
 package com.siftscience;
 
+import java.io.IOException;
+
 import com.siftscience.model.ScoreFieldSet;
 import okhttp3.HttpUrl;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
-
-import java.io.IOException;
 
 /**
  * ScoreRequest is the request type of Sift Score API requests.
@@ -44,6 +44,9 @@ public class ScoreRequest extends SiftRequest<ScoreResponse> {
         if (scoreFieldSet.getAbuseTypes() != null && scoreFieldSet.getAbuseTypes().size() > 0) {
             builder.addQueryParameter("abuse_types",
                 StringUtils.joinWithComma(scoreFieldSet.getAbuseTypes()));
+        }
+        if (scoreFieldSet.isReturnScorePercentiles()) {
+            builder.addQueryParameter("fields", "score_percentiles");
         }
         return builder.build();
     }

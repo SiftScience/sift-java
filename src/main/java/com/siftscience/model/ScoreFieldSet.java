@@ -10,6 +10,8 @@ public class ScoreFieldSet extends FieldSet<ScoreFieldSet> {
     @Expose @SerializedName(USER_ID) private String userId;
     private List<String> abuseTypes;
 
+    private boolean returnScorePercentiles = false;
+
     public String getUserId() {
         return userId;
     }
@@ -28,4 +30,12 @@ public class ScoreFieldSet extends FieldSet<ScoreFieldSet> {
         return this;
     }
 
+    public boolean isReturnScorePercentiles() {
+        return returnScorePercentiles;
+    }
+
+    public ScoreFieldSet setReturnScorePercentiles(boolean returnScorePercentiles) {
+        this.returnScorePercentiles = returnScorePercentiles;
+        return this;
+    }
 }

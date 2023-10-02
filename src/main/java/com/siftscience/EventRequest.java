@@ -2,9 +2,7 @@ package com.siftscience;
 
 import java.io.IOException;
 import java.util.Arrays;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 import okhttp3.HttpUrl;
 import okhttp3.OkHttpClient;
@@ -49,12 +47,8 @@ public class EventRequest extends SiftRequest<EventResponse> {
         if (forceWorkflowRun) {
             builder.addQueryParameter("force_workflow_run", "true");
         }
-        Set<String> fields = new HashSet<>();
         if (returnScorePercentiles) {
-            fields.add("score_percentiles");
-        }
-        if (fields.size() > 0) {
-            builder.addQueryParameter("fields", StringUtils.joinWithComma(fields));
+            builder.addQueryParameter("fields", "score_percentiles");
         }
 
         // returnScore and abuseTypes are encoded into the URL as query params rather than JSON.
