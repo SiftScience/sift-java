@@ -27,6 +27,8 @@ pipeline {
     }
     environment {
         GIT_BRANCH = "${env.CHANGE_BRANCH != null? env.CHANGE_BRANCH : env.BRANCH_NAME}"
+        TERM = 'dumb'
+        GRADLE_OPTS = '-Dorg.gradle.project.sonatypeUsername=username -Dorg.gradle.project.sonatypePassword=password'
     }
     stages {
         stage('Initialize') {
