@@ -48,26 +48,32 @@ pipeline {
                     def workflows = [:]
                     def stage1 = 'Java Integration'
                     workflows[stage1] = {
-                        ciUtil.updateGithubCommitStatus(repoName, stage1, 'Started', 'pending', commitSha)
-                        try {
-                            siftJavaWorkflow.runJavaIntegration(podTemplateFile, podLabel)
-                            ciUtil.updateGithubCommitStatus(repoName, stage1, 'SUCCESS', 'success', commitSha)
-                        } catch (Exception e) {
-                            ciUtil.updateGithubCommitStatus(repoName, stage1, 'FAILURE', 'failure', commitSha)
-                            print("${stage1} failed")
-                            throw e
+                        stage[stage1] = {
+                            ciUtil.updateGithubCommitStatus(repoName, stage1, 'Started', 'pending', commitSha)
+                            try {
+                                siftJavaWorkflow.runJavaIntegration(podTemplateFile, podLabel)
+                                ciUtil.updateGithubCommitStatus(repoName, stage1, 'SUCCESS', 'success', commitSha)
+                            } catch (Exception e) {
+                                ciUtil.updateGithubCommitStatus(repoName, stage1, 'FAILURE', 'failure', commitSha)
+                                print("${stage1} failed")
+                                throw e
+                            }
                         }
                     }
                     def stage2 = 'Build'
                     workflows[stage2] = {
-                        ciUtil.updateGithubCommitStatus(repoName, stage2, 'Started', 'pending', commitSha)
-                        try {
-                            siftJavaWorkflow.runBuild(podTemplateFile, podLabel)
-                            ciUtil.updateGithubCommitStatus(repoName, stage2, 'SUCCESS', 'success', commitSha)
-                        } catch (Exception e) {
-                            ciUtil.updateGithubCommitStatus(repoName, stage2, 'FAILURE', 'failure', commitSha)
-                            print("${stage2} failed")
-                            throw e
+                        stage[stage2] = {
+                            if (env.GIT_BRANCH == "master") {
+                                ciUtil.updateGithubCommitStatus(repoName, stage2, 'Started', 'pending', commitSha)
+                                try {
+                                    siftJavaWorkflow.runBuild(podTemplateFile, podLabel)
+                                    ciUtil.updateGithubCommitStatus(repoName, stage2, 'SUCCESS', 'success', commitSha)
+                                } catch (Exception e) {
+                                    ciUtil.updateGithubCommitStatus(repoName, stage2, 'FAILURE', 'failure', commitSha)
+                                    print("${stage2} failed")
+                                    throw e
+                                }
+                            }
                         }
                     }
                     parallel workflows
