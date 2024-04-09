@@ -48,7 +48,7 @@ pipeline {
                     def workflows = [:]
                     def stage1 = 'Java Integration'
                     workflows[stage1] = {
-                        stage[stage1] = {
+                        stage[stage1] {
                             ciUtil.updateGithubCommitStatus(repoName, stage1, 'Started', 'pending', commitSha)
                             try {
                                 siftJavaWorkflow.runJavaIntegration(podTemplateFile, podLabel)
@@ -62,7 +62,7 @@ pipeline {
                     }
                     def stage2 = 'Build'
                     workflows[stage2] = {
-                        stage[stage2] = {
+                        stage[stage2] {
                             if (env.GIT_BRANCH == "master") {
                                 ciUtil.updateGithubCommitStatus(repoName, stage2, 'Started', 'pending', commitSha)
                                 try {
