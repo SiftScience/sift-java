@@ -112,5 +112,4 @@ workflows:
             branches:
               only:
                 - master
-                - jenkins-ci
           context: *context
