@@ -90,7 +90,7 @@ pipeline {
         unsuccessful {
             script {
                 ciUtil.updateGithubCommitStatus(repoName, statusContext, currentBuild.currentResult, 'failure', commitSha)
-                ciUtil.notifySlack(repoName, commitSha)
+                // ciUtil.notifySlack(repoName, commitSha)
             }
         }
         always {
