@@ -27,6 +27,7 @@ pipeline {
     }
     environment {
         GIT_BRANCH = "${env.CHANGE_BRANCH != null? env.CHANGE_BRANCH : env.BRANCH_NAME}"
+        CACHE_VERSION = 'v1'
         TERM = 'dumb'
         GRADLE_OPTS = '-Dorg.gradle.project.sonatypeUsername=username -Dorg.gradle.project.sonatypePassword=password'
     }
