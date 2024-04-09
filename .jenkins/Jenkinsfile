@@ -15,7 +15,7 @@ def podTemplateFile = 'jdk8-pod-template.yaml'
 def podLabel = "openjdk-8-0-${BUILD_TAG}"
 
 // GitHub repo name
-def repoName = 'data-platform'
+def repoName = 'sift-java'
 
 pipeline {
     agent none
@@ -23,6 +23,7 @@ pipeline {
         timestamps()
         skipDefaultCheckout()
         disableConcurrentBuilds()
+        parallelsAlwaysFailFast()
         buildDiscarder logRotator(artifactDaysToKeepStr: '', artifactNumToKeepStr: '', daysToKeepStr: '30', numToKeepStr: '')
     }
     environment {
@@ -90,7 +91,7 @@ pipeline {
         unsuccessful {
             script {
                 ciUtil.updateGithubCommitStatus(repoName, statusContext, currentBuild.currentResult, 'failure', commitSha)
-                // ciUtil.notifySlack(repoName, commitSha)
+                ciUtil.notifySlack(repoName, commitSha)
             }
         }
         always {
