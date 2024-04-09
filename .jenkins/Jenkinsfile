@@ -64,9 +64,7 @@ pipeline {
                     def stage2 = 'Build'
                     workflows[stage2] = {
                         stage(stage2) {
-                            echo "HERE"
-                            echo "${env.GIT_BRANCH}"
-                            if (env.GIT_BRANCH == "master") {
+                            if (env.GIT_BRANCH.equals('master')) {
                                 ciUtil.updateGithubCommitStatus(repoName, stage2, 'Started', 'pending', commitSha)
                                 try {
                                     siftJavaWorkflow.runBuild(podTemplateFile, podLabel)
