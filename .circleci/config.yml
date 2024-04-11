@@ -83,9 +83,9 @@ jobs:
           name: Build and packaged sift-java
           command: ./gradlew distZip
 
-      - add_ssh_keys:
-          fingerprints:
-            - "4c:c7:1d:f2:95:87:3c:f6:61:4e:46:5a:c8:2a:d7:c9"
+      # - add_ssh_keys:
+      #     fingerprints:
+      #       - "4c:c7:1d:f2:95:87:3c:f6:61:4e:46:5a:c8:2a:d7:c9"
 
       - run:
           name: Clone sift-java-integration-app and extract sift-java
