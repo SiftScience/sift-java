@@ -53,7 +53,7 @@ pipeline {
                             if (env.GIT_BRANCH.equals('master')) {
                                 ciUtil.updateGithubCommitStatus(repoName, stage1, 'Started', 'pending', commitSha)
                                 try {
-                                    siftJavaWorkflow.runJavaIntegration(podTemplateFile, podLabel)
+                                    siftJavaWorkflow.runSiftJavaIntegration(podTemplateFile, podLabel)
                                     ciUtil.updateGithubCommitStatus(repoName, stage1, 'SUCCESS', 'success', commitSha)
                                 } catch (Exception e) {
                                     ciUtil.updateGithubCommitStatus(repoName, stage1, 'FAILURE', 'failure', commitSha)
@@ -68,7 +68,7 @@ pipeline {
                         stage(stage2) {
                             ciUtil.updateGithubCommitStatus(repoName, stage2, 'Started', 'pending', commitSha)
                             try {
-                                siftJavaWorkflow.runBuild(podTemplateFile, podLabel)
+                                siftJavaWorkflow.runSiftJavaBuild(podTemplateFile, podLabel)
                                 ciUtil.updateGithubCommitStatus(repoName, stage2, 'SUCCESS', 'success', commitSha)
                             } catch (Exception e) {
                                 ciUtil.updateGithubCommitStatus(repoName, stage2, 'FAILURE', 'failure', commitSha)
