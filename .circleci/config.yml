@@ -1,0 +1,115 @@
+version: 2.1
+
+orbs:
+  slack: circleci/slack@4.1
+
+slack/notify: &slack_notify
+  branch_pattern: master
+  event: fail
+  channel: ci-build-status
+  template: SLACK_TAG_CI_FAILURE_TEMPLATE
+
+commands:
+  export_slack_id:
+    steps:
+      - run:
+          name  : Exporting circleci username as slack id.
+          command: echo 'export SLACK_PARAM_MENTIONS="$CIRCLE_USERNAME"' >> "$BASH_ENV"
+      - run:
+          name : CircleCi To Slack user mapping.
+          command: |
+            echo $GITHUB_SLACK_USERMAPPING | base64 --decode > github_slack
+            while read -r line || [[ -n $line ]];
+            do
+              [[ ${line//[[:space:]]/} =~ ^#.* || -z "$line" ]] && continue
+              echo "$line" | tr "=" "\n" | while read -r key; do
+              read -r value
+              if [ "$CIRCLE_USERNAME" = "${key}" ]; then
+                echo "export SLACK_PARAM_MENTIONS='<@${value}>'" >> $BASH_ENV
+              fi
+              done
+            done < github_slack
+            rm github_slack
+
+context: &context
+  - slack-templates
+  - slack_Oauth
+  - Github_Slack_UserMapping
+
+jobs:
+  build:
+    docker:
+      - image: circleci/openjdk:8
+
+    working_directory: ~/repo
+
+    environment:
+      TERM: dumb
+      GRADLE_OPTS: -Dorg.gradle.project.sonatypeUsername=username -Dorg.gradle.project.sonatypePassword=password
+
+    steps:
+      - checkout
+      - export_slack_id
+      - restore_cache:
+          keys:
+            - v1-dependencies-{{ checksum "build.gradle" }}
+            - v1-dependencies-
+
+      - run: ./gradlew dependencies
+
+      - save_cache:
+          paths:
+            - ~/.gradle
+          key: v1-dependencies-{{ checksum "build.gradle" }}
+
+      - run: ./gradlew test
+
+      - slack/notify:
+          <<: *slack_notify
+
+  java_integration:
+    docker:
+      - image: circleci/openjdk:8-jdk
+    working_directory: ~/repo
+
+    environment:
+      TERM: dumb
+      GRADLE_OPTS: -Dorg.gradle.project.sonatypeUsername=username -Dorg.gradle.project.sonatypePassword=password
+
+    steps:
+      - checkout
+      - export_slack_id
+      - run:
+          name: Build and packaged sift-java
+          command: ./gradlew distZip
+
+      - add_ssh_keys:
+          fingerprints:
+            - "4c:c7:1d:f2:95:87:3c:f6:61:4e:46:5a:c8:2a:d7:c9"
+
+      - run:
+          name: Clone sift-java-integration-app and extract sift-java
+          command: |
+            export GIT_SSH_COMMAND='ssh -i ~/.ssh/id_rsa_4cc71df295873cf6614e465ac82ad7c9'
+            version=$(./gradlew properties -q | grep -E "^version:" | awk '{print $2}')
+            git clone git@github.com:SiftScience/sift-java-integration-app.git
+            cd sift-java-integration-app
+            unzip -j ../build/distributions/sift-java-${version}.zip -d app/libs/
+
+      - run:
+          name: Running tests in sift-java-integration-app
+          command: |
+            cd sift-java-integration-app
+            ./gradlew test
+
+workflows:
+  sift-java:
+    jobs:
+      - build:
+          context: *context
+      - java_integration:
+          filters:
+            branches:
+              only:
+                - master
+          context: *context
