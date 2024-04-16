@@ -1,5 +1,5 @@
 // Load Jenkins shared library
-jenkinsBranch = 'sift-java'
+jenkinsBranch = 'master'
 sharedLib = library("shared-lib@${jenkinsBranch}")
 
 def siftJavaWorkflow  = sharedLib.com.sift.ci.SiftJavaWorkflow.new()
