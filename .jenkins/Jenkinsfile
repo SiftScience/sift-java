@@ -6,7 +6,7 @@ def siftJavaWorkflow  = sharedLib.com.sift.ci.SiftJavaWorkflow.new()
 def ciUtil = sharedLib.com.sift.ci.CIUtil.new()
 def stackdriver = sharedLib.com.sift.ci.StackDriverMetrics.new()
 
-// Default GitHub status context for automatically triggered build
+// Default GitHub status context for automatically triggered builds
 def defaultStatusContext = 'Jenkins:auto'
 
 // Pod template file for Jenkins agent pod
