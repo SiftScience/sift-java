@@ -12,7 +12,7 @@ def defaultStatusContext = 'Jenkins:auto'
 // Pod template file for Jenkins agent pod
 // Pod template yaml file is defined in https://github.com/SiftScience/jenkins/tree/master/resources/jenkins-k8s-pod-templates
 def podTemplateFile = 'jdk8-pod-template.yaml'
-def podLabel = "jdk8-0-${BUILD_TAG}"
+def podLabel = "jdk8-${BUILD_TAG}"
 
 // GitHub repo name
 def repoName = 'sift-java'
