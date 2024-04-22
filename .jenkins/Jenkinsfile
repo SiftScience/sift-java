@@ -1,5 +1,5 @@
 // Load Jenkins shared library
-jenkinsBranch = 'master'
+jenkinsBranch = 'v0.1.0'
 sharedLib = library("shared-lib@${jenkinsBranch}")
 
 def siftJavaWorkflow  = sharedLib.com.sift.ci.SiftJavaWorkflow.new()
@@ -23,8 +23,10 @@ pipeline {
         timestamps()
         skipDefaultCheckout()
         disableConcurrentBuilds()
+        disableRestartFromStage()
         parallelsAlwaysFailFast()
         buildDiscarder logRotator(artifactDaysToKeepStr: '', artifactNumToKeepStr: '', daysToKeepStr: '30', numToKeepStr: '')
+        timeout(time: 1, unit: 'HOURS')
     }
     environment {
         GIT_BRANCH = "${env.CHANGE_BRANCH != null? env.CHANGE_BRANCH : env.BRANCH_NAME}"
