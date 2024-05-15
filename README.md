@@ -19,7 +19,7 @@ Java 1.7 or later.
 ### Gradle
 ```
 dependencies {
-    compile 'com.siftscience:sift-java:3.13.1'
+    compile 'com.siftscience:sift-java:3.14.0'
 }
 ```
 ### Other
