@@ -1,6 +1,7 @@
 package com.siftscience;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -10,7 +11,7 @@ import okhttp3.Response;
 
 /**
  * EventRequest is the request type for the Sift Events API.
- * https://siftscience.com/developers/docs/curl/events-api
+ * <a href="https://siftscience.com/developers/docs/curl/events-api">Events API</a>
  */
 public class EventRequest extends SiftRequest<EventResponse> {
     // The abuse types to return synchronous scores for.
@@ -19,6 +20,7 @@ public class EventRequest extends SiftRequest<EventResponse> {
     private boolean forceWorkflowRun = false;
     private boolean isReturnRouteInfo = false;
     private boolean returnScorePercentiles = false;
+    private boolean returnWarnings = false;
 
     EventRequest(HttpUrl baseUrl, String accountId, OkHttpClient okClient, FieldSet fields) {
         super(baseUrl, accountId, okClient, fields);
@@ -47,12 +49,20 @@ public class EventRequest extends SiftRequest<EventResponse> {
         if (forceWorkflowRun) {
             builder.addQueryParameter("force_workflow_run", "true");
         }
+
+        List<String> fields = new ArrayList<>();
         if (returnScorePercentiles) {
-            builder.addQueryParameter("fields", "score_percentiles");
+            fields.add("score_percentiles");
+        }
+        if (returnWarnings) {
+            fields.add("warnings");
+        }
+        if (!fields.isEmpty()) {
+            builder.addQueryParameter("fields", StringUtils.joinWithComma(fields));
         }
 
         // returnScore and abuseTypes are encoded into the URL as query params rather than JSON.
-        if (abuseTypes != null && abuseTypes.size() > 0) {
+        if (abuseTypes != null && !abuseTypes.isEmpty()) {
             builder.addQueryParameter("abuse_types", StringUtils.joinWithComma(abuseTypes));
         }
         return builder.build();
@@ -80,6 +90,11 @@ public class EventRequest extends SiftRequest<EventResponse> {
 
     public EventRequest withScorePercentiles() {
         this.returnScorePercentiles = true;
+        return this;
+    }
+
+    public EventRequest withWarnings() {
+        this.returnWarnings = true;
         return this;
     }
 }

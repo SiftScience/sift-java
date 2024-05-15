@@ -1,3 +1,7 @@
+3.14.0 (2024-05-15)
+=================
+- Added support for warnings in Events API
+
 3.13.1 (2024-03-28)
 =================
 - Upgrade OkHttp to [4.12.0](https://square.github.io/okhttp/changelogs/changelog_4x/#version-4120) and Okio to [3.6.0](https://square.github.io/okhttp/changelogs/changelog_4x/#version-4120 ) to fix transitive vulnerability [CVE-2023-3635](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-3635)

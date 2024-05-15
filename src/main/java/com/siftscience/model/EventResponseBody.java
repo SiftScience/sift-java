@@ -8,9 +8,18 @@ public class EventResponseBody extends BaseResponseBody<EventResponseBody> {
         return gson.fromJson(json, EventResponseBody.class);
     }
 
-    @Expose @SerializedName("request") private String request;
-    @Expose @SerializedName("time") private Integer time;
-    @Expose @SerializedName("score_response") private ScoreResponse scoreResponse;
+    @Expose
+    @SerializedName("request")
+    private String request;
+    @Expose
+    @SerializedName("time")
+    private Integer time;
+    @Expose
+    @SerializedName("score_response")
+    private ScoreResponse scoreResponse;
+    @Expose
+    @SerializedName("warnings")
+    private Warnings warnings;
 
     public String getRequest() {
         return request;
@@ -36,6 +45,15 @@ public class EventResponseBody extends BaseResponseBody<EventResponseBody> {
 
     public EventResponseBody setScoreResponse(ScoreResponse scoreResponse) {
         this.scoreResponse = scoreResponse;
+        return this;
+    }
+
+    public Warnings getWarnings() {
+        return warnings;
+    }
+
+    public EventResponseBody setWarnings(Warnings warnings) {
+        this.warnings = warnings;
         return this;
     }
 }
