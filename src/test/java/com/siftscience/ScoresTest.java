@@ -37,6 +37,14 @@ public class ScoresTest {
                 "    \"status\" : 0,\n" +
                 "    \"error_message\" : \"OK\",\n" +
                 "    \"time\" : 1327604222,\n" +
+                "    \"warnings\": {\n" +
+                "       \"count\": 1,\n" +
+                "       \"items\": [\n" +
+                "           {\n" +
+                "               \"message\": \"Missing currency\"\n" +
+                "           }\n" +
+                "       ]\n" +
+                "    },\n" +
                 "    \"request\" : \"" + TestUtils.unescapeJson(expectedRequestBody) + "\",\n" +
                 "    \"score_response\": {\n" +
                 "      \"status\": 0, \n" +
@@ -93,14 +101,15 @@ public class ScoresTest {
         EventRequest request = client.buildRequest(
                 new CreateOrderFieldSet().setUserId("billy_jones_301"))
             .withScores("payment_abuse", "promotion_abuse")
-            .withScorePercentiles();
+            .withScorePercentiles()
+            .withWarnings();
         EventResponse siftResponse = request.send();
 
         // Verify the request.
         RecordedRequest request1 = server.takeRequest();
         Assert.assertEquals("POST", request1.getMethod());
         Assert.assertEquals("/v205/events?return_score=true" +
-            "&fields=score_percentiles" +
+            "&fields=score_percentiles,warnings" +
             "&abuse_types=payment_abuse,promotion_abuse", request1.getPath());
         JSONAssert.assertEquals(expectedRequestBody, request.getFieldSet().toJson(), true);
 
@@ -113,7 +122,9 @@ public class ScoresTest {
             siftResponse.getAbuseScore("payment_abuse").getScore());
         Assert.assertEquals(expectedPercentiles(),
             siftResponse.getAbuseScore("payment_abuse").getPercentiles());
-
+        Assert.assertEquals(1, (int) siftResponse.getBody().getWarnings().getCount());
+        Assert.assertEquals("Missing currency",
+            siftResponse.getBody().getWarnings().getWarningItems().get(0).getMessage());
         server.shutdown();
     }
 

@@ -5,7 +5,7 @@ import java.util.List;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class WarningsResponse {
+public class Warnings {
     @Expose
     @SerializedName("count")
     private Integer count;
@@ -17,7 +17,7 @@ public class WarningsResponse {
         return count;
     }
 
-    public WarningsResponse setCount(Integer count) {
+    public Warnings setCount(Integer count) {
         this.count = count;
         return this;
     }
@@ -26,7 +26,7 @@ public class WarningsResponse {
         return warningItems;
     }
 
-    public WarningsResponse setWarningItems(List<WarningItem> warningItems) {
+    public Warnings setWarningItems(List<WarningItem> warningItems) {
         this.warningItems = warningItems;
         return this;
     }

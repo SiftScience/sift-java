@@ -19,7 +19,7 @@ public class EventResponseBody extends BaseResponseBody<EventResponseBody> {
     private ScoreResponse scoreResponse;
     @Expose
     @SerializedName("warnings")
-    private WarningsResponse warningsResponse;
+    private Warnings warnings;
 
     public String getRequest() {
         return request;
@@ -48,12 +48,12 @@ public class EventResponseBody extends BaseResponseBody<EventResponseBody> {
         return this;
     }
 
-    public WarningsResponse getWarningsResponse() {
-        return warningsResponse;
+    public Warnings getWarnings() {
+        return warnings;
     }
 
-    public EventResponseBody setWarningsResponse(WarningsResponse warningsResponse) {
-        this.warningsResponse = warningsResponse;
+    public EventResponseBody setWarnings(Warnings warnings) {
+        this.warnings = warnings;
         return this;
     }
 }
