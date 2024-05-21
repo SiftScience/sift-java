@@ -1,6 +1,7 @@
 package com.siftscience;
 
 import com.siftscience.exception.MerchantAPIException;
+import com.siftscience.utils.OkHttpUtils;
 import okhttp3.HttpUrl;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
@@ -45,13 +46,14 @@ public abstract class SiftMerchantRequest<T extends SiftMerchantResponse> {
     public T send() throws IOException {
         fieldSet.validate();
 
-        Request.Builder okRequestBuilder = new Request.Builder().addHeader("User-Agent", USER_AGENT_HEADER).url(this.url());
+        Request.Builder okRequestBuilder =
+            new Request.Builder().addHeader("User-Agent", USER_AGENT_HEADER).url(this.url());
         modifyRequestBuilder(okRequestBuilder);
         Request request = okRequestBuilder.build();
-        T response = buildResponse(okClient.newCall(request).execute(), fieldSet);
+        T response = buildResponse(OkHttpUtils.execute(request, okClient), fieldSet);
 
         if (!response.isOk()) {
-                throw new MerchantAPIException(response.getApiErrorMessage());
+            throw new MerchantAPIException(response.getApiErrorMessage());
         }
 
         return response;

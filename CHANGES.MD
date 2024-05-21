@@ -1,3 +1,7 @@
+3.14.2 (2024-05-20)
+=================
+- Fixed bug with okHttp causing SocketTimeoutException
+
 3.14.1 (2024-05-16)
 =================
 - Added support for warnings in Events API

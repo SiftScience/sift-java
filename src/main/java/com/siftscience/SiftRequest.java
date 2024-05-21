@@ -1,6 +1,7 @@
 package com.siftscience;
 
 import com.siftscience.exception.*;
+import com.siftscience.utils.OkHttpUtils;
 import okhttp3.*;
 
 import java.io.IOException;
@@ -46,7 +47,7 @@ public abstract class SiftRequest<T extends SiftResponse> {
         Request.Builder okRequestBuilder = new Request.Builder().addHeader("User-Agent", USER_AGENT_HEADER).url(this.url());
         modifyRequestBuilder(okRequestBuilder);
         Request request = okRequestBuilder.build();
-        T response = buildResponse(okClient.newCall(request).execute(), fieldSet);
+        T response = buildResponse(OkHttpUtils.execute(request, okClient), fieldSet);
 
         // If not successful but no exception happened yet, dig deeper into the response so we
         // can manually throw an appropriate exception.
