@@ -1,11 +1,10 @@
 package com.siftscience.utils;
 
 import java.io.IOException;
-import java.util.concurrent.CountDownLatch;
-import java.util.concurrent.TimeUnit;
-import java.util.concurrent.atomic.AtomicReference;
+import java.io.InterruptedIOException;
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.ExecutionException;
 
-import com.siftscience.exception.SiftException;
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.OkHttpClient;
@@ -14,8 +13,9 @@ import okhttp3.Response;
 import org.jetbrains.annotations.NotNull;
 
 public class OkHttpUtils {
+    private OkHttpUtils() {
 
-    private static final int DEFAULT_TIMEOUT_SEC = 30;
+    }
 
     /**
      * There is a <a href="https://github.com/square/okhttp/issues/7841">bug</a> on okHttp library,
@@ -29,29 +29,27 @@ public class OkHttpUtils {
      * @param okClient - client library
      * @return - response
      */
-    public static Response execute(Request request, OkHttpClient okClient) {
-        CountDownLatch countDownLatch = new CountDownLatch(1);
-        AtomicReference<Response> response = new AtomicReference<>();
+    public static Response execute(Request request, OkHttpClient okClient) throws IOException {
+        CompletableFuture<Response> result = new CompletableFuture<>();
         okClient.newCall(request).enqueue(new Callback() {
             @Override
             public void onFailure(@NotNull Call call, @NotNull IOException e) {
-                throw new SiftException(e.getMessage());
+                result.completeExceptionally(e);
             }
 
             @Override
             public void onResponse(@NotNull Call call, @NotNull Response httpResponse) {
-                response.set(httpResponse);
-                countDownLatch.countDown();
+                result.complete(httpResponse);
             }
         });
         try {
-            if (countDownLatch.await(DEFAULT_TIMEOUT_SEC, TimeUnit.SECONDS)) {
-                return response.get();
-            }
+            return result.get();
         } catch (InterruptedException e) {
             Thread.currentThread().interrupt();
-            throw new SiftException("Interrupted while waiting for reply from Sift");
+            result.cancel(true);
+            throw new InterruptedIOException("Interrupted while waiting for reply from Sift");
+        } catch (ExecutionException e) {
+            throw new IOException(e);
         }
-        throw new SiftException("Timeout while waiting for reply from Sift");
     }
 }
