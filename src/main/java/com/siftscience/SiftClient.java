@@ -72,6 +72,11 @@ public class SiftClient {
         this.baseUrl = baseUrl;
     }
 
+    public SiftClient(String apiKey, String accountId, HttpUrl baseUrl, OkHttpClient okHttpClient) {
+        this(apiKey, accountId, okHttpClient);
+        this.baseUrl = baseUrl;
+    }
+
     public String getApiKey() {
         return apiKey;
     }
