@@ -22,8 +22,8 @@ public class EventRequest extends SiftRequest<EventResponse> {
     private boolean returnScorePercentiles = false;
     private boolean returnWarnings = false;
 
-    EventRequest(HttpUrl baseUrl, String accountId, OkHttpClient okClient, FieldSet fields) {
-        super(baseUrl, accountId, okClient, fields);
+    EventRequest(HttpUrl baseUrl, String accountId, HttpClient client, FieldSet fields) {
+        super(baseUrl, accountId, client, fields);
         abuseTypes = null;
     }
 

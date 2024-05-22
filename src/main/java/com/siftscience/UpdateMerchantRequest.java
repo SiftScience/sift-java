@@ -16,8 +16,8 @@ public class UpdateMerchantRequest extends SiftMerchantRequest<UpdateMerchantRes
 
     private final String merchantId;
 
-    UpdateMerchantRequest(HttpUrl baseUrl, String accountId, OkHttpClient okClient, FieldSet fields, String merchantId) {
-        super(baseUrl, accountId, okClient, fields);
+    UpdateMerchantRequest(HttpUrl baseUrl, String accountId, HttpClient httpClient, FieldSet fields, String merchantId) {
+        super(baseUrl, accountId, httpClient, fields);
         this.merchantId = merchantId;
     }
 

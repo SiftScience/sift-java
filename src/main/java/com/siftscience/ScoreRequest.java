@@ -4,7 +4,6 @@ import java.io.IOException;
 
 import com.siftscience.model.ScoreFieldSet;
 import okhttp3.HttpUrl;
-import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
 
@@ -13,8 +12,8 @@ import okhttp3.Response;
  * https://siftscience.com/developers/docs/curl/score-api
  */
 public class ScoreRequest extends SiftRequest<ScoreResponse> {
-    ScoreRequest(HttpUrl baseUrl, String accountId, OkHttpClient okClient, ScoreFieldSet fields) {
-        super(baseUrl, accountId, okClient, fields);
+    ScoreRequest(HttpUrl baseUrl, String accountId, HttpClient httpClient, ScoreFieldSet fields) {
+        super(baseUrl, accountId, httpClient, fields);
     }
 
     /**

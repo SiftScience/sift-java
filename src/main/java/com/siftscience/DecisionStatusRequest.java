@@ -1,16 +1,18 @@
 package com.siftscience;
 
-import com.siftscience.model.DecisionStatusFieldSet;
-import okhttp3.*;
-
 import java.io.IOException;
 
 import static com.siftscience.model.DecisionStatusFieldSet.ENTITY_CONTENT;
 import static com.siftscience.model.DecisionStatusFieldSet.ENTITY_SESSIONS;
+import com.siftscience.model.DecisionStatusFieldSet;
+import okhttp3.Credentials;
+import okhttp3.HttpUrl;
+import okhttp3.Request;
+import okhttp3.Response;
 
 public class DecisionStatusRequest extends SiftRequest<DecisionStatusResponse> {
-    DecisionStatusRequest(HttpUrl baseUrl, String accountId, OkHttpClient okClient, DecisionStatusFieldSet fields) {
-        super(baseUrl, accountId, okClient, fields);
+    DecisionStatusRequest(HttpUrl baseUrl, String accountId, HttpClient httpClient, DecisionStatusFieldSet fields) {
+        super(baseUrl, accountId, httpClient, fields);
     }
 
     @Override

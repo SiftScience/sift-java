@@ -17,7 +17,7 @@ import static com.siftscience.Constants.USER_AGENT_HEADER;
 public abstract class SiftMerchantRequest<T extends SiftMerchantResponse> {
     private final String accountId;
     FieldSet fieldSet;
-    private OkHttpClient okClient;
+    private HttpClient httpClient;
     private HttpUrl baseUrl;
 
     protected abstract HttpUrl path(HttpUrl baseUrl);
@@ -26,10 +26,10 @@ public abstract class SiftMerchantRequest<T extends SiftMerchantResponse> {
         return path(baseUrl);
     }
 
-    SiftMerchantRequest(HttpUrl baseUrl, String accountId, OkHttpClient okClient, FieldSet fields) {
+    SiftMerchantRequest(HttpUrl baseUrl, String accountId, HttpClient httpClient, FieldSet fields) {
         this.baseUrl = baseUrl;
         this.accountId = accountId;
-        this.okClient = okClient;
+        this.httpClient = httpClient;
         this.fieldSet = fields;
     }
 
@@ -50,7 +50,7 @@ public abstract class SiftMerchantRequest<T extends SiftMerchantResponse> {
             new Request.Builder().addHeader("User-Agent", USER_AGENT_HEADER).url(this.url());
         modifyRequestBuilder(okRequestBuilder);
         Request request = okRequestBuilder.build();
-        T response = buildResponse(OkHttpUtils.execute(request, okClient), fieldSet);
+        T response = buildResponse(httpClient.execute(request), fieldSet);
 
         if (!response.isOk()) {
             throw new MerchantAPIException(response.getApiErrorMessage());

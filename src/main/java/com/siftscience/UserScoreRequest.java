@@ -1,13 +1,12 @@
 package com.siftscience;
 
+import java.io.IOException;
+
 import com.siftscience.model.UserScoreFieldSet;
 import okhttp3.HttpUrl;
-import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
-
-import java.io.IOException;
 
 /**
  * UserScoreRequest is the request type of Sift User Score API requests.
@@ -19,9 +18,9 @@ import java.io.IOException;
  *    See details here: https://siftscience.com/developers/docs/java/score-api/rescore
  */
 public class UserScoreRequest extends SiftRequest<EntityScoreResponse> {
-    UserScoreRequest(HttpUrl baseUrl, String accountId, OkHttpClient okClient,
+    UserScoreRequest(HttpUrl baseUrl, String accountId, HttpClient httpClient,
                      UserScoreFieldSet fields) {
-        super(baseUrl, accountId, okClient, fields);
+        super(baseUrl, accountId, httpClient, fields);
     }
 
     /**
