@@ -22,7 +22,8 @@ public class OkHttpUtils {
      * which causes java.net.SocketTimeoutException from HTTP/2 connection to leave dead okhttp
      * clients in pool.
      * This utility method is used as a
-     * <a href="https://github.com/square/okhttp/issues/3146#issuecomment-1469679373">workaround</a>
+     * <a href="https://github.com/androidx/media/commit/80928e730c53729d147264a910fb327ba88be257">
+     * workaround</a>
      * to enqueue and sync wait for response
      *
      * @param request  - request to send
@@ -45,7 +46,9 @@ public class OkHttpUtils {
         try {
             return result.get();
         } catch (InterruptedException e) {
-            Thread.currentThread().interrupt();
+            // Intentionally don't interrupt, as it causes okHHtp fail as described
+            // in the link in javadoc
+            // Thread.currentThread().interrupt();
             result.cancel(true);
             throw new InterruptedIOException("Interrupted while waiting for reply from Sift");
         } catch (ExecutionException e) {
