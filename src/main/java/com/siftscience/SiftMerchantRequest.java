@@ -1,6 +1,7 @@
 package com.siftscience;
 
 import com.siftscience.exception.MerchantAPIException;
+import com.siftscience.utils.OkHttpUtils;
 import okhttp3.HttpUrl;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
@@ -16,7 +17,7 @@ import static com.siftscience.Constants.USER_AGENT_HEADER;
 public abstract class SiftMerchantRequest<T extends SiftMerchantResponse> {
     private final String accountId;
     FieldSet fieldSet;
-    private OkHttpClient okClient;
+    private HttpClient httpClient;
     private HttpUrl baseUrl;
 
     protected abstract HttpUrl path(HttpUrl baseUrl);
@@ -25,10 +26,10 @@ public abstract class SiftMerchantRequest<T extends SiftMerchantResponse> {
         return path(baseUrl);
     }
 
-    SiftMerchantRequest(HttpUrl baseUrl, String accountId, OkHttpClient okClient, FieldSet fields) {
+    SiftMerchantRequest(HttpUrl baseUrl, String accountId, HttpClient httpClient, FieldSet fields) {
         this.baseUrl = baseUrl;
         this.accountId = accountId;
-        this.okClient = okClient;
+        this.httpClient = httpClient;
         this.fieldSet = fields;
     }
 
@@ -45,13 +46,14 @@ public abstract class SiftMerchantRequest<T extends SiftMerchantResponse> {
     public T send() throws IOException {
         fieldSet.validate();
 
-        Request.Builder okRequestBuilder = new Request.Builder().addHeader("User-Agent", USER_AGENT_HEADER).url(this.url());
+        Request.Builder okRequestBuilder =
+            new Request.Builder().addHeader("User-Agent", USER_AGENT_HEADER).url(this.url());
         modifyRequestBuilder(okRequestBuilder);
         Request request = okRequestBuilder.build();
-        T response = buildResponse(okClient.newCall(request).execute(), fieldSet);
+        T response = buildResponse(httpClient.execute(request), fieldSet);
 
         if (!response.isOk()) {
-                throw new MerchantAPIException(response.getApiErrorMessage());
+            throw new MerchantAPIException(response.getApiErrorMessage());
         }
 
         return response;

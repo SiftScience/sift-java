@@ -1,15 +1,18 @@
 package com.siftscience;
 
-import com.siftscience.model.GetMerchantsFieldSet;
-import okhttp3.*;
-
 import java.io.IOException;
+
+import com.siftscience.model.GetMerchantsFieldSet;
+import okhttp3.Credentials;
+import okhttp3.HttpUrl;
+import okhttp3.Request;
+import okhttp3.Response;
 
 
 public class GetMerchantsRequest extends SiftMerchantRequest<GetMerchantsResponse> {
 
-    GetMerchantsRequest(HttpUrl baseUrl, String accountId, OkHttpClient okClient, FieldSet fields) {
-        super(baseUrl, accountId, okClient, fields);
+    GetMerchantsRequest(HttpUrl baseUrl, String accountId, HttpClient httpClient, FieldSet fields) {
+        super(baseUrl, accountId, httpClient, fields);
     }
 
     private static String DEFAULT_BATCH_SIZE = "1000";

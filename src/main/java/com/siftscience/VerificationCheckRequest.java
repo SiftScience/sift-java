@@ -1,15 +1,14 @@
 package com.siftscience;
 
-import com.siftscience.model.VerificationCheckFieldSet;
-import okhttp3.OkHttpClient;
-import okhttp3.HttpUrl;
-import okhttp3.Response;
-import okhttp3.Request;
-import okhttp3.Credentials;
-import okhttp3.MediaType;
-import okhttp3.RequestBody;
-
 import java.io.IOException;
+
+import com.siftscience.model.VerificationCheckFieldSet;
+import okhttp3.Credentials;
+import okhttp3.HttpUrl;
+import okhttp3.MediaType;
+import okhttp3.Request;
+import okhttp3.RequestBody;
+import okhttp3.Response;
 
 
 /**
@@ -18,8 +17,8 @@ import java.io.IOException;
 */
 public class VerificationCheckRequest extends SiftRequest<VerificationCheckResponse> {
 
-    VerificationCheckRequest(HttpUrl baseUrl, String accountId, OkHttpClient okClient, VerificationCheckFieldSet fields) {
-        super(baseUrl, accountId, okClient, fields);
+    VerificationCheckRequest(HttpUrl baseUrl, String accountId, HttpClient httpClient, VerificationCheckFieldSet fields) {
+        super(baseUrl, accountId, httpClient, fields);
     }
 
     @Override

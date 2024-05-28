@@ -1,19 +1,18 @@
 package com.siftscience;
 
-import com.siftscience.model.GetDecisionFieldSet;
-
 import java.io.IOException;
+
+import com.siftscience.model.GetDecisionFieldSet;
 import okhttp3.Credentials;
 import okhttp3.HttpUrl;
-import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
 
 
 public class GetDecisionsRequest extends SiftRequest<GetDecisionsResponse> {
 
-    GetDecisionsRequest(HttpUrl baseUrl, String accountId, OkHttpClient okClient, FieldSet fields) {
-        super(baseUrl, accountId, okClient, fields);
+    GetDecisionsRequest(HttpUrl baseUrl, String accountId, HttpClient httpClient, FieldSet fields) {
+        super(baseUrl, accountId, httpClient, fields);
     }
 
     public enum Query {

@@ -1,15 +1,14 @@
 package com.siftscience;
 
-import com.siftscience.model.VerificationResendFieldSet;
-import okhttp3.OkHttpClient;
-import okhttp3.HttpUrl;
-import okhttp3.Response;
-import okhttp3.Request;
-import okhttp3.Credentials;
-import okhttp3.MediaType;
-import okhttp3.RequestBody;
-
 import java.io.IOException;
+
+import com.siftscience.model.VerificationResendFieldSet;
+import okhttp3.Credentials;
+import okhttp3.HttpUrl;
+import okhttp3.MediaType;
+import okhttp3.Request;
+import okhttp3.RequestBody;
+import okhttp3.Response;
 
 /**
 * The resend call generates a new OTP and sends it to the original recipient with the same settings.
@@ -17,8 +16,8 @@ import java.io.IOException;
 * */
 public class VerificationResendRequest extends SiftRequest<VerificationResendResponse> {
 
-    VerificationResendRequest(HttpUrl baseUrl, String accountId, OkHttpClient okClient, VerificationResendFieldSet fields) {
-        super(baseUrl, accountId, okClient, fields);
+    VerificationResendRequest(HttpUrl baseUrl, String accountId, HttpClient httpClient, VerificationResendFieldSet fields) {
+        super(baseUrl, accountId, httpClient, fields);
     }
 
     @Override

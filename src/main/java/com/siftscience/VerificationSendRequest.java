@@ -1,15 +1,14 @@
 package com.siftscience;
 
-import com.siftscience.model.VerificationSendFieldSet;
-import okhttp3.OkHttpClient;
-import okhttp3.HttpUrl;
-import okhttp3.Response;
-import okhttp3.Request;
-import okhttp3.Credentials;
-import okhttp3.MediaType;
-import okhttp3.RequestBody;
-
 import java.io.IOException;
+
+import com.siftscience.model.VerificationSendFieldSet;
+import okhttp3.Credentials;
+import okhttp3.HttpUrl;
+import okhttp3.MediaType;
+import okhttp3.Request;
+import okhttp3.RequestBody;
+import okhttp3.Response;
 
 /**
 *The send call triggers the generation of an OTP code that is stored by Sift
@@ -18,8 +17,8 @@ import java.io.IOException;
 * */
 public class VerificationSendRequest  extends SiftRequest<VerificationSendResponse> {
 
-    VerificationSendRequest(HttpUrl baseUrl, String accountId, OkHttpClient okClient, VerificationSendFieldSet fields) {
-        super(baseUrl, accountId, okClient, fields);
+    VerificationSendRequest(HttpUrl baseUrl, String accountId, HttpClient httpClient, VerificationSendFieldSet fields) {
+        super(baseUrl, accountId, httpClient, fields);
     }
 
     @Override

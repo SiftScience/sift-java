@@ -1,15 +1,18 @@
 package com.siftscience;
 
-import com.siftscience.model.GetMerchantFieldSet;
-import okhttp3.*;
-
 import java.io.IOException;
+
+import com.siftscience.model.GetMerchantFieldSet;
+import okhttp3.Credentials;
+import okhttp3.HttpUrl;
+import okhttp3.Request;
+import okhttp3.Response;
 
 
 public class GetMerchantRequest extends SiftMerchantRequest<GetMerchantResponse> {
 
-    GetMerchantRequest(HttpUrl baseUrl, String accountId, OkHttpClient okClient, FieldSet fields) {
-        super(baseUrl, accountId, okClient, fields);
+    GetMerchantRequest(HttpUrl baseUrl, String accountId, HttpClient httpClient, FieldSet fields) {
+        super(baseUrl, accountId, httpClient, fields);
     }
 
     @Override

@@ -3,12 +3,14 @@ package com.siftscience;
 import java.io.IOException;
 
 import com.siftscience.model.ApplyDecisionFieldSet;
-import okhttp3.*;
+import okhttp3.Credentials;
+import okhttp3.HttpUrl;
+import okhttp3.Request;
 
 public class ApplyDecisionRequest extends SiftRequest<ApplyDecisionResponse>{
 
-    ApplyDecisionRequest(HttpUrl baseUrl, String accountId, OkHttpClient okClient, ApplyDecisionFieldSet fields) {
-        super(baseUrl, accountId, okClient, fields);
+    ApplyDecisionRequest(HttpUrl baseUrl, String accountId, HttpClient httpClient, ApplyDecisionFieldSet fields) {
+        super(baseUrl, accountId, httpClient, fields);
     }
 
     @Override

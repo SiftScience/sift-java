@@ -1,11 +1,21 @@
 package com.siftscience;
 
-import com.siftscience.exception.*;
-import okhttp3.*;
-
 import java.io.IOException;
 
 import static com.siftscience.Constants.USER_AGENT_HEADER;
+import com.siftscience.exception.InvalidApiKeyException;
+import com.siftscience.exception.InvalidFieldException;
+import com.siftscience.exception.InvalidRequestException;
+import com.siftscience.exception.MissingFieldException;
+import com.siftscience.exception.RateLimitException;
+import com.siftscience.exception.ServerException;
+import com.siftscience.exception.SiftException;
+import com.siftscience.utils.OkHttpUtils;
+import okhttp3.HttpUrl;
+import okhttp3.MediaType;
+import okhttp3.Request;
+import okhttp3.RequestBody;
+import okhttp3.Response;
 
 /**
  * SiftRequest is the base class for all Sift API requests. It implements the `send` method which
@@ -14,7 +24,7 @@ import static com.siftscience.Constants.USER_AGENT_HEADER;
 public abstract class SiftRequest<T extends SiftResponse> {
     private final String accountId;
     FieldSet fieldSet;
-    private OkHttpClient okClient;
+    private HttpClient httpClient;
     private HttpUrl baseUrl;
 
     protected abstract HttpUrl path(HttpUrl baseUrl);
@@ -23,10 +33,10 @@ public abstract class SiftRequest<T extends SiftResponse> {
         return path(baseUrl);
     }
 
-    SiftRequest(HttpUrl baseUrl, String accountId, OkHttpClient okClient, FieldSet fields) {
+    SiftRequest(HttpUrl baseUrl, String accountId, HttpClient httpClient, FieldSet fields) {
         this.baseUrl = baseUrl;
         this.accountId = accountId;
-        this.okClient = okClient;
+        this.httpClient = httpClient;
         this.fieldSet = fields;
     }
 
@@ -46,7 +56,7 @@ public abstract class SiftRequest<T extends SiftResponse> {
         Request.Builder okRequestBuilder = new Request.Builder().addHeader("User-Agent", USER_AGENT_HEADER).url(this.url());
         modifyRequestBuilder(okRequestBuilder);
         Request request = okRequestBuilder.build();
-        T response = buildResponse(okClient.newCall(request).execute(), fieldSet);
+        T response = buildResponse(httpClient.execute(request), fieldSet);
 
         // If not successful but no exception happened yet, dig deeper into the response so we
         // can manually throw an appropriate exception.

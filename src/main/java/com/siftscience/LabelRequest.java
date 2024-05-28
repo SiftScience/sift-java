@@ -1,19 +1,18 @@
 package com.siftscience;
 
+import java.io.IOException;
+
 import com.siftscience.model.LabelFieldSet;
 import okhttp3.HttpUrl;
-import okhttp3.OkHttpClient;
 import okhttp3.Response;
-
-import java.io.IOException;
 
 /**
  * LabelRequest is the request type for the Sift Labels API.
  * https://siftscience.com/developers/docs/curl/labels-api
  */
 public class LabelRequest extends SiftRequest<LabelResponse> {
-    LabelRequest(HttpUrl baseUrl, String accountId, OkHttpClient okClient, LabelFieldSet fields) {
-        super(baseUrl, accountId, okClient, fields);
+    LabelRequest(HttpUrl baseUrl, String accountId, HttpClient httpClient, LabelFieldSet fields) {
+        super(baseUrl, accountId, httpClient, fields);
     }
 
     @Override

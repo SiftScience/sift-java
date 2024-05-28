@@ -10,9 +10,9 @@ import java.io.IOException;
  * https://siftscience.com/developers/docs/curl/labels-api/unlabel-user
  */
 public class UnlabelRequest extends SiftRequest<UnlabelResponse> {
-    UnlabelRequest(HttpUrl baseUrl, String accountId, OkHttpClient okClient,
+    UnlabelRequest(HttpUrl baseUrl, String accountId, HttpClient httpClient,
                    UnlabelFieldSet fields) {
-        super(baseUrl, accountId, okClient, fields);
+        super(baseUrl, accountId, httpClient, fields);
     }
 
     /**
