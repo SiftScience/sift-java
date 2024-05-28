@@ -40,4 +40,31 @@ public class SiftRequestTest {
         Assert.assertEquals("SiftScience/v205 sift-java/3.14.2", recordedRequest.getHeader("User-Agent"));
     }
 
+    @Test
+    public void testEnqueueRequests() throws Exception {
+        MockWebServer server = new MockWebServer();
+        MockResponse response = new MockResponse();
+        response.setResponseCode(HTTP_OK);
+
+        server.enqueue(response);
+        server.start();
+
+        // Create a new client and link it to the mock server.
+        SiftClient client = new SiftClient("YOUR_API_KEY", "YOUR_ACCOUNT_ID",
+            new OkHttpClient.Builder()
+                .addInterceptor(OkHttpUtils.urlRewritingInterceptor(server))
+                .build());
+        client.enqueueRequests();
+
+        // Build and execute the request against the mock server.
+        ApplyDecisionRequest request = client.buildRequest(
+            new ApplyDecisionFieldSet()
+                .setUserId("a_user_id")
+                .setTime(System.currentTimeMillis()));
+
+        ApplyDecisionResponse receivedResponse = request.send();
+
+        // verify
+        Assert.assertNotNull(receivedResponse);
+    }
 }
