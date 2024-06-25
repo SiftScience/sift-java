@@ -30,4 +30,4 @@ jobs:
         uses: gradle/actions/setup-gradle@v3 # v3.1.0
 
       - name: Build with Gradle Wrapper
-        run: ./gradlew build
+        run: ./gradlew dependencies
