@@ -32,4 +32,4 @@ jobs:
         run: ./gradlew dependencies
 
       - name: Gradle Test
-          run: ./gradlew test
+        run: ./gradlew test
