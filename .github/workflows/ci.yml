@@ -55,6 +55,8 @@ jobs:
           ssh-private-key: ${{ secrets.GITHUBCLONEKEY }}
           ref: main
           path: sift-java-integration-app
+      - run: |
+          ls
 
       - name: Build with Gradle Wrapper
         run: |
