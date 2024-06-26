@@ -57,6 +57,10 @@ jobs:
           pwd
           ls
           echo "*****************"
+          cp /home/runner/work/sift-java/sift-java/build/distributions/*.zip /home/runner/work/
+          cd /home/runner/work
+          ls
+          echo "*****************"
 
       - name: get version
         id: version
@@ -77,4 +81,8 @@ jobs:
         run: |
           pwd
           ls
-          unzip -j ../build/distributions/sift-java-3.14.2.zip -d app/libs/
+          echo "*****************"
+          cd /home/runner/work
+          ls
+          echo "*****************"
+          unzip -j /home/runner/work/sift-java-3.14.2.zip -d app/libs/
