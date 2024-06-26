@@ -51,6 +51,7 @@ jobs:
 
       - run: |
           ./gradlew distZip
+          ls
           cd build/distributions/
           ls
 
