@@ -56,6 +56,8 @@ jobs:
 
       - name: Build with Gradle Wrapper
         run: |
+          pwd
+          ls
           cd sift-java-integration-app
           version=$(./gradlew properties -q | grep -E "^version:" | awk '{print $2}')
           unzip -j ../build/distributions/sift-java-${version}.zip -d app/libs/
