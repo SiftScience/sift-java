@@ -72,9 +72,9 @@ jobs:
           repository: SiftScience/sift-java-integration-app
           ssh-key: ${{ secrets.GITHUBCLONEKEY }}
           ref: main
-          path: /home/runner/work/sift-java/sift-java/
 
       - name: Build with Gradle Wrapper
         run: |
+          pwd
           ls
           unzip -j ../build/distributions/sift-java-3.14.2.zip -d app/libs/
