@@ -51,6 +51,7 @@ jobs:
 
       - run: |
           ./gradlew distZip
+          cd /build/distributions/
           ls
 
       - name: get version
