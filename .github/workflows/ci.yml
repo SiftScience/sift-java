@@ -37,7 +37,7 @@ jobs:
       - name: Gradle Test
         run: ./gradlew test
 
-  java_integration:
+  java_integration_test:
     runs-on: ubuntu-latest
     permissions:
       contents: read
@@ -53,15 +53,6 @@ jobs:
           ./gradlew distZip
           cp /home/runner/work/sift-java/sift-java/build/distributions/*.zip /home/runner/work/
           cd /home/runner/work
-        
-
-      - name: get version
-        id: version
-        run: |
-          PROP_VALUE=`./gradlew properties -q | grep "version:" | cut -d'=' -f2`
-          echo $PROP_VALUE
-          echo "version=$PROP_VALUE" >> $env:GITHUB_ENV
-          echo ${{ env.version }}
 
       - name: Clone sift-java-integration-app and extract sift-java
         uses: actions/checkout@v4
