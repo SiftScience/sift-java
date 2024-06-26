@@ -49,10 +49,10 @@ jobs:
           java-version: '8'
           distribution: 'zulu'
       - name: Clone sift-java-integration-app and extract sift-java
-        uses: actions/checkout@v1
+        uses: webfactory/ssh-agent@v0.4.1
         with:
           repository: SiftScience/sift-java-integration-app
-          token: ${{ secrets.GITHUBCLONEKEY }}
+          ssh-private-key: ${{ secrets.GITHUBCLONEKEY }}
 
       - name: Build with Gradle Wrapper
         run: |
