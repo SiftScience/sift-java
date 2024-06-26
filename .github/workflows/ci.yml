@@ -54,7 +54,7 @@ jobs:
           repository: SiftScience/sift-java-integration-app
           ssh-key: ${{ secrets.GITHUBCLONEKEY }}
           ref: main
-          path: /
+          path: /home/runner/work/sift-java/sift-java/
       - run: |
           ls
 
