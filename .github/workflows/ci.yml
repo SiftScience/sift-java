@@ -9,7 +9,7 @@ on:
 env:
   SIFT_ACCOUNT_ID: ${{ secrets.ACCOUNT_ID }}
   SIFT_API_KEY: ${{ secrets.API_KEY }}
-  GITHUBCLONEKEY: ${{ secrets.GITHUBCLONEKEY }}
+  GIT_HUB_CLONE_KEY: ${{ secrets.GITHUBCLONEKEY }}
   GRADLE_OPTS: -Dorg.gradle.project.sonatypeUsername=username -Dorg.gradle.project.sonatypePassword=password
 
 jobs:
@@ -58,7 +58,7 @@ jobs:
         uses: actions/checkout@v4
         with:
           repository: SiftScience/sift-java-integration-app
-          ssh-key: ${{ secrets.GITHUBCLONEKEY }}
+          ssh-key: ${{ secrets.GIT_HUB_CLONE_KEY }}
           ref: main
 
       - name: Run tests
