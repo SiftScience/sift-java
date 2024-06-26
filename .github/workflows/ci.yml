@@ -50,8 +50,13 @@ jobs:
           distribution: 'zulu'
 
       - run: |
+          ./gradlew distZip
+
+      - name: get version
+        id: version
+        run: |
           PROP_VALUE=`./gradlew properties -q | grep "version:" | cut -d'=' -f2`
-          echo $PROP_VALUE   
+          version=$PROP_VALUE >> $GITHUB_OUTPUT
 
       - name: Clone sift-java-integration-app and extract sift-java
         uses: actions/checkout@v4
@@ -66,4 +71,4 @@ jobs:
           ls
           PROP_VALUE=`./gradlew properties -q | grep "version:" | cut -d'=' -f2`
           echo $PROP_VALUE 
-          unzip -j ../build/distributions/sift-java-$PROP_VALUE.zip -d app/libs/
+          unzip -j ../build/distributions/sift-java-${{ steps.version.outputs.version }}.zip -d app/libs/
