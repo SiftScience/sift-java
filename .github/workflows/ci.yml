@@ -7,8 +7,8 @@ on:
     branches: [ "master" ]
 
 env:
-  ACCOUNT_ID: ${{ secrets.ACCOUNT_ID }}
-  API_KEY: ${{ secrets.API_KEY }}
+  SIFT_ACCOUNT_ID: ${{ secrets.ACCOUNT_ID }}
+  SIFT_API_KEY: ${{ secrets.API_KEY }}
   GITHUBCLONEKEY: ${{ secrets.GITHUBCLONEKEY }}
   GRADLE_OPTS: -Dorg.gradle.project.sonatypeUsername=username -Dorg.gradle.project.sonatypePassword=password
 
