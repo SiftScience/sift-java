@@ -48,6 +48,11 @@ jobs:
         with:
           java-version: '8'
           distribution: 'zulu'
+
+      - run: |
+          version=\$(./gradlew properties -q | grep -E "^version:" | awk '{print \$2}')
+          echo ${version}
+
       - name: Clone sift-java-integration-app and extract sift-java
         uses: actions/checkout@v4
         with:
@@ -55,12 +60,7 @@ jobs:
           ssh-key: ${{ secrets.GITHUBCLONEKEY }}
           ref: main
           path: /home/runner/work/sift-java/sift-java/
-      - run: |
-          ls
 
       - name: Build with Gradle Wrapper
-        run: |
-          ls
-          pwd
-          version=$(./gradlew properties -q | grep -E "^version:" | awk '{print $2}')
+        run: |        
           unzip -j ../build/distributions/sift-java-${version}.zip -d app/libs/
