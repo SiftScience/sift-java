@@ -53,7 +53,10 @@ jobs:
           ./gradlew distZip
           ls
           cd build/distributions/
+          echo "*****************"
+          pwd
           ls
+          echo "*****************"
 
       - name: get version
         id: version
