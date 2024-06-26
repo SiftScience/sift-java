@@ -51,16 +51,9 @@ jobs:
 
       - run: |
           ./gradlew distZip
-          ls
-          cd build/distributions/
-          echo "*****************"
-          pwd
-          ls
-          echo "*****************"
           cp /home/runner/work/sift-java/sift-java/build/distributions/*.zip /home/runner/work/
           cd /home/runner/work
-          ls
-          echo "*****************"
+        
 
       - name: get version
         id: version
@@ -77,8 +70,7 @@ jobs:
           ssh-key: ${{ secrets.GITHUBCLONEKEY }}
           ref: main
 
-      - name: Build with Gradle Wrapper
+      - name: Run tests
         run: |
-          pwd
-          ls
-          unzip -j /home/runner/work/sift-java-3.14.2.zip -d app/libs/
+          unzip -j /home/runner/work/*.zip -d app/libs/
+          ./gradlew test
