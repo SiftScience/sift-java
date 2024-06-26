@@ -51,6 +51,8 @@ jobs:
 
       - run: |
           ./gradlew properties -q
+          PROP_VALUE=`./gradlew properties -q | grep "version:" | cut -d'=' -f2`
+          echo $PROP_VALUE   
 
       - name: Clone sift-java-integration-app and extract sift-java
         uses: actions/checkout@v4
