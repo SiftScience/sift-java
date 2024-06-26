@@ -53,11 +53,13 @@ jobs:
         with:
           repository: SiftScience/sift-java-integration-app
           ssh-private-key: ${{ secrets.GITHUBCLONEKEY }}
+          ref: main
+          path: sift-java-integration-app
 
       - name: Build with Gradle Wrapper
         run: |
-          pwd
           ls
+          pwd
           cd sift-java-integration-app
           version=$(./gradlew properties -q | grep -E "^version:" | awk '{print $2}')
           unzip -j ../build/distributions/sift-java-${version}.zip -d app/libs/
