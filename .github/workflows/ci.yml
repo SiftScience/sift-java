@@ -56,7 +56,8 @@ jobs:
         id: version
         run: |
           PROP_VALUE=`./gradlew properties -q | grep "version:" | cut -d'=' -f2`
-          echo "version=$PROP_VALUE" >> $GITHUB_ENV
+          echo $PROP_VALUE
+          echo "version=$PROP_VALUE" >> $env:GITHUB_ENV
           echo ${{ env.version }}
 
       - name: Clone sift-java-integration-app and extract sift-java
