@@ -50,8 +50,7 @@ jobs:
           distribution: 'zulu'
 
       - run: |
-          version=$(./gradlew properties -q)
-          echo ${version}
+          ./gradlew properties -q
 
       - name: Clone sift-java-integration-app and extract sift-java
         uses: actions/checkout@v4
