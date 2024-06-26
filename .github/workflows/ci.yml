@@ -50,7 +50,6 @@ jobs:
           distribution: 'zulu'
 
       - run: |
-          ./gradlew properties -q
           PROP_VALUE=`./gradlew properties -q | grep "version:" | cut -d'=' -f2`
           echo $PROP_VALUE   
 
@@ -64,4 +63,4 @@ jobs:
 
       - name: Build with Gradle Wrapper
         run: |        
-          unzip -j ../build/distributions/sift-java-${version}.zip -d app/libs/
+          unzip -j ../build/distributions/sift-java-$PROP_VALUE.zip -d app/libs/
