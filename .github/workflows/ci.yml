@@ -49,7 +49,7 @@ jobs:
           java-version: '8'
           distribution: 'zulu'
       - name: Clone sift-java-integration-app and extract sift-java
-      - uses: actions/checkout@v1
+        uses: actions/checkout@v1
         with:
           repository: SiftScience/sift-java-integration-app
           token: ${{ secrets.GITHUBCLONEKEY }}
