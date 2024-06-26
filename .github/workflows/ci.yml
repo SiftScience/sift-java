@@ -50,7 +50,7 @@ jobs:
           distribution: 'zulu'
 
       - run: |
-          version=\$(./gradlew properties -q | grep -E "^version:" | awk '{print \$2}')
+          version=$(./gradlew properties -q | grep -E "^version:" | awk '{print \$2}')
           echo ${version}
 
       - name: Clone sift-java-integration-app and extract sift-java
