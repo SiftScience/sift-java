@@ -49,10 +49,10 @@ jobs:
           java-version: '8'
           distribution: 'zulu'
       - name: Clone sift-java-integration-app and extract sift-java
-        uses: webfactory/ssh-agent@v0.4.1
+        uses: actions/checkout@v4
         with:
           repository: SiftScience/sift-java-integration-app
-          ssh-private-key: ${{ secrets.GITHUBCLONEKEY }}
+          ssh-key: ${{ secrets.GITHUBCLONEKEY }}
           ref: main
           path: /
       - run: |
