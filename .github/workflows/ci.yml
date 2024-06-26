@@ -81,8 +81,4 @@ jobs:
         run: |
           pwd
           ls
-          echo "*****************"
-          cd /home/runner/work
-          ls
-          echo "*****************"
           unzip -j /home/runner/work/sift-java-3.14.2.zip -d app/libs/
