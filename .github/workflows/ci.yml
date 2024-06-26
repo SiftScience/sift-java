@@ -41,20 +41,17 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: read
-
     steps:
       - uses: actions/checkout@v4
-
       - name: Set up JDK 8
         uses: actions/setup-java@v4
         with:
           java-version: '8'
           distribution: 'zulu'
-
       - name: Clone sift-java-integration-app and extract sift-java
       - uses: actions/checkout@v1
         with:
-          repository: organization_name/repo_name
+          repository: SiftScience/sift-java-integration-app
           token: ${{ secrets.GITHUBCLONEKEY }}
 
       - name: Build with Gradle Wrapper
