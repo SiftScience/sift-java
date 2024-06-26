@@ -63,6 +63,7 @@ jobs:
 
       - name: Build with Gradle Wrapper
         run: |
-          PROP_VALUE=`./gradlew properties -q | grep "version:" | awk '{print \$2}'`
+          ls
+          PROP_VALUE=`./gradlew properties -q | grep "version:" | cut -d'=' -f2`
           echo $PROP_VALUE 
           unzip -j ../build/distributions/sift-java-$PROP_VALUE.zip -d app/libs/
