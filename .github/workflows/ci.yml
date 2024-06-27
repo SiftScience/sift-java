@@ -2,9 +2,11 @@ name: Sift Java CI
 
 on:
   push:
-    branches: [ "master" ]
+    branches:
+      - master
   pull_request:
-    branches: [ "master" ]
+    branches:
+      - master
 
 env:
   SIFT_ACCOUNT_ID: ${{ secrets.ACCOUNT_ID }}
