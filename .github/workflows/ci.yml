@@ -41,6 +41,7 @@ jobs:
 
   java_integration_test:
     runs-on: ubuntu-latest
+    if: ${{ github.ref == 'refs/heads/master' }}
     permissions:
       contents: read
     steps:
