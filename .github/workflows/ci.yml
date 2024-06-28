@@ -30,7 +30,7 @@ jobs:
           java-version: '8'
           distribution: 'zulu'
 
-      - name: Build with Gradle Wrapper
+      - name: Build with GradleWrapper
         run: ./gradlew dependencies
 
       - name: Gradle Test
