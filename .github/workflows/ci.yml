@@ -1,0 +1,67 @@
+name: Sift Java CI
+
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+    branches:
+      - master
+
+env:
+  SIFT_ACCOUNT_ID: ${{ secrets.ACCOUNT_ID }}
+  SIFT_API_KEY: ${{ secrets.API_KEY }}
+  GITHUBCLONEKEY: ${{ secrets.GITHUBCLONEKEY }}
+  GRADLE_OPTS: -Dorg.gradle.project.sonatypeUsername=username -Dorg.gradle.project.sonatypePassword=password
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up JDK 8
+        uses: actions/setup-java@v4
+        with:
+          java-version: '8'
+          distribution: 'zulu'
+
+      - name: Build with GradleWrapper
+        run: ./gradlew dependencies
+
+      - name: Gradle Test
+        run: ./gradlew test
+
+  java_integration_test:
+    runs-on: ubuntu-latest
+    if: ${{ github.ref == 'refs/heads/master' }}
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up JDK 8
+        uses: actions/setup-java@v4
+        with:
+          java-version: '8'
+          distribution: 'zulu'
+
+      - run: |
+          ./gradlew distZip
+          cp /home/runner/work/sift-java/sift-java/build/distributions/*.zip /home/runner/work/
+          cd /home/runner/work
+
+      - name: Clone sift-java-integration-app and extract sift-java
+        uses: actions/checkout@v4
+        with:
+          repository: SiftScience/sift-java-integration-app
+          ssh-key: ${{ secrets.GITHUBCLONEKEY }}
+          ref: main
+
+      - name: Run tests
+        run: |
+          unzip -j /home/runner/work/*.zip -d app/libs/
+          ./gradlew test
