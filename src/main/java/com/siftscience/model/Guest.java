@@ -10,6 +10,8 @@ public class Guest {
     @Expose @SerializedName("$loyalty_program") private String loyaltyProgram;
     @Expose @SerializedName("$loyalty_program_id") private String loyaltyProgramId;
     @Expose @SerializedName("$birth_date") private String birthDate;
+    @Expose @SerializedName("$guest_user_id") private String guestUserId;
+    @Expose @SerializedName("$guest_booking_reference_id") private String guestBookingReferenceId;
 
     public String getName() {
         return name;
@@ -62,6 +64,24 @@ public class Guest {
 
     public Guest setBirthDate(String birthDate) {
         this.birthDate = birthDate;
+        return this;
+    }
+
+    public String getGuestUserId() {
+        return guestUserId;
+    }
+
+    public Guest setGuestUserId(String guestUserId) {
+        this.guestUserId = guestUserId;
+        return this;
+    }
+
+    public String getGuestBookingReferenceId() {
+        return guestBookingReferenceId;
+    }
+
+    public Guest setGuestBookingReferenceId(String guestBookingReferenceId) {
+        this.guestBookingReferenceId = guestBookingReferenceId;
         return this;
     }
 }

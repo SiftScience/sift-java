@@ -204,7 +204,9 @@ public class TestUtils {
                 .setLoyaltyProgram("skymiles")
                 .setLoyaltyProgramId("PSOV34DF")
                 .setPhone("1-415-555-6040")
-                .setEmail("jdoe@domain.com");
+                .setEmail("jdoe@domain.com")
+                .setGuestUserId("johndoe_1985-01-19")
+                .setGuestBookingReferenceId("AO0999837df");
     }
 
     static Guest sampleGuest2() {
