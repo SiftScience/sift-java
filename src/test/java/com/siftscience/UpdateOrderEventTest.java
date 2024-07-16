@@ -86,7 +86,9 @@ public class UpdateOrderEventTest {
             "          \"$loyalty_program\": \"skymiles\",\n" +
             "          \"$loyalty_program_id\": \"PSOV34DF\",\n" +
             "          \"$phone\": \"1-415-555-6040\",\n" +
-            "          \"$email\": \"jdoe@domain.com\"\n" +
+            "          \"$email\": \"jdoe@domain.com\",\n" +
+            "          \"$guest_user_id\": \"johndoe_1985-01-19\",\n" +
+            "          \"$guest_booking_reference_id\": \"AO0999837df\"\n" +
             "        },\n" +
             "        {\n" +
             "          \"$name\": \"Jane Doe\"\n" +

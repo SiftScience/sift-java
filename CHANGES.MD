@@ -1,3 +1,7 @@
+3.15.2 (2024-07-11)
+=================
+- Added support for `$guest_user_id` and `$guest_booking_reference_id` fields to `$guest` complex field for `$create_order` and `$update_order` events
+
 3.14.2 (2024-05-20)
 =================
 - Fixed bug with okHttp causing SocketTimeoutException
