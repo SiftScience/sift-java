@@ -1,4 +1,4 @@
-3.16.2 (2024-09-26)
+3.16.0 (2024-09-26)
 =================
 - Added support for `$iata_carrier_code` to the `$booking` complex field
 
