@@ -1,3 +1,7 @@
+3.16.0 (2024-09-26)
+=================
+- Added support for `$iata_carrier_code` to the `$booking` complex field
+
 3.15.2 (2024-07-11)
 =================
 - Added support for `$guest_user_id` and `$guest_booking_reference_id` fields to `$guest` complex field for `$create_order` and `$update_order` events

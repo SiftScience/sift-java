@@ -127,6 +127,7 @@ public class CreateOrderEventTest {
             "      ],\n" +
             "      \"$price\": 49900000,\n" +
             "      \"$currency_code\": \"USD\",\n" +
+            "      \"$iata_carrier_code\": \"AS\",\n" +
             "      \"$quantity\": 1,\n" +
             "      \"$tags\": [\n" +
             "        \"team-123\",\n" +

@@ -187,6 +187,7 @@ public class TestUtils {
             .setSegments(segments)
             .setPrice(49900000L)
             .setCurrencyCode("USD")
+            .setIataCarrierCode("AS")
             .setTags(sampleTags3())
             .setQuantity(1L);
     }

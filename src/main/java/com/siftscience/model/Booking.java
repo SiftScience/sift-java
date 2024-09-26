@@ -13,6 +13,7 @@ public class Booking {
     @Expose @SerializedName("$price") private Long price;
     @Expose @SerializedName("$currency_code") private String currencyCode;
     @Expose @SerializedName("$quantity") private Long quantity;
+    @Expose @SerializedName("$iata_carrier_code") private String iataCarrierCode;
     @Expose @SerializedName("$guests") private List<Guest> guests;
     @Expose @SerializedName("$segments") private List<Segment> segments;
     @Expose @SerializedName("$room_type") private String roomType;
@@ -82,6 +83,15 @@ public class Booking {
 
     public Booking setQuantity(Long quantity) {
         this.quantity = quantity;
+        return this;
+    }
+
+    public String getIataCarrierCode() {
+        return iataCarrierCode;
+    }
+
+    public Booking setIataCarrierCode(String iataCarrierCode) {
+        this.iataCarrierCode = iataCarrierCode;
         return this;
     }
 
