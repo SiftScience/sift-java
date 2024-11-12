@@ -6,7 +6,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.siftscience.model.DigitalOrder;
-import com.siftscience.model.PaymentMethod;
 import com.siftscience.model.TransactionFieldSet;
 import okhttp3.OkHttpClient;
 import okhttp3.mockwebserver.MockResponse;

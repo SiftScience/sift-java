@@ -1,3 +1,7 @@
+3.17.0 (2024-11-15)
+=================
+- Added support for `$wager` event type
+  
 3.16.0 (2024-09-26)
 =================
 - Added support for `$iata_carrier_code` to the `$booking` complex field
