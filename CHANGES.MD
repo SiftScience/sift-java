@@ -1,6 +1,9 @@
 3.17.0 (2024-11-15)
 =================
-- Added support for `$wager` event type
+- Added support for `$wager` event type in Events API
+- Added support for `$minimum_deposit_amount`, `$maximum_deposit_amount`,
+  `$minimum_withdrawal_amount`, `$maximum_withdrawal_amount`, `$current_balance`,
+  and `$new_balance` fields to `$transaction` events
   
 3.16.0 (2024-09-26)
 =================

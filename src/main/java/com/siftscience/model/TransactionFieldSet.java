@@ -31,6 +31,12 @@ public class TransactionFieldSet extends BaseAppBrowserSiteBrandFieldSet<Transac
     @Expose @SerializedName("$digital_orders") private List<DigitalOrder> digitalOrders;
     @Expose @SerializedName("$receiver_wallet_address") private String receiverWalletAddress;
     @Expose @SerializedName("$receiver_external_address") private Boolean receiverExternalAddress;
+    @Expose @SerializedName("$minimum_deposit_amount") private Long minimumDepositAmount;
+    @Expose @SerializedName("$maximum_deposit_amount") private Long maximumDepositAmount;
+    @Expose @SerializedName("$minimum_withdrawal_amount") private Long minimumWithdrawalAmount;
+    @Expose @SerializedName("$maximum_withdrawal_amount") private Long maximumWithdrawalAmount;
+    @Expose @SerializedName("$current_balance") private Long currentBalance;
+    @Expose @SerializedName("$new_balance") private Long newBalance;
 
 
     @Override
@@ -256,6 +262,60 @@ public class TransactionFieldSet extends BaseAppBrowserSiteBrandFieldSet<Transac
 
     public TransactionFieldSet setReceiverExternalAddress(Boolean receiverExternalAddress) {
         this.receiverExternalAddress = receiverExternalAddress;
+        return this;
+    }
+
+    public Long getMinimumDepositAmount() {
+        return minimumDepositAmount;
+    }
+
+    public TransactionFieldSet setMinimumDepositAmount(Long minimumDepositAmount) {
+        this.minimumDepositAmount = minimumDepositAmount;
+        return this;
+    }
+
+    public Long getMaximumDepositAmount() {
+        return maximumDepositAmount;
+    }
+
+    public TransactionFieldSet setMaximumDepositAmount(Long maximumDepositAmount) {
+        this.maximumDepositAmount = maximumDepositAmount;
+        return this;
+    }
+
+    public Long getMinimumWithdrawalAmount() {
+        return minimumWithdrawalAmount;
+    }
+
+    public TransactionFieldSet setMinimumWithdrawalAmount(Long minimumWithdrawalAmount) {
+        this.minimumWithdrawalAmount = minimumWithdrawalAmount;
+        return this;
+    }
+
+    public Long getMaximumWithdrawalAmount() {
+        return maximumWithdrawalAmount;
+    }
+
+    public TransactionFieldSet setMaximumWithdrawalAmount(Long maximumWithdrawalAmount) {
+        this.maximumWithdrawalAmount = maximumWithdrawalAmount;
+        return this;
+    }
+
+    public Long getCurrentBalance() {
+        return currentBalance;
+    }
+
+    public TransactionFieldSet setCurrentBalance(Long currentBalance) {
+        this.currentBalance = currentBalance;
+        return this;
+    }
+
+    public Long getNewBalance() {
+        return newBalance;
+    }
+
+    public TransactionFieldSet setNewBalance(Long newBalance) {
+        this.newBalance = newBalance;
         return this;
     }
 }
