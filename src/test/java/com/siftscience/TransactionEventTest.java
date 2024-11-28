@@ -6,7 +6,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.siftscience.model.DigitalOrder;
-import com.siftscience.model.PaymentMethod;
 import com.siftscience.model.TransactionFieldSet;
 import okhttp3.OkHttpClient;
 import okhttp3.mockwebserver.MockResponse;
@@ -651,6 +650,134 @@ public class TransactionEventTest {
             .setDigitalOrders(digitalOrderList)
             .setReceiverWalletAddress("jx17gVqSyo9m4MrhuhuYEUXdCicdof85Bl")
             .setReceiverExternalAddress(true));
+        EventResponse siftResponse = request.send();
+
+        // Verify the request.
+        RecordedRequest request1 = server.takeRequest();
+        Assert.assertEquals("POST", request1.getMethod());
+        Assert.assertEquals("/v205/events", request1.getPath());
+        JSONAssert.assertEquals(expectedRequestBody, request.getFieldSet().toJson(), true);
+
+        // Verify the response.
+        Assert.assertEquals(HTTP_OK, siftResponse.getHttpStatusCode());
+        Assert.assertEquals(0, (int) siftResponse.getBody().getStatus());
+        JSONAssert.assertEquals(response.getBody().readUtf8(),
+            siftResponse.getBody().toJson(), true);
+
+        server.shutdown();
+    }
+
+    @Test
+    public void testTransactionEventWithExtraDepositFields() throws Exception {
+        String expectedRequestBody = "{\n" +
+            "  \"$type\"                   : \"$transaction\",\n" +
+            "  \"$api_key\"                : \"YOUR_API_KEY\",\n" +
+            "  \"$user_id\"                : \"billy_jones_301\",\n" +
+            "  \"$amount\"                 : 500000,\n" +
+            "  \"$currency_code\"          : \"USD\",\n" +
+            "  \"$transaction_type\"       : \"$deposit\",\n" +
+            "  \"$transaction_id\"         : \"719637215\",\n" +
+            "  \"$minimum_deposit_amount\" : 5000,\n" +
+            "  \"$maximum_deposit_amount\" : 100000000,\n" +
+            "  \"$current_balance\"        : 500000,\n" +
+            "  \"$new_balance\"            : 1000000,\n" +
+            "}";
+
+        // Start a new mock server and enqueue a mock response.
+        MockWebServer server = new MockWebServer();
+        MockResponse response = new MockResponse();
+        response.setResponseCode(HTTP_OK);
+        response.setBody("{\n" +
+            "    \"status\" : 0,\n" +
+            "    \"error_message\" : \"OK\",\n" +
+            "    \"time\" : 1327604222,\n" +
+            "    \"request\" : \"" + TestUtils.unescapeJson(expectedRequestBody) + "\"\n" +
+            "}");
+        server.enqueue(response);
+        server.start();
+
+        // Create a new client and link it to the mock server.
+        SiftClient client = new SiftClient("YOUR_API_KEY", "YOUR_ACCOUNT_ID",
+            new OkHttpClient.Builder()
+                .addInterceptor(OkHttpUtils.urlRewritingInterceptor(server))
+                .build());
+
+        // Build and execute the request against the mock server.
+        EventRequest request = client.buildRequest(new TransactionFieldSet()
+            .setUserId("billy_jones_301")
+            .setAmount(500000L)
+            .setCurrencyCode("USD")
+            .setTransactionType("$deposit")
+            .setTransactionId("719637215")
+            .setMinimumDepositAmount(5000L)
+            .setMaximumDepositAmount(100000000L)
+            .setCurrentBalance(500000L)
+            .setNewBalance(1000000L));
+
+        EventResponse siftResponse = request.send();
+
+        // Verify the request.
+        RecordedRequest request1 = server.takeRequest();
+        Assert.assertEquals("POST", request1.getMethod());
+        Assert.assertEquals("/v205/events", request1.getPath());
+        JSONAssert.assertEquals(expectedRequestBody, request.getFieldSet().toJson(), true);
+
+        // Verify the response.
+        Assert.assertEquals(HTTP_OK, siftResponse.getHttpStatusCode());
+        Assert.assertEquals(0, (int) siftResponse.getBody().getStatus());
+        JSONAssert.assertEquals(response.getBody().readUtf8(),
+            siftResponse.getBody().toJson(), true);
+
+        server.shutdown();
+    }
+
+    @Test
+    public void testTransactionEventWithExtraWithdrawalFields() throws Exception {
+        String expectedRequestBody = "{\n" +
+            "  \"$type\"                      : \"$transaction\",\n" +
+            "  \"$api_key\"                   : \"YOUR_API_KEY\",\n" +
+            "  \"$user_id\"                   : \"billy_jones_301\",\n" +
+            "  \"$amount\"                    : 500000,\n" +
+            "  \"$currency_code\"             : \"USD\",\n" +
+            "  \"$transaction_type\"          : \"$withdrawal\",\n" +
+            "  \"$transaction_id\"            : \"719637215\",\n" +
+            "  \"$minimum_withdrawal_amount\" : 5000,\n" +
+            "  \"$maximum_withdrawal_amount\" : 100000000,\n" +
+            "  \"$current_balance\"           : 1000000,\n" +
+            "  \"$new_balance\"               : 500000,\n" +
+            "}";
+
+        // Start a new mock server and enqueue a mock response.
+        MockWebServer server = new MockWebServer();
+        MockResponse response = new MockResponse();
+        response.setResponseCode(HTTP_OK);
+        response.setBody("{\n" +
+            "    \"status\" : 0,\n" +
+            "    \"error_message\" : \"OK\",\n" +
+            "    \"time\" : 1327604222,\n" +
+            "    \"request\" : \"" + TestUtils.unescapeJson(expectedRequestBody) + "\"\n" +
+            "}");
+        server.enqueue(response);
+        server.start();
+
+        // Create a new client and link it to the mock server.
+        SiftClient client = new SiftClient("YOUR_API_KEY", "YOUR_ACCOUNT_ID",
+            new OkHttpClient.Builder()
+                .addInterceptor(OkHttpUtils.urlRewritingInterceptor(server))
+                .build());
+
+        // Build and execute the request against the mock server.
+        EventRequest request = client.buildRequest(new TransactionFieldSet()
+            .setUserId("billy_jones_301")
+            .setAmount(500000L)
+            .setCurrencyCode("USD")
+            .setTransactionType("$withdrawal")
+            .setTransactionId("719637215")
+            .setMinimumWithdrawalAmount(5000L)
+            .setMaximumWithdrawalAmount(100000000L)
+            .setCurrentBalance(1000000L)
+            .setNewBalance(500000L));
+
         EventResponse siftResponse = request.send();
 
         // Verify the request.
