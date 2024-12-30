@@ -19,8 +19,10 @@ public class SiftException extends RuntimeException {
     }
 
     private static String responseErrorMessage(SiftResponse response) {
-        if (response == null || response.getApiErrorMessage() == null) {
+        if (response == null) {
             return "Unexpected API error.";
+        } else if (response.getApiErrorMessage() == null) {
+            return "Unexpected API error " + response.getHttpStatusCode() + ".";
         }
         return response.getApiErrorMessage();
     }

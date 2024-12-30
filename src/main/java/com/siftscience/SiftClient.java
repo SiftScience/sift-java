@@ -56,6 +56,8 @@ public class SiftClient {
     }
 
     public SiftClient(String apiKey, String accountId, OkHttpClient okHttpClient) {
+        assertNotNull(apiKey, "API key must not be null");
+        assertNotNull(okHttpClient, "Http Client must not be null");
         this.apiKey = apiKey;
         this.accountId = accountId;
         this.httpClient = new HttpClient(okHttpClient);
@@ -95,16 +97,19 @@ public class SiftClient {
     }
 
     public ApplyDecisionRequest buildRequest(ApplyDecisionFieldSet fields) {
+        assertAccountIdIsNotNull();
         setupApiKey(fields);
         return new ApplyDecisionRequest(baseUrl, getAccountId(), httpClient, fields);
     }
 
     public GetDecisionsRequest buildRequest(GetDecisionFieldSet fields) {
+        assertAccountIdIsNotNull();
         setupApiKey(fields);
         return new GetDecisionsRequest(baseUrl, getAccountId(), httpClient, fields);
     }
 
     public DecisionStatusRequest buildRequest(DecisionStatusFieldSet fields) {
+        assertAccountIdIsNotNull();
         setupApiKey(fields);
         return new DecisionStatusRequest(baseUrl, getAccountId(), httpClient, fields);
     }
@@ -130,26 +135,31 @@ public class SiftClient {
     }
 
     public WorkflowStatusRequest buildRequest(WorkflowStatusFieldSet fields) {
+        assertAccountIdIsNotNull();
         setupApiKey(fields);
         return new WorkflowStatusRequest(baseUrl, getAccountId(), httpClient, fields);
     }
 
     public GetMerchantsRequest buildRequest(GetMerchantsFieldSet fields) {
+        assertAccountIdIsNotNull();
         setupApiKey(fields);
         return new GetMerchantsRequest(baseUrl, getAccountId(), httpClient, fields);
     }
 
     public GetMerchantRequest buildRequest(GetMerchantFieldSet fields) {
+        assertAccountIdIsNotNull();
         setupApiKey(fields);
         return new GetMerchantRequest(baseUrl, getAccountId(), httpClient, fields);
     }
 
     public CreateMerchantRequest buildRequest(CreateMerchantFieldSet fields) {
+        assertAccountIdIsNotNull();
         setupApiKey(fields);
         return new CreateMerchantRequest(baseUrl, getAccountId(), httpClient, fields);
     }
 
     public UpdateMerchantRequest buildRequest(UpdateMerchantFieldSet fields, String merchantId) {
+        assertAccountIdIsNotNull();
         setupApiKey(fields);
         return new UpdateMerchantRequest(baseUrl, getAccountId(), httpClient, fields, merchantId);
     }
@@ -171,5 +181,15 @@ public class SiftClient {
 
     private void setupApiKey(FieldSet fields) {
         fields.setApiKey(getApiKey());
+    }
+
+    private void assertAccountIdIsNotNull() {
+        assertNotNull(getAccountId(), "Account ID must not be null");
+    }
+
+    private void assertNotNull(Object value, String message) {
+        if (value == null) {
+            throw new IllegalArgumentException(message);
+        }
     }
 }
