@@ -4,6 +4,8 @@ import static java.net.HttpURLConnection.HTTP_BAD_REQUEST;
 import static java.net.HttpURLConnection.HTTP_INTERNAL_ERROR;
 import java.io.IOException;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 import com.siftscience.exception.InvalidApiKeyException;
 import com.siftscience.exception.InvalidFieldException;
 import com.siftscience.exception.MissingFieldException;
@@ -15,7 +17,6 @@ import okhttp3.mockwebserver.MockResponse;
 import okhttp3.mockwebserver.MockWebServer;
 import org.json.JSONException;
 import org.junit.After;
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.skyscreamer.jsonassert.JSONAssert;
@@ -93,11 +94,11 @@ public class SiftClientTest {
         }
 
         // We should have gotten an exception.
-        Assert.assertNotNull(apiKeyException);
-        Assert.assertEquals("Invalid API key message.", apiKeyException.getLocalizedMessage());
+        assertNotNull(apiKeyException);
+        assertEquals("Invalid API key message.", apiKeyException.getLocalizedMessage());
 
         // Check that we can access the API key from the exception object.
-        Assert.assertEquals("INVALID_API_KEY",
+        assertEquals("INVALID_API_KEY",
                 apiKeyException.getSiftResponse().getRequestBody().getApiKey());
     }
 
@@ -141,8 +142,8 @@ public class SiftClientTest {
         }
 
         // We should have gotten an exception.
-        Assert.assertNotNull(missingFieldException);
-        Assert.assertEquals("Missing user email message from server.",
+        assertNotNull(missingFieldException);
+        assertEquals("Missing user email message from server.",
                 missingFieldException.getLocalizedMessage());
     }
 
@@ -164,8 +165,8 @@ public class SiftClientTest {
         }
 
         // Should have thrown an exception.
-        Assert.assertNotNull(invalidFieldException);
-        Assert.assertEquals("Custom field \"$not_allowed\" may not begin with a dollar sign.",
+        assertNotNull(invalidFieldException);
+        assertEquals("Custom field \"$not_allowed\" may not begin with a dollar sign.",
                 invalidFieldException.getLocalizedMessage());
     }
 
@@ -211,8 +212,8 @@ public class SiftClientTest {
         }
 
         // We should have gotten an exception.
-        Assert.assertNotNull(rateLimitException);
-        Assert.assertEquals("Rate limit error message.", rateLimitException.getLocalizedMessage());
+        assertNotNull(rateLimitException);
+        assertEquals("Rate limit error message.", rateLimitException.getLocalizedMessage());
     }
 
     /**
@@ -243,8 +244,9 @@ public class SiftClientTest {
         }
 
         // We should have gotten an exception.
-        Assert.assertNotNull(serverException);
-        Assert.assertEquals("Unexpected API error.", serverException.getLocalizedMessage());
+        assertNotNull(serverException);
+        assertEquals("Unexpected API error " + HTTP_INTERNAL_ERROR + ".",
+            serverException.getLocalizedMessage());
     }
 
     /**
@@ -276,8 +278,9 @@ public class SiftClientTest {
         }
 
         // We should have gotten an exception.
-        Assert.assertNotNull(serverException);
-        Assert.assertEquals("Unexpected API error.", serverException.getLocalizedMessage());
+        assertNotNull(serverException);
+        assertEquals("Unexpected API error " + HTTP_INTERNAL_ERROR + ".",
+            serverException.getLocalizedMessage());
     }
 
     /**
