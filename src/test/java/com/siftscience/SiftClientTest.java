@@ -6,12 +6,20 @@ import java.io.IOException;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.fail;
 import com.siftscience.exception.InvalidApiKeyException;
 import com.siftscience.exception.InvalidFieldException;
 import com.siftscience.exception.MissingFieldException;
 import com.siftscience.exception.RateLimitException;
 import com.siftscience.exception.ServerException;
+import com.siftscience.model.ApplyDecisionFieldSet;
+import com.siftscience.model.CreateMerchantFieldSet;
 import com.siftscience.model.CreateOrderFieldSet;
+import com.siftscience.model.DecisionStatusFieldSet;
+import com.siftscience.model.GetDecisionFieldSet;
+import com.siftscience.model.GetMerchantsFieldSet;
+import com.siftscience.model.UpdateMerchantFieldSet;
+import com.siftscience.model.WorkflowStatusFieldSet;
 import okhttp3.OkHttpClient;
 import okhttp3.mockwebserver.MockResponse;
 import okhttp3.mockwebserver.MockWebServer;
@@ -306,4 +314,92 @@ public class SiftClientTest {
         "}", fieldSet.toJson(), true);
     }
 
+    @Test
+    public void testFailsToCreateClientWhenApiKeyIsNull() {
+        assertIllegalArgumentWithMessage(
+            () -> new SiftClient(null, "YOUR_ACCOUNT_ID"),
+            "API key must not be null"
+        );
+    }
+
+    @Test
+    public void testFailsToCreateClientWhenHttpClientIsNull() {
+        assertIllegalArgumentWithMessage(
+            () -> new SiftClient("YOUR_API_KEY", "YOUR_ACCOUNT_ID",
+                (OkHttpClient) null),
+            "Http Client must not be null"
+        );
+    }
+
+    @Test
+    public void testFailsToBuildApplyDecisionRequest() {
+        SiftClient siftClient = new SiftClient("YOUR_API_KEY", null);
+        assertIllegalArgumentWithMessage(
+            () -> siftClient.buildRequest(new ApplyDecisionFieldSet()),
+            "Account ID must not be null"
+        );
+    }
+
+    @Test
+    public void testFailsToBuildGetDecisionRequest() {
+        SiftClient siftClient = new SiftClient("YOUR_API_KEY", null);
+        assertIllegalArgumentWithMessage(
+            () -> siftClient.buildRequest(new GetDecisionFieldSet()),
+            "Account ID must not be null"
+        );
+    }
+
+    @Test
+    public void testFailsToBuildDecisionStatusRequest() {
+        SiftClient siftClient = new SiftClient("YOUR_API_KEY", null);
+        assertIllegalArgumentWithMessage(
+            () -> siftClient.buildRequest(new DecisionStatusFieldSet()),
+            "Account ID must not be null"
+        );
+    }
+
+    @Test
+    public void testFailsToBuildWorkflowStatusRequest() {
+        SiftClient siftClient = new SiftClient("YOUR_API_KEY", null);
+        assertIllegalArgumentWithMessage(
+            () -> siftClient.buildRequest(new WorkflowStatusFieldSet()),
+            "Account ID must not be null"
+        );
+    }
+
+    @Test
+    public void testFailsToBuildGetMerchantsRequest() {
+        SiftClient siftClient = new SiftClient("YOUR_API_KEY", null);
+        assertIllegalArgumentWithMessage(
+            () -> siftClient.buildRequest(new GetMerchantsFieldSet()),
+            "Account ID must not be null"
+        );
+    }
+
+    @Test
+    public void testFailsToBuildCreateMerchantRequest() {
+        SiftClient siftClient = new SiftClient("YOUR_API_KEY", null);
+        assertIllegalArgumentWithMessage(
+            () -> siftClient.buildRequest(new CreateMerchantFieldSet()),
+            "Account ID must not be null"
+        );
+    }
+
+    @Test
+    public void testFailsToBuildUpdateMerchantRequest() {
+        SiftClient siftClient = new SiftClient("YOUR_API_KEY", null);
+        assertIllegalArgumentWithMessage(
+            () -> siftClient.buildRequest(new UpdateMerchantFieldSet(), "merchantID"),
+            "Account ID must not be null"
+        );
+    }
+
+    private void assertIllegalArgumentWithMessage(Runnable runnable, String message) {
+        try {
+            runnable.run();
+            fail("Excepted to throw IllegalArgumentException");
+        } catch (IllegalArgumentException exception) {
+            assertEquals(message, exception.getMessage());
+        }
+    }
 }
