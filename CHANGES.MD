@@ -2,7 +2,7 @@
 =================
 - Included HTTP Status codes into `SiftException` message when possible
 - Validate that `apiKey` and `okHttpClient` are not `null` when creating `SiftClient`
-- Validate that `accoundId` is not `null` when creating requests which require `accoundId` 
+- Validate that `accountId` is not `null` when creating requests which require `accountId` 
 
 3.17.0 (2024-11-15)
 =================
