@@ -29,7 +29,7 @@ public class SiftRequestTest {
 
         // then
         RecordedRequest recordedRequest = server.takeRequest();
-        assertEquals("SiftScience/v205 sift-java/3.17.0",
+        assertEquals("SiftScience/v205 sift-java/3.17.1",
             recordedRequest.getHeader("User-Agent"));
     }
 
