@@ -1,3 +1,9 @@
+3.18.0 (2025-01-11)
+=================
+- Added support for `$amount_usd` in `$transaction`, `$create_order`, `$update_order`, `$wager` event types and in `$discount` complex field
+- Added support for `$price_usd` in `$booking` and `$item` complex fields
+- Added support for `$card_bin_country`, `$card_type`, and `$card_brand` for `$payment_method` complex type
+
 3.17.1 (2024-12-31)
 =================
 - Included HTTP Status codes into `SiftException` message when possible
