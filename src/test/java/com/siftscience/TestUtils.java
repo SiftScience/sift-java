@@ -45,14 +45,6 @@ public class TestUtils {
                 .setZipCode("03257");
     }
 
-    static Address sampleAddress3() {
-        return new Address()
-                .setCity("Seattle")
-                .setRegion("Washington")
-                .setCountry("US")
-                .setZipCode("98112");
-    }
-
     static PaymentMethod samplePaymentMethod1() {
         return new PaymentMethod()
                 .setPaymentType("$credit_card")
@@ -68,6 +60,16 @@ public class TestUtils {
                 .setCardLast4("4444");
     }
 
+    static PaymentMethod samplePaymentMethodBinMetadata() {
+        return new PaymentMethod()
+            .setPaymentType("$credit_card")
+            .setPaymentGateway("$braintree")
+            .setCardBin("542486")
+            .setCardLast4("4444")
+            .setCardBinCountry("US")
+            .setCardBrand("Visa")
+            .setCardType("Gold");
+    }
 
     static PaymentMethod samplePaymentMethodAch() {
         return new PaymentMethod()
@@ -170,6 +172,22 @@ public class TestUtils {
                 .setQuantity(2L);
     }
 
+    static Item sampleItemPriceUsd() {
+        return new Item()
+            .setItemId("B004834GQO")
+            .setProductTitle("The Slanket Blanket-Texas Tea")
+            .setPrice(39990000L)
+            .setPriceUsd(44490000L)
+            .setUpc("67862114510011")
+            .setSku("004834GQ")
+            .setBrand("Slanket")
+            .setManufacturer("Slanket")
+            .setCategory("Blankets & Throws")
+            .setTags(sampleTags2())
+            .setColor("Texas Tea")
+            .setQuantity(2L);
+    }
+
     static Booking sampleBooking() {
         List<Guest> guests = new ArrayList<>();
         guests.add(sampleGuest1());
@@ -189,6 +207,18 @@ public class TestUtils {
             .setCurrencyCode("USD")
             .setIataCarrierCode("AS")
             .setTags(sampleTags3())
+            .setQuantity(1L);
+    }
+
+    static Booking sampleBookingWithPriceUsd() {
+        return new Booking()
+            .setBookingType("$flight")
+            .setTitle("SFO - LAS, 2 Adults")
+            .setStartTime(12038412903L)
+            .setEndTime(12048412903L)
+            .setPrice(49900000L)
+            .setPriceUsd(55500000L)
+            .setCurrencyCode("EUR")
             .setQuantity(1L);
     }
 
@@ -239,6 +269,13 @@ public class TestUtils {
                 .setCurrencyCode("USD");
     }
 
+    static Discount sampleDiscountWithAmountUsd() {
+        return new Discount()
+            .setAmount(5000000L)
+            .setAmountUsd(5550000L)
+            .setCurrencyCode("EUR");
+    }
+
     static CreditPoint sampleCreditPoint() {
         return new CreditPoint()
                 .setAmount(100L)
@@ -270,11 +307,11 @@ public class TestUtils {
                 .setDiscount(sampleDiscount2());
     }
 
-    static List<String> sampleCategories() {
-        List<String> categories = new ArrayList<>();
-        categories.add("Housing");
-        categories.add("Apartments");
-        categories.add("2 Bedrooms");
-        return categories;
+    static Promotion samplePromotionWithAmountUsd() {
+        return new Promotion()
+            .setPromotionId("FirstTimeBuyer")
+            .setStatus("$success")
+            .setDescription("$5 off")
+            .setDiscount(sampleDiscountWithAmountUsd());
     }
 }

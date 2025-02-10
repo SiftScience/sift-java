@@ -794,4 +794,75 @@ public class TransactionEventTest {
 
         server.shutdown();
     }
+
+    @Test
+    public void testTransactionEventWithAmountUsdAndBinMetadata() throws Exception {
+        String expectedRequestBody = "{\n" +
+            "  \"$type\"             : \"$transaction\",\n" +
+            "  \"$api_key\"          : \"YOUR_API_KEY\",\n" +
+            "  \"$user_id\"          : \"billy_jones_301\",\n" +
+            "  \"$amount\"           : 506790000,\n" +
+            "  \"$amount_usd\"       : 555790000,\n" +
+            "  \"$currency_code\"    : \"EUR\",\n" +
+            "\n" +
+            "  \"$user_email\"       : \"bill@gmail.com\",\n" +
+            "  \"$transaction_type\" : \"$buy\",\n" +
+            "  \"$transaction_id\"   : \"719637215\",\n" +
+            "\n" +
+            "  \"$payment_method\"   : {\n" +
+            "      \"$payment_type\"    : \"$credit_card\",\n" +
+            "      \"$payment_gateway\" : \"$braintree\",\n" +
+            "      \"$card_bin\"        : \"542486\",\n" +
+            "      \"$card_last4\"      : \"4444\",\n" +
+            "      \"$card_bin_country\": \"US\",\n" +
+            "      \"$card_type\"       : \"Gold\",\n" +
+            "      \"$card_brand\"      : \"Visa\"\n" +
+            "  },\n" +
+            "}";
+
+        // Start a new mock server and enqueue a mock response.
+        MockWebServer server = new MockWebServer();
+        MockResponse response = new MockResponse();
+        response.setResponseCode(HTTP_OK);
+        response.setBody("{\n" +
+            "    \"status\" : 0,\n" +
+            "    \"error_message\" : \"OK\",\n" +
+            "    \"time\" : 1327604222,\n" +
+            "    \"request\" : \"" + TestUtils.unescapeJson(expectedRequestBody) + "\"\n" +
+            "}");
+        server.enqueue(response);
+        server.start();
+
+        // Create a new client and link it to the mock server.
+        SiftClient client = new SiftClient("YOUR_API_KEY", "YOUR_ACCOUNT_ID",
+            new OkHttpClient.Builder()
+                .addInterceptor(OkHttpUtils.urlRewritingInterceptor(server))
+                .build());
+
+        // Build and execute the request against the mock server.
+        EventRequest request = client.buildRequest(new TransactionFieldSet()
+            .setUserId("billy_jones_301")
+            .setAmount(506790000L)
+            .setAmountUsd(555790000L)
+            .setCurrencyCode("EUR")
+            .setUserEmail("bill@gmail.com")
+            .setTransactionType("$buy")
+            .setTransactionId("719637215")
+            .setPaymentMethod(TestUtils.samplePaymentMethodBinMetadata()));
+        EventResponse siftResponse = request.send();
+
+        // Verify the request.
+        RecordedRequest request1 = server.takeRequest();
+        Assert.assertEquals("POST", request1.getMethod());
+        Assert.assertEquals("/v205/events", request1.getPath());
+        JSONAssert.assertEquals(expectedRequestBody, request.getFieldSet().toJson(), true);
+
+        // Verify the response.
+        Assert.assertEquals(HTTP_OK, siftResponse.getHttpStatusCode());
+        Assert.assertEquals(0, (int) siftResponse.getBody().getStatus());
+        JSONAssert.assertEquals(response.getBody().readUtf8(),
+            siftResponse.getBody().toJson(), true);
+
+        server.shutdown();
+    }
 }
