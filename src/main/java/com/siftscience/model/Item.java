@@ -9,6 +9,7 @@ public class Item {
     @Expose @SerializedName("$item_id") private String itemId;
     @Expose @SerializedName("$product_title") private String productTitle;
     @Expose @SerializedName("$price") private Long price;
+    @Expose @SerializedName("$price_usd") private Long priceUsd;
     @Expose @SerializedName("$currency_code") private String currencyCode;
     @Expose @SerializedName("$quantity") private Long quantity;
     @Expose @SerializedName("$upc") private String upc;
@@ -144,6 +145,15 @@ public class Item {
 
     public Item setQuantity(Long quantity) {
         this.quantity = quantity;
+        return this;
+    }
+
+    public Long getPriceUsd() {
+        return priceUsd;
+    }
+
+    public Item setPriceUsd(Long priceUsd) {
+        this.priceUsd = priceUsd;
         return this;
     }
 }

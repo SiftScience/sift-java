@@ -11,6 +11,7 @@ public class Booking {
     @Expose @SerializedName("$start_time") private Long startTime;
     @Expose @SerializedName("$end_time") private Long endTime;
     @Expose @SerializedName("$price") private Long price;
+    @Expose @SerializedName("$price_usd") private Long priceUsd;
     @Expose @SerializedName("$currency_code") private String currencyCode;
     @Expose @SerializedName("$quantity") private Long quantity;
     @Expose @SerializedName("$iata_carrier_code") private String iataCarrierCode;
@@ -167,4 +168,12 @@ public class Booking {
         return this;
     }
 
+    public Long getPriceUsd() {
+        return priceUsd;
+    }
+
+    public Booking setPriceUsd(Long priceUsd) {
+        this.priceUsd = priceUsd;
+        return this;
+    }
 }
