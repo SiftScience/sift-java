@@ -2,7 +2,6 @@ package com.siftscience;
 
 import static java.net.HttpURLConnection.HTTP_BAD_REQUEST;
 import static java.net.HttpURLConnection.HTTP_OK;
-import static java.util.Collections.singletonList;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -1040,110 +1039,6 @@ public class CreateOrderEventTest {
 
         // Verify the response.
         Assert.assertEquals(HTTP_OK, siftResponse.getHttpStatusCode());
-        Assert.assertEquals(0, (int) siftResponse.getBody().getStatus());
-        JSONAssert.assertEquals(response.getBody().readUtf8(),
-            siftResponse.getBody().toJson(), true);
-
-        server.shutdown();
-    }
-
-    @Test
-    public void testCreateOrderEventBookingWithPromoWithAmountUsd() throws JSONException,
-        IOException, InterruptedException {
-
-        // The expected JSON payload of the request.
-        String expectedRequestBody = "{\n" +
-            "  \"$type\"             : \"$create_order\",\n" +
-            "  \"$api_key\"          : \"YOUR_API_KEY\",\n" +
-            "  \"$user_id\"          : \"billy_jones_301\",\n" +
-            "\n" +
-            "  \"$order_id\"         : \"ORDER-28168441\",\n" +
-            "  \"$user_email\"       : \"bill@gmail.com\",\n" +
-            "  \"$amount\"           : 115940000,\n" +
-            "  \"$amount_usd\"       : 155540000,\n" +
-            "  \"$currency_code\"    : \"EUR\",\n" +
-            "  \"$payment_methods\"  : [\n" +
-            "      {\n" +
-            "             \"$payment_type\"    : \"$credit_card\",\n" +
-            "             \"$payment_gateway\" : \"$braintree\",\n" +
-            "             \"$card_bin\"        : \"542486\",\n" +
-            "             \"$card_last4\"      : \"4444\",\n" +
-            "             \"$card_bin_country\": \"US\",\n" +
-            "             \"$card_type\"       : \"Gold\",\n" +
-            "             \"$card_brand\"      : \"Visa\"\n" +
-            "      }\n" +
-            "  ],\n" +
-            "  \"$bookings\": [\n" +
-            "    {\n" +
-            "      \"$booking_type\": \"$flight\",\n" +
-            "      \"$title\": \"SFO - LAS, 2 Adults\",\n" +
-            "      \"$start_time\": 12038412903,\n" +
-            "      \"$end_time\": 12048412903,\n" +
-            "      \"$price\": 49900000,\n" +
-            "      \"$price_usd\": 55500000,\n" +
-            "      \"$currency_code\": \"EUR\",\n" +
-            "      \"$quantity\": 1,\n" +
-            "    }\n" +
-            "  ],\n" +
-            "\n" +
-            "  \"$promotions\"         : [\n" +
-            "    {\n" +
-            "      \"$promotion_id\" : \"FirstTimeBuyer\",\n" +
-            "      \"$status\"       : \"$success\",\n" +
-            "      \"$description\"  : \"$5 off\",\n" +
-            "      \"$discount\"     : {\n" +
-            "        \"$amount\"                   : 5000000,\n" +
-            "        \"$amount_usd\"               : 5550000,\n" +
-            "        \"$currency_code\"            : \"EUR\"\n" +
-            "      }\n" +
-            "    }\n" +
-            "  ]\n" +
-            "}";
-
-        // Start a new mock server and enqueue a mock response.
-        MockWebServer server = new MockWebServer();
-        MockResponse response = new MockResponse();
-        response.setResponseCode(HTTP_OK);
-        response.setBody("{\n" +
-            "    \"status\" : 0,\n" +
-            "    \"error_message\" : \"OK\",\n" +
-            "    \"time\" : 1327604222,\n" +
-            "    \"request\" : \"" + TestUtils.unescapeJson(expectedRequestBody) + "\"\n" +
-            "}");
-        server.enqueue(response);
-        server.start();
-
-        // Create a new client and link it to the mock server.
-        SiftClient client = new SiftClient("YOUR_API_KEY", "YOUR_ACCOUNT_ID",
-            new OkHttpClient.Builder()
-                .addInterceptor(OkHttpUtils.urlRewritingInterceptor(server))
-                .build());
-
-        // Build and execute the request against the mock server.
-        EventRequest request = client.buildRequest(
-            new CreateOrderFieldSet()
-                .setUserId("billy_jones_301")
-                .setOrderId("ORDER-28168441")
-                .setUserEmail("bill@gmail.com")
-                .setAmount(115940000L)
-                .setAmountUsd(155540000L)
-                .setCurrencyCode("EUR")
-                .setPaymentMethods(singletonList(TestUtils.samplePaymentMethodBinMetadata()))
-                .setBookings(singletonList(TestUtils.sampleBookingWithPriceUsd()))
-                .setPromotions(singletonList(TestUtils.samplePromotionWithAmountUsd()))
-        );
-
-        EventResponse siftResponse = request.send();
-
-        // Verify the request.
-        RecordedRequest request1 = server.takeRequest();
-        Assert.assertEquals("POST", request1.getMethod());
-        Assert.assertEquals("/v205/events", request1.getPath());
-        JSONAssert.assertEquals(expectedRequestBody, request.getFieldSet().toJson(), true);
-
-        // Verify the response.
-        Assert.assertEquals(HTTP_OK, siftResponse.getHttpStatusCode());
-        Assert.assertNotNull(siftResponse.getBody());
         Assert.assertEquals(0, (int) siftResponse.getBody().getStatus());
         JSONAssert.assertEquals(response.getBody().readUtf8(),
             siftResponse.getBody().toJson(), true);

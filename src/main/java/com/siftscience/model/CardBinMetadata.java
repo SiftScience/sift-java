@@ -8,8 +8,8 @@ public class CardBinMetadata {
     @SerializedName("$country") private String country;
     @Expose @SerializedName("$level") private String level;
     @Expose @SerializedName("$type") private String type;
-    @Expose @SerializedName("$brand") private Address brand;
-    @Expose @SerializedName("$bank") private Address bank;
+    @Expose @SerializedName("$brand") private String brand;
+    @Expose @SerializedName("$bank") private String bank;
 
     public String getCountry() {
         return country;
@@ -38,20 +38,20 @@ public class CardBinMetadata {
         return this;
     }
 
-    public Address getBrand() {
+    public String getBrand() {
         return brand;
     }
 
-    public CardBinMetadata setBrand(Address brand) {
+    public CardBinMetadata setBrand(String brand) {
         this.brand = brand;
         return this;
     }
 
-    public Address getBank() {
+    public String getBank() {
         return bank;
     }
 
-    public CardBinMetadata setBank(Address bank) {
+    public CardBinMetadata setBank(String bank) {
         this.bank = bank;
         return this;
     }

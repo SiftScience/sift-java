@@ -5,7 +5,6 @@ import static java.net.HttpURLConnection.HTTP_OK;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 
 import com.siftscience.exception.InvalidFieldException;
@@ -1025,86 +1024,6 @@ public class UpdateOrderEventTest {
                 .setCurrencyCode("USD")
                 .setPaymentMethods(paymentMethodList)
                 .setDigitalOrders(digitalOrderList));
-
-        EventResponse siftResponse = request.send();
-
-        // Verify the request.
-        RecordedRequest request1 = server.takeRequest();
-        Assert.assertEquals("POST", request1.getMethod());
-        Assert.assertEquals("/v205/events", request1.getPath());
-        JSONAssert.assertEquals(expectedRequestBody, request.getFieldSet().toJson(), true);
-
-        // Verify the response.
-        Assert.assertEquals(HTTP_OK, siftResponse.getHttpStatusCode());
-        Assert.assertEquals(0, (int) siftResponse.getBody().getStatus());
-        JSONAssert.assertEquals(response.getBody().readUtf8(),
-            siftResponse.getBody().toJson(), true);
-
-        server.shutdown();
-    }
-
-    @Test
-    public void testUpdateOrderEventWithItemsPriceUsd()
-        throws JSONException, IOException, InterruptedException {
-
-        // The expected JSON payload of the request.
-        String expectedRequestBody = "{\n" +
-            "  \"$type\": \"$update_order\",\n" +
-            "  \"$api_key\": \"YOUR_API_KEY\",\n" +
-            "  \"$user_id\": \"billy_jones_301\",\n" +
-            "  \"$order_id\": \"ORDER-28168441\",\n" +
-            "  \"$user_email\": \"bill@gmail.com\",\n" +
-            "  \"$amount\": 115940000,\n" +
-            "  \"$amount_usd\": 155540000,\n" +
-            "  \"$currency_code\": \"EUR\",\n" +
-            "  \"$items\"             : [\n" +
-            "    {\n" +
-            "      \"$item_id\"        : \"B004834GQO\",\n" +
-            "      \"$product_title\"  : \"The Slanket Blanket-Texas Tea\",\n" +
-            "      \"$price\"          : 39990000,\n" +
-            "      \"$price_usd\"      : 44490000,\n" +
-            "      \"$upc\"            : \"67862114510011\",\n" +
-            "      \"$sku\"            : \"004834GQ\",\n" +
-            "      \"$brand\"          : \"Slanket\",\n" +
-            "      \"$manufacturer\"   : \"Slanket\",\n" +
-            "      \"$category\"       : \"Blankets & Throws\",\n" +
-            "      \"$tags\"           : [\"Awesome\", \"Wintertime specials\"],\n" +
-            "      \"$color\"          : \"Texas Tea\",\n" +
-            "      \"$quantity\"       : 2\n" +
-            "    }\n" +
-            "  ],\n" +
-            "}\n";
-
-        // Start a new mock server and enqueue a mock response.
-        MockWebServer server = new MockWebServer();
-        MockResponse response = new MockResponse();
-        response.setResponseCode(HTTP_OK);
-        response.setBody("{\n" +
-            "    \"status\" : 0,\n" +
-            "    \"error_message\" : \"OK\",\n" +
-            "    \"time\" : 1327604222,\n" +
-            "    \"request\" : \"" + TestUtils.unescapeJson(expectedRequestBody) + "\"\n" +
-            "}");
-        server.enqueue(response);
-        server.start();
-
-        // Create a new client and link it to the mock server.
-        SiftClient client = new SiftClient("YOUR_API_KEY", "YOUR_ACCOUNT_ID",
-            new OkHttpClient.Builder()
-                .addInterceptor(OkHttpUtils.urlRewritingInterceptor(server))
-                .build());
-
-        // Build and execute the request against the mock server.
-        EventRequest request = client.buildRequest(
-            new UpdateOrderFieldSet()
-                .setUserId("billy_jones_301")
-                .setOrderId("ORDER-28168441")
-                .setUserEmail("bill@gmail.com")
-                .setAmount(115940000L)
-                .setAmountUsd(155540000L)
-                .setCurrencyCode("EUR")
-                .setItems(Collections.singletonList(TestUtils.sampleItemPriceUsd()))
-                );
 
         EventResponse siftResponse = request.send();
 

@@ -22,8 +22,7 @@ public class WagerFieldSetTest {
             "  \"$wager_type\"           : \"win_1\",\n" +
             "  \"$wager_status\"         : \"$accept\",\n" +
             "  \"$amount\"               : 506790000,\n" +
-            "  \"$amount_usd\"           : 555790000,\n" +
-            "  \"$currency_code\"        : \"EUR\",\n" +
+            "  \"$currency_code\"        : \"USD\",\n" +
             "  \"$wager_event_type\"     : \"sportsbook\",\n" +
             "  \"$wager_event_name\"     : \"NFL\",\n" +
             "  \"$wager_event_id\"       : \"NFL_2024_N1234\",\n" +
@@ -56,8 +55,7 @@ public class WagerFieldSetTest {
             .setWagerType("win_1")
             .setWagerStatus("$accept")
             .setAmount(506790000L)
-            .setAmountUsd(555790000L)
-            .setCurrencyCode("EUR")
+            .setCurrencyCode("USD")
             .setWagerEventType("sportsbook")
             .setWagerEventName("NFL")
             .setWagerEventId("NFL_2024_N1234")

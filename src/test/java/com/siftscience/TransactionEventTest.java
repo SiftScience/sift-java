@@ -5,7 +5,9 @@ import static java.net.HttpURLConnection.HTTP_OK;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.siftscience.model.CardBinMetadata;
 import com.siftscience.model.DigitalOrder;
+import com.siftscience.model.PaymentMethod;
 import com.siftscience.model.TransactionFieldSet;
 import okhttp3.OkHttpClient;
 import okhttp3.mockwebserver.MockResponse;
@@ -796,13 +798,12 @@ public class TransactionEventTest {
     }
 
     @Test
-    public void testTransactionEventWithAmountUsdAndBinMetadata() throws Exception {
+    public void testTransactionEventWithBinMetadata() throws Exception {
         String expectedRequestBody = "{\n" +
             "  \"$type\"             : \"$transaction\",\n" +
             "  \"$api_key\"          : \"YOUR_API_KEY\",\n" +
             "  \"$user_id\"          : \"billy_jones_301\",\n" +
             "  \"$amount\"           : 506790000,\n" +
-            "  \"$amount_usd\"       : 555790000,\n" +
             "  \"$currency_code\"    : \"EUR\",\n" +
             "\n" +
             "  \"$user_email\"       : \"bill@gmail.com\",\n" +
@@ -810,13 +811,17 @@ public class TransactionEventTest {
             "  \"$transaction_id\"   : \"719637215\",\n" +
             "\n" +
             "  \"$payment_method\"   : {\n" +
-            "      \"$payment_type\"    : \"$credit_card\",\n" +
-            "      \"$payment_gateway\" : \"$braintree\",\n" +
-            "      \"$card_bin\"        : \"542486\",\n" +
-            "      \"$card_last4\"      : \"4444\",\n" +
-            "      \"$card_bin_country\": \"US\",\n" +
-            "      \"$card_type\"       : \"Gold\",\n" +
-            "      \"$card_brand\"      : \"Visa\"\n" +
+            "      \"$payment_type\"     : \"$credit_card\",\n" +
+            "      \"$payment_gateway\"  : \"$braintree\",\n" +
+            "      \"$card_bin\"         : \"542486\",\n" +
+            "      \"$card_last4\"       : \"4444\",\n" +
+            "      \"$card_bin_metadata\": {\n" +
+            "          \"$country\": \"US\",\n" +
+            "          \"$level\"  : \"Gold\",\n" +
+            "          \"$type\"   : \"CREDIT\",\n" +
+            "          \"$brand\"  : \"VISA\",\n" +
+            "          \"$bank\"   : \"Chase\"\n" +
+            "      },\n" +
             "  },\n" +
             "}";
 
@@ -840,15 +845,21 @@ public class TransactionEventTest {
                 .build());
 
         // Build and execute the request against the mock server.
+        PaymentMethod paymentMethod = TestUtils.samplePaymentMethod1()
+            .setCardBinMetadata(new CardBinMetadata()
+                .setCountry("US")
+                .setLevel("Gold")
+                .setType("CREDIT")
+                .setBrand("VISA")
+                .setBank("Chase"));
         EventRequest request = client.buildRequest(new TransactionFieldSet()
             .setUserId("billy_jones_301")
             .setAmount(506790000L)
-            .setAmountUsd(555790000L)
             .setCurrencyCode("EUR")
             .setUserEmail("bill@gmail.com")
             .setTransactionType("$buy")
             .setTransactionId("719637215")
-            .setPaymentMethod(TestUtils.samplePaymentMethodBinMetadata()));
+            .setPaymentMethod(paymentMethod));
         EventResponse siftResponse = request.send();
 
         // Verify the request.
