@@ -6,7 +6,6 @@ import com.google.gson.annotations.SerializedName;
 public class Discount {
     @Expose @SerializedName("$percentage_off") private Double percentageOff;
     @Expose @SerializedName("$amount") private Long amount;
-    @Expose @SerializedName("$amount_usd") private Long amountUsd;
     @Expose @SerializedName("$currency_code") private String currencyCode;
     @Expose @SerializedName("$minimum_purchase_amount") private Long minimumPurchaseAmount;
 
@@ -43,15 +42,6 @@ public class Discount {
 
     public Discount setMinimumPurchaseAmount(Long minimumPurchaseAmount) {
         this.minimumPurchaseAmount = minimumPurchaseAmount;
-        return this;
-    }
-
-    public Long getAmountUsd() {
-        return amountUsd;
-    }
-
-    public Discount setAmountUsd(Long amountUsd) {
-        this.amountUsd = amountUsd;
         return this;
     }
 }

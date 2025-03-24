@@ -7,7 +7,6 @@ import com.google.gson.annotations.SerializedName;
 
 public class TransactionFieldSet extends BaseAppBrowserSiteBrandFieldSet<TransactionFieldSet> {
     @Expose @SerializedName("$amount") private Long amount;
-    @Expose @SerializedName("$amount_usd") private Long amountUsd;
     @Expose @SerializedName("$currency_code") private String currencyCode;
     @Expose @SerializedName(USER_EMAIL) private String userEmail;
     @Expose @SerializedName("$transaction_type") private String transactionType;
@@ -38,6 +37,7 @@ public class TransactionFieldSet extends BaseAppBrowserSiteBrandFieldSet<Transac
     @Expose @SerializedName("$maximum_withdrawal_amount") private Long maximumWithdrawalAmount;
     @Expose @SerializedName("$current_balance") private Long currentBalance;
     @Expose @SerializedName("$new_balance") private Long newBalance;
+
 
     @Override
     public String getEventType() {
@@ -316,15 +316,6 @@ public class TransactionFieldSet extends BaseAppBrowserSiteBrandFieldSet<Transac
 
     public TransactionFieldSet setNewBalance(Long newBalance) {
         this.newBalance = newBalance;
-        return this;
-    }
-
-    public Long getAmountUsd() {
-        return amountUsd;
-    }
-
-    public TransactionFieldSet setAmountUsd(Long amountUsd) {
-        this.amountUsd = amountUsd;
         return this;
     }
 }

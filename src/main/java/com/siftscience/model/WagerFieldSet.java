@@ -9,7 +9,6 @@ public class WagerFieldSet  extends EventsApiRequestFieldSet<WagerFieldSet> {
     @Expose @SerializedName("$wager_type") private String wagerType;
     @Expose @SerializedName("$wager_status") private String wagerStatus;
     @Expose @SerializedName("$amount") private Long amount;
-    @Expose @SerializedName("$amount_usd") private Long amountUsd;
     @Expose @SerializedName("$currency_code") private String currencyCode;
     @Expose @SerializedName("$wager_event_type") private String wagerEventType;
     @Expose @SerializedName("$wager_event_name") private String wagerEventName;
@@ -103,15 +102,6 @@ public class WagerFieldSet  extends EventsApiRequestFieldSet<WagerFieldSet> {
 
     public WagerFieldSet setMinimumWagerAmount(Long minimumWagerAmount) {
         this.minimumWagerAmount = minimumWagerAmount;
-        return this;
-    }
-
-    public Long getAmountUsd() {
-        return amountUsd;
-    }
-
-    public WagerFieldSet setAmountUsd(Long amountUsd) {
-        this.amountUsd = amountUsd;
         return this;
     }
 }

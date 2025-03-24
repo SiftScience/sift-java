@@ -10,7 +10,6 @@ public abstract class BaseOrderFieldSet<T extends BaseOrderFieldSet<T>>
     @Expose @SerializedName("$order_id") private String orderId;
     @Expose @SerializedName(USER_EMAIL) private String userEmail;
     @Expose @SerializedName("$amount") private Long amount;
-    @Expose @SerializedName("$amount_usd") private Long amountUsd;
     @Expose @SerializedName("$currency_code") private String currencyCode;
     @Expose @SerializedName("$billing_address") private Address billingAddress;
     @Expose @SerializedName("$shipping_address") private Address shippingAddress;
@@ -200,15 +199,6 @@ public abstract class BaseOrderFieldSet<T extends BaseOrderFieldSet<T>>
 
     public T setDigitalOrders(List<DigitalOrder> digitalOrders) {
         this.digitalOrders = digitalOrders;
-        return (T) this;
-    }
-
-    public Long getAmountUsd() {
-        return amountUsd;
-    }
-
-    public T setAmountUsd(Long amountUsd) {
-        this.amountUsd = amountUsd;
         return (T) this;
     }
 }
