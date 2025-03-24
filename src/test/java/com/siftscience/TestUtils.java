@@ -45,6 +45,14 @@ public class TestUtils {
                 .setZipCode("03257");
     }
 
+    static Address sampleAddress3() {
+        return new Address()
+                .setCity("Seattle")
+                .setRegion("Washington")
+                .setCountry("US")
+                .setZipCode("98112");
+    }
+
     static PaymentMethod samplePaymentMethod1() {
         return new PaymentMethod()
                 .setPaymentType("$credit_card")
@@ -59,6 +67,7 @@ public class TestUtils {
                 .setCardBin("542486")
                 .setCardLast4("4444");
     }
+
 
     static PaymentMethod samplePaymentMethodAch() {
         return new PaymentMethod()
@@ -261,4 +270,11 @@ public class TestUtils {
                 .setDiscount(sampleDiscount2());
     }
 
+    static List<String> sampleCategories() {
+        List<String> categories = new ArrayList<>();
+        categories.add("Housing");
+        categories.add("Apartments");
+        categories.add("2 Bedrooms");
+        return categories;
+    }
 }
