@@ -4,12 +4,29 @@ import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 public class CardBinMetadata {
-    @Expose
-    @SerializedName("$country") private String country;
+    @Expose @SerializedName("$bank") private String bank;
+    @Expose @SerializedName("$brand") private String brand;
+    @Expose @SerializedName("$country") private String country;
     @Expose @SerializedName("$level") private String level;
     @Expose @SerializedName("$type") private String type;
-    @Expose @SerializedName("$brand") private String brand;
-    @Expose @SerializedName("$bank") private String bank;
+
+    public String getBank() {
+        return bank;
+    }
+
+    public CardBinMetadata setBank(String bank) {
+        this.bank = bank;
+        return this;
+    }
+
+    public String getBrand() {
+        return brand;
+    }
+
+    public CardBinMetadata setBrand(String brand) {
+        this.brand = brand;
+        return this;
+    }
 
     public String getCountry() {
         return country;
@@ -35,24 +52,6 @@ public class CardBinMetadata {
 
     public CardBinMetadata setType(String type) {
         this.type = type;
-        return this;
-    }
-
-    public String getBrand() {
-        return brand;
-    }
-
-    public CardBinMetadata setBrand(String brand) {
-        this.brand = brand;
-        return this;
-    }
-
-    public String getBank() {
-        return bank;
-    }
-
-    public CardBinMetadata setBank(String bank) {
-        this.bank = bank;
         return this;
     }
 }
