@@ -35,6 +35,7 @@ public class PaymentMethod {
     @Expose @SerializedName("$sepa_direct_debit_mandate") private Boolean sepaDirectDebitMandate;
     @Expose @SerializedName("$wallet_address") private String walletAddress;
     @Expose @SerializedName("$wallet_type") private String walletType;
+    @Expose @SerializedName("$card_bin_metadata") private CardBinMetadata cardBinMetadata;
 
     public String getPaymentType() {
         return paymentType;
@@ -303,6 +304,15 @@ public class PaymentMethod {
 
     public PaymentMethod setWalletType(String walletType) {
         this.walletType = walletType;
+        return this;
+    }
+
+    public CardBinMetadata getCardBinMetadata() {
+        return cardBinMetadata;
+    }
+
+    public PaymentMethod setCardBinMetadata(CardBinMetadata cardBinMetadata) {
+        this.cardBinMetadata = cardBinMetadata;
         return this;
     }
 }

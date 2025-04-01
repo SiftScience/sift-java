@@ -5,7 +5,9 @@ import static java.net.HttpURLConnection.HTTP_OK;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.siftscience.model.CardBinMetadata;
 import com.siftscience.model.DigitalOrder;
+import com.siftscience.model.PaymentMethod;
 import com.siftscience.model.TransactionFieldSet;
 import okhttp3.OkHttpClient;
 import okhttp3.mockwebserver.MockResponse;
@@ -778,6 +780,86 @@ public class TransactionEventTest {
             .setCurrentBalance(1000000L)
             .setNewBalance(500000L));
 
+        EventResponse siftResponse = request.send();
+
+        // Verify the request.
+        RecordedRequest request1 = server.takeRequest();
+        Assert.assertEquals("POST", request1.getMethod());
+        Assert.assertEquals("/v205/events", request1.getPath());
+        JSONAssert.assertEquals(expectedRequestBody, request.getFieldSet().toJson(), true);
+
+        // Verify the response.
+        Assert.assertEquals(HTTP_OK, siftResponse.getHttpStatusCode());
+        Assert.assertEquals(0, (int) siftResponse.getBody().getStatus());
+        JSONAssert.assertEquals(response.getBody().readUtf8(),
+            siftResponse.getBody().toJson(), true);
+
+        server.shutdown();
+    }
+
+    @Test
+    public void testTransactionEventWithBinMetadata() throws Exception {
+        String expectedRequestBody = "{\n" +
+            "  \"$type\"             : \"$transaction\",\n" +
+            "  \"$api_key\"          : \"YOUR_API_KEY\",\n" +
+            "  \"$user_id\"          : \"billy_jones_301\",\n" +
+            "  \"$amount\"           : 506790000,\n" +
+            "  \"$currency_code\"    : \"EUR\",\n" +
+            "\n" +
+            "  \"$user_email\"       : \"bill@gmail.com\",\n" +
+            "  \"$transaction_type\" : \"$buy\",\n" +
+            "  \"$transaction_id\"   : \"719637215\",\n" +
+            "\n" +
+            "  \"$payment_method\"   : {\n" +
+            "      \"$payment_type\"     : \"$credit_card\",\n" +
+            "      \"$payment_gateway\"  : \"$braintree\",\n" +
+            "      \"$card_bin\"         : \"542486\",\n" +
+            "      \"$card_last4\"       : \"4444\",\n" +
+            "      \"$card_bin_metadata\": {\n" +
+            "          \"$country\": \"US\",\n" +
+            "          \"$level\"  : \"Gold\",\n" +
+            "          \"$type\"   : \"CREDIT\",\n" +
+            "          \"$brand\"  : \"VISA\",\n" +
+            "          \"$bank\"   : \"Chase\"\n" +
+            "      },\n" +
+            "  },\n" +
+            "}";
+
+        // Start a new mock server and enqueue a mock response.
+        MockWebServer server = new MockWebServer();
+        MockResponse response = new MockResponse();
+        response.setResponseCode(HTTP_OK);
+        response.setBody("{\n" +
+            "    \"status\" : 0,\n" +
+            "    \"error_message\" : \"OK\",\n" +
+            "    \"time\" : 1327604222,\n" +
+            "    \"request\" : \"" + TestUtils.unescapeJson(expectedRequestBody) + "\"\n" +
+            "}");
+        server.enqueue(response);
+        server.start();
+
+        // Create a new client and link it to the mock server.
+        SiftClient client = new SiftClient("YOUR_API_KEY", "YOUR_ACCOUNT_ID",
+            new OkHttpClient.Builder()
+                .addInterceptor(OkHttpUtils.urlRewritingInterceptor(server))
+                .build());
+
+        // Build and execute the request against the mock server.
+        PaymentMethod paymentMethod = TestUtils.samplePaymentMethod1()
+            .setCardBinMetadata(new CardBinMetadata()
+                .setCountry("US")
+                .setLevel("Gold")
+                .setType("CREDIT")
+                .setBrand("VISA")
+                .setBank("Chase"));
+        EventRequest request = client.buildRequest(new TransactionFieldSet()
+            .setUserId("billy_jones_301")
+            .setAmount(506790000L)
+            .setCurrencyCode("EUR")
+            .setUserEmail("bill@gmail.com")
+            .setTransactionType("$buy")
+            .setTransactionId("719637215")
+            .setPaymentMethod(paymentMethod));
         EventResponse siftResponse = request.send();
 
         // Verify the request.

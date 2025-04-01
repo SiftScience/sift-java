@@ -1,3 +1,7 @@
+3.18.0 (2025-03-28)
+=================
+- Added support for `$card_bin_metadata` complex field to `$payment_method`
+
 3.17.1 (2024-12-31)
 =================
 - Included HTTP Status codes into `SiftException` message when possible
