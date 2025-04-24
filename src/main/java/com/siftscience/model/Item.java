@@ -10,6 +10,7 @@ public class Item {
     @Expose @SerializedName("$product_title") private String productTitle;
     @Expose @SerializedName("$price") private Long price;
     @Expose @SerializedName("$currency_code") private String currencyCode;
+    @Expose @SerializedName("$exchange_rate") private ExchangeRate exchangeRate;
     @Expose @SerializedName("$quantity") private Long quantity;
     @Expose @SerializedName("$upc") private String upc;
     @Expose @SerializedName("$sku") private String sku;
@@ -68,6 +69,15 @@ public class Item {
 
     public String getCurrencyCode() {
         return currencyCode;
+    }
+
+    public ExchangeRate getExchangeRate() {
+        return exchangeRate;
+    }
+
+    public Item setExchangeRate(ExchangeRate exchangeRate) {
+        this.exchangeRate = exchangeRate;
+        return this;
     }
 
     public Item setCurrencyCode(String currencyCode) {

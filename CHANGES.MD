@@ -1,3 +1,8 @@
+3.19.0 (2025-04-24)
+=================
+- Added support for `$exchange_rate` complex field to `$transaction`, `$create_order`,
+  `$update_order` and `$wager` events, `$booking`, `$discount` and `$item` event fields 
+
 3.18.0 (2025-03-28)
 =================
 - Added support for `$card_bin_metadata` complex field to `$payment_method`

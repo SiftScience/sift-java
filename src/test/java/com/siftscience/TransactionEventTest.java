@@ -7,6 +7,7 @@ import java.util.List;
 
 import com.siftscience.model.CardBinMetadata;
 import com.siftscience.model.DigitalOrder;
+import com.siftscience.model.ExchangeRate;
 import com.siftscience.model.PaymentMethod;
 import com.siftscience.model.TransactionFieldSet;
 import okhttp3.OkHttpClient;
@@ -860,6 +861,66 @@ public class TransactionEventTest {
             .setTransactionType("$buy")
             .setTransactionId("719637215")
             .setPaymentMethod(paymentMethod));
+        EventResponse siftResponse = request.send();
+
+        // Verify the request.
+        RecordedRequest request1 = server.takeRequest();
+        Assert.assertEquals("POST", request1.getMethod());
+        Assert.assertEquals("/v205/events", request1.getPath());
+        JSONAssert.assertEquals(expectedRequestBody, request.getFieldSet().toJson(), true);
+
+        // Verify the response.
+        Assert.assertEquals(HTTP_OK, siftResponse.getHttpStatusCode());
+        Assert.assertEquals(0, (int) siftResponse.getBody().getStatus());
+        JSONAssert.assertEquals(response.getBody().readUtf8(),
+            siftResponse.getBody().toJson(), true);
+
+        server.shutdown();
+    }
+
+    @Test
+    public void testTransactionEventWithExchangeRate() throws Exception {
+        String expectedRequestBody = "{\n" +
+            "  \"$type\"             : \"$transaction\",\n" +
+            "  \"$api_key\"          : \"YOUR_API_KEY\",\n" +
+            "  \"$user_id\"          : \"billy_jones_301\",\n" +
+            "  \"$user_email\"       : \"bill@gmail.com\",\n" +
+            "  \"$amount\"           : 506790000,\n" +
+            "  \"$currency_code\"    : \"EUR\",\n" +
+            "  \"$exchange_rate\"    : {\n" +
+            "      \"$quote_currency_code\" : \"USD\",\n" +
+            "      \"$rate\"                : 1.15,\n" +
+            "  },\n" +
+            "}";
+
+        // Start a new mock server and enqueue a mock response.
+        MockWebServer server = new MockWebServer();
+        MockResponse response = new MockResponse();
+        response.setResponseCode(HTTP_OK);
+        response.setBody("{\n" +
+            "    \"status\" : 0,\n" +
+            "    \"error_message\" : \"OK\",\n" +
+            "    \"time\" : 1327604222,\n" +
+            "    \"request\" : \"" + TestUtils.unescapeJson(expectedRequestBody) + "\"\n" +
+            "}");
+        server.enqueue(response);
+        server.start();
+
+        // Create a new client and link it to the mock server.
+        SiftClient client = new SiftClient("YOUR_API_KEY", "YOUR_ACCOUNT_ID",
+            new OkHttpClient.Builder()
+                .addInterceptor(OkHttpUtils.urlRewritingInterceptor(server))
+                .build());
+
+        // Build and execute the request against the mock server.
+        EventRequest request = client.buildRequest(new TransactionFieldSet()
+            .setUserId("billy_jones_301")
+            .setUserEmail("bill@gmail.com")
+            .setAmount(506790000L)
+            .setCurrencyCode("EUR")
+            .setExchangeRate(new ExchangeRate()
+                .setQuoteCurrencyCode("USD")
+                .setRate(1.15f)));
         EventResponse siftResponse = request.send();
 
         // Verify the request.

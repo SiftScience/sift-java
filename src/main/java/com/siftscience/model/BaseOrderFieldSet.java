@@ -11,6 +11,7 @@ public abstract class BaseOrderFieldSet<T extends BaseOrderFieldSet<T>>
     @Expose @SerializedName(USER_EMAIL) private String userEmail;
     @Expose @SerializedName("$amount") private Long amount;
     @Expose @SerializedName("$currency_code") private String currencyCode;
+    @Expose @SerializedName("$exchange_rate") private ExchangeRate exchangeRate;
     @Expose @SerializedName("$billing_address") private Address billingAddress;
     @Expose @SerializedName("$shipping_address") private Address shippingAddress;
     @Expose @SerializedName("$payment_methods") private List<PaymentMethod> paymentMethods;
@@ -60,6 +61,15 @@ public abstract class BaseOrderFieldSet<T extends BaseOrderFieldSet<T>>
 
     public T setCurrencyCode(String currencyCode) {
         this.currencyCode = currencyCode;
+        return (T) this;
+    }
+
+    public ExchangeRate getExchangeRate() {
+        return exchangeRate;
+    }
+
+    public T setExchangeRate(ExchangeRate exchangeRate) {
+        this.exchangeRate = exchangeRate;
         return (T) this;
     }
 

@@ -10,6 +10,7 @@ public class WagerFieldSet  extends EventsApiRequestFieldSet<WagerFieldSet> {
     @Expose @SerializedName("$wager_status") private String wagerStatus;
     @Expose @SerializedName("$amount") private Long amount;
     @Expose @SerializedName("$currency_code") private String currencyCode;
+    @Expose @SerializedName("$exchange_rate") private ExchangeRate exchangeRate;
     @Expose @SerializedName("$wager_event_type") private String wagerEventType;
     @Expose @SerializedName("$wager_event_name") private String wagerEventName;
     @Expose @SerializedName("$wager_event_id") private String wagerEventId;
@@ -66,6 +67,15 @@ public class WagerFieldSet  extends EventsApiRequestFieldSet<WagerFieldSet> {
 
     public WagerFieldSet setCurrencyCode(String currencyCode) {
         this.currencyCode = currencyCode;
+        return this;
+    }
+
+    public ExchangeRate getExchangeRate() {
+        return exchangeRate;
+    }
+
+    public WagerFieldSet setExchangeRate(ExchangeRate exchangeRate) {
+        this.exchangeRate = exchangeRate;
         return this;
     }
 

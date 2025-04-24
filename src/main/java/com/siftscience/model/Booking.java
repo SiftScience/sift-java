@@ -12,6 +12,7 @@ public class Booking {
     @Expose @SerializedName("$end_time") private Long endTime;
     @Expose @SerializedName("$price") private Long price;
     @Expose @SerializedName("$currency_code") private String currencyCode;
+    @Expose @SerializedName("$exchange_rate") private ExchangeRate exchangeRate;
     @Expose @SerializedName("$quantity") private Long quantity;
     @Expose @SerializedName("$iata_carrier_code") private String iataCarrierCode;
     @Expose @SerializedName("$guests") private List<Guest> guests;
@@ -74,6 +75,15 @@ public class Booking {
 
     public Booking setCurrencyCode(String currencyCode) {
         this.currencyCode = currencyCode;
+        return this;
+    }
+
+    public ExchangeRate getExchangeRate() {
+        return exchangeRate;
+    }
+
+    public Booking setExchangeRate(ExchangeRate exchangeRate) {
+        this.exchangeRate = exchangeRate;
         return this;
     }
 

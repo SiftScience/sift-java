@@ -7,6 +7,7 @@ public class Discount {
     @Expose @SerializedName("$percentage_off") private Double percentageOff;
     @Expose @SerializedName("$amount") private Long amount;
     @Expose @SerializedName("$currency_code") private String currencyCode;
+    @Expose @SerializedName("$exchange_rate") private ExchangeRate exchangeRate;
     @Expose @SerializedName("$minimum_purchase_amount") private Long minimumPurchaseAmount;
 
     public Double getPercentageOff() {
@@ -33,6 +34,15 @@ public class Discount {
 
     public Discount setCurrencyCode(String currencyCode) {
         this.currencyCode = currencyCode;
+        return this;
+    }
+
+    public ExchangeRate getExchangeRate() {
+        return exchangeRate;
+    }
+
+    public Discount setExchangeRate(ExchangeRate exchangeRate) {
+        this.exchangeRate = exchangeRate;
         return this;
     }
 
