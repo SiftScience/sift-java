@@ -1117,14 +1117,6 @@ public class CreateOrderEventTest {
                 .addInterceptor(OkHttpUtils.urlRewritingInterceptor(server))
                 .build());
 
-        // Payment methods.
-        List<PaymentMethod> paymentMethodList = new ArrayList<>();
-        paymentMethodList.add(TestUtils.samplePaymentMethodWalletFields());
-
-        // Digital orders.
-        List<DigitalOrder> digitalOrderList = new ArrayList<>();
-        digitalOrderList.add(TestUtils.sampleDigitalOrder());
-
         // Build and execute the request against the mock server.
         // It includes booking, promotion and item with ExchangeRate
         EventRequest request = client.buildRequest(
