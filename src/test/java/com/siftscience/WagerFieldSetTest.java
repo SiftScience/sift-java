@@ -2,6 +2,7 @@ package com.siftscience;
 
 import static java.net.HttpURLConnection.HTTP_OK;
 
+import com.siftscience.model.ExchangeRate;
 import com.siftscience.model.WagerFieldSet;
 import okhttp3.OkHttpClient;
 import okhttp3.mockwebserver.MockResponse;
@@ -22,7 +23,11 @@ public class WagerFieldSetTest {
             "  \"$wager_type\"           : \"win_1\",\n" +
             "  \"$wager_status\"         : \"$accept\",\n" +
             "  \"$amount\"               : 506790000,\n" +
-            "  \"$currency_code\"        : \"USD\",\n" +
+            "  \"$currency_code\"        : \"EUR\",\n" +
+            "  \"$exchange_rate\"        : {\n" +
+            "      \"$quote_currency_code\" : \"USD\",\n" +
+            "      \"$rate\"                : 1.15\n" +
+            "  },\n" +
             "  \"$wager_event_type\"     : \"sportsbook\",\n" +
             "  \"$wager_event_name\"     : \"NFL\",\n" +
             "  \"$wager_event_id\"       : \"NFL_2024_N1234\",\n" +
@@ -55,7 +60,10 @@ public class WagerFieldSetTest {
             .setWagerType("win_1")
             .setWagerStatus("$accept")
             .setAmount(506790000L)
-            .setCurrencyCode("USD")
+            .setCurrencyCode("EUR")
+            .setExchangeRate(new ExchangeRate()
+                .setQuoteCurrencyCode("USD")
+                .setRate(1.15f))
             .setWagerEventType("sportsbook")
             .setWagerEventName("NFL")
             .setWagerEventId("NFL_2024_N1234")

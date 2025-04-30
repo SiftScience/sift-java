@@ -2,6 +2,7 @@ package com.siftscience;
 
 import static java.net.HttpURLConnection.HTTP_BAD_REQUEST;
 import static java.net.HttpURLConnection.HTTP_OK;
+import static java.util.Collections.singletonList;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -11,6 +12,7 @@ import com.siftscience.exception.InvalidFieldException;
 import com.siftscience.model.Booking;
 import com.siftscience.model.CreateOrderFieldSet;
 import com.siftscience.model.DigitalOrder;
+import com.siftscience.model.ExchangeRate;
 import com.siftscience.model.Item;
 import com.siftscience.model.PaymentMethod;
 import com.siftscience.model.Promotion;
@@ -1028,6 +1030,108 @@ public class CreateOrderEventTest {
                 .setCurrencyCode("USD")
                 .setPaymentMethods(paymentMethodList)
                 .setDigitalOrders(digitalOrderList));
+
+        EventResponse siftResponse = request.send();
+
+        // Verify the request.
+        RecordedRequest request1 = server.takeRequest();
+        Assert.assertEquals("POST", request1.getMethod());
+        Assert.assertEquals("/v205/events", request1.getPath());
+        JSONAssert.assertEquals(expectedRequestBody, request.getFieldSet().toJson(), true);
+
+        // Verify the response.
+        Assert.assertEquals(HTTP_OK, siftResponse.getHttpStatusCode());
+        Assert.assertEquals(0, (int) siftResponse.getBody().getStatus());
+        JSONAssert.assertEquals(response.getBody().readUtf8(),
+            siftResponse.getBody().toJson(), true);
+
+        server.shutdown();
+    }
+
+    @Test
+    public void testCreateOrderEventWithExchangeRate() throws JSONException, IOException,
+        InterruptedException {
+
+        // The expected JSON payload of the request.
+        String expectedRequestBody = "{\n" +
+            "  \"$type\"          : \"$create_order\",\n" +
+            "  \"$api_key\"       : \"YOUR_API_KEY\",\n" +
+            "  \"$user_id\"       : \"billy_jones_301\",\n" +
+            "  \"$order_id\"      : \"ORDER-28168441\",\n" +
+            "  \"$amount\"        : 115940000,\n" +
+            "  \"$currency_code\" : \"EUR\",\n" +
+            "  \"$exchange_rate\" : {\n" +
+            "      \"$quote_currency_code\" : \"USD\",\n" +
+            "      \"$rate\"                : 1.15\n" +
+            "  },\n" +
+            "  \"$bookings\" : [\n" +
+            "    {\n" +
+            "      \"$price\"         : 49900000,\n" +
+            "      \"$currency_code\" : \"EUR\",\n" +
+            "      \"$exchange_rate\" : {\n" +
+            "          \"$quote_currency_code\" : \"USD\",\n" +
+            "          \"$rate\"                : 1.15\n" +
+            "      }\n" +
+            "    }\n" +
+            "  ],\n" +
+            "  \"$promotions\" : [\n" +
+            "    {\n" +
+            "      \"$discount\" : {\n" +
+            "        \"$amount\"        : 5000000,\n" +
+            "        \"$currency_code\" : \"EUR\",\n" +
+            "        \"$exchange_rate\" : {\n" +
+            "            \"$quote_currency_code\" : \"USD\",\n" +
+            "            \"$rate\"                : 1.15\n" +
+            "        }\n" +
+            "      }\n" +
+            "    }\n" +
+            "  ],\n" +
+            "  \"$items\" : [\n" +
+            "    {\n" +
+            "      \"$price\"         : 39990000,\n" +
+            "      \"$currency_code\" : \"EUR\",\n" +
+            "      \"$exchange_rate\" : {\n" +
+            "          \"$quote_currency_code\" : \"USD\",\n" +
+            "          \"$rate\"                : 1.15\n" +
+            "      }\n" +
+            "    }\n" +
+            "  ]\n" +
+            "}\n";
+
+        // Start a new mock server and enqueue a mock response.
+        MockWebServer server = new MockWebServer();
+        MockResponse response = new MockResponse();
+        response.setResponseCode(HTTP_OK);
+        response.setBody("{\n" +
+            "    \"status\" : 0,\n" +
+            "    \"error_message\" : \"OK\",\n" +
+            "    \"time\" : 1327604222,\n" +
+            "    \"request\" : \"" + TestUtils.unescapeJson(expectedRequestBody) + "\"\n" +
+            "}");
+        server.enqueue(response);
+        server.start();
+
+        // Create a new client and link it to the mock server.
+        SiftClient client = new SiftClient("YOUR_API_KEY", "YOUR_ACCOUNT_ID",
+            new OkHttpClient.Builder()
+                .addInterceptor(OkHttpUtils.urlRewritingInterceptor(server))
+                .build());
+
+        // Build and execute the request against the mock server.
+        // It includes booking, promotion and item with ExchangeRate
+        EventRequest request = client.buildRequest(
+            new CreateOrderFieldSet()
+                .setUserId("billy_jones_301")
+                .setOrderId("ORDER-28168441")
+                .setAmount(115940000L)
+                .setCurrencyCode("EUR")
+                .setExchangeRate(new ExchangeRate()
+                    .setQuoteCurrencyCode("USD")
+                    .setRate(1.15f))
+                .setBookings(singletonList(TestUtils.sampleBookingWithExchangeRate()))
+                .setPromotions(singletonList(TestUtils.samplePromotionWithExchangeRate()))
+                .setItems(singletonList(TestUtils.sampleItemWithExchangeRate()))
+        );
 
         EventResponse siftResponse = request.send();
 

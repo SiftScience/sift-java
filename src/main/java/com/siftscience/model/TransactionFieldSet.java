@@ -8,6 +8,7 @@ import com.google.gson.annotations.SerializedName;
 public class TransactionFieldSet extends BaseAppBrowserSiteBrandFieldSet<TransactionFieldSet> {
     @Expose @SerializedName("$amount") private Long amount;
     @Expose @SerializedName("$currency_code") private String currencyCode;
+    @Expose @SerializedName("$exchange_rate") private ExchangeRate exchangeRate;
     @Expose @SerializedName(USER_EMAIL) private String userEmail;
     @Expose @SerializedName("$transaction_type") private String transactionType;
     @Expose @SerializedName("$transaction_status") private String transactionStatus;
@@ -63,6 +64,15 @@ public class TransactionFieldSet extends BaseAppBrowserSiteBrandFieldSet<Transac
 
     public TransactionFieldSet setCurrencyCode(String currencyCode) {
         this.currencyCode = currencyCode;
+        return this;
+    }
+
+    public ExchangeRate getExchangeRate() {
+        return exchangeRate;
+    }
+
+    public TransactionFieldSet setExchangeRate(ExchangeRate exchangeRate) {
+        this.exchangeRate = exchangeRate;
         return this;
     }
 

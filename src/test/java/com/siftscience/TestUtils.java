@@ -5,6 +5,7 @@ import com.siftscience.model.Booking;
 import com.siftscience.model.CreditPoint;
 import com.siftscience.model.DigitalOrder;
 import com.siftscience.model.Discount;
+import com.siftscience.model.ExchangeRate;
 import com.siftscience.model.Guest;
 import com.siftscience.model.Item;
 import com.siftscience.model.MerchantProfile;
@@ -170,6 +171,15 @@ public class TestUtils {
                 .setQuantity(2L);
     }
 
+    static Item sampleItemWithExchangeRate() {
+        return new Item()
+            .setPrice(39990000L)
+            .setCurrencyCode("EUR")
+            .setExchangeRate(new ExchangeRate()
+                .setQuoteCurrencyCode("USD")
+                .setRate(1.15f));
+    }
+
     static Booking sampleBooking() {
         List<Guest> guests = new ArrayList<>();
         guests.add(sampleGuest1());
@@ -190,6 +200,15 @@ public class TestUtils {
             .setIataCarrierCode("AS")
             .setTags(sampleTags3())
             .setQuantity(1L);
+    }
+
+    static Booking sampleBookingWithExchangeRate() {
+        return new Booking()
+            .setPrice(49900000L)
+            .setCurrencyCode("EUR")
+            .setExchangeRate(new ExchangeRate()
+                .setQuoteCurrencyCode("USD")
+                .setRate(1.15f));
     }
 
     static OrderedFrom sampleOrderedFrom() {
@@ -239,6 +258,15 @@ public class TestUtils {
                 .setCurrencyCode("USD");
     }
 
+    static Discount sampleDiscountWithExchangeRate() {
+        return new Discount()
+            .setAmount(5000000L)
+            .setCurrencyCode("EUR")
+            .setExchangeRate(new ExchangeRate()
+                .setQuoteCurrencyCode("USD")
+                .setRate(1.15f));
+    }
+
     static CreditPoint sampleCreditPoint() {
         return new CreditPoint()
                 .setAmount(100L)
@@ -268,6 +296,11 @@ public class TestUtils {
                 .setDescription("$5 off your first 5 rides")
                 .setReferrerUserId("elon-m93903")
                 .setDiscount(sampleDiscount2());
+    }
+
+    static Promotion samplePromotionWithExchangeRate() {
+        return new Promotion()
+            .setDiscount(sampleDiscountWithExchangeRate());
     }
 
     static List<String> sampleCategories() {
