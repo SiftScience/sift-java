@@ -124,12 +124,12 @@ public class CreateOrderEventTest {
             "          \"$vessel_number\": \"LH454\",\n" +
             "          \"$fare_class\": \"Premium Economy\",\n" +
             "          \"$departure_airport_code\": \"SFO\",\n" +
-            "          \"$arrival_airport_code\": \"LAS\"\n" +
+            "          \"$arrival_airport_code\": \"LAS\",\n" +
+            "          \"$iata_carrier_code\": \"AS\"\n" +
             "        }\n" +
             "      ],\n" +
             "      \"$price\": 49900000,\n" +
             "      \"$currency_code\": \"USD\",\n" +
-            "      \"$iata_carrier_code\": \"AS\",\n" +
             "      \"$quantity\": 1,\n" +
             "      \"$tags\": [\n" +
             "        \"team-123\",\n" +
