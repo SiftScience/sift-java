@@ -6,6 +6,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import com.siftscience.model.PaymentMethod;
+import com.siftscience.model.Promotion;
 import com.siftscience.model.UpdateAccountFieldSet;
 import okhttp3.OkHttpClient;
 import okhttp3.mockwebserver.MockResponse;
@@ -55,6 +56,17 @@ public class UpdateAccountEventTest {
                 "      \"$country\"       : \"US\",\n" +
                 "      \"$zipcode\"       : \"03257\"\n" +
                 "  },\n" +
+                "  \"$promotions\"       : [\n" +
+                "    {\n" +
+                "      \"$promotion_id\"     : \"FriendReferral\",\n" +
+                "      \"$status\"           : \"$success\",\n" +
+                "      \"$referrer_user_id\" : \"janejane102\",\n" +
+                "      \"$credit_point\"     : {\n" +
+                "        \"$amount\"             : 100,\n" +
+                "        \"$credit_point_type\"  : \"account karma\"\n" +
+                "      }\n" +
+                "    }\n" +
+                "  ],\n" +
                 "  \"$social_sign_on_type\"   : \"$twitter\",\n" +
                 "  \"email_confirmed_status\"  : \"$success\",\n" +
                 "  \"phone_confirmed_status\"  : \"$success\",\n" +
@@ -99,6 +111,10 @@ public class UpdateAccountEventTest {
         List<PaymentMethod> paymentMethodList = new ArrayList<>();
         paymentMethodList.add(TestUtils.samplePaymentMethod2());
 
+        // Promotions.
+        List<Promotion> promotionList = new ArrayList<>();
+        promotionList.add(TestUtils.samplePromotion2());
+
         // Build and execute the request against the mock server.
         SiftRequest request = client.buildRequest(
                 new UpdateAccountFieldSet()
@@ -111,6 +127,7 @@ public class UpdateAccountEventTest {
                         .setPaymentMethods(paymentMethodList)
                         .setBillingAddress(TestUtils.sampleAddress2())
                         .setShippingAddress(TestUtils.sampleAddress2())
+                        .setPromotions(promotionList)
                         .setSocialSignOnType("$twitter")
                         .setCustomField("email_confirmed_status", "$success")
                         .setCustomField("phone_confirmed_status", "$success")

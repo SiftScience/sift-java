@@ -1,3 +1,9 @@
+3.20.0 (2025-05-12)
+=================
+- Added support for `$promotions` complex field to `$update_account` event fields
+- Added support for `$iata_carrier_code` to the `$segment` complex field
+- Removed support for `$iata_carrier_code` in the `$booking` complex field
+
 3.19.0 (2025-04-24)
 =================
 - Added support for `$exchange_rate` complex field to `$transaction`, `$create_order`,

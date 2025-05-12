@@ -197,7 +197,6 @@ public class TestUtils {
             .setSegments(segments)
             .setPrice(49900000L)
             .setCurrencyCode("USD")
-            .setIataCarrierCode("AS")
             .setTags(sampleTags3())
             .setQuantity(1L);
     }
@@ -243,8 +242,10 @@ public class TestUtils {
             .setVesselNumber("LH454")
             .setFareClass("Premium Economy")
             .setDepartureAirportCode("SFO")
-            .setArrivalAirportCode("LAS");
+            .setArrivalAirportCode("LAS")
+            .setIataCarrierCode("AS");
     }
+
     static Discount sampleDiscount1() {
         return new Discount()
                 .setAmount(5000000L)
