@@ -1,4 +1,4 @@
-3.20.0 (2025-05-07)
+3.20.0 (2025-05-12)
 =================
 - Added support for `$promotions` complex field to `$update_account` event fields
 - Added support for `$iata_carrier_code` to the `$segment` complex field
