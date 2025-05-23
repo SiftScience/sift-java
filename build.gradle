@@ -38,12 +38,12 @@ buildscript {
 }
 
 task sourceJar(type: Jar) {
-    classifier "sources"
+    archiveClassifier.set("sources")
     from sourceSets.main.allSource
 }
 
 task javaDocJar(type: Jar) {
-    classifier "javadoc"
+    archiveClassifier.set("javadoc")
     from javadoc
 }
 
