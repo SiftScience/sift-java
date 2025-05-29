@@ -1,0 +1,11 @@
+version: 2
+updates:
+  - package-ecosystem: "gradle"
+    directory: "/"                # Location of your `build.gradle` or `build.gradle.kts`
+    schedule:
+      interval: "daily"          # Options: "daily", "weekly", "monthly"
+    open-pull-requests-limit: 10
+    rebase-strategy: "auto"
+    commit-message:
+      prefix: "chore"
+      include: "scope"
