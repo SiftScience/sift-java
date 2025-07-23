@@ -31,7 +31,7 @@ public class UpdatePasswordEventTest {
                 "      \"$device_manufacturer\" : \"Apple\",\n" +
                 "      \"$device_model\" : \"iPhone 4,2\",\n" +
                 "      \"$device_unique_id\" : \"A3D261E4-DE0A-470B-9E4A-720F3D3D22E6\",\n" +
-                "      \"$app_version\" : \"3.2.7\",\n" +
+                "      \"$app_version\" : \"3.2.7\"\n" +
                 "  },\n" +
                 " \"$reason\" : \"$forced_reset\",\n" +
                 " \"$status\" : \"$success\",\n" +

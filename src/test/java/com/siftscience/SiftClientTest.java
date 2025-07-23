@@ -310,7 +310,7 @@ public class SiftClientTest {
                 "\"$amount\": 5," +
                 "\"$session_id\": \"foo\"," +
                 "\"custom1\": \"blah\"," +
-                "\"custom3\": 99," +
+                "\"custom3\": 99" +
         "}", fieldSet.toJson(), true);
     }
 

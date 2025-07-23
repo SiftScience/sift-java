@@ -383,7 +383,7 @@ public class TransactionEventTest {
                 "      \"$region\"       : \"New Hampshire\",\n" +
                 "      \"$country\"      : \"US\",\n" +
                 "      \"$zipcode\"      : \"03257\"\n" +
-                "  },\n" +
+                "  }\n" +
                 "}";
 
         // Start a new mock server and enqueue a mock response.
@@ -469,7 +469,7 @@ public class TransactionEventTest {
                 "  },\n" +
                 "  \"$merchant_initiated_transaction\"   : true,\n" +
                 "  \"$triggered_3ds\"   : \"$processor\",\n" +
-                "  \"$status_3ds\"   : \"$successful\",\n" +
+                "  \"$status_3ds\"   : \"$successful\"\n" +
                 "}";
 
         // Start a new mock server and enqueue a mock response.
@@ -539,7 +539,7 @@ public class TransactionEventTest {
                 "      \"$shortened_iban_first6\"     : \"FR7630\",\n" +
                 "      \"$shortened_iban_last4\"      : \"1234\",\n" +
                 "      \"$sepa_direct_debit_mandate\" : true\n" +
-                "  },\n" +
+                "  }\n" +
                 "}";
 
         // Start a new mock server and enqueue a mock response.
@@ -602,7 +602,7 @@ public class TransactionEventTest {
             "\n" +
             "  \"$payment_method\"   : {\n" +
             "      \"$wallet_address\" : \"ZplYVmchAoywfMvC8jCiKlBLfKSBiFtHU6\",\n" +
-            "      \"$wallet_type\"    : \"$crypto\",\n" +
+            "      \"$wallet_type\"    : \"$crypto\"\n" +
             "  },\n" +
             "  \"$digital_orders\" : [\n" +
             "    {\n" +
@@ -610,11 +610,11 @@ public class TransactionEventTest {
             "      \"$pair\"          : \"BTC_USD\",\n" +
             "      \"$asset_type\"    : \"$crypto\",\n" +
             "      \"$order_type\"    : \"$market\",\n" +
-            "      \"$volume\"        : \"6.0\",\n" +
+            "      \"$volume\"        : \"6.0\"\n" +
             "    }\n" +
             "  ],\n" +
             "  \"$receiver_wallet_address\"   : \"jx17gVqSyo9m4MrhuhuYEUXdCicdof85Bl\",\n" +
-            "  \"$receiver_external_address\" : true,\n" +
+            "  \"$receiver_external_address\" : true\n" +
             "}";
 
         // Start a new mock server and enqueue a mock response.
@@ -683,7 +683,7 @@ public class TransactionEventTest {
             "  \"$minimum_deposit_amount\" : 5000,\n" +
             "  \"$maximum_deposit_amount\" : 100000000,\n" +
             "  \"$current_balance\"        : 500000,\n" +
-            "  \"$new_balance\"            : 1000000,\n" +
+            "  \"$new_balance\"            : 1000000\n" +
             "}";
 
         // Start a new mock server and enqueue a mock response.
@@ -747,7 +747,7 @@ public class TransactionEventTest {
             "  \"$minimum_withdrawal_amount\" : 5000,\n" +
             "  \"$maximum_withdrawal_amount\" : 100000000,\n" +
             "  \"$current_balance\"           : 1000000,\n" +
-            "  \"$new_balance\"               : 500000,\n" +
+            "  \"$new_balance\"               : 500000\n" +
             "}";
 
         // Start a new mock server and enqueue a mock response.
@@ -822,8 +822,8 @@ public class TransactionEventTest {
             "          \"$type\"   : \"CREDIT\",\n" +
             "          \"$brand\"  : \"VISA\",\n" +
             "          \"$bank\"   : \"Chase\"\n" +
-            "      },\n" +
-            "  },\n" +
+            "      }\n" +
+            "  }\n" +
             "}";
 
         // Start a new mock server and enqueue a mock response.
@@ -889,8 +889,8 @@ public class TransactionEventTest {
             "  \"$currency_code\"    : \"EUR\",\n" +
             "  \"$exchange_rate\"    : {\n" +
             "      \"$quote_currency_code\" : \"USD\",\n" +
-            "      \"$rate\"                : 1.15,\n" +
-            "  },\n" +
+            "      \"$rate\"                : 1.15\n" +
+            "  }\n" +
             "}";
 
         // Start a new mock server and enqueue a mock response.

@@ -900,7 +900,7 @@ public class UpdateOrderEventTest {
             "      \"$region\"    : \"New Hampshire\",\n" +
             "      \"$zipcode\"   : \"03257\"\n" +
             "    }\n" +
-            "  },\n" +
+            "  }\n" +
             "}\n";
 
         // Start a new mock server and enqueue a mock response.
@@ -972,7 +972,7 @@ public class UpdateOrderEventTest {
             "  \"$payment_methods\": [\n" +
             "    {\n" +
             "      \"$wallet_address\": \"ZplYVmchAoywfMvC8jCiKlBLfKSBiFtHU6\",\n" +
-            "      \"$wallet_type\": \"$crypto\",\n" +
+            "      \"$wallet_type\": \"$crypto\"\n" +
             "    }\n" +
             "  ],\n" +
             "  \"$digital_orders\" : [\n" +
@@ -981,9 +981,9 @@ public class UpdateOrderEventTest {
             "      \"$pair\"          : \"BTC_USD\",\n" +
             "      \"$asset_type\"    : \"$crypto\",\n" +
             "      \"$order_type\"    : \"$market\",\n" +
-            "      \"$volume\"        : \"6.0\",\n" +
+            "      \"$volume\"        : \"6.0\"\n" +
             "    }\n" +
-            "  ],\n" +
+            "  ]\n" +
             "}\n";
 
         // Start a new mock server and enqueue a mock response.
