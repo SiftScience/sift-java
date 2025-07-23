@@ -31,7 +31,7 @@ public class WagerFieldSetTest {
             "  \"$wager_event_type\"     : \"sportsbook\",\n" +
             "  \"$wager_event_name\"     : \"NFL\",\n" +
             "  \"$wager_event_id\"       : \"NFL_2024_N1234\",\n" +
-            "  \"$minimum_wager_amount\" : 1000000,\n" +
+            "  \"$minimum_wager_amount\" : 1000000\n" +
             "}";
 
         // Start a new mock server and enqueue a mock response.

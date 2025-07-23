@@ -163,7 +163,7 @@ public class ContentEventTest {
             "           \"$link\": \"https://www.domain.com/file.png\",\n" +
             "           \"$description\": \"Billy's picture\"\n" +
             "       }],\n" +
-            "       \"$expiration_time\": 1549063157000,\n" +
+            "       \"$expiration_time\": 1549063157000\n" +
             "   },\n" +
             "  \"$verification_phone_number\" : \"+12345678901\"\n" +
             "}";
@@ -271,7 +271,7 @@ public class ContentEventTest {
             "           \"$md5_hash\": \"aflshdfbalsubdf3234sfdkjb\",\n" +
             "           \"$link\": \"https://www.domain.com/file.png\",\n" +
             "           \"$description\": \"My hike today!\"\n" +
-            "       }],\n" +
+            "       }]\n" +
             "   }," +
             "  \"$verification_phone_number\" : \"+12345678901\"\n" +
             "}";
@@ -363,7 +363,7 @@ public class ContentEventTest {
             "           \"$md5_hash\": \"aflshdfbalsubdf3234sfdkjb\",\n" +
             "           \"$link\": \"https://www.domain.com/file.png\",\n" +
             "           \"$description\": \"Alex’s picture\"\n" +
-            "       }],\n" +
+            "       }]\n" +
             "   }," +
             "  \"$verification_phone_number\" : \"+12345678901\"\n" +
             "}";
@@ -784,7 +784,7 @@ public class ContentEventTest {
             "           \"$link\": \"https://www.domain.com/file.png\",\n" +
             "           \"$description\": \"Billy's picture\"\n" +
             "       }],\n" +
-            "       \"$expiration_time\": 1549063157000,\n" +
+            "       \"$expiration_time\": 1549063157000\n" +
             "   },\n" +
             "  \"$verification_phone_number\" : \"+12345678901\"\n" +
             "}";
@@ -894,7 +894,7 @@ public class ContentEventTest {
             "           \"$md5_hash\": \"aflshdfbalsubdf3234sfdkjb\",\n" +
             "           \"$link\": \"https://www.domain.com/file.png\",\n" +
             "           \"$description\": \"My hike today!\"\n" +
-            "       }],\n" +
+            "       }]\n" +
             "   }," +
             "  \"$verification_phone_number\" : \"+12345678901\"\n" +
             "}";
@@ -988,7 +988,7 @@ public class ContentEventTest {
             "           \"$md5_hash\": \"aflshdfbalsubdf3234sfdkjb\",\n" +
             "           \"$link\": \"https://www.domain.com/file.png\",\n" +
             "           \"$description\": \"Alex’s picture\"\n" +
-            "       }],\n" +
+            "       }]\n" +
             "   }," +
             "  \"$verification_phone_number\" : \"+12345678901\"\n" +
             "}";

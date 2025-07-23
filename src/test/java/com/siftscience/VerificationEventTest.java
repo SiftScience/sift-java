@@ -33,7 +33,7 @@ public class VerificationEventTest {
                 "      \"$device_manufacturer\" : \"Apple\",\n" +
                 "      \"$device_model\" : \"iPhone 4,2\",\n" +
                 "      \"$device_unique_id\" : \"A3D261E4-DE0A-470B-9E4A-720F3D3D22E6\",\n" +
-                "      \"$app_version\" : \"3.2.7\",\n" +
+                "      \"$app_version\" : \"3.2.7\"\n" +
                 "  },\n" +
                 "  \"$status\"       : \"$pending\",\n" +
                 "  \"$verification_type\" : \"$sms\",\n" +
@@ -41,7 +41,7 @@ public class VerificationEventTest {
                 "  \"$verified_event\" : \"" + verifiedEvent + "\",\n" +
                 "  \"$verified_entity_id\" : \"" + verifiedEntityId + "\",\n" +
                 "  \"$reason\" : \"" + reason + "\",\n" +
-                "  \"$ip\" : \"128.148.1.135\",\n" +
+                "  \"$ip\" : \"128.148.1.135\"\n" +
                 "}";
 
         // Start a new mock server and enqueue a mock response.
