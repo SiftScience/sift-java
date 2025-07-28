@@ -1,3 +1,10 @@
+3.21.0 (2025-07-28)
+=================
+- Bumped version for `gson` from `2.10` to `2.13.1`
+- Bumped version for `okhttp` from `4.12.0` to `5.1.0`
+- Bumped version for `okio` from `3.6.0` to `3.15.0`
+- Bumped version for `commons-codec` from `1.15.0` to `1.19.0`
+
 3.20.0 (2025-05-12)
 =================
 - Added support for `$promotions` complex field to `$update_account` event fields
