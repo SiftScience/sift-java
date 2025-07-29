@@ -1,4 +1,4 @@
-3.21.1 (2025-07-29)
+3.21.2 (2025-07-29)
 =================
 - Bumped version for `gson` from `2.10` to `2.13.1`
 - Bumped version for `okhttp` from `4.12.0` to `5.1.0`
