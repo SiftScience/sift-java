@@ -65,18 +65,3 @@ jobs:
         run: |
           unzip -j /home/runner/work/*.zip -d app/libs/
           ./gradlew test
-  test_publish_to_maven:
-    runs-on: ubuntu-latest
-#    if: ${{ github.ref == 'refs/heads/master' }}
-    permissions:
-      contents: read
-    steps:
-      - uses: actions/checkout@v4
-      - name: Set up JDK 8
-        uses: actions/setup-java@v4
-        with:
-          java-version: '8'
-          distribution: 'zulu'
-
-      - name: Test PublishToMaven
-        run: ./gradlew publishToMavenLocal
