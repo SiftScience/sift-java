@@ -5,7 +5,7 @@ apply plugin: 'signing'
 apply plugin: 'java-library-distribution'
 
 group = 'com.siftscience'
-version = '3.21.1'
+version = '3.21.2'
 
 repositories {
     mavenCentral()
@@ -158,7 +158,7 @@ publishing {
     repositories {
         maven {
             name 'staging'
-            url 'https://oss.sonatype.org/service/local/staging/deploy/maven2/'
+            url = 'https://ossrh-staging-api.central.sonatype.com/service/local/staging/deploy/maven2/'
 
             credentials {
                 username = "${sonatypeUsername}"
