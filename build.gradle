@@ -106,7 +106,7 @@ publishing {
             pom.packaging = "jar"
 
             pom.withXml {
-                configurations.compile.resolvedConfiguration.firstLevelModuleDependencies.each {
+                configurations.runtimeClasspath.resolvedConfiguration.firstLevelModuleDependencies.each {
                     dep ->
                         asNode().dependencies[0].dependency.find {
                             it.artifactId[0].text() == dep.moduleName &&
