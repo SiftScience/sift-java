@@ -135,23 +135,23 @@ publishing {
             }
 
             // Sign the artifacts.
-            project.tasks.signArchives.signatureFiles.each {
-                artifact(it) {
-                    def matcher = it.file =~ /-(sources|javadoc)\.jar\.asc$/
-                    def zipMatcher = it.file =~ /\.(zip|tar)\.asc$/
-                    def extensionPrefix = 'jar'
-//                    if (zipMatcher.find()) {
-//                        extensionPrefix = zipMatcher.group(1)
+//            project.tasks.signArchives.signatureFiles.each {
+//                artifact(it) {
+//                    def matcher = it.file =~ /-(sources|javadoc)\.jar\.asc$/
+//                    def zipMatcher = it.file =~ /\.(zip|tar)\.asc$/
+//                    def extensionPrefix = 'jar'
+////                    if (zipMatcher.find()) {
+////                        extensionPrefix = zipMatcher.group(1)
+////                    }
+//                    if (matcher.find()) {
+//                        classifier = matcher.group(1)
+//                    } else {
+//                        classifier = null
 //                    }
-                    if (matcher.find()) {
-                        classifier = matcher.group(1)
-                    } else {
-                        classifier = null
-                    }
-
-                    extension = extensionPrefix + '.asc'
-                }
-            }
+//
+//                    extension = extensionPrefix + '.asc'
+//                }
+//            }
         }
     }
 
@@ -168,10 +168,18 @@ publishing {
     }
 }
 
-model {
-    tasks.publishJarPublicationToStagingRepository {
-        dependsOn(project.tasks.signArchives)
-    }
+//model {
+//    tasks.publishJarPublicationToStagingRepository {
+//        dependsOn(project.tasks.signArchives)
+//    }
+//}
+
+signing {
+    required { gradle.taskGraph.hasTask("publish") }
+    def signingKey = "${signing.keyId}"
+    def signingPassword = "${signing.password}"
+    useInMemoryPgpKeys(signingKey, signingPassword)
+    sign publishing.publications.jar
 }
 
 distributions {
