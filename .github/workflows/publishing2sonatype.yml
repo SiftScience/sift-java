@@ -37,6 +37,7 @@ jobs:
       - name: Sonatype Publish
         run: |
           ./gradlew --info publishJarPublicationToStagingRepository
+          ls -la build/libs/
           BEARER=$(printf "${{ secrets.SUSER }}:${{ secrets.SPASSWORD }}" | base64)
           curl --request POST \
             --verbose \
