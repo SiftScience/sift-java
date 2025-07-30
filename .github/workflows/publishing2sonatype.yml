@@ -36,9 +36,9 @@ jobs:
           sed -i -e 's|.*sonatypePassword.*|                password = "${{ secrets.SPASSWORD }}"|' ./build.gradle 
       - name: Sonatype Publish
         run: |
-          ./gradlew -S publishJarPublicationToStagingRepository
           BEARER=$(printf "${{ secrets.SUSER }}:${{ secrets.SPASSWORD }}" | base64)
           curl --request POST \
             --verbose \
             --header "Authorization: Bearer ${BEARER}" \
             https://ossrh-staging-api.central.sonatype.com/manual/upload/defaultRepository/${{ secrets.SREPO_ID }}
+          ./gradlew -S publishJarPublicationToStagingRepository
