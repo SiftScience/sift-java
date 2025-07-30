@@ -158,13 +158,12 @@ publishing {
     repositories {
         maven {
             name 'staging'
-            url = 'https://central.sonatype.com/api/v1/publisher/deployments/download/'
+            url = 'https://central.sonatype.com/api/v1/publisher'
 
-            credentials(AuthHeaderValue)
-            authentication {
-                header(AuthHeaderName)
+            credentials {
+                username = "${sonatypeUsername}"
+                password = "${sonatypePassword}"
             }
-
         }
     }
 }
