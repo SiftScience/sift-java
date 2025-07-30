@@ -5,8 +5,8 @@ buildscript {
 }
 
 plugins {
-//    id 'org.jreleaser' version '1.19.0'
-    id 'io.github.gradle-nexus.publish-plugin' version '2.0.0'
+    id 'org.jreleaser' version '1.19.0'
+//    id 'io.github.gradle-nexus.publish-plugin' version '2.0.0'
 }
 
 apply plugin: 'java'
@@ -163,11 +163,11 @@ publishing {
             }
         }
     }
-//    repositories {
-//        maven {
-//            url = layout.buildDirectory.dir('staging-deploy')
-//        }
-//    }
+    repositories {
+        maven {
+            url = layout.buildDirectory.dir('staging-deploy')
+        }
+    }
 }
 //    repositories {
 //        maven {
@@ -182,11 +182,29 @@ publishing {
 //    }
 
 
-nexusPublishing {
-    repositories {
-        // see https://central.sonatype.org/publish/publish-portal-ossrh-staging-api/#configuration
-        sonatype {
-            nexusUrl.set(uri("https://ossrh-staging-api.central.sonatype.com/service/local/"))
+//nexusPublishing {
+//    repositories {
+//        // see https://central.sonatype.org/publish/publish-portal-ossrh-staging-api/#configuration
+//        sonatype {
+//            nexusUrl.set(uri("https://ossrh-staging-api.central.sonatype.com/service/local/"))
+//        }
+//    }
+//}
+
+jreleaser {
+    signing {
+        active = 'ALWAYS'
+        armored = true
+    }
+    deploy {
+        maven {
+            mavenCentral {
+                sonatype {
+                    active = 'ALWAYS'
+                    url = 'https://central.sonatype.com/api/v1/publisher'
+                    stagingRepository('build/staging-deploy')
+                }
+            }
         }
     }
 }
