@@ -163,11 +163,11 @@ publishing {
             }
         }
     }
-    repositories {
-        maven {
-            url = layout.buildDirectory.dir('staging-deploy')
-        }
-    }
+//    repositories {
+//        maven {
+//            url = layout.buildDirectory.dir('staging-deploy')
+//        }
+//    }
 }
 //    repositories {
 //        maven {
