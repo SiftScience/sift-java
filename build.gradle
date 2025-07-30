@@ -176,9 +176,6 @@ publishing {
 
 signing {
     required { gradle.taskGraph.hasTask("publish") }
-    def signingKey = "${signingKeyId}"
-    def signingPassword = "${signingPassword}"
-    useInMemoryPgpKeys(signingKey, signingPassword)
     sign publishing.publications.jar
 }
 
