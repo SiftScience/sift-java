@@ -5,6 +5,7 @@ buildscript {
 }
 
 plugins {
+//    id 'org.jreleaser' version '1.19.0'
     id 'io.github.gradle-nexus.publish-plugin' version '2.0.0'
 }
 
@@ -15,6 +16,11 @@ apply plugin: 'java-library-distribution'
 
 group = 'com.siftscience'
 version = '3.21.2'
+
+java {
+    withJavadocJar()
+    withSourcesJar()
+}
 
 repositories {
     mavenCentral()
@@ -157,6 +163,12 @@ publishing {
             }
         }
     }
+    repositories {
+        maven {
+            url = layout.buildDirectory.dir('staging-deploy')
+        }
+    }
+}
 //    repositories {
 //        maven {
 //            name 'staging'
@@ -168,7 +180,7 @@ publishing {
 //            }
 //        }
 //    }
-}
+
 
 nexusPublishing {
     repositories {
@@ -178,17 +190,17 @@ nexusPublishing {
             nexusUrl.set(uri("https://ossrh-staging-api.central.sonatype.com/service/local/"))
 //            username = "${sonatypeUsername}" // defaults to project.properties["myNexusUsername"]
 //            password = "${sonatypePassword}" // defaults to project.properties["myNexusPassword"]
+            username = "ZxC3zG"
+            password = "O5zzMmghqUpz5ggAsob74s4qKDKvjE6zW"
         }
     }
 }
 
-
-
-model {
-    tasks.publishJarPublicationToStagingRepository {
-        dependsOn(project.tasks.signArchives)
-    }
-}
+//model {
+//    tasks.publishJarPublicationToStagingRepository {
+//        dependsOn(project.tasks.signArchives)
+//    }
+//}
 
 distributions {
     main {
