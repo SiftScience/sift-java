@@ -36,6 +36,7 @@ jobs:
           sed -i -e 's|.*sonatypePassword.*|                password = "${{ secrets.SPASSWORD }}"|' ./build.gradle 
       - name: Sonatype Publish
         run: |
+          mkdir -p ~/.jreleaser
           touch ~/.jreleaser/config.toml
           echo "JRELEASER_NEXUS2_USERNAME='${{ secrets.SUSER }}'" >> ~/.jreleaser/config.toml
           echo "JRELEASER_NEXUS2_PASSWORD='${{ secrets.SPASSWORD }}'" >> ~/.jreleaser/config.toml
