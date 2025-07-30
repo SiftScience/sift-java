@@ -1,11 +1,18 @@
+buildscript {
+    repositories {
+        jcenter()
+    }
+}
+
+plugins {
+    id 'io.github.gradle-nexus.publish-plugin' version '2.0.0'
+}
 
 apply plugin: 'java'
 apply plugin: 'maven-publish'
 apply plugin: 'signing'
 apply plugin: 'java-library-distribution'
-plugins {
-  id("io.github.gradle-nexus.publish-plugin") version "2.0.0"
-}
+
 group = 'com.siftscience'
 version = '3.21.2'
 
@@ -14,12 +21,12 @@ repositories {
 }
 
 compileJava {
-  sourceCompatibility = 1.8
-  targetCompatibility = 1.8
+    sourceCompatibility = 1.8
+    targetCompatibility = 1.8
 }
 
 compileTestJava {
-  sourceCompatibility = 1.8
+    sourceCompatibility = 1.8
 }
 
 dependencies {
@@ -31,12 +38,6 @@ dependencies {
     implementation 'com.squareup.okhttp3:okhttp:5.1.0'
     implementation 'com.squareup.okio:okio:3.15.0'
     implementation 'commons-codec:commons-codec:1.19.0'
-}
-
-buildscript {
-    repositories {
-        jcenter()
-    }
 }
 
 task sourceJar(type: Jar) {
@@ -156,12 +157,20 @@ publishing {
             }
         }
     }
+//    repositories {
+//        maven {
+//            name 'staging'
+//            url = 'https://ossrh-staging-api.central.sonatype.com/service/local/staging/deploy/maven2/'
+//
+//            credentials {
+//                username = "${sonatypeUsername}"
+//                password = "${sonatypePassword}"
+//            }
+//        }
+//    }
 }
 
 nexusPublishing {
-    repositories {
-        sonatype()
-    }
     repositories {
         // see https://central.sonatype.org/publish/publish-portal-ossrh-staging-api/#configuration
         sonatype {
@@ -173,17 +182,7 @@ nexusPublishing {
     }
 }
 
-//     repositories {
-//         maven {
-//             name 'staging'
-//             url = 'https://ossrh-staging-api.central.sonatype.com/service/local/staging/deploy/maven2/'
-//
-//             credentials {
-//                 username = "${sonatypeUsername}"
-//                 password = "${sonatypePassword}"
-//             }
-//         }
-//     }
+
 
 model {
     tasks.publishJarPublicationToStagingRepository {
