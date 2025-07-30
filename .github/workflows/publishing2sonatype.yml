@@ -41,4 +41,4 @@ jobs:
           curl --request POST \
             --verbose \
             --header "Authorization: Bearer ${BEARER}" \
-            https://central.sonatype.com/manual/upload/defaultRepository/${{ secrets.SREPO_ID }}
+            https://ossrh-staging-api.central.sonatype.com/manual/upload/defaultRepository/${{ secrets.SREPO_ID }}
