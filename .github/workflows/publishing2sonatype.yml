@@ -38,7 +38,7 @@ jobs:
         run: |
           BEARER=$(printf "${{ secrets.SUSER }}:${{ secrets.SPASSWORD }}" | base64)
           echo "stagingAuthHeaderName=Authorization" >> ./gradle.properties
-          echo "stagingAuthHeaderValuee=Bearer ${BEARER}" >> ./gradle.properties
+          echo "stagingAuthHeaderValue=Bearer ${BEARER}" >> ./gradle.properties
           ./gradlew -S publishJarPublicationToStagingRepository
 #          curl --request POST \
 #            --verbose \

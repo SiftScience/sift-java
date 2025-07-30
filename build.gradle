@@ -160,9 +160,9 @@ publishing {
             name 'staging'
             url = 'https://central.sonatype.com/api/v1/publisher/deployments/download/'
 
-            credentials(HttpHeaderCredentials)
+            credentials(AuthHeaderValue)
             authentication {
-                header(HttpHeaderAuthentication)
+                header(AuthHeaderName)
             }
 
         }
