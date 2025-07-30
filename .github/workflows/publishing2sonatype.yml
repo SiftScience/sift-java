@@ -36,8 +36,7 @@ jobs:
           sed -i -e 's|.*sonatypePassword.*|                password = "${{ secrets.SPASSWORD }}"|' ./build.gradle 
       - name: Sonatype Publish
         run: |
-          ./gradlew --info publishJarPublicationToStagingRepository
-          ls -la build/libs/
+          ./gradlew publishJarPublicationToStagingRepository
           BEARER=$(printf "${{ secrets.SUSER }}:${{ secrets.SPASSWORD }}" | base64)
           curl --request POST \
             --verbose \
