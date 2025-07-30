@@ -176,8 +176,8 @@ nexusPublishing {
         sonatype {
 //             nexusUrl = uri("https://your-server.com/staging")
             nexusUrl.set(uri("https://ossrh-staging-api.central.sonatype.com/service/local/"))
-            username = "${sonatypeUsername}" // defaults to project.properties["myNexusUsername"]
-            password = "${sonatypePassword}" // defaults to project.properties["myNexusPassword"]
+//            username = "${sonatypeUsername}" // defaults to project.properties["myNexusUsername"]
+//            password = "${sonatypePassword}" // defaults to project.properties["myNexusPassword"]
         }
     }
 }

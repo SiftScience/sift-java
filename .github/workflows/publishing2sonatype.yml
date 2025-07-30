@@ -36,6 +36,8 @@ jobs:
           sed -i -e 's|.*sonatypePassword.*|                password = "${{ secrets.SPASSWORD }}"|' ./build.gradle 
       - name: Sonatype Publish
         run: |
+          echo "myNexusUsername=${{ secrets.SUSER }}" >> ./gradle.properties
+          echo "myNexusPassword=${{ secrets.SPASSWORD }}" >> ./gradle.properties
           ./gradlew publishToSonatype
 #          ./gradlew -S releaseSonatypeStagingRepository
 #          BEARER=$(printf "${{ secrets.SUSER }}:${{ secrets.SPASSWORD }}" | base64)
