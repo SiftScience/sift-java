@@ -37,8 +37,8 @@ jobs:
       - name: Sonatype Publish
         run: |
           ./gradlew publishJarPublicationToStagingRepository
-          BEARER=$(printf "${secrets.SUSER}:${secrets.SPASSWORD}" | base64)
+          BEARER=$(printf "${{ secrets.SUSER }}:${{ secrets.SPASSWORD }}" | base64)
           curl --request POST \
             --verbose \
             --header "Authorization: Bearer ${BEARER}" \
-            https://central.sonatype.com/manual/upload/defaultRepository/${secrets.SREPO_ID}
+            https://central.sonatype.com/manual/upload/defaultRepository/${{ secrets.SREPO_ID }}
