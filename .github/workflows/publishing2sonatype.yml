@@ -1,6 +1,5 @@
 name: Publishing to Sonatype
 on:
-  push:
   release:
     types: [published]
 
