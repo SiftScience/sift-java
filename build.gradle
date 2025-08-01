@@ -74,13 +74,12 @@ def pomConfig = {
     inceptionYear 2016
     organization {
         name 'Sift Science'
-        url 'https://siftscience.com'
+        url 'https://sift.com'
     }
     developers {
         developer {
-            id 'lopatin'
-            name 'Alex Lopatin'
-            url 'https://github.com/lopatin'
+            id 'sift-api-platform'
+            name 'Sift API Platform Team'
         }
     }
     scm {
@@ -121,37 +120,6 @@ publishing {
                 last.parent().appendNode('description', 'Sift Science Java API')
                 last + pomConfig
             }
-
-            // Sign the pom.xml.
-            pom.withXml {
-                def pomFile = file("${project.buildDir}/generated-pom.xml")
-                writeTo(pomFile)
-                def pomAscFile = signing.sign(pomFile).signatureFiles[0]
-                artifact(pomAscFile) {
-                    classifier = null
-                    extension = 'pom.asc'
-                }
-                pomFile.delete()
-            }
-
-            // Sign the artifacts.
-            project.tasks.signArchives.signatureFiles.each {
-                artifact(it) {
-                    def matcher = it.file =~ /-(sources|javadoc)\.jar\.asc$/
-                    def zipMatcher = it.file =~ /\.(zip|tar)\.asc$/
-                    def extensionPrefix = 'jar'
-                    if (zipMatcher.find()) {
-                        extensionPrefix = zipMatcher.group(1)
-                    }
-                    if (matcher.find()) {
-                        classifier = matcher.group(1)
-                    } else {
-                        classifier = null
-                    }
-
-                    extension = extensionPrefix + '.asc'
-                }
-            }
         }
     }
 
@@ -168,10 +136,9 @@ publishing {
     }
 }
 
-model {
-    tasks.publishJarPublicationToStagingRepository {
-        dependsOn(project.tasks.signArchives)
-    }
+signing {
+    required { gradle.taskGraph.hasTask("publish") }
+    sign publishing.publications.jar
 }
 
 distributions {
