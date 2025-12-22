@@ -30,9 +30,12 @@ public class FlagContentFieldSet extends EventsApiRequestFieldSet<FlagContentFie
         }
     }
 
+    @Expose @SerializedName("$brand_name") private String brandName;
     @Expose @SerializedName("$content_id") private String contentId;
     @Expose @SerializedName("$flagged_by") private String flaggedBy;
     @Expose @SerializedName("$reason") private String reason;
+    @Expose @SerializedName("$site_country") private String siteCountry;
+    @Expose @SerializedName("$site_domain") private String siteDomain;
     @Expose @SerializedName(USER_EMAIL) private String userEmail;
     @Expose @SerializedName(VERIFICATION_PHONE_NUMBER) private String verificationPhoneNumber;
 
@@ -83,6 +86,33 @@ public class FlagContentFieldSet extends EventsApiRequestFieldSet<FlagContentFie
 
     public FlagContentFieldSet setVerificationPhoneNumber(String verificationPhoneNumber) {
         this.verificationPhoneNumber = verificationPhoneNumber;
+        return this;
+    }
+
+    public String getSiteDomain() {
+        return siteDomain;
+    }
+
+    public FlagContentFieldSet setSiteDomain(String siteDomain) {
+        this.siteDomain = siteDomain;
+        return this;
+    }
+
+    public String getSiteCountry() {
+        return siteCountry;
+    }
+
+    public FlagContentFieldSet setSiteCountry(String siteCountry) {
+        this.siteCountry = siteCountry;
+        return this;
+    }
+
+    public String getBrandName() {
+        return brandName;
+    }
+
+    public FlagContentFieldSet setBrandName(String brandName) {
+        this.brandName = brandName;
         return this;
     }
 }
