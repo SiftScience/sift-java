@@ -588,7 +588,7 @@ public class ContentEventTest {
             "           \"$zipcode\": \"98112\"\n" +
             "       }],\n" +
             "       \"$reviewed_content_id\": \"listing-234234\",\n" +
-            "       \"$reviewed_user_id\": \"userId_12345_65432\",\n" +
+            "       \"$reviewed_user_id\": \"fyw3989sjpqr71\",\n" +
             "       \"$images\": [{\n" +
             "           \"$md5_hash\": \"aflshdfbalsubdf3234sfdkjb\",\n" +
             "           \"$link\": \"https://www.domain.com/file.png\",\n" +
@@ -639,7 +639,7 @@ public class ContentEventTest {
             .setContactEmail("alex_301@domain.com")
             .setLocations(Collections.singletonList(locationAddress))
             .setReviewedContentId("listing-234234")
-            .setReviewedUserId("userId_12345_65432")
+            .setReviewedUserId("fyw3989sjpqr71")
             .setImages(images)
             .setRating(4.5);
 
@@ -1227,7 +1227,7 @@ public class ContentEventTest {
             "           \"$zipcode\": \"98112\"\n" +
             "       }],\n" +
             "       \"$reviewed_content_id\": \"listing-234234\",\n" +
-            "       \"$reviewed_user_id\": \"userId_12345_65432\",\n" +
+            "       \"$reviewed_user_id\": \"fyw3989sjpqr71\",\n" +
             "       \"$images\": [{\n" +
             "           \"$md5_hash\": \"aflshdfbalsubdf3234sfdkjb\",\n" +
             "           \"$link\": \"https://www.domain.com/file.png\",\n" +
@@ -1278,7 +1278,7 @@ public class ContentEventTest {
             .setContactEmail("alex_301@domain.com")
             .setLocations(Collections.singletonList(locationAddress))
             .setReviewedContentId("listing-234234")
-            .setReviewedUserId("userId_12345_65432")
+            .setReviewedUserId("fyw3989sjpqr71")
             .setImages(images)
             .setRating(4.5);
 
