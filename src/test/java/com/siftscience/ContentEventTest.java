@@ -48,7 +48,7 @@ public class ContentEventTest {
             "  \"$session_id\"       : \"a234ksjfgn435sfg\",\n" +
             "  \"$status\"           : \"$active\",\n" +
             "  \"$ip\"           : \"255.255.255.0\",\n" +
-            "  \"$user_email\"   : \"alex_302@domain.com\",\n" +
+            "  \"$user_email\"   : \"billjones1@example.com\",\n" +
             "  \"$comment\"     : {\n" +
             "       \"$body\": \"Congrats on the new role!\",\n" +
             "       \"$contact_email\": \"alex_301@domain.com\",\n" +
@@ -104,7 +104,7 @@ public class ContentEventTest {
             .setSessionId("a234ksjfgn435sfg")
             .setStatus("$active")
             .setIp("255.255.255.0")
-            .setUserEmail("alex_302@domain.com")
+            .setUserEmail("billjones1@example.com")
             .setComment(c)
             .setVerificationPhoneNumber("+12345678901"));
 
@@ -137,7 +137,7 @@ public class ContentEventTest {
             "  \"$session_id\"       : \"a234ksjfgn435sfg\",\n" +
             "  \"$status\"           : \"$active\",\n" +
             "  \"$ip\"           : \"255.255.255.0\",\n" +
-            "  \"$user_email\"   : \"alex_302@domain.com\",\n" +
+            "  \"$user_email\"   : \"billjones1@example.com\",\n" +
             "  \"$listing\"     : {\n" +
             "       \"$subject\": \"2 Bedroom Apartment for Rent\",\n" +
             "       \"$body\": \"Capitol Hill Seattle brand new condo. 2 bedrooms and 1 full bath.\",\n" +
@@ -235,7 +235,7 @@ public class ContentEventTest {
             .setSessionId("a234ksjfgn435sfg")
             .setStatus("$active")
             .setIp("255.255.255.0")
-            .setUserEmail("alex_302@domain.com")
+            .setUserEmail("billjones1@example.com")
             .setListing(l)
             .setVerificationPhoneNumber("+12345678901"));
 
@@ -267,7 +267,7 @@ public class ContentEventTest {
             "  \"$session_id\"       : \"a234ksjfgn435sfg\",\n" +
             "  \"$status\"           : \"$active\",\n" +
             "  \"$ip\"           : \"255.255.255.0\",\n" +
-            "  \"$user_email\"   : \"alex_302@domain.com\",\n" +
+            "  \"$user_email\"   : \"billjones1@example.com\",\n" +
             "  \"$message\"     : {\n" +
             "       \"$body\": \"Let's meet at 5pm\",\n" +
             "       \"$contact_email\": \"alex_301@domain.com\",\n" +
@@ -321,7 +321,7 @@ public class ContentEventTest {
             .setSessionId("a234ksjfgn435sfg")
             .setStatus("$active")
             .setIp("255.255.255.0")
-            .setUserEmail("alex_302@domain.com")
+            .setUserEmail("billjones1@example.com")
             .setMessage(m)
             .setVerificationPhoneNumber("+12345678901"));
 
@@ -353,7 +353,7 @@ public class ContentEventTest {
             "  \"$session_id\"       : \"a234ksjfgn435sfg\",\n" +
             "  \"$status\"           : \"$active\",\n" +
             "  \"$ip\"           : \"255.255.255.0\",\n" +
-            "  \"$user_email\"   : \"alex_302@domain.com\",\n" +
+            "  \"$user_email\"   : \"billjones1@example.com\",\n" +
             "  \"$profile\"     : {\n" +
             "       \"$body\": \"Hi! My name is Alex and I just moved to New London!\",\n" +
             "       \"$contact_email\": \"alex_301@domain.com\",\n" +
@@ -424,7 +424,7 @@ public class ContentEventTest {
             .setSessionId("a234ksjfgn435sfg")
             .setStatus("$active")
             .setIp("255.255.255.0")
-            .setUserEmail("alex_302@domain.com")
+            .setUserEmail("billjones1@example.com")
             .setProfile(p)
             .setVerificationPhoneNumber("+12345678901"));
 
@@ -456,7 +456,7 @@ public class ContentEventTest {
             "  \"$session_id\"       : \"a234ksjfgn435sfg\",\n" +
             "  \"$status\"           : \"$active\",\n" +
             "  \"$ip\"           : \"255.255.255.0\",\n" +
-            "  \"$user_email\"   : \"alex_302@domain.com\",\n" +
+            "  \"$user_email\"   : \"billjones1@example.com\",\n" +
             "  \"$post\"     : {\n" +
             "       \"$subject\": \"My new apartment!\"," +
             "       \"$body\": \"Moved into my new apartment yesterday.\",\n" +
@@ -544,7 +544,7 @@ public class ContentEventTest {
             .setSessionId("a234ksjfgn435sfg")
             .setStatus("$active")
             .setIp("255.255.255.0")
-            .setUserEmail("alex_302@domain.com")
+            .setUserEmail("billjones1@example.com")
             .setPost(p)
             .setVerificationPhoneNumber("+12345678901"));
 
@@ -576,7 +576,7 @@ public class ContentEventTest {
             "  \"$session_id\"       : \"a234ksjfgn435sfg\",\n" +
             "  \"$status\"           : \"$active\",\n" +
             "  \"$ip\"           : \"255.255.255.0\",\n" +
-            "  \"$user_email\"   : \"alex_302@domain.com\",\n" +
+            "  \"$user_email\"   : \"billjones1@example.com\",\n" +
             "  \"$review\"     : {\n" +
             "       \"$subject\": \"Amazing Tacos!\"," +
             "       \"$body\": \"I ate the tacos.\",\n" +
@@ -650,7 +650,7 @@ public class ContentEventTest {
             .setSessionId("a234ksjfgn435sfg")
             .setStatus("$active")
             .setIp("255.255.255.0")
-            .setUserEmail("alex_302@domain.com")
+            .setUserEmail("billjones1@example.com")
             .setReview(r)
             .setVerificationPhoneNumber("+12345678901"));
 
@@ -682,7 +682,7 @@ public class ContentEventTest {
             "  \"$session_id\"       : \"a234ksjfgn435sfg\",\n" +
             "  \"$status\"           : \"$active\",\n" +
             "  \"$ip\"           : \"255.255.255.0\",\n" +
-            "  \"$user_email\"   : \"alex_302@domain.com\",\n" +
+            "  \"$user_email\"   : \"billjones1@example.com\",\n" +
             "  \"$comment\"     : {\n" +
             "       \"$body\": \"Congrats on the new role!\",\n" +
             "       \"$contact_email\": \"alex_301@domain.com\",\n" +
@@ -739,7 +739,7 @@ public class ContentEventTest {
             .setSessionId("a234ksjfgn435sfg")
             .setStatus("$active")
             .setIp("255.255.255.0")
-            .setUserEmail("alex_302@domain.com")
+            .setUserEmail("billjones1@example.com")
             .setComment(c)
             .setVerificationPhoneNumber("+12345678901"));
 
@@ -772,7 +772,7 @@ public class ContentEventTest {
             "  \"$session_id\"       : \"a234ksjfgn435sfg\",\n" +
             "  \"$status\"           : \"$active\",\n" +
             "  \"$ip\"           : \"255.255.255.0\",\n" +
-            "  \"$user_email\"   : \"alex_302@domain.com\",\n" +
+            "  \"$user_email\"   : \"billjones1@example.com\",\n" +
             "  \"$listing\"     : {\n" +
             "       \"$subject\": \"2 Bedroom Apartment for Rent\",\n" +
             "       \"$body\": \"Capitol Hill Seattle brand new condo. 2 bedrooms and 1 full bath.\",\n" +
@@ -870,7 +870,7 @@ public class ContentEventTest {
             .setSessionId("a234ksjfgn435sfg")
             .setStatus("$active")
             .setIp("255.255.255.0")
-            .setUserEmail("alex_302@domain.com")
+            .setUserEmail("billjones1@example.com")
             .setListing(l)
             .setVerificationPhoneNumber("+12345678901"));
 
@@ -902,7 +902,7 @@ public class ContentEventTest {
             "  \"$session_id\"       : \"a234ksjfgn435sfg\",\n" +
             "  \"$status\"           : \"$active\",\n" +
             "  \"$ip\"           : \"255.255.255.0\",\n" +
-            "  \"$user_email\"   : \"alex_302@domain.com\",\n" +
+            "  \"$user_email\"   : \"billjones1@example.com\",\n" +
             "  \"$message\"     : {\n" +
             "       \"$body\": \"Let's meet at 5pm\",\n" +
             "       \"$contact_email\": \"alex_301@domain.com\",\n" +
@@ -960,7 +960,7 @@ public class ContentEventTest {
             .setSessionId("a234ksjfgn435sfg")
             .setStatus("$active")
             .setIp("255.255.255.0")
-            .setUserEmail("alex_302@domain.com")
+            .setUserEmail("billjones1@example.com")
             .setMessage(m)
             .setVerificationPhoneNumber("+12345678901"));
 
@@ -992,7 +992,7 @@ public class ContentEventTest {
             "  \"$session_id\"       : \"a234ksjfgn435sfg\",\n" +
             "  \"$status\"           : \"$active\",\n" +
             "  \"$ip\"           : \"255.255.255.0\",\n" +
-            "  \"$user_email\"   : \"alex_302@domain.com\",\n" +
+            "  \"$user_email\"   : \"billjones1@example.com\",\n" +
             "  \"$profile\"     : {\n" +
             "       \"$body\": \"Hi! My name is Alex and I just moved to New London!\",\n" +
             "       \"$contact_email\": \"alex_301@domain.com\",\n" +
@@ -1063,7 +1063,7 @@ public class ContentEventTest {
             .setSessionId("a234ksjfgn435sfg")
             .setStatus("$active")
             .setIp("255.255.255.0")
-            .setUserEmail("alex_302@domain.com")
+            .setUserEmail("billjones1@example.com")
             .setProfile(p)
             .setVerificationPhoneNumber("+12345678901"));
 
@@ -1095,7 +1095,7 @@ public class ContentEventTest {
             "  \"$session_id\"       : \"a234ksjfgn435sfg\",\n" +
             "  \"$status\"           : \"$active\",\n" +
             "  \"$ip\"           : \"255.255.255.0\",\n" +
-            "  \"$user_email\"   : \"alex_302@domain.com\",\n" +
+            "  \"$user_email\"   : \"billjones1@example.com\",\n" +
             "  \"$post\"     : {\n" +
             "       \"$subject\": \"My new apartment!\"," +
             "       \"$body\": \"Moved into my new apartment yesterday.\",\n" +
@@ -1183,7 +1183,7 @@ public class ContentEventTest {
             .setSessionId("a234ksjfgn435sfg")
             .setStatus("$active")
             .setIp("255.255.255.0")
-            .setUserEmail("alex_302@domain.com")
+            .setUserEmail("billjones1@example.com")
             .setPost(p)
             .setVerificationPhoneNumber("+12345678901"));
 
@@ -1215,7 +1215,7 @@ public class ContentEventTest {
             "  \"$session_id\"       : \"a234ksjfgn435sfg\",\n" +
             "  \"$status\"           : \"$active\",\n" +
             "  \"$ip\"           : \"255.255.255.0\",\n" +
-            "  \"$user_email\"   : \"alex_302@domain.com\",\n" +
+            "  \"$user_email\"   : \"billjones1@example.com\",\n" +
             "  \"$review\"     : {\n" +
             "       \"$subject\": \"Amazing Tacos!\"," +
             "       \"$body\": \"I ate the tacos.\",\n" +
@@ -1289,7 +1289,7 @@ public class ContentEventTest {
             .setSessionId("a234ksjfgn435sfg")
             .setStatus("$active")
             .setIp("255.255.255.0")
-            .setUserEmail("alex_302@domain.com")
+            .setUserEmail("billjones1@example.com")
             .setReview(r)
             .setVerificationPhoneNumber("+12345678901"));
 
