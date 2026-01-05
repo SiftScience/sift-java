@@ -1,3 +1,8 @@
+3.22.0 (2026-01-05)
+=================
+- Added support for `$user_email`, `$review.$reviewed_user_id` fields to `$create_content`, `$update_content` events
+- Added support for `$brand_name`, `$site_country`, `$site_domain` field to `$flag_content` event
+
 3.21.2 (2025-07-29)
 =================
 - Bumped version for `gson` from `2.10` to `2.13.1`

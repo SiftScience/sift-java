@@ -5,7 +5,7 @@ apply plugin: 'signing'
 apply plugin: 'java-library-distribution'
 
 group = 'com.siftscience'
-version = '3.21.2'
+version = '3.22.0'
 
 repositories {
     mavenCentral()
@@ -129,8 +129,8 @@ publishing {
             url = 'https://ossrh-staging-api.central.sonatype.com/service/local/staging/deploy/maven2/'
 
             credentials {
-                username = "${sonatypeUsername}"
-                password = "${sonatypePassword}"
+                username = ""
+                password = ""
             }
         }
     }
@@ -145,4 +145,9 @@ distributions {
     main {
         distributionBaseName = 'sift-java'
     }
+}
+
+test {
+    // useJUnitPlatform()
+    useJUnit()
 }
