@@ -7,6 +7,7 @@ public abstract class BaseContentFieldSet<T extends BaseContentFieldSet<T>>
         extends BaseAppBrowserSiteBrandFieldSet<T> {
     @Expose @SerializedName("$content_id") private String contentId;
     @Expose @SerializedName("$status") private String status;
+    @Expose @SerializedName(USER_EMAIL) private String userEmail;
     @Expose @SerializedName(VERIFICATION_PHONE_NUMBER) private String verificationPhoneNumber;
 
     public String getContentId() {
@@ -33,6 +34,15 @@ public abstract class BaseContentFieldSet<T extends BaseContentFieldSet<T>>
 
     public T setVerificationPhoneNumber(String verificationPhoneNumber) {
         this.verificationPhoneNumber = verificationPhoneNumber;
+        return (T) this;
+    }
+
+    public String getUserEmail() {
+        return userEmail;
+    }
+
+    public T setUserEmail(String userEmail) {
+        this.userEmail = userEmail;
         return (T) this;
     }
 }

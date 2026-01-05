@@ -40,11 +40,14 @@ public class FlagContentEventTest {
         String expectedRequestBody = "{\n" +
                 "  \"$type\"       : \"$flag_content\", \n" +
                 "  \"$api_key\"    : \"YOUR_API_KEY\",\n" +
+                "  \"$brand_name\" : \"sift\",\n" +
                 "  \"$user_id\"    : \"billy_jones_301\",\n" +
                 "  \"$content_id\" : \"9671500641\",\n" +
                 "\n" +
                 "  \"$flagged_by\" : \"jamieli89\",\n" +
                 "  \"$reason\" : \"" + this.reason.value + "\",\n" +
+                "  \"$site_country\" : \"US\",\n" +
+                "  \"$site_domain\" : \"sift.com\",\n" +
                 "  \"$user_email\" : \"billy_jones_301@email.com\",\n" +
                 "  \"$verification_phone_number\" : \"+12345678901\"\n" +
                 "}";
@@ -75,6 +78,9 @@ public class FlagContentEventTest {
                 .setContentId("9671500641")
                 .setFlaggedBy("jamieli89")
                 .setReason(this.reason)
+                .setBrandName("sift")
+                .setSiteCountry("US")
+                .setSiteDomain("sift.com")
                 .setUserEmail("billy_jones_301@email.com")
                 .setVerificationPhoneNumber("+12345678901"));
 

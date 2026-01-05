@@ -11,6 +11,7 @@ public class Review {
     @Expose @SerializedName("$contact_email") private String contactEmail;
     @Expose @SerializedName("$locations") private List<Address> locations;
     @Expose @SerializedName("$reviewed_content_id") private String reviewedContentId;
+    @Expose @SerializedName("$reviewed_user_id") private String reviewedUserId;
     @Expose @SerializedName("$images") private List<Image> images;
     @Expose @SerializedName("$rating") private Double rating;
 
@@ -74,6 +75,15 @@ public class Review {
 
     public Review setReviewedContentId(String reviewedContentId) {
         this.reviewedContentId = reviewedContentId;
+        return this;
+    }
+
+    public String getReviewedUserId() {
+        return reviewedUserId;
+    }
+
+    public Review setReviewedUserId(String reviewedUserId) {
+        this.reviewedUserId = reviewedUserId;
         return this;
     }
 }
