@@ -1,3 +1,10 @@
+3.23.0 (2026-08-18)
+=================
+- Added support for the Global Profile API: `GlobalProfileFieldSet` / `GlobalProfileRequest` for
+  `GET /v3/accounts/{accountId}/global_profile/users/{userId}`, and
+  `GlobalProfileLookupFieldSet` / `GlobalProfileLookupRequest` for
+  `POST /v3/accounts/{accountId}/global_profile/lookup`
+
 3.22.0 (2026-01-05)
 =================
 - Added support for `$user_email`, `$review.$reviewed_user_id` fields to `$create_content`, `$update_content` events

@@ -3,6 +3,8 @@ package com.siftscience;
 import com.siftscience.model.ApplyDecisionFieldSet;
 import com.siftscience.model.DecisionStatusFieldSet;
 import com.siftscience.model.GetDecisionFieldSet;
+import com.siftscience.model.GlobalProfileFieldSet;
+import com.siftscience.model.GlobalProfileLookupFieldSet;
 import com.siftscience.model.LabelFieldSet;
 import com.siftscience.model.ScoreFieldSet;
 import com.siftscience.model.UnlabelFieldSet;
@@ -106,6 +108,18 @@ public class SiftClient {
         assertAccountIdIsNotNull();
         setupApiKey(fields);
         return new GetDecisionsRequest(baseUrl, getAccountId(), httpClient, fields);
+    }
+
+    public GlobalProfileRequest buildRequest(GlobalProfileFieldSet fields) {
+        assertAccountIdIsNotNull();
+        setupApiKey(fields);
+        return new GlobalProfileRequest(baseUrl, getAccountId(), httpClient, fields);
+    }
+
+    public GlobalProfileLookupRequest buildRequest(GlobalProfileLookupFieldSet fields) {
+        assertAccountIdIsNotNull();
+        setupApiKey(fields);
+        return new GlobalProfileLookupRequest(baseUrl, getAccountId(), httpClient, fields);
     }
 
     public DecisionStatusRequest buildRequest(DecisionStatusFieldSet fields) {
