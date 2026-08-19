@@ -20,20 +20,13 @@ public class GlobalProfileLookupTest {
         String responseBody = "{\n" +
                 "  \"status\": 0,\n" +
                 "  \"error_message\": \"OK\",\n" +
-                "  \"error_code\": null,\n" +
                 "  \"lookback_months\": 12,\n" +
                 "  \"profile_summary\": {\n" +
                 "    \"identity_found\": true,\n" +
                 "    \"has_links\": true,\n" +
                 "    \"link_count\": 7,\n" +
                 "    \"linked_accounts_count_per_industry\": {\"finances\": 3, \"internet\": 4}\n" +
-                "  },\n" +
-                "  \"identity_age\": null,\n" +
-                "  \"user_decisions\": null,\n" +
-                "  \"chargebacks\": null,\n" +
-                "  \"orders\": null,\n" +
-                "  \"transactions\": null,\n" +
-                "  \"locations\": null\n" +
+                "  }\n" +
                 "}";
 
         MockWebServer server = new MockWebServer();
@@ -89,11 +82,66 @@ public class GlobalProfileLookupTest {
         GlobalProfileLookupRequest lookupRequest = client.buildRequest(
                 new GlobalProfileLookupFieldSet()
                         .setPhone("+15551234567"));
-        lookupRequest.send();
+        GlobalProfileLookupResponse siftResponse = lookupRequest.send();
 
         RecordedRequest request = server.takeRequest();
         JSONAssert.assertEquals("{\"phone\": \"+15551234567\"}",
                 request.getBody().readUtf8(), false);
+
+        Assert.assertEquals(HTTP_OK, siftResponse.getHttpStatusCode());
+        Assert.assertTrue(siftResponse.isOk());
+        Assert.assertFalse(siftResponse.getBody().getProfileSummary().getIdentityFound());
+    }
+
+    @Test
+    public void testLookupIdentityNotFound() throws Exception {
+        String accountId = "YOUR_ACCOUNT_ID";
+        String responseBody = "{\n" +
+                "  \"status\": 0,\n" +
+                "  \"error_message\": \"OK\",\n" +
+                "  \"error_code\": null,\n" +
+                "  \"lookback_months\": null,\n" +
+                "  \"profile_summary\": {\n" +
+                "    \"identity_found\": false,\n" +
+                "    \"has_links\": null,\n" +
+                "    \"link_count\": null,\n" +
+                "    \"linked_accounts_count_per_industry\": null\n" +
+                "  },\n" +
+                "  \"identity_age\": null,\n" +
+                "  \"user_decisions\": null,\n" +
+                "  \"chargebacks\": null,\n" +
+                "  \"orders\": null,\n" +
+                "  \"transactions\": null,\n" +
+                "  \"locations\": null\n" +
+                "}";
+
+        MockWebServer server = new MockWebServer();
+        MockResponse response = new MockResponse();
+        response.setResponseCode(HTTP_OK);
+        response.setBody(responseBody);
+        server.enqueue(response);
+        server.start();
+
+        SiftClient client = new SiftClient("YOUR_API_KEY", accountId,
+                new OkHttpClient.Builder()
+                        .addInterceptor(OkHttpUtils.urlRewritingInterceptor(server))
+                        .build());
+
+        GlobalProfileLookupRequest lookupRequest = client.buildRequest(
+                new GlobalProfileLookupFieldSet()
+                        .setEmail("unknown@example.com"));
+        GlobalProfileLookupResponse siftResponse = lookupRequest.send();
+
+        Assert.assertEquals(HTTP_OK, siftResponse.getHttpStatusCode());
+        Assert.assertTrue(siftResponse.isOk());
+        Assert.assertFalse(siftResponse.getBody().getProfileSummary().getIdentityFound());
+        Assert.assertNull(siftResponse.getBody().getLookbackMonths());
+        Assert.assertNull(siftResponse.getBody().getIdentityAge());
+        Assert.assertNull(siftResponse.getBody().getUserDecisions());
+        Assert.assertNull(siftResponse.getBody().getChargebacks());
+        Assert.assertNull(siftResponse.getBody().getOrders());
+        Assert.assertNull(siftResponse.getBody().getTransactions());
+        Assert.assertNull(siftResponse.getBody().getLocations());
     }
 
     @Test

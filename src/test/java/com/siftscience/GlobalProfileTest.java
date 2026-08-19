@@ -16,7 +16,6 @@ public class GlobalProfileTest {
     private static final String RESPONSE_BODY = "{\n" +
             "  \"status\": 0,\n" +
             "  \"error_message\": \"OK\",\n" +
-            "  \"error_code\": null,\n" +
             "  \"lookback_months\": 12,\n" +
             "  \"profile_summary\": {\n" +
             "    \"identity_found\": true,\n" +
@@ -123,6 +122,7 @@ public class GlobalProfileTest {
         Assert.assertEquals("GET", request.getMethod());
         Assert.assertEquals("/v3/accounts/" + accountId + "/global_profile/users/some_user_id",
                 request.getPath());
+        Assert.assertEquals(request.getHeader("Authorization"), "Basic WU9VUl9BUElfS0VZOg==");
     }
 
     @Test
@@ -164,7 +164,12 @@ public class GlobalProfileTest {
         GlobalProfileResponse siftResponse = getGlobalProfileRequest.send();
 
         Assert.assertFalse(siftResponse.getBody().getProfileSummary().getIdentityFound());
+        Assert.assertNull(siftResponse.getBody().getLookbackMonths());
         Assert.assertNull(siftResponse.getBody().getIdentityAge());
         Assert.assertNull(siftResponse.getBody().getUserDecisions());
+        Assert.assertNull(siftResponse.getBody().getChargebacks());
+        Assert.assertNull(siftResponse.getBody().getOrders());
+        Assert.assertNull(siftResponse.getBody().getTransactions());
+        Assert.assertNull(siftResponse.getBody().getLocations());
     }
 }

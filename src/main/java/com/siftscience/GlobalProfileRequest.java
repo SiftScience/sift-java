@@ -10,7 +10,8 @@ import okhttp3.Response;
 
 public class GlobalProfileRequest extends SiftRequest<GlobalProfileResponse> {
 
-    GlobalProfileRequest(HttpUrl baseUrl, String accountId, HttpClient httpClient, FieldSet fields) {
+    GlobalProfileRequest(HttpUrl baseUrl, String accountId, HttpClient httpClient,
+                         GlobalProfileFieldSet fields) {
         super(baseUrl, accountId, httpClient, fields);
     }
 

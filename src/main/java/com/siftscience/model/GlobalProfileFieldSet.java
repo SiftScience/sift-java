@@ -1,19 +1,30 @@
 package com.siftscience.model;
 
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
 import com.siftscience.FieldSet;
+import com.siftscience.exception.MissingFieldException;
 
 /**
  * Field set for {@code GET /v3/accounts/{accountId}/global_profile/users/{userId}}.
  */
 public class GlobalProfileFieldSet extends FieldSet<GlobalProfileFieldSet> {
-    private String userId;
-    private Boolean globalOnly;
-    private Boolean includeOwnData;
+    @Expose @SerializedName("user_id") private String userId;
+    @Expose @SerializedName("global_only") private Boolean globalOnly;
+    @Expose @SerializedName("include_own_data") private Boolean includeOwnData;
 
     public GlobalProfileFieldSet() {}
 
     public static GlobalProfileFieldSet fromJson(String json) {
         return gson.fromJson(json, GlobalProfileFieldSet.class);
+    }
+
+    @Override
+    public void validate() {
+        super.validate();
+        if (userId == null || userId.isEmpty()) {
+            throw new MissingFieldException("'userId' is required for a global profile request.");
+        }
     }
 
     public String getUserId() {
