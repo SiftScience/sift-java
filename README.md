@@ -332,3 +332,48 @@ DecisionStatusRequest request = client.buildRequest(new DecisionStatusFieldSet()
         .setUserId("a_user_id")
         .setEntityId("a_content_id"));
 ```
+
+### Global Profile API
+
+[API Docs](https://sift.com/developers/docs/java/global-profile-api)
+
+The Global Profile API returns cross-tenant identity, decision, chargeback, order, transaction, and
+location signals for a user, either by user ID or by looking them up via email/phone.
+
+#### Get a user's global profile
+
+To retrieve a global profile by user id, build a request with a `GlobalProfileFieldSet`.
+```java
+GlobalProfileRequest request = client.buildRequest(new GlobalProfileFieldSet()
+        .setUserId("a_user_id"));
+```
+
+`global_only` (excludes the requesting tenant's own network connections, defaults to `false`) and
+`include_own_data` (includes the requested user's own feature values, defaults to `true`) may
+optionally be set.
+```java
+GlobalProfileRequest request = client.buildRequest(new GlobalProfileFieldSet()
+        .setUserId("a_user_id")
+        .setGlobalOnly(true)
+        .setIncludeOwnData(false));
+
+GlobalProfileResponse response = request.send();
+response.getBody().getProfileSummary().getIdentityFound();
+```
+
+If `identity_found` is `false`, every field on the response body other than `profile_summary` will
+be `null`.
+
+#### Look up a global profile by email or phone
+
+To look up a global profile without a Sift user id, build a request with a
+`GlobalProfileLookupFieldSet`, providing at least one of `email` or `phone`.
+```java
+GlobalProfileLookupRequest request = client.buildRequest(new GlobalProfileLookupFieldSet()
+        .setEmail("jane.doe@example.com")
+        .setPhone("+15551234567"));
+
+GlobalProfileLookupResponse response = request.send();
+```
+
+Omitting both `email` and `phone` will raise a `MissingFieldException` before any request is sent.
