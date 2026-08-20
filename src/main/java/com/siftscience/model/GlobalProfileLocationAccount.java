@@ -9,6 +9,7 @@ import com.google.gson.annotations.SerializedName;
  */
 public class GlobalProfileLocationAccount {
     @Expose @SerializedName("city") private String city;
+    @Expose @SerializedName("region") private String region;
     @Expose @SerializedName("country") private String country;
 
     public String getCity() {
@@ -17,6 +18,15 @@ public class GlobalProfileLocationAccount {
 
     public GlobalProfileLocationAccount setCity(String city) {
         this.city = city;
+        return this;
+    }
+
+    public String getRegion() {
+        return region;
+    }
+
+    public GlobalProfileLocationAccount setRegion(String region) {
+        this.region = region;
         return this;
     }
 
