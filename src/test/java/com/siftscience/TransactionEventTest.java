@@ -5,9 +5,12 @@ import static java.net.HttpURLConnection.HTTP_OK;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.siftscience.model.BotIdentification;
 import com.siftscience.model.CardBinMetadata;
 import com.siftscience.model.DigitalOrder;
 import com.siftscience.model.ExchangeRate;
+import com.siftscience.model.Geo;
+import com.siftscience.model.Kyc;
 import com.siftscience.model.PaymentMethod;
 import com.siftscience.model.TransactionFieldSet;
 import okhttp3.OkHttpClient;
@@ -930,6 +933,75 @@ public class TransactionEventTest {
         JSONAssert.assertEquals(expectedRequestBody, request.getFieldSet().toJson(), true);
 
         // Verify the response.
+        Assert.assertEquals(HTTP_OK, siftResponse.getHttpStatusCode());
+        Assert.assertEquals(0, (int) siftResponse.getBody().getStatus());
+        JSONAssert.assertEquals(response.getBody().readUtf8(),
+            siftResponse.getBody().toJson(), true);
+
+        server.shutdown();
+    }
+
+    @Test
+    public void testTransactionEventWithIdentitySignals() throws Exception {
+        String expectedRequestBody = "{\n" +
+            "  \"$type\"             : \"$transaction\",\n" +
+            "  \"$api_key\"          : \"YOUR_API_KEY\",\n" +
+            "  \"$user_id\"          : \"billy_jones_301\",\n" +
+            "  \"$amount\"           : 506790000,\n" +
+            "  \"$currency_code\"    : \"USD\",\n" +
+            "  \"$kyc\" : {\n" +
+            "      \"$names_match\"           : true,\n" +
+            "      \"$bin_nationality_match\" : true,\n" +
+            "      \"$provider\"              : \"lexisnexis\"\n" +
+            "  },\n" +
+            "  \"$geo\" : {\n" +
+            "      \"$uuid\"     : \"gc-abc-123\",\n" +
+            "      \"$provider\" : \"geocomply\"\n" +
+            "  },\n" +
+            "  \"$bot_identification\" : {\n" +
+            "      \"$result\"   : \"suspected\",\n" +
+            "      \"$provider\" : \"human_security\"\n" +
+            "  }\n" +
+            "}";
+
+        MockWebServer server = new MockWebServer();
+        MockResponse response = new MockResponse();
+        response.setResponseCode(HTTP_OK);
+        response.setBody("{\n" +
+            "    \"status\" : 0,\n" +
+            "    \"error_message\" : \"OK\",\n" +
+            "    \"time\" : 1327604222,\n" +
+            "    \"request\" : \"" + TestUtils.unescapeJson(expectedRequestBody) + "\"\n" +
+            "}");
+        server.enqueue(response);
+        server.start();
+
+        SiftClient client = new SiftClient("YOUR_API_KEY", "YOUR_ACCOUNT_ID",
+            new OkHttpClient.Builder()
+                .addInterceptor(OkHttpUtils.urlRewritingInterceptor(server))
+                .build());
+
+        EventRequest request = client.buildRequest(new TransactionFieldSet()
+            .setUserId("billy_jones_301")
+            .setAmount(506790000L)
+            .setCurrencyCode("USD")
+            .setKyc(new Kyc()
+                .setNamesMatch(true)
+                .setBinNationalityMatch(true)
+                .setProvider("lexisnexis"))
+            .setGeo(new Geo()
+                .setUuid("gc-abc-123")
+                .setProvider("geocomply"))
+            .setBotIdentification(new BotIdentification()
+                .setResult("suspected")
+                .setProvider("human_security")));
+        EventResponse siftResponse = request.send();
+
+        RecordedRequest request1 = server.takeRequest();
+        Assert.assertEquals("POST", request1.getMethod());
+        Assert.assertEquals("/v205/events", request1.getPath());
+        JSONAssert.assertEquals(expectedRequestBody, request.getFieldSet().toJson(), true);
+
         Assert.assertEquals(HTTP_OK, siftResponse.getHttpStatusCode());
         Assert.assertEquals(0, (int) siftResponse.getBody().getStatus());
         JSONAssert.assertEquals(response.getBody().readUtf8(),

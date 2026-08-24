@@ -38,6 +38,9 @@ public class TransactionFieldSet extends BaseAppBrowserSiteBrandFieldSet<Transac
     @Expose @SerializedName("$maximum_withdrawal_amount") private Long maximumWithdrawalAmount;
     @Expose @SerializedName("$current_balance") private Long currentBalance;
     @Expose @SerializedName("$new_balance") private Long newBalance;
+    @Expose @SerializedName("$kyc") private Kyc kyc;
+    @Expose @SerializedName("$geo") private Geo geo;
+    @Expose @SerializedName("$bot_identification") private BotIdentification botIdentification;
 
 
     @Override
@@ -326,6 +329,33 @@ public class TransactionFieldSet extends BaseAppBrowserSiteBrandFieldSet<Transac
 
     public TransactionFieldSet setNewBalance(Long newBalance) {
         this.newBalance = newBalance;
+        return this;
+    }
+
+    public Kyc getKyc() {
+        return kyc;
+    }
+
+    public TransactionFieldSet setKyc(Kyc kyc) {
+        this.kyc = kyc;
+        return this;
+    }
+
+    public Geo getGeo() {
+        return geo;
+    }
+
+    public TransactionFieldSet setGeo(Geo geo) {
+        this.geo = geo;
+        return this;
+    }
+
+    public BotIdentification getBotIdentification() {
+        return botIdentification;
+    }
+
+    public TransactionFieldSet setBotIdentification(BotIdentification botIdentification) {
+        this.botIdentification = botIdentification;
         return this;
     }
 }

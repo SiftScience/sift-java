@@ -18,6 +18,11 @@ public abstract class BaseAccountFieldSet<T extends BaseAccountFieldSet<T>>
     @Expose @SerializedName("$social_sign_on_type") private String socialSignOnType;
     @Expose @SerializedName("$merchant_profile") private MerchantProfile merchantProfile;
     @Expose @SerializedName(VERIFICATION_PHONE_NUMBER) private String verificationPhoneNumber;
+    @Expose @SerializedName("$nationality") private String nationality;
+    @Expose @SerializedName("$year_of_birth") private Integer yearOfBirth;
+    @Expose @SerializedName("$kyc") private Kyc kyc;
+    @Expose @SerializedName("$geo") private Geo geo;
+    @Expose @SerializedName("$bot_identification") private BotIdentification botIdentification;
 
     public String getUserEmail() {
         return userEmail;
@@ -115,6 +120,51 @@ public abstract class BaseAccountFieldSet<T extends BaseAccountFieldSet<T>>
 
     public T setPromotions(List<Promotion> promotions) {
         this.promotions = promotions;
+        return (T) this;
+    }
+
+    public String getNationality() {
+        return nationality;
+    }
+
+    public T setNationality(String nationality) {
+        this.nationality = nationality;
+        return (T) this;
+    }
+
+    public Integer getYearOfBirth() {
+        return yearOfBirth;
+    }
+
+    public T setYearOfBirth(Integer yearOfBirth) {
+        this.yearOfBirth = yearOfBirth;
+        return (T) this;
+    }
+
+    public Kyc getKyc() {
+        return kyc;
+    }
+
+    public T setKyc(Kyc kyc) {
+        this.kyc = kyc;
+        return (T) this;
+    }
+
+    public Geo getGeo() {
+        return geo;
+    }
+
+    public T setGeo(Geo geo) {
+        this.geo = geo;
+        return (T) this;
+    }
+
+    public BotIdentification getBotIdentification() {
+        return botIdentification;
+    }
+
+    public T setBotIdentification(BotIdentification botIdentification) {
+        this.botIdentification = botIdentification;
         return (T) this;
     }
 }

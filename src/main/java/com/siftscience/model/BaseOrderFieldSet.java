@@ -27,6 +27,9 @@ public abstract class BaseOrderFieldSet<T extends BaseOrderFieldSet<T>>
     @Expose @SerializedName("$merchant_profile") private MerchantProfile merchantProfile;
     @Expose @SerializedName(VERIFICATION_PHONE_NUMBER) private String verificationPhoneNumber;
     @Expose @SerializedName("$digital_orders") private List<DigitalOrder> digitalOrders;
+    @Expose @SerializedName("$kyc") private Kyc kyc;
+    @Expose @SerializedName("$geo") private Geo geo;
+    @Expose @SerializedName("$bot_identification") private BotIdentification botIdentification;
 
     public String getOrderId() {
         return orderId;
@@ -209,6 +212,33 @@ public abstract class BaseOrderFieldSet<T extends BaseOrderFieldSet<T>>
 
     public T setDigitalOrders(List<DigitalOrder> digitalOrders) {
         this.digitalOrders = digitalOrders;
+        return (T) this;
+    }
+
+    public Kyc getKyc() {
+        return kyc;
+    }
+
+    public T setKyc(Kyc kyc) {
+        this.kyc = kyc;
+        return (T) this;
+    }
+
+    public Geo getGeo() {
+        return geo;
+    }
+
+    public T setGeo(Geo geo) {
+        this.geo = geo;
+        return (T) this;
+    }
+
+    public BotIdentification getBotIdentification() {
+        return botIdentification;
+    }
+
+    public T setBotIdentification(BotIdentification botIdentification) {
+        this.botIdentification = botIdentification;
         return (T) this;
     }
 }

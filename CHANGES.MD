@@ -1,3 +1,11 @@
+3.23.0 (2026-08-20)
+=================
+- Added support for `$nationality`, `$year_of_birth` fields to `$create_account`, `$update_account` events
+- Added support for `$kyc` complex field to `$create_account`, `$update_account`, `$transaction`,
+  `$create_order`, `$update_order`, `$verification` events
+- Added support for `$geo`, `$bot_identification` complex fields to `$create_account`,
+  `$update_account`, `$login`, `$transaction`, `$create_order`, `$update_order` events
+
 3.22.0 (2026-01-05)
 =================
 - Added support for `$user_email`, `$review.$reviewed_user_id` fields to `$create_content`, `$update_content` events
