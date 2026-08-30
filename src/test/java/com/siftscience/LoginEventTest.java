@@ -163,7 +163,7 @@ public class LoginEventTest {
                 "      \"$provider\" : \"geocomply\"\n" +
                 "  },\n" +
                 "  \"$bot_identification\" : {\n" +
-                "      \"$result\"   : \"human\",\n" +
+                "      \"$result\"   : \"$human\",\n" +
                 "      \"$provider\" : \"datadome\"\n" +
                 "  }\n" +
                 "}";
@@ -192,7 +192,7 @@ public class LoginEventTest {
                         .setUuid("gc-abc-123")
                         .setProvider("geocomply"))
                 .setBotIdentification(new BotIdentification()
-                        .setResult("human")
+                        .setResult("$human")
                         .setProvider("datadome")));
 
         SiftResponse siftResponse = request.send();

@@ -177,7 +177,7 @@ public class CreateAccountEventTest {
                 "  \"$year_of_birth\" : 1985,\n" +
                 "  \"$kyc\" : {\n" +
                 "      \"$names_match\"           : true,\n" +
-                "      \"$kyc_level\"             : \"basic\",\n" +
+                "      \"$kyc_level\"             : \"$basic\",\n" +
                 "      \"$bin_nationality_match\" : true,\n" +
                 "      \"$provider\"              : \"lexisnexis\"\n" +
                 "  },\n" +
@@ -186,7 +186,7 @@ public class CreateAccountEventTest {
                 "      \"$provider\" : \"geocomply\"\n" +
                 "  },\n" +
                 "  \"$bot_identification\" : {\n" +
-                "      \"$result\"   : \"human\",\n" +
+                "      \"$result\"   : \"$human\",\n" +
                 "      \"$provider\" : \"datadome\"\n" +
                 "  }\n" +
                 "}";
@@ -215,14 +215,14 @@ public class CreateAccountEventTest {
                         .setYearOfBirth(1985)
                         .setKyc(new Kyc()
                                 .setNamesMatch(true)
-                                .setKycLevel("basic")
+                                .setKycLevel("$basic")
                                 .setBinNationalityMatch(true)
                                 .setProvider("lexisnexis"))
                         .setGeo(new Geo()
                                 .setUuid("gc-abc-123")
                                 .setProvider("geocomply"))
                         .setBotIdentification(new BotIdentification()
-                                .setResult("human")
+                                .setResult("$human")
                                 .setProvider("datadome")));
 
         SiftResponse siftResponse = request.send();

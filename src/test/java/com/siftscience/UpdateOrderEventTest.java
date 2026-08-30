@@ -1058,7 +1058,7 @@ public class UpdateOrderEventTest {
             "  \"$currency_code\" : \"USD\",\n" +
             "  \"$kyc\" : {\n" +
             "      \"$names_match\"           : true,\n" +
-            "      \"$kyc_level\"             : \"basic\",\n" +
+            "      \"$kyc_level\"             : \"$basic\",\n" +
             "      \"$bin_nationality_match\" : true,\n" +
             "      \"$provider\"              : \"lexisnexis\"\n" +
             "  },\n" +
@@ -1067,7 +1067,7 @@ public class UpdateOrderEventTest {
             "      \"$provider\" : \"geocomply\"\n" +
             "  },\n" +
             "  \"$bot_identification\" : {\n" +
-            "      \"$result\"   : \"human\",\n" +
+            "      \"$result\"   : \"$human\",\n" +
             "      \"$provider\" : \"datadome\"\n" +
             "  }\n" +
             "}";
@@ -1097,14 +1097,14 @@ public class UpdateOrderEventTest {
                 .setCurrencyCode("USD")
                 .setKyc(new Kyc()
                     .setNamesMatch(true)
-                    .setKycLevel("basic")
+                    .setKycLevel("$basic")
                     .setBinNationalityMatch(true)
                     .setProvider("lexisnexis"))
                 .setGeo(new Geo()
                     .setUuid("gc-abc-123")
                     .setProvider("geocomply"))
                 .setBotIdentification(new BotIdentification()
-                    .setResult("human")
+                    .setResult("$human")
                     .setProvider("datadome")));
 
         SiftResponse<EventResponseBody> siftResponse = request.send();

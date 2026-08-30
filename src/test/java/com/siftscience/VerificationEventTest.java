@@ -110,7 +110,7 @@ public class VerificationEventTest {
                 "  \"$verification_type\"  : \"$kyc\",\n" +
                 "  \"$kyc\" : {\n" +
                 "      \"$names_match\"           : true,\n" +
-                "      \"$kyc_level\"             : \"basic\",\n" +
+                "      \"$kyc_level\"             : \"$basic\",\n" +
                 "      \"$bin_nationality_match\" : false,\n" +
                 "      \"$provider\"              : \"lexisnexis\"\n" +
                 "  }\n" +
@@ -139,7 +139,7 @@ public class VerificationEventTest {
                 .setVerificationType("$kyc")
                 .setKyc(new Kyc()
                         .setNamesMatch(true)
-                        .setKycLevel("basic")
+                        .setKycLevel("$basic")
                         .setBinNationalityMatch(false)
                         .setProvider("lexisnexis")));
 

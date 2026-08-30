@@ -959,7 +959,7 @@ public class TransactionEventTest {
             "      \"$provider\" : \"geocomply\"\n" +
             "  },\n" +
             "  \"$bot_identification\" : {\n" +
-            "      \"$result\"   : \"suspected\",\n" +
+            "      \"$result\"   : \"$suspected\",\n" +
             "      \"$provider\" : \"human_security\"\n" +
             "  }\n" +
             "}";
@@ -993,7 +993,7 @@ public class TransactionEventTest {
                 .setUuid("gc-abc-123")
                 .setProvider("geocomply"))
             .setBotIdentification(new BotIdentification()
-                .setResult("suspected")
+                .setResult("$suspected")
                 .setProvider("human_security")));
         EventResponse siftResponse = request.send();
 
