@@ -4,7 +4,9 @@ import static java.net.HttpURLConnection.HTTP_OK;
 import java.util.Arrays;
 
 import com.siftscience.model.App;
+import com.siftscience.model.BotIdentification;
 import com.siftscience.model.Browser;
+import com.siftscience.model.Geo;
 import com.siftscience.model.LoginFieldSet;
 import okhttp3.OkHttpClient;
 import okhttp3.mockwebserver.MockResponse;
@@ -147,5 +149,64 @@ public class LoginEventTest {
 
         server.shutdown();
 
+    }
+
+    @Test
+    public void testLoginWithIdentitySignals() throws Exception {
+        String expectedRequestBody = "{\n" +
+                "  \"$type\"         : \"$login\",\n" +
+                "  \"$api_key\"      : \"YOUR_API_KEY\",\n" +
+                "  \"$user_id\"      : \"billy_jones_301\",\n" +
+                "  \"$login_status\" : \"$success\",\n" +
+                "  \"$geo\" : {\n" +
+                "      \"$uuid\"     : \"gc-abc-123\",\n" +
+                "      \"$provider\" : \"geocomply\"\n" +
+                "  },\n" +
+                "  \"$bot_identification\" : {\n" +
+                "      \"$result\"   : \"$human\",\n" +
+                "      \"$provider\" : \"datadome\"\n" +
+                "  }\n" +
+                "}";
+
+        MockWebServer server = new MockWebServer();
+        MockResponse response = new MockResponse();
+        response.setResponseCode(HTTP_OK);
+        response.setBody("{\n" +
+                "    \"status\" : 0,\n" +
+                "    \"error_message\" : \"OK\",\n" +
+                "    \"time\" : 1327604222,\n" +
+                "    \"request\" : \"" + TestUtils.unescapeJson(expectedRequestBody) + "\"\n" +
+                "}");
+        server.enqueue(response);
+        server.start();
+
+        SiftClient client = new SiftClient("YOUR_API_KEY", "YOUR_ACCOUNT_ID",
+            new OkHttpClient.Builder()
+                .addInterceptor(OkHttpUtils.urlRewritingInterceptor(server))
+                .build());
+
+        SiftRequest request = client.buildRequest(new LoginFieldSet()
+                .setUserId("billy_jones_301")
+                .setLoginStatus("$success")
+                .setGeo(new Geo()
+                        .setUuid("gc-abc-123")
+                        .setProvider("geocomply"))
+                .setBotIdentification(new BotIdentification()
+                        .setResult("$human")
+                        .setProvider("datadome")));
+
+        SiftResponse siftResponse = request.send();
+
+        RecordedRequest request1 = server.takeRequest();
+        Assert.assertEquals("POST", request1.getMethod());
+        Assert.assertEquals("/v205/events", request1.getPath());
+        JSONAssert.assertEquals(expectedRequestBody, request.getFieldSet().toJson(), true);
+
+        Assert.assertEquals(HTTP_OK, siftResponse.getHttpStatusCode());
+        Assert.assertEquals(0, (int) siftResponse.getBody().getStatus());
+        JSONAssert.assertEquals(response.getBody().readUtf8(),
+                siftResponse.getBody().toJson(), true);
+
+        server.shutdown();
     }
 }

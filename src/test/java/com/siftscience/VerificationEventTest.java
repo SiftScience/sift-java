@@ -3,6 +3,7 @@ package com.siftscience;
 import static java.net.HttpURLConnection.HTTP_OK;
 
 import com.siftscience.model.App;
+import com.siftscience.model.Kyc;
 import com.siftscience.model.VerificationFieldSet;
 import okhttp3.OkHttpClient;
 import okhttp3.mockwebserver.MockResponse;
@@ -91,6 +92,64 @@ public class VerificationEventTest {
         JSONAssert.assertEquals(expectedRequestBody, request.getFieldSet().toJson(), true);
 
         // Verify the response.
+        Assert.assertEquals(HTTP_OK, siftResponse.getHttpStatusCode());
+        Assert.assertEquals(0, (int) siftResponse.getBody().getStatus());
+        JSONAssert.assertEquals(response.getBody().readUtf8(),
+                siftResponse.getBody().toJson(), true);
+
+        server.shutdown();
+    }
+
+    @Test
+    public void testVerificationWithKyc() throws Exception {
+        String expectedRequestBody = "{\n" +
+                "  \"$type\"                : \"$verification\",\n" +
+                "  \"$api_key\"             : \"YOUR_API_KEY\",\n" +
+                "  \"$user_id\"             : \"billy_jones_301\",\n" +
+                "  \"$status\"              : \"$success\",\n" +
+                "  \"$verification_type\"  : \"$kyc\",\n" +
+                "  \"$kyc\" : {\n" +
+                "      \"$names_match\"           : true,\n" +
+                "      \"$kyc_level\"             : \"$basic\",\n" +
+                "      \"$bin_nationality_match\" : false,\n" +
+                "      \"$provider\"              : \"lexisnexis\"\n" +
+                "  }\n" +
+                "}";
+
+        MockWebServer server = new MockWebServer();
+        MockResponse response = new MockResponse();
+        response.setResponseCode(HTTP_OK);
+        response.setBody("{\n" +
+                "    \"status\" : 0,\n" +
+                "    \"error_message\" : \"OK\",\n" +
+                "    \"time\" : 1327604222,\n" +
+                "    \"request\" : \"" + TestUtils.unescapeJson(expectedRequestBody) + "\"\n" +
+                "}");
+        server.enqueue(response);
+        server.start();
+
+        SiftClient client = new SiftClient("YOUR_API_KEY", "YOUR_ACCOUNT_ID",
+            new OkHttpClient.Builder()
+                .addInterceptor(OkHttpUtils.urlRewritingInterceptor(server))
+                .build());
+
+        SiftRequest request = client.buildRequest(new VerificationFieldSet()
+                .setUserId("billy_jones_301")
+                .setStatus("$success")
+                .setVerificationType("$kyc")
+                .setKyc(new Kyc()
+                        .setNamesMatch(true)
+                        .setKycLevel("$basic")
+                        .setBinNationalityMatch(false)
+                        .setProvider("lexisnexis")));
+
+        SiftResponse siftResponse = request.send();
+
+        RecordedRequest request1 = server.takeRequest();
+        Assert.assertEquals("POST", request1.getMethod());
+        Assert.assertEquals("/v205/events", request1.getPath());
+        JSONAssert.assertEquals(expectedRequestBody, request.getFieldSet().toJson(), true);
+
         Assert.assertEquals(HTTP_OK, siftResponse.getHttpStatusCode());
         Assert.assertEquals(0, (int) siftResponse.getBody().getStatus());
         JSONAssert.assertEquals(response.getBody().readUtf8(),

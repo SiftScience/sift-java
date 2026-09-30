@@ -14,6 +14,7 @@ public class VerificationFieldSet extends BaseAppBrowserSiteBrandFieldSet<Verifi
     @Expose @SerializedName("$reason") private String reason;
     @Expose @SerializedName("$verified_event") private String verifiedEvent;
     @Expose @SerializedName("$verified_entity_id") private String verifiedEntityId;
+    @Expose @SerializedName("$kyc") private Kyc kyc;
 
     @Override
     public String getEventType() {
@@ -65,6 +66,15 @@ public class VerificationFieldSet extends BaseAppBrowserSiteBrandFieldSet<Verifi
 
     public VerificationFieldSet setVerifiedEntityId(String verifiedEntityId) {
         this.verifiedEntityId = verifiedEntityId;
+        return this;
+    }
+
+    public Kyc getKyc() {
+        return kyc;
+    }
+
+    public VerificationFieldSet setKyc(Kyc kyc) {
+        this.kyc = kyc;
         return this;
     }
 }

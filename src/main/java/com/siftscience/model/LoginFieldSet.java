@@ -17,6 +17,8 @@ public class LoginFieldSet extends BaseAppBrowserSiteBrandFieldSet<LoginFieldSet
     @Expose @SerializedName("$account_types") private List<String> accountTypes;
     @Expose @SerializedName(USER_EMAIL) private String userEmail;
     @Expose @SerializedName(VERIFICATION_PHONE_NUMBER) private String verificationPhoneNumber;
+    @Expose @SerializedName("$geo") private Geo geo;
+    @Expose @SerializedName("$bot_identification") private BotIdentification botIdentification;
 
     @Override
     public String getEventType() {
@@ -77,6 +79,24 @@ public class LoginFieldSet extends BaseAppBrowserSiteBrandFieldSet<LoginFieldSet
 
     public LoginFieldSet setVerificationPhoneNumber(String verificationPhoneNumber) {
         this.verificationPhoneNumber = verificationPhoneNumber;
+        return this;
+    }
+
+    public Geo getGeo() {
+        return geo;
+    }
+
+    public LoginFieldSet setGeo(Geo geo) {
+        this.geo = geo;
+        return this;
+    }
+
+    public BotIdentification getBotIdentification() {
+        return botIdentification;
+    }
+
+    public LoginFieldSet setBotIdentification(BotIdentification botIdentification) {
+        this.botIdentification = botIdentification;
         return this;
     }
 }
